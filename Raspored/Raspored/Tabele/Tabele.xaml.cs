@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Raspored
+namespace Raspored.Tabele
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Tabele.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Tabele : Window
     {
-        public MainWindow()
+        public Tabele()
         {
             InitializeComponent();
-        }
-
-        private void Ucionice_Click(object sender, RoutedEventArgs e)
-        {
-           var w = new Tabele.Tabele();
-           w.ShowDialog();
         }
     }
 }
