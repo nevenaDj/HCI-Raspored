@@ -235,7 +235,11 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Grid Grid.Row="0" Grid.Column="1">
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="1"
+                ScrollViewer.CanContentScroll="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -243,13 +247,230 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0">Ponedeljak</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="1">Utorak</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="2">Sreda</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="3">Cetvrtak</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="4">Petak</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="5">Subota</TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Ponedeljak
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Utorak
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Sreda
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Cetvrtak
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Petak
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="0"
+                    Grid.Column="6"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    Subota
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    07:00
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="5"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="1"
+                    Grid.Column="6"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    07:15
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    07:30
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1" />
+                <DataGridCell
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    07:45
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    08:00
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    08:15
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    08:30
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    08:45
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    09:00
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    09:15
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    09:30
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    09:45
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    10:00
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    10:15
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="14"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    10:30
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="15"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    10:45
+                </DataGridCell>
+                <DataGridCell
+                    Grid.Row="16"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    11:00
+                </DataGridCell>
+
 
             </Grid>
         </Grid>
