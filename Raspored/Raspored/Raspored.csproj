@@ -55,9 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DDrop\PravljenjeRasporeda.xaml.cs">
+      <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Podaci.cs" />
     <Compile Include="Tabele\Tabele.xaml.cs">
       <DependentUpon>Tabele.xaml</DependentUpon>
     </Compile>
+    <Page Include="DDrop\PravljenjeRasporeda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,7 +114,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="folder.png" />
+    <Resource Include="foldero.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

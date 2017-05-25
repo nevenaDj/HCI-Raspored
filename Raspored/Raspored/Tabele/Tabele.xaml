@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:Raspored.Tabele"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Tabele"
-    Width="900"
+    Width="1000"
     Height="650"
-    MinWidth="900"
+    MinWidth="1000"
     MinHeight="650"
     Top="50"
     mc:Ignorable="d">
@@ -105,10 +105,10 @@
                             <Grid Margin="10" DataContext="{Binding ElementName=dgrMainUcionica, Path=SelectedItem}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Margin" Value="0,0,80,4" />
+                                        <Setter Property="Margin" Value="0,0,60,4" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Margin" Value="50,0,50,0" />
+                                        <Setter Property="Margin" Value="0,0,10,0" />
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -124,18 +124,36 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Opis:</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Broj radnih mesta:</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Projektor:</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="0">Tabla:</TextBlock>
-                                <TextBlock Grid.Row="5" Grid.Column="0">Pametna tabla:</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="0">Operativni sistem:</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Opis</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0">Broj radnih mesta</TextBlock>
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    Margin="2,2,2,2">
+                                    Projektor
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    Margin="2,2,2,2">
+                                    Tabla
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="4"
+                                    Grid.Column="3"
+                                    Margin="2,2,2,2">
+                                    Pametna tabla
+                                </TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="3">Operativni sistem</TextBlock>
                                 <Button
                                     Grid.Row="7"
-                                    Grid.Column="1"
+                                    Grid.Column="4"
                                     Width="80"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right">
@@ -143,7 +161,7 @@
                                 </Button>
                                 <Button
                                     Grid.Row="7"
-                                    Grid.Column="2"
+                                    Grid.Column="5"
                                     Width="80"
                                     Margin="0,5,80,0"
                                     HorizontalAlignment="Right">
@@ -160,13 +178,14 @@
                                     Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
-                                    Grid.Row="2"
+                                    Grid.Row="3"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,0,0"
                                     Text="" />
-                                <CheckBox Grid.Row="3" Grid.Column="1" />
-                                <CheckBox Grid.Row="4" Grid.Column="1" />
-                                <CheckBox Grid.Row="5" Grid.Column="1" />
+                                <ComboBox Grid.Row="0" Grid.Column="4" />
+                                <CheckBox Grid.Row="2" Grid.Column="4" />
+                                <CheckBox Grid.Row="3" Grid.Column="4" />
+                                <CheckBox Grid.Row="4" Grid.Column="4" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -265,10 +284,10 @@
                             <Grid Margin="10,0,10,0" DataContext="{Binding ElementName=dgrMainPredmet, Path=SelectedItem}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Margin" Value="0,0,80,4" />
+                                        <Setter Property="Margin" Value="0,0,60,4" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Margin" Value="50,0,50,0" />
+                                        <Setter Property="Margin" Value="0,0,10,0" />
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -276,7 +295,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="30" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -288,22 +307,39 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv:</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Smer:</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Opis:</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="0">Velicina grupe:</TextBlock>
-                                <TextBlock Grid.Row="5" Grid.Column="0">Minimalna duzina termina:</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="0">Broj termina:</TextBlock>
-                                <TextBlock Grid.Row="7" Grid.Column="0">Projektor:</TextBlock>
-                                <TextBlock Grid.Row="8" Grid.Column="0">Tabla:</TextBlock>
-                                <TextBlock Grid.Row="9" Grid.Column="0">Pametna tabla:</TextBlock>
-                                <TextBlock Grid.Row="10" Grid.Column="0">Operativni sistem:</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Skracenica</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Center">
+                                    Smer
+                                </TextBlock>
+
+                                <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem</TextBlock>
+
+                                <TextBlock Grid.Row="5" Grid.Column="0">Velicina grupe</TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="0">Minimalna duzina termina</TextBlock>
+                                <TextBlock Grid.Row="7" Grid.Column="0">Broj termina</TextBlock>
+
+                                <TextBlock Grid.Row="5" Grid.Column="3">Projektor</TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="3">Tabla</TextBlock>
+                                <TextBlock Grid.Row="7" Grid.Column="3">Pametna tabla</TextBlock>
+
                                 <Button
                                     Grid.Row="11"
-                                    Grid.Column="1"
+                                    Grid.Column="4"
+                                    Grid.ColumnSpan="2"
                                     Width="80"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right">
@@ -311,9 +347,9 @@
                                 </Button>
                                 <Button
                                     Grid.Row="11"
-                                    Grid.Column="2"
+                                    Grid.Column="6"
                                     Width="80"
-                                    Margin="0,5,80,0"
+                                    Margin="0,5,10,0"
                                     HorizontalAlignment="Right">
                                     Odustani
                                 </Button>
@@ -338,23 +374,52 @@
                                     Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Margin="0,0,5,0"
+                                    VerticalAlignment="Center"
                                     Text="" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,5,0"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True"
+                                    Text="" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5,0,15,0"
+                                    VerticalAlignment="Center"
+                                    IsReadOnly="True"
+                                    Text="" />
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Width="50"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                    ...
+                                </Button>
+                                <ComboBox Grid.Row="3" Grid.Column="4" />
                                 <TextBox
                                     Grid.Row="5"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
                                     Grid.Row="6"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
                                     Text="" />
-                                <CheckBox Grid.Row="7" Grid.Column="1" />
-                                <CheckBox Grid.Row="8" Grid.Column="1" />
-                                <CheckBox Grid.Row="9" Grid.Column="1" />
+                                <TextBox
+                                    Grid.Row="7"
+                                    Grid.Column="1"
+                                    Text="" />
+                                <CheckBox Grid.Row="5" Grid.Column="4" />
+                                <CheckBox Grid.Row="6" Grid.Column="4" />
+                                <CheckBox Grid.Row="7" Grid.Column="4" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -452,7 +517,7 @@
                                         <Setter Property="Margin" Value="0,0,80,4" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Margin" Value="50,0,50,0" />
+                                        <Setter Property="Margin" Value="0,0,50,0" />
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -465,15 +530,25 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv:</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Datum uvodjenja:</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Opis:</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Skracenica</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    VerticalAlignment="Center">
+                                    Datum uvodjenja
+                                </TextBlock>
+
                                 <Button
                                     Grid.Row="4"
-                                    Grid.Column="1"
+                                    Grid.Column="4"
                                     Width="80"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right">
@@ -481,7 +556,7 @@
                                 </Button>
                                 <Button
                                     Grid.Row="4"
-                                    Grid.Column="2"
+                                    Grid.Column="5"
                                     Width="80"
                                     Margin="0,5,80,0"
                                     HorizontalAlignment="Right">
@@ -507,6 +582,7 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Text="" />
+                                <DatePicker Grid.Row="0" Grid.Column="4" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -603,10 +679,10 @@
                             <Grid Margin="10" DataContext="{Binding ElementName=dgrMainSoftver, Path=SelectedItem}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Margin" Value="0,0,80,4" />
+                                        <Setter Property="Margin" Value="0,0,60,4" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Margin" Value="50,0,50,0" />
+                                        <Setter Property="Margin" Value="0,0,10,0" />
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -623,19 +699,23 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv:</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Operativni sistem:</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Proizvodjac:</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="0">Sajt:</TextBlock>
-                                <TextBlock Grid.Row="5" Grid.Column="0">Godina izdavanja:</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="0">Cena:</TextBlock>
-                                <TextBlock Grid.Row="7" Grid.Column="0">Opis:</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Opis</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem:</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="3">Proizvodjac</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="3">Sajt</TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="0">Godina izdavanja</TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="0">Cena</TextBlock>
+
                                 <Button
                                     Grid.Row="8"
-                                    Grid.Column="1"
+                                    Grid.Column="4"
                                     Width="80"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right">
@@ -643,7 +723,7 @@
                                 </Button>
                                 <Button
                                     Grid.Row="8"
-                                    Grid.Column="2"
+                                    Grid.Column="5"
                                     Width="80"
                                     Margin="0,5,80,0"
                                     HorizontalAlignment="Right">
@@ -665,30 +745,25 @@
                                     Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
-                                    Grid.Row="3"
-                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Grid.ColumnSpan="2"
+                                    Text="" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="4"
                                     Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
                                     Grid.Row="4"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
                                     Text="" />
                                 <TextBox
                                     Grid.Row="5"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
                                     Text="" />
-                                <TextBox
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Text="" />
-                                <TextBox
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Text="" />
+                                <ComboBox Grid.Row="3" Grid.Column="4" />
+
                             </Grid>
                         </Border>
                     </Grid>

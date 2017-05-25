@@ -17,6 +17,7 @@
                 <MenuItem Header="Smera" />
                 <MenuItem Header="Softvera" />
             </MenuItem>
+            <MenuItem Click="MenuItem_Click" Header="_Raspored" />
         </Menu>
         <Grid
             HorizontalAlignment="Stretch"

@@ -30,5 +30,12 @@ namespace Raspored
            var w = new Tabele.Tabele();
            w.ShowDialog();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var r = new DDrop.PravljenjeRasporeda();
+            r.ShowDialog();
+
+        }
     }
 }
