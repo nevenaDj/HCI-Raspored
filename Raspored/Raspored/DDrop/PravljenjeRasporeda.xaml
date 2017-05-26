@@ -216,13 +216,13 @@
             <ListView
                 Grid.Row="0"
                 Grid.Column="0"
-                ItemsSource="{Binding Studenti}">
+                ItemsSource="{Binding Studenti}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
                             <TextBlock FontWeight="Bold" Text="{Binding Ime}" />
                             <TextBlock Text=", " />
-                            <TextBlock Text="{Binding Prezime}" />
+                            <TextBlock Text="{Binding Naziv}" />
                             <TextBlock Text=" (" />
                             <TextBlock
                                 Cursor="Hand"
@@ -280,7 +280,8 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1" 
+                        />
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="1"
@@ -335,26 +336,89 @@
                         Grid.Column="1"
                         BorderBrush="Black"
                         BorderThickness="1" />
+
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="2"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1" >
+                        <ListView ItemsSource="{Binding Studenti2}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Naziv}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Prezime}" />
+                                        <TextBlock Text=" (" />
+                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                        <TextBlock Text=")" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </DataGridCell>
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="3"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1" >
+                        <ListView ItemsSource="{Binding Studenti3}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop2">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Naziv}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Prezime}" />
+                                        <TextBlock Text=" (" />
+                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                        <TextBlock Text=")" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </DataGridCell>
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="4"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1">
+                        <ListView ItemsSource="{Binding Studenti4}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop4">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Naziv}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Prezime}" />
+                                        <TextBlock Text=" (" />
+                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                        <TextBlock Text=")" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataGridCell>
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="5"
                         BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderThickness="1">
+                        <ListView ItemsSource="{Binding Studenti5}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop5">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Naziv}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Prezime}" />
+                                        <TextBlock Text=" (" />
+                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                        <TextBlock Text=")" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataGridCell>
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="6"

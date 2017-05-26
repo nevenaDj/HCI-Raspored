@@ -202,5 +202,10 @@ namespace Raspored.Model
                 }
             }
         }
+
+        public static implicit operator ObservableCollection<object>(Predmet v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
