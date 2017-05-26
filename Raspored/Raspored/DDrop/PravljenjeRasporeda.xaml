@@ -216,7 +216,7 @@
             <ListView
                 Grid.Row="0"
                 Grid.Column="0"
-                ItemsSource="{Binding Studenti}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
+                ItemsSource="{Binding Studenti}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2" MouseMove="ListView_MouseMove">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -239,8 +239,9 @@
             <ScrollViewer
                 Grid.Row="0"
                 Grid.Column="1"
-                VerticalScrollBarVisibility="Visible">
-                <Grid>
+                VerticalScrollBarVisibility="Visible"
+                >
+                <Grid Name="a123">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -342,7 +343,7 @@
                         Grid.Column="2"
                         BorderBrush="Black"
                         BorderThickness="1" >
-                        <ListView ItemsSource="{Binding Studenti2}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
+                        <ListView ItemsSource="{Binding StudentiTo[0]}" DataContext="1" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
@@ -363,7 +364,7 @@
                         Grid.Column="3"
                         BorderBrush="Black"
                         BorderThickness="1" >
-                        <ListView ItemsSource="{Binding Studenti3}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop2">
+                        <ListView ItemsSource="{Binding StudentiTo[1]}"  AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
@@ -384,7 +385,7 @@
                         Grid.Column="4"
                         BorderBrush="Black"
                         BorderThickness="1">
-                        <ListView ItemsSource="{Binding Studenti4}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop4">
+                        <ListView ItemsSource="{Binding StudentiTo[2]}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
@@ -403,8 +404,9 @@
                         Grid.Row="1"
                         Grid.Column="5"
                         BorderBrush="Black"
-                        BorderThickness="1">
-                        <ListView ItemsSource="{Binding Studenti5}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop5">
+                        BorderThickness="1"
+                        >
+                        <ListView ItemsSource="{Binding StudentiTo[3]}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>

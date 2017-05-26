@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Raspored.Model;
+using System.Data;
 
 namespace Raspored.DDrop
 {
@@ -43,11 +44,11 @@ namespace Raspored.DDrop
             l.Add(new Predmet { Naziv = "5" });
 
             Studenti = new ObservableCollection<Predmet>(l);
-            Studenti2 = new ObservableCollection<Predmet>();
-            Studenti3 = new ObservableCollection<Predmet>();
-            Studenti4 = new ObservableCollection<Predmet>();
-            Studenti5 = new ObservableCollection<Predmet>();
 
+
+            StudentiTo= new List< ObservableCollection<Predmet>>();
+            for (int i=0; i<5; i++)
+                StudentiTo.Add(new ObservableCollection<Predmet>());
         }
         public ObservableCollection<Smer> Smerovi
         {
@@ -61,10 +62,8 @@ namespace Raspored.DDrop
             set;
         }
         public ObservableCollection<Predmet> Studenti { get; private set; }
-        public ObservableCollection<Predmet> Studenti2 { get; private set; }
-        public ObservableCollection<Predmet> Studenti3 { get; private set; }
-        public ObservableCollection<Predmet> Studenti4 { get; private set; }
-        public ObservableCollection<Predmet> Studenti5 { get; private set; }
+        public List<ObservableCollection<Predmet>> StudentiTo { get; private set; }
+        private bool fromList = true;
 
         private void Korak1_Click(object sender, RoutedEventArgs e)
         {
@@ -85,6 +84,13 @@ namespace Raspored.DDrop
         {
             startPoint = e.GetPosition(null);
         }
+
+        private void ListView_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+            fromList = true;
+        }
+
 
         private void ListView_MouseMove(object sender, MouseEventArgs e)
         {
@@ -134,56 +140,24 @@ namespace Raspored.DDrop
 
         private void ListView_Drop(object sender, DragEventArgs e)
         {
+
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
-                if (Studenti2.Count == 0)
-                {
-                    Studenti.Remove(student);
-                    Studenti2.Add(student);
-                    Studenti3.Add(student);
-                }
                 
-            }
-        }
-        private void ListView_Drop2(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent("myFormat"))
-            {
-                Predmet student = e.Data.GetData("myFormat") as Predmet;
-                if (Studenti3.Count == 0)
+                if (fromList)
                 {
                     Studenti.Remove(student);
-                    Studenti3.Add(student);
+                    StudentiTo[1].Add(student);
                 }
-
-            }
-        }
-
-        private void ListView_Drop4(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent("myFormat"))
-            {
-                Predmet student = e.Data.GetData("myFormat") as Predmet;
-                if (Studenti4.Count == 0)
+                else
                 {
-                    Studenti2.Remove(student);
-                    Studenti4.Add(student);
-                }
+                    StudentiTo[1].Remove(student);
+                    StudentiTo[2].Add(student);
 
-            }
-        }
-
-        private void ListView_Drop5(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent("myFormat"))
-            {
-                Predmet student = e.Data.GetData("myFormat") as Predmet;
-                if (Studenti5.Count == 0)
-                {
-                    Studenti2.Remove(student);
-                    Studenti5.Add(student);
                 }
+                fromList = false;
+
 
             }
         }
