@@ -222,8 +222,7 @@ namespace Raspored.DDrop
                     listView.Background = Brushes.LightGreen;
                     for (int i=0;i<student.DuzinaTermina/15; i++) {
                         StudentiTo[c1+i][r1].Add(student);
-                        //listView.Background = Brushes.LightGreen;
-                        //String ime = "lw" + (c1 + i) + (r1 + 1);
+                       
                         
                      }
 
