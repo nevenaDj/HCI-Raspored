@@ -155,7 +155,10 @@
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid Margin="10" DataContext="{Binding SelectedUcionica, Mode=TwoWay}">
+                            <Grid
+                                x:Name="GridUcionice"
+                                Margin="10"
+                                DataContext="{Binding SelectedUcionica, Mode=TwoWay}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -217,15 +220,19 @@
                                 </TextBlock>
                                 <TextBlock Grid.Row="0" Grid.Column="3">Operativni sistem</TextBlock>
                                 <Button
+                                    x:Name="SacuvajUcionicu"
                                     Grid.Row="7"
                                     Grid.Column="4"
                                     Width="80"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Click="SacuvajUcionicu_Click">
+                                    Click="SacuvajUcionicu_Click"
+                                    Visibility="{Binding VisibleSacuvaj}">
                                     Sacuvaj
                                 </Button>
+
                                 <Button
+                                    x:Name="OdusatniUcionica"
                                     Grid.Row="7"
                                     Grid.Column="5"
                                     Width="80"
@@ -364,6 +371,7 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    Click="IzbrisiPredmet_Click"
                                     IsEnabled="{Binding EnableIzbrisi}">
                                     Izbrisi
                                 </Button>
@@ -378,7 +386,10 @@
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
                             CornerRadius="8,8,3,3">
-                            <Grid Margin="10,0,10,0" DataContext="{Binding SelectedPredmet}">
+                            <Grid
+                                x:Name="GridPredmeti"
+                                Margin="10,0,10,0"
+                                DataContext="{Binding SelectedPredmet}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -434,6 +445,7 @@
                                 <TextBlock Grid.Row="7" Grid.Column="3">Pametna tabla</TextBlock>
 
                                 <Button
+                                    x:Name="SacuvajPredmet"
                                     Grid.Row="11"
                                     Grid.Column="4"
                                     Grid.ColumnSpan="2"
@@ -444,6 +456,7 @@
                                     Sacuvaj
                                 </Button>
                                 <Button
+                                    x:Name="OdustaniPredmet"
                                     Grid.Row="11"
                                     Grid.Column="6"
                                     Width="80"
@@ -626,6 +639,7 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    Click="IzbrisiSmer_Click"
                                     IsEnabled="{Binding EnableIzbrisi}">
                                     Izbrisi
                                 </Button>
@@ -639,7 +653,10 @@
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
                             CornerRadius="8,8,3,3">
-                            <Grid Margin="10" DataContext="{Binding SelectedSmer}">
+                            <Grid
+                                x:Name="GridSmer"
+                                Margin="10"
+                                DataContext="{Binding SelectedSmer}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,80,4" />
@@ -675,6 +692,7 @@
                                 </TextBlock>
 
                                 <Button
+                                    x:Name="SacuvajSmer"
                                     Grid.Row="4"
                                     Grid.Column="4"
                                     Width="80"
@@ -684,6 +702,7 @@
                                     Sacuvaj
                                 </Button>
                                 <Button
+                                    x:Name="OdustaniSmer"
                                     Grid.Row="4"
                                     Grid.Column="5"
                                     Width="80"
@@ -820,6 +839,7 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    Click="IzbrisiSoftver_Click"
                                     IsEnabled="{Binding EnableIzbrisi}">
                                     Izbrisi
                                 </Button>
@@ -833,7 +853,10 @@
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
                             CornerRadius="8,8,3,3">
-                            <Grid Margin="10" DataContext="{Binding SelectedSoftver}">
+                            <Grid
+                                x:Name="GridSoftver"
+                                Margin="10"
+                                DataContext="{Binding SelectedSoftver}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -871,6 +894,7 @@
                                 <TextBlock Grid.Row="5" Grid.Column="0">Cena</TextBlock>
 
                                 <Button
+                                    x:Name="SacuvajSoftver"
                                     Grid.Row="8"
                                     Grid.Column="4"
                                     Width="80"
@@ -882,6 +906,7 @@
                                     Sacuvaj
                                 </Button>
                                 <Button
+                                    x:Name="OdustaniSoftver"
                                     Grid.Row="8"
                                     Grid.Column="5"
                                     Width="80"
