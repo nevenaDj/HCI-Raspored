@@ -38,17 +38,18 @@ namespace Raspored.DDrop
             Predmeti = new ObservableCollection<Predmet>();
 
             List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1" });
-            l.Add(new Predmet { Naziv = "2" });
-            l.Add(new Predmet { Naziv = "3" });
-            l.Add(new Predmet { Naziv = "4" });
-            l.Add(new Predmet { Naziv = "5" });
+            l.Add(new Predmet { Naziv = "1", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "2", VelicinaGrupe = 3, DuzinaTermina = 90 });
+            l.Add(new Predmet { Naziv = "3", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "4", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "5", VelicinaGrupe = 3, DuzinaTermina = 45 });
 
             Studenti = new ObservableCollection<Predmet>(l);
 
 
-            StudentiTo= new List<List<ObservableCollection<Predmet>>>();
-            for (int i = 0; i < 60; i++) {
+            StudentiTo = new List<List<ObservableCollection<Predmet>>>();
+            for (int i = 0; i < 60; i++)
+            {
                 List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
                 for (int j = 0; j < 7; j++)
                     temp.Add(new ObservableCollection<Predmet>());
@@ -94,7 +95,7 @@ namespace Raspored.DDrop
             lv = sender as ListView;
             String v = lv.Name.ToString();
             String r = v.Substring(4, 1);
-            from_r = Convert.ToInt32(r) ;
+            from_r = Convert.ToInt32(r);
             String c = v.Substring(2, 2);
             from_c = Convert.ToInt32(c);
         }
@@ -102,7 +103,7 @@ namespace Raspored.DDrop
         private void ListView_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
         {
             startPoint = e.GetPosition(null);
-    
+
             fromList = true;
         }
 
@@ -118,8 +119,8 @@ namespace Raspored.DDrop
             {
                 // Get the dragged ListViewItem
                 ListView listView = sender as ListView;
-                
-                
+
+
                 ListViewItem listViewItem =
                     FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
                 if (listViewItem == null)
@@ -129,9 +130,9 @@ namespace Raspored.DDrop
                 Predmet student = (Predmet)listView.ItemContainerGenerator.
                     ItemFromContainer(listViewItem);
 
-                
+
                 // Initialize the drag & drop operation
-                DataObject dragData = new DataObject("myFormat", student);                
+                DataObject dragData = new DataObject("myFormat", student);
                 DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
             }
         }
@@ -177,10 +178,10 @@ namespace Raspored.DDrop
         private void ListView_Drop(object sender, DragEventArgs e)
         {
             ListView listView = sender as ListView;
-            
+
             String v = listView.Name.ToString();
-            String r= v.Substring(4, 1);
-            int r1= Convert.ToInt32(r) ;
+            String r = v.Substring(4, 1);
+            int r1 = Convert.ToInt32(r);
             String c = v.Substring(2, 2);
             int c1 = Convert.ToInt32(c);
             //MessageBox.Show(r1.ToString());
@@ -189,21 +190,46 @@ namespace Raspored.DDrop
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
                 if (StudentiTo[c1][r1].Count == 0)
+                {
+                    if (fromList)
                     {
-                        if (fromList)
+                        Studenti.Remove(student);
+                    }
+                    else
+                    {
+                        int i = 0;
+                        int x = 0;
+                        while (true)
                         {
-                            Studenti.Remove(student);
-                            StudentiTo[c1][r1].Add(student);
-                            listView.Background = Brushes.LightGreen;
+
+                            foreach (Predmet p in StudentiTo[from_c - i - 1][from_r])
+                            {
+                                if (p.Naziv != student.Naziv)
+                                    x = 1;
+                            }
+                            // MessageBox.Show("" + x);
+                            if (x == 1 || StudentiTo[from_c - i - 1][from_r].Count == 0)
+                                break;
+                            i++;
                         }
-                        else
+
+                        for (int j = 0; j < student.DuzinaTermina / 15; j++)
                         {
-                            StudentiTo[from_c][from_r].Remove(student);
+                            StudentiTo[from_c - i + j][from_r].Remove(student);
                             lv.Background = Brushes.White;
-                            StudentiTo[c1][r1].Add(student);
-                            listView.Background = Brushes.LightGreen;
+
                         }
                     }
+                    // StudentiTo[c1][r1].Add(student);
+                    listView.Background = Brushes.LightGreen;
+                    for (int i = 0; i < student.DuzinaTermina / 15; i++)
+                    {
+                        StudentiTo[c1 + i][r1].Add(student);
+
+
+                    }
+
+                }
                 fromList = false;
 
 
