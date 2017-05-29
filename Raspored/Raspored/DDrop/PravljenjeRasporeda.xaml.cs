@@ -38,11 +38,11 @@ namespace Raspored.DDrop
             Predmeti = new ObservableCollection<Predmet>();
 
             List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1" });
-            l.Add(new Predmet { Naziv = "2" });
-            l.Add(new Predmet { Naziv = "3" });
-            l.Add(new Predmet { Naziv = "4" });
-            l.Add(new Predmet { Naziv = "5" });
+            l.Add(new Predmet { Naziv = "1", VelicinaGrupe=3, DuzinaTermina=45 });
+            l.Add(new Predmet { Naziv = "2", VelicinaGrupe = 3, DuzinaTermina = 90 });
+            l.Add(new Predmet { Naziv = "3", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "4", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "5", VelicinaGrupe = 3, DuzinaTermina = 45 });
 
             Studenti = new ObservableCollection<Predmet>(l);
 
@@ -190,20 +190,44 @@ namespace Raspored.DDrop
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
                 if (StudentiTo[c1][r1].Count == 0)
                     {
-                        if (fromList)
+                    if (fromList)
+                    {
+                        Studenti.Remove(student);
+                    }
+                    else
+                    {
+                        int i = 0;
+                        int x = 0;
+                        while (true)
                         {
-                            Studenti.Remove(student);
-                            StudentiTo[c1][r1].Add(student);
-                            listView.Background = Brushes.LightGreen;
+                           
+                            foreach (Predmet p in StudentiTo[from_c - i - 1][from_r]) { 
+                                if (p.Naziv != student.Naziv)
+                                    x = 1;
+                                }
+                           // MessageBox.Show("" + x);
+                            if (x == 1 || StudentiTo[from_c - i - 1][from_r].Count==0)
+                                break;
+                            i++;
                         }
-                        else
+                        
+                        for (int j = 0; j < student.DuzinaTermina / 15; j++)
                         {
-                            StudentiTo[from_c][from_r].Remove(student);
+                            StudentiTo[from_c - i + j][from_r].Remove(student);
                             lv.Background = Brushes.White;
-                            StudentiTo[c1][r1].Add(student);
-                            listView.Background = Brushes.LightGreen;
+
                         }
                     }
+                   // StudentiTo[c1][r1].Add(student);
+                    listView.Background = Brushes.LightGreen;
+                    for (int i=0;i<student.DuzinaTermina/15; i++) {
+                        StudentiTo[c1+i][r1].Add(student);
+                        //listView.Background = Brushes.LightGreen;
+                        //String ime = "lw" + (c1 + i) + (r1 + 1);
+                        
+                     }
+
+                }
                 fromList = false;
 
 
