@@ -22,7 +22,7 @@ namespace Raspored.Model
         private string _naziv;
         private OS _opetativniSistem;
         private string _proizvodjac;
-        private Uri _sajt;
+        private string _sajt;
         private int _godinaIzdavanja;
         private double _cena;
         private string _opis;
@@ -97,7 +97,7 @@ namespace Raspored.Model
             }
         }
         
-        public Uri Sajt
+        public string Sajt
         {
             get
             {

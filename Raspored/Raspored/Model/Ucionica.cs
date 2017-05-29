@@ -22,6 +22,7 @@ namespace Raspored.Model
         private string _oznaka;
         private string _opis;
         private int _brojRadnihMesta;
+        private bool _imaProjektor;
         private bool _imaTabla;
         private bool _imaPametnaTabla;
         private OS _operativniSistem;
@@ -35,6 +36,14 @@ namespace Raspored.Model
         public Ucionica()
         {
             Softveri = new ObservableCollection<Softver>();
+
+            _oznaka = "";
+            _opis = "";
+            _imaPametnaTabla = false;
+            _imaProjektor = true;
+            _imaTabla = true;
+            _brojRadnihMesta = 16;
+            
 
         }
 
@@ -85,7 +94,23 @@ namespace Raspored.Model
                 }
             }
         }
-        
+
+        public bool ImaProjektor
+        {
+            get
+            {
+                return _imaProjektor;
+            }
+            set
+            {
+                if (_imaProjektor != value)
+                {
+                    _imaProjektor = value;
+                    OnPropertyChanged("ImaProjektor");
+                }
+            }
+        }
+
         public bool ImaTabla
         {
             get

@@ -22,14 +22,17 @@ namespace Raspored.Model
 
         private string _oznaka;
         private string _naziv;
+        private string _skracenica;
         private Smer _smer;
         private string _opis;
         private int _velicinaGrupe;
         private int _duzinaTermina;
+        private int _brojTermina;
         private bool _trebaProjektor;
         private bool _trebaTabla;
         private bool _trebaPametnaTabla;
         private OS _neophodanOS;
+        private Softver _softver;
 
         public ObservableCollection<Softver> Softveri
         {
@@ -40,6 +43,15 @@ namespace Raspored.Model
         public Predmet()
         {
             Softveri = new ObservableCollection<Softver>();
+            _oznaka = "";
+            _opis = "";
+            _naziv = "";
+            _duzinaTermina = 2;
+            _brojTermina = 4;
+            _velicinaGrupe = 16;
+            _trebaPametnaTabla = false;
+            _trebaTabla = true;
+            _trebaProjektor = true;
 
         }
 
@@ -74,7 +86,23 @@ namespace Raspored.Model
                 }
             }
         }
-        
+
+        public string Skracenica
+        {
+            get
+            {
+                return _skracenica;
+            }
+            set
+            {
+                if (_skracenica != value)
+                {
+                    _skracenica = value;
+                    OnPropertyChanged("Skracenica");
+                }
+            }
+        }
+
         public Smer SmerPredmeta
         {
             get
@@ -122,7 +150,7 @@ namespace Raspored.Model
                 }
             }
         }
-        
+
         public int DuzinaTermina
         {
             get
@@ -138,6 +166,24 @@ namespace Raspored.Model
                 }
             }
         }
+
+        public int BrojTermina
+        {
+            get
+            {
+                return _brojTermina;
+            }
+            set
+            {
+                if (_brojTermina != value)
+                {
+                    _brojTermina = value;
+                    OnPropertyChanged("BrojTermina");
+                }
+            }
+        }
+
+
         
         public bool TrebaProjektor
         {
@@ -199,6 +245,22 @@ namespace Raspored.Model
                 {
                     _neophodanOS = value;
                     OnPropertyChanged("NeophodanOS");
+                }
+            }
+        }
+
+        public Softver Softver
+        {
+            get
+            {
+                return _softver;
+            }
+            set
+            {
+                if (_softver != value)
+                {
+                    _softver = value;
+                    OnPropertyChanged("Softver");
                 }
             }
         }

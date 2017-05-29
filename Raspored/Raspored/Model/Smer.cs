@@ -20,11 +20,16 @@ namespace Raspored.Model
 
         private string _oznaka;
         private string _naziv;
+        private string _skracenica;
         private DateTime _datumUvodjenja;
         private string _opis;
 
         public Smer()
         {
+            _naziv = "";
+            _opis = "";
+            _skracenica = "";
+            _oznaka = "";
 
         }
 
@@ -59,7 +64,23 @@ namespace Raspored.Model
                 }
             }
         }
- 
+
+        public string Skracenica
+        {
+            get
+            {
+                return _skracenica;
+            }
+            set
+            {
+                if (_skracenica != value)
+                {
+                    _skracenica = value;
+                    OnPropertyChanged("Skracenica");
+                }
+            }
+        }
+
         public DateTime DatumUvodjenja
         {
             get
