@@ -6,12 +6,13 @@
     xmlns:local="clr-namespace:Raspored.Tabele"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Raspored.Model"
+    xmlns:val="clr-namespace:Raspored.Tabele"
     Title="Tabele"
     Width="1000"
     Height="650"
     MinWidth="1000"
     MinHeight="650"
-    FontSize="15"
+    FontSize="16"
     Top="50"
     mc:Ignorable="d">
 
@@ -88,12 +89,12 @@
                                     Grid.Column="0"
                                     Grid.ColumnSpan="4"
                                     AutoGenerateColumns="False"
-                                    BorderThickness="0"
+                                    BorderThickness="1"
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
                                     IsSynchronizedWithCurrentItem="True"
                                     ItemsSource="{Binding Path=Ucionice}"
-                                    SelectedItem="{Binding SelectedUcionica, Mode=TwoWay}">
+                                    SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Width="80" Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -131,8 +132,9 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    IsEnabled="{Binding EnablePromeni}">
-                                    Promeni
+                                    Click="RezimIzmeniUcionicu_Click"
+                                    IsEnabled="{Binding EnablePromeniUcionicu}">
+                                    Izmeni
                                 </Button>
                                 <Button
                                     Grid.Row="1"
@@ -141,7 +143,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiUcionicu_Click"
-                                    IsEnabled="{Binding EnableIzbrisi}">
+                                    IsEnabled="{Binding EnableIzbrisiUcionicu}">
                                     Izbrisi
                                 </Button>
 
@@ -158,11 +160,12 @@
                             <Grid
                                 x:Name="GridUcionice"
                                 Margin="10"
-                                DataContext="{Binding SelectedUcionica, Mode=TwoWay}">
+                                DataContext="{Binding Path=SelectedUcionica, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
-
+                                        <Setter Property="BorderThickness" Value="2" />
+                                        <Setter Property="FontWeight" Value="DemiBold" />
                                         <Style.Triggers>
                                             <Trigger Property="IsReadOnly" Value="True">
                                                 <Setter Property="Background" Value="LightGray" />
@@ -223,23 +226,44 @@
                                     x:Name="SacuvajUcionicu"
                                     Grid.Row="7"
                                     Grid.Column="4"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
                                     Click="SacuvajUcionicu_Click"
                                     Visibility="{Binding VisibleSacuvaj}">
-                                    Sacuvaj
+                                    Dodaj ucionicu
+                                </Button>
+                                <Button
+                                    x:Name="SacuvajIzmenuUcionice"
+                                    Grid.Row="7"
+                                    Grid.Column="4"
+                                    Width="120"
+                                    Margin="0,5,5,0"
+                                    HorizontalAlignment="Right"
+                                    Click="SacuvajIzmenuUcionice_Click"
+                                    Visibility="{Binding VisibleSacuvaj}">
+                                    Sacuvaj izmenu
                                 </Button>
 
                                 <Button
                                     x:Name="OdusatniUcionica"
                                     Grid.Row="7"
                                     Grid.Column="5"
-                                    Width="80"
-                                    Margin="0,5,80,0"
+                                    Width="120"
+                                    Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniUcionica_Click">
                                     Odustani
+                                </Button>
+                                <Button
+                                    x:Name="IzmenaOdustaniUcionica"
+                                    Grid.Row="7"
+                                    Grid.Column="5"
+                                    Width="120"
+                                    Margin="0,5,10,0"
+                                    HorizontalAlignment="Right"
+                                    Click="IzmenaOdustaniUcionica_Click">
+                                    Ponisti izmenu
                                 </Button>
                                 <TextBox
                                     Grid.Row="0"
@@ -254,8 +278,27 @@
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="1"
-                                    Margin="0,0,0,0"
-                                    Text="{Binding Path=BrojRadnihMesta}" />
+                                    Margin="0,0,0,0">
+                                    <TextBox.Text>
+                                        <Binding Path="BrojRadnihMesta" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
+                                                <val:MinMaxValidationRule
+                                                    Max="1000"
+                                                    Min="0"
+                                                    ValidationStep="ConvertedProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <StackPanel>
+                                                <AdornedElementPlaceholder x:Name="textBox" />
+                                                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}" />
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
                                 <ComboBox Grid.Row="0" Grid.Column="4" />
                                 <CheckBox
                                     Grid.Row="2"
@@ -281,11 +324,16 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="47*" />
+                            <ColumnDefinition Width="939*" />
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
+                            Grid.ColumnSpan="2"
                             Padding="8"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -362,8 +410,9 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    IsEnabled="{Binding EnablePromeni}">
-                                    Promeni
+                                    Click="RezimIzmeniPredmet_Click"
+                                    IsEnabled="{Binding EnablePromeniPredmet}">
+                                    Izmeni
                                 </Button>
                                 <Button
                                     Grid.Row="1"
@@ -372,7 +421,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiPredmet_Click"
-                                    IsEnabled="{Binding EnableIzbrisi}">
+                                    IsEnabled="{Binding EnableIzbrisiPredmet}">
                                     Izbrisi
                                 </Button>
                             </Grid>
@@ -381,6 +430,7 @@
                         <Border
                             Grid.Row="1"
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Padding="20"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -393,6 +443,8 @@
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
+                                        <Setter Property="BorderThickness" Value="2" />
+                                        <Setter Property="FontWeight" Value="DemiBold" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Margin" Value="0,0,10,0" />
@@ -445,21 +497,43 @@
                                 <TextBlock Grid.Row="7" Grid.Column="3">Pametna tabla</TextBlock>
 
                                 <Button
+                                    x:Name="SacuvajIzmenuPredmet"
+                                    Grid.Row="11"
+                                    Grid.Column="4"
+                                    Grid.ColumnSpan="2"
+                                    Width="120"
+                                    Margin="0,5,5,0"
+                                    HorizontalAlignment="Right"
+                                    Click="SacuvajIzmenuPredmet_Click">
+                                    Sacuvaj izmenu
+                                </Button>
+
+                                <Button
                                     x:Name="SacuvajPredmet"
                                     Grid.Row="11"
                                     Grid.Column="4"
                                     Grid.ColumnSpan="2"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
                                     Click="SacuvajPredmet_Click">
-                                    Sacuvaj
+                                    Dodaj predmet
+                                </Button>
+                                <Button
+                                    x:Name="IzmenaOdustaniPredmet"
+                                    Grid.Row="11"
+                                    Grid.Column="6"
+                                    Width="120"
+                                    Margin="0,5,10,0"
+                                    HorizontalAlignment="Right"
+                                    Click="IzmenaOdustaniPredmet_Click">
+                                    Ponisti izmenu
                                 </Button>
                                 <Button
                                     x:Name="OdustaniPredmet"
                                     Grid.Row="11"
                                     Grid.Column="6"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniPredmet_Click">
@@ -485,12 +559,134 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Opis}" />
+                                <TextBox Grid.Row="5" Grid.Column="1">
+                                    <TextBox.Text>
+                                        <Binding Path="VelicinaGrupe" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
+                                                <val:MinMaxValidationRule
+                                                    Max="1000"
+                                                    Min="0"
+                                                    ValidationStep="ConvertedProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+                                <TextBox Grid.Row="6" Grid.Column="1">
+                                    <TextBox.Text>
+                                        <Binding Path="DuzinaTermina" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
+                                                <val:MinMaxValidationRule
+                                                    Max="1000"
+                                                    Min="0"
+                                                    ValidationStep="ConvertedProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+                                <TextBox
+                                    Grid.Row="7"
+                                    Grid.Column="1"
+                                    Height="25"
+                                    Margin="0,0,60,0"
+                                    VerticalAlignment="Top">
+                                    <TextBox.Text>
+                                        <Binding Path="BrojTermina" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
+                                                <val:MinMaxValidationRule
+                                                    Max="1000"
+                                                    Min="0"
+                                                    ValidationStep="ConvertedProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
                                 <TextBox
                                     Grid.Row="0"
                                     Grid.Column="4"
                                     Margin="0,0,5,0"
                                     VerticalAlignment="Center"
                                     Text="{Binding Path=Smer.Oznaka}" />
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Width="50"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                    ...
+                                </Button>
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="3"
@@ -507,28 +703,9 @@
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
                                     Text="" />
-                                <Button
-                                    Grid.Row="0"
-                                    Grid.Column="5"
-                                    Width="50"
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center">
-                                    ...
-                                </Button>
+
                                 <ComboBox Grid.Row="3" Grid.Column="4" />
-                                <TextBox
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding Path=VelicinaGrupe}" />
-                                <TextBox
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Text="{Binding Path=DuzinaTermina}" />
-                                <TextBox
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Text="{Binding Path=BrojTermina}" />
+
                                 <CheckBox
                                     Grid.Row="5"
                                     Grid.Column="4"
@@ -570,7 +747,8 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="265*" />
+                                    <ColumnDefinition Width="90*" />
+                                    <ColumnDefinition Width="175*" />
                                     <ColumnDefinition Width="527*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
@@ -579,7 +757,7 @@
                                     x:Name="dgrMainSmer"
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Grid.ColumnSpan="4"
+                                    Grid.ColumnSpan="5"
                                     AutoGenerateColumns="False"
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
@@ -616,7 +794,7 @@
                                 </DataGrid>
                                 <Button
                                     Grid.Row="1"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
@@ -626,21 +804,22 @@
                                 </Button>
                                 <Button
                                     Grid.Row="1"
-                                    Grid.Column="2"
-                                    Width="80"
-                                    Margin="0,5,5,15"
-                                    HorizontalAlignment="Right"
-                                    IsEnabled="{Binding EnablePromeni}">
-                                    Promeni
-                                </Button>
-                                <Button
-                                    Grid.Row="1"
                                     Grid.Column="3"
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    Click="RezimIzmeniSmer_Click"
+                                    IsEnabled="{Binding EnablePromeniSmer}">
+                                    Izmeni
+                                </Button>
+                                <Button
+                                    Grid.Row="1"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="0,5,5,15"
+                                    HorizontalAlignment="Right"
                                     Click="IzbrisiSmer_Click"
-                                    IsEnabled="{Binding EnableIzbrisi}">
+                                    IsEnabled="{Binding EnableIzbrisiSmer}">
                                     Izbrisi
                                 </Button>
                             </Grid>
@@ -660,6 +839,8 @@
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,80,4" />
+                                        <Setter Property="BorderThickness" Value="2" />
+                                        <Setter Property="FontWeight" Value="DemiBold" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Margin" Value="0,0,50,0" />
@@ -695,18 +876,38 @@
                                     x:Name="SacuvajSmer"
                                     Grid.Row="4"
                                     Grid.Column="4"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
                                     Click="SacuvajSmer_Click">
-                                    Sacuvaj
+                                    Dodaj smer
+                                </Button>
+                                <Button
+                                    x:Name="SacuvajIzmenuSmera"
+                                    Grid.Row="4"
+                                    Grid.Column="4"
+                                    Width="120"
+                                    Margin="0,5,5,0"
+                                    HorizontalAlignment="Right"
+                                    Click="SacuvajIzmenuSmera_Click">
+                                    Sacuvaj izmenu
+                                </Button>
+                                <Button
+                                    x:Name="IzmenaOdustaniSmer"
+                                    Grid.Row="4"
+                                    Grid.Column="5"
+                                    Width="120"
+                                    Margin="0,5,10,0"
+                                    HorizontalAlignment="Right"
+                                    Click="IzmenaOdustaniSmer_Click">
+                                    Ponisti izmenu
                                 </Button>
                                 <Button
                                     x:Name="OdustaniSmer"
                                     Grid.Row="4"
                                     Grid.Column="5"
-                                    Width="80"
-                                    Margin="0,5,80,0"
+                                    Width="120"
+                                    Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniSmer_Click">
                                     Odustani
@@ -830,8 +1031,9 @@
                                     Width="80"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    IsEnabled="{Binding EnablePromeni}">
-                                    Promeni
+                                    Click="RezimIzmeniSoftver_Click"
+                                    IsEnabled="{Binding EnablePromeniSoftver}">
+                                    Izmeni
                                 </Button>
                                 <Button
                                     Grid.Row="1"
@@ -840,7 +1042,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiSoftver_Click"
-                                    IsEnabled="{Binding EnableIzbrisi}">
+                                    IsEnabled="{Binding EnableIzbrisiSoftver}">
                                     Izbrisi
                                 </Button>
                             </Grid>
@@ -860,6 +1062,8 @@
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
+                                        <Setter Property="BorderThickness" Value="2" />
+                                        <Setter Property="FontWeight" Value="DemiBold" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Margin" Value="0,0,10,0" />
@@ -894,23 +1098,45 @@
                                 <TextBlock Grid.Row="5" Grid.Column="0">Cena</TextBlock>
 
                                 <Button
+                                    x:Name="IzmeniSoftver"
+                                    Grid.Row="8"
+                                    Grid.Column="4"
+                                    Width="120"
+                                    Height="24"
+                                    Margin="0,0,5,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Click="IzmeniSoftver_Click">
+                                    Sacuvaj izmenu
+                                </Button>
+                                <Button
                                     x:Name="SacuvajSoftver"
                                     Grid.Row="8"
                                     Grid.Column="4"
-                                    Width="80"
+                                    Width="120"
                                     Height="24"
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
                                     Click="SacuvajSoftver_Click">
-                                    Sacuvaj
+                                    Dodaj softver
+                                </Button>
+                                <Button
+                                    x:Name="IzmenaOdustaniSoftver"
+                                    Grid.Row="8"
+                                    Grid.Column="5"
+                                    Width="120"
+                                    Margin="0,5,10,0"
+                                    HorizontalAlignment="Right"
+                                    Click="IzmenaOdustaniSoftver_Click">
+                                    Ponisti izmenu
                                 </Button>
                                 <Button
                                     x:Name="OdustaniSoftver"
                                     Grid.Row="8"
                                     Grid.Column="5"
-                                    Width="80"
-                                    Margin="0,5,80,0"
+                                    Width="120"
+                                    Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniSoftver_Click">
                                     Odustani
@@ -931,6 +1157,75 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Opis}" />
+                                <TextBox Grid.Row="4" Grid.Column="1">
+                                    <TextBox.Text>
+                                        <Binding Path="GodinaIzdavanja" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
+                                                <val:MinMaxValidationRule
+                                                    Max="1000"
+                                                    Min="0"
+                                                    ValidationStep="ConvertedProposedValue" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
+                                <TextBox Grid.Row="5" Grid.Column="1">
+                                    <TextBox.Text>
+                                        <Binding Path="Cena" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                    <Validation.ErrorTemplate>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Validation.ErrorTemplate>
+                                </TextBox>
                                 <TextBox
                                     Grid.Row="0"
                                     Grid.Column="4"
@@ -941,14 +1236,7 @@
                                     Grid.Column="4"
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Sajt}" />
-                                <TextBox
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Text="{Binding Path=GodinaIzdavanja}" />
-                                <TextBox
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    Text="{Binding Path=Cena}" />
+
                                 <ComboBox Grid.Row="3" Grid.Column="4" />
 
                             </Grid>

@@ -64,6 +64,38 @@ namespace Raspored.Tabele
             GridPredmeti.IsEnabled = false;
             GridSoftver.IsEnabled = false;
 
+            IzmeniSoftver.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
+            IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
+            IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
+
+            if (Ucionice.Count > 0)
+            {
+                SelectedUcionica = Ucionice[0]; 
+            }
+
+            if (Predmeti.Count > 0)
+            {
+                SelectedPredmet = Predmeti[0];
+            }
+
+            if (Softveri.Count > 0)
+            {
+                SelectedSoftver = Softveri[0];
+            }
+
+            if (Smerovi.Count > 0)
+            {
+                SelectedSmer = Smerovi[0];
+            }
+
         }
 
         public ObservableCollection<Predmet> Predmeti
@@ -157,8 +189,8 @@ namespace Raspored.Tabele
         private void DodajUcionicu_Click(object sender, RoutedEventArgs e)
         {
             SelectedUcionica = new Ucionica();
-            EnablePromeni = "False";
-            EnableIzbrisi = "False";
+            EnablePromeniUcionicu = "False";
+            EnableIzbrisiUcionicu = "False";
             EnableDodaj = "False";
             TabPredmeti = "False";
             TabSmer = "False";
@@ -189,36 +221,138 @@ namespace Raspored.Tabele
             }
         }
 
-        private string _enablePromeni;
-        public string EnablePromeni
+        private string _enablePromeniUcionicu;
+        public string EnablePromeniUcionicu
         {
             get
             {
-                return _enablePromeni;
+                return _enablePromeniUcionicu;
             }
             set
             {
-                if (_enablePromeni != value)
+                if (_enablePromeniUcionicu != value)
                 {
-                    _enablePromeni = value;
-                    OnPropertyChanged("EnablePromeni");
+                    _enablePromeniUcionicu = value;
+                    OnPropertyChanged("EnablePromeniUcionicu");
                 }
             }
         }
 
-        private string _enableIzbrisi;
-        public string EnableIzbrisi
+        private string _enableIzbrisiUcionicu;
+        public string EnableIzbrisiUcionicu
         {
             get
             {
-                return _enableIzbrisi;
+                return _enableIzbrisiUcionicu;
             }
             set
             {
-                if (_enableIzbrisi != value)
+                if (_enableIzbrisiUcionicu != value)
                 {
-                    _enableIzbrisi = value;
-                    OnPropertyChanged("EnableIzbrisi");
+                    _enableIzbrisiUcionicu = value;
+                    OnPropertyChanged("EnableIzbrisiUcionicu");
+                }
+            }
+        }
+
+        private string _enablePromeniSoftver;
+        public string EnablePromeniSoftver
+        {
+            get
+            {
+                return _enablePromeniSoftver;
+            }
+            set
+            {
+                if (_enablePromeniSoftver != value)
+                {
+                    _enablePromeniSoftver = value;
+                    OnPropertyChanged("EnablePromeniSoftver");
+                }
+            }
+        }
+
+        private string _enableIzbrisiSoftver;
+        public string EnableIzbrisiSoftver
+        {
+            get
+            {
+                return _enableIzbrisiSoftver;
+            }
+            set
+            {
+                if (_enableIzbrisiSoftver != value)
+                {
+                    _enableIzbrisiSoftver = value;
+                    OnPropertyChanged("EnableIzbrisiSoftver");
+                }
+            }
+        }
+
+        private string _enablePromeniSmer;
+        public string EnablePromeniSmer
+        {
+            get
+            {
+                return _enablePromeniSmer;
+            }
+            set
+            {
+                if (_enablePromeniSmer != value)
+                {
+                    _enablePromeniSmer = value;
+                    OnPropertyChanged("EnablePromeniSmer");
+                }
+            }
+        }
+
+        private string _enableIzbrisiSmer;
+        public string EnableIzbrisiSmer
+        {
+            get
+            {
+                return _enableIzbrisiSmer;
+            }
+            set
+            {
+                if (_enableIzbrisiSmer != value)
+                {
+                    _enableIzbrisiSmer = value;
+                    OnPropertyChanged("EnableIzbrisiSmer");
+                }
+            }
+        }
+
+        private string _enablePromeniPredmet;
+        public string EnablePromeniPredmet
+        {
+            get
+            {
+                return _enablePromeniPredmet;
+            }
+            set
+            {
+                if (_enablePromeniPredmet != value)
+                {
+                    _enablePromeniPredmet = value;
+                    OnPropertyChanged("EnablePromeniPredmet");
+                }
+            }
+        }
+
+        private string _enableIzbrisiPredmet;
+        public string EnableIzbrisiPredmet
+        {
+            get
+            {
+                return _enableIzbrisiPredmet;
+            }
+            set
+            {
+                if (_enableIzbrisiPredmet != value)
+                {
+                    _enableIzbrisiPredmet = value;
+                    OnPropertyChanged("EnableIzbrisiPredmet");
                 }
             }
         }
@@ -331,8 +465,8 @@ namespace Raspored.Tabele
             {
                 SelectedUcionica = Ucionice[0];
             }
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniUcionicu = "True";
+            EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
             TabPredmeti = "True";
             TabSmer = "True";
@@ -348,8 +482,8 @@ namespace Raspored.Tabele
         private void SacuvajUcionicu_Click(object sender, RoutedEventArgs e)
         {
             Ucionice.Add(SelectedUcionica);
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniUcionicu = "True";
+            EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
             TabPredmeti = "True";
             TabSmer = "True";
@@ -359,11 +493,23 @@ namespace Raspored.Tabele
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             OdusatniUcionica.Visibility = Visibility.Hidden;
             GridUcionice.IsEnabled = false;
+
+            if (Ucionice.Count > 0)
+            {
+                EnableIzbrisiUcionicu = "True";
+                EnablePromeniUcionicu = "True";
+            }
         }
 
         private void IzbrisiUcionicu_Click(object sender, RoutedEventArgs e)
         {
             Ucionice.Remove(SelectedUcionica);
+
+            if (Ucionice.Count <= 0)
+            {
+                EnableIzbrisiUcionicu = "False";
+                EnablePromeniUcionicu = "False";
+            }
 
         }
 
@@ -387,8 +533,8 @@ namespace Raspored.Tabele
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
             SelectedPredmet = new Predmet();
-            EnablePromeni = "False";
-            EnableIzbrisi = "False";
+            EnablePromeniPredmet = "False";
+            EnableIzbrisiPredmet = "False";
             EnableDodaj = "False";
             TabUcionice = "False";
             TabSmer = "False";
@@ -406,8 +552,8 @@ namespace Raspored.Tabele
             {
                 SelectedPredmet = Predmeti[0];
             }
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniPredmet = "True";
+            EnableIzbrisiPredmet = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabSmer = "True";
@@ -424,8 +570,8 @@ namespace Raspored.Tabele
         private void SacuvajPredmet_Click(object sender, RoutedEventArgs e)
         {
             Predmeti.Add(SelectedPredmet);
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniPredmet = "True";
+            EnableIzbrisiPredmet = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabSmer = "True";
@@ -436,6 +582,12 @@ namespace Raspored.Tabele
             OdustaniPredmet.Visibility = Visibility.Hidden;
 
             GridPredmeti.IsEnabled = false;
+
+            if (Predmeti.Count > 0)
+            {
+                EnableIzbrisiPredmet = "True";
+                EnablePromeniPredmet = "True";
+            }
 
         }
 
@@ -459,8 +611,8 @@ namespace Raspored.Tabele
         private void DodajSmer_Click(object sender, RoutedEventArgs e)
         {
             SelectedSmer = new Smer();
-            EnablePromeni = "False";
-            EnableIzbrisi = "False";
+            EnablePromeniSmer = "False";
+            EnableIzbrisiSmer = "False";
             EnableDodaj = "False";
             TabUcionice = "False";
             TabPredmeti = "False";
@@ -480,8 +632,8 @@ namespace Raspored.Tabele
                 SelectedSmer = Smerovi[0];
             }
 
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniSmer = "True";
+            EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -497,8 +649,8 @@ namespace Raspored.Tabele
         private void SacuvajSmer_Click(object sender, RoutedEventArgs e)
         {
             Smerovi.Add(SelectedSmer);
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniSmer = "True";
+            EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -508,6 +660,12 @@ namespace Raspored.Tabele
             SacuvajSmer.Visibility = Visibility.Hidden;
             OdustaniSmer.Visibility = Visibility.Hidden;
             GridSmer.IsEnabled = false;
+
+            if (Smerovi.Count > 0)
+            {
+                EnableIzbrisiSmer = "True";
+                EnablePromeniSmer = "True";
+            }
 
         }
 
@@ -531,8 +689,8 @@ namespace Raspored.Tabele
         private void DodajSoftver_Click(object sender, RoutedEventArgs e)
         {
             SelectedSoftver = new Softver();
-            EnablePromeni = "False";
-            EnableIzbrisi = "False";
+            EnablePromeniSoftver = "False";
+            EnableIzbrisiSoftver = "False";
             EnableDodaj = "False";
             TabUcionice = "False";
             TabPredmeti = "False";
@@ -551,8 +709,8 @@ namespace Raspored.Tabele
             {
                 SelectedSoftver = Softveri[0];
             }
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniSoftver = "True";
+            EnableIzbrisiSoftver = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -569,12 +727,12 @@ namespace Raspored.Tabele
         private void SacuvajSoftver_Click(object sender, RoutedEventArgs e)
         {
             Softveri.Add(SelectedSoftver);
-            EnablePromeni = "True";
-            EnableIzbrisi = "True";
+            EnablePromeniSoftver = "True";
+            EnableIzbrisiSoftver = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
-            TabSoftver = "True";
+            TabSmer = "True";
             Podaci = "True";
 
             SacuvajSoftver.Visibility = Visibility.Hidden;
@@ -582,22 +740,44 @@ namespace Raspored.Tabele
 
             GridSoftver.IsEnabled = false;
 
+            if (Softveri.Count > 0)
+            {
+                EnableIzbrisiSoftver = "True";
+                EnablePromeniSoftver = "True";
+            }
+
         }
 
         private void IzbrisiPredmet_Click(object sender, RoutedEventArgs e)
         {
             Predmeti.Remove(SelectedPredmet);
+            if (Predmeti.Count <= 0)
+            {
+                EnableIzbrisiPredmet = "False";
+                EnablePromeniPredmet = "False";
+            }
+
         }
 
         private void IzbrisiSmer_Click(object sender, RoutedEventArgs e)
         {
             Smerovi.Remove(SelectedSmer);
+            if (Smerovi.Count <= 0)
+            {
+                EnableIzbrisiSmer = "False";
+                EnablePromeniSmer = "False";
+            }
 
         }
 
         private void IzbrisiSoftver_Click(object sender, RoutedEventArgs e)
         {
             Softveri.Remove(SelectedSoftver);
+            if (Softveri.Count <= 0)
+            {
+                EnableIzbrisiSoftver = "False";
+                EnablePromeniSoftver = "False";
+            }
 
         }
 
@@ -618,7 +798,214 @@ namespace Raspored.Tabele
             }
         }
 
+        private void RezimIzmeniSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            GridSoftver.IsEnabled = true;
+            IzmeniSoftver.Visibility = Visibility.Visible;
+            IzmenaOdustaniSoftver.Visibility = Visibility.Visible;
 
+            EnablePromeniSoftver = "False";
+            EnableIzbrisiSoftver = "False";
+            EnableDodaj = "False";
+            TabUcionice = "False";
+            TabPredmeti = "False";
+            TabSmer = "False";
+            Podaci = "False";
+
+
+
+
+        }
+
+        private void IzmeniSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            IzmeniSoftver.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
+
+            EnablePromeniSoftver = "True";
+            EnableIzbrisiSoftver = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabPredmeti = "True";
+            TabSmer = "True";
+            Podaci = "True";
+
+            GridSoftver.IsEnabled = false;
+
+        }
+
+        private void IzmenaOdustaniSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            IzmeniSoftver.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
+
+            EnablePromeniSoftver = "True";
+            EnableIzbrisiSoftver = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabPredmeti = "True";
+            TabSmer = "True";
+            Podaci = "True";
+            GridSoftver.IsEnabled = false;
+
+        }
+
+        private void RezimIzmeniSmer_Click(object sender, RoutedEventArgs e)
+        {
+            GridSmer.IsEnabled = true;
+            SacuvajIzmenuSmera.Visibility = Visibility.Visible;
+            IzmenaOdustaniSmer.Visibility = Visibility.Visible;
+
+            EnablePromeniSmer = "False";
+            EnableIzbrisiSmer = "False";
+            EnableDodaj = "False";
+            TabUcionice = "False";
+            TabPredmeti = "False";
+            TabSoftver = "False";
+            Podaci = "False";
+
+        }
+
+        private void SacuvajIzmenuSmera_Click(object sender, RoutedEventArgs e)
+        {
+            SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
+
+            EnablePromeniSmer = "True";
+            EnableIzbrisiSmer = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabPredmeti = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridSmer.IsEnabled = false;
+
+        }
+
+        private void IzmenaOdustaniSmer_Click(object sender, RoutedEventArgs e)
+        {
+            SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
+
+            EnablePromeniSmer = "True";
+            EnableIzbrisiSmer = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabPredmeti = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridSmer.IsEnabled = false;
+
+        }
+
+        private void RezimIzmeniPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            GridPredmeti.IsEnabled = true;
+            SacuvajIzmenuPredmet.Visibility = Visibility.Visible;
+            IzmenaOdustaniPredmet.Visibility = Visibility.Visible;
+
+            EnablePromeniPredmet = "False";
+            EnableIzbrisiPredmet = "False";
+            EnableDodaj = "False";
+            TabUcionice = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
+            Podaci = "False";
+
+        }
+
+        private void SacuvajIzmenuPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
+            IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
+
+            EnablePromeniPredmet = "True";
+            EnableIzbrisiPredmet = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridPredmeti.IsEnabled = false;
+
+        }
+
+        private void IzmenaOdustaniPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
+            IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
+
+            EnablePromeniPredmet = "True";
+            EnableIzbrisiPredmet = "True";
+            EnableDodaj = "True";
+            TabUcionice = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridPredmeti.IsEnabled = false;
+
+        }
+
+        private Ucionica _ucionicaPreIzmene;
+
+        private void RezimIzmeniUcionicu_Click(object sender, RoutedEventArgs e)
+        {
+            _ucionicaPreIzmene = SelectedUcionica;
+            GridUcionice.IsEnabled = true;
+            SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
+            IzmenaOdustaniUcionica.Visibility = Visibility.Visible;
+
+            EnablePromeniUcionicu = "False";
+            EnableIzbrisiUcionicu = "False";
+            EnableDodaj = "False";
+            TabPredmeti = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
+            Podaci = "False";
+
+        }
+
+        private void SacuvajIzmenuUcionice_Click(object sender, RoutedEventArgs e)
+        {
+            SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
+            IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
+
+            EnablePromeniUcionicu = "True";
+            EnableIzbrisiUcionicu = "True";
+            EnableDodaj = "True";
+            TabPredmeti = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridUcionice.IsEnabled = false;
+        }
+
+        private void IzmenaOdustaniUcionica_Click(object sender, RoutedEventArgs e)
+        {
+                    
+
+            SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
+            IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
+
+            EnablePromeniUcionicu = "True";
+            EnableIzbrisiUcionicu = "True";
+            EnableDodaj = "True";
+            TabPredmeti = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
+            Podaci = "True";
+
+            GridUcionice.IsEnabled = false;
+
+
+        }
+
+        
 
     }
 }
