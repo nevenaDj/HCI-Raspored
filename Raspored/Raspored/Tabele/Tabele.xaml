@@ -157,6 +157,12 @@
                                 x:Name="GridUcionice"
                                 Margin="10"
                                 DataContext="{Binding Path=SelectedUcionica, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="SacuvajUcionicu_CanExecute"
+                                        Command="New"
+                                        Executed="SacuvajUcionicu_Executed" />
+                                </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -181,7 +187,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -232,7 +238,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Click="SacuvajUcionicu_Click"
+                                    Command="New"
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Dodaj ucionicu
                                 </Button>
@@ -281,9 +287,14 @@
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="1"
-                                    Margin="0,0,0,0">
+                                    Margin="0,0,0,0"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="BrojRadnihMesta" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="BrojRadnihMesta"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
                                                 <val:MinMaxValidationRule
@@ -1132,6 +1143,12 @@
                                 x:Name="GridSoftver"
                                 Margin="10"
                                 DataContext="{Binding SelectedSoftver}">
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="SacuvajSoftver_CanExecute"
+                                        Command="New"
+                                        Executed="SacuvajSoftver_Executed" />
+                                </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -1191,7 +1208,7 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
-                                    Click="SacuvajSoftver_Click">
+                                    Command="New">
                                     Dodaj softver
                                 </Button>
                                 <Button
@@ -1230,14 +1247,21 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Opis}" />
-                                <TextBox Grid.Row="4" Grid.Column="1">
+                                <TextBox
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="GodinaIzdavanja" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="GodinaIzdavanja"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
-                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
-                                                <val:MinMaxValidationRule
-                                                    Max="1000"
-                                                    Min="0"
+
+                                                <val:GodinaValidationRule
+                                                    Max="2017"
+                                                    Min="1980"
                                                     ValidationStep="ConvertedProposedValue" />
                                             </Binding.ValidationRules>
                                         </Binding>
@@ -1266,9 +1290,16 @@
                                         </ControlTemplate>
                                     </Validation.ErrorTemplate>
                                 </TextBox>
-                                <TextBox Grid.Row="5" Grid.Column="1">
+                                <TextBox
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="Cena" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="Cena"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
 

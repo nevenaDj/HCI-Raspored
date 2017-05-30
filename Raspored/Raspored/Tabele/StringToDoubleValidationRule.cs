@@ -78,5 +78,35 @@ namespace Raspored.Tabele
         }
     }
 
+    public class GodinaValidationRule : ValidationRule
+    {
+        public int Min
+        {
+            get;
+            set;
+        }
+
+        public int Max
+        {
+            get;
+            set;
+        }
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value is int)
+            {
+                int d = (int)value;
+                if (d < Min) return new ValidationResult(false, "Godina nije ispravna.");
+                if (d > Max) return new ValidationResult(false, "Godina nije ispravna.");
+                return new ValidationResult(true, null);
+            }
+            else
+            {
+                return new ValidationResult(false, "Greska prilikom unosa.");
+            }
+        }
+    }
+
 
 }

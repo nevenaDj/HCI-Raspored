@@ -365,7 +365,7 @@ namespace Raspored.Tabele
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
-        private void SacuvajUcionicu_Click(object sender, RoutedEventArgs e)
+        private void SacuvajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
             Ucionice.Add(SelectedUcionica);
@@ -388,6 +388,11 @@ namespace Raspored.Tabele
             }
 
             sacuvajUcionicu();
+
+            e.Handled = true;
+
+
+            SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
@@ -782,6 +787,8 @@ namespace Raspored.Tabele
             }
             sacuvajSmer();
 
+            SelectRowByIndex(dgrMainSmer, Smerovi.Count - 1);
+
         }
 
         private void IzbrisiSmer_Click(object sender, RoutedEventArgs e)
@@ -954,7 +961,7 @@ namespace Raspored.Tabele
 
         }
 
-        private void SacuvajSoftver_Click(object sender, RoutedEventArgs e)
+        private void SacuvajSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Softveri.Add(SelectedSoftver);
             EnablePromeniSoftver = "True";
@@ -976,6 +983,11 @@ namespace Raspored.Tabele
                 EnablePromeniSoftver = "True";
             }
             sacuvajSoftver();
+
+            e.Handled = true;
+
+
+            SelectRowByIndex(dgrMainSoftver, Softveri.Count - 1);
 
         }
 
@@ -1214,6 +1226,7 @@ namespace Raspored.Tabele
                 else
                     f.Write(2);
                 f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.Sajt);
+                f.Write("\r\n");
             }
             f.Close();
         }
@@ -1376,6 +1389,18 @@ namespace Raspored.Tabele
             e.Handled = true;
         }
 
+        private void SacuvajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.Handled = true;
+        }
+
+        private void SacuvajSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.Handled = true;
+        }
+
         public static void SelectRowByIndex(DataGrid dataGrid, int rowIndex)
         {
             if (!dataGrid.SelectionUnit.Equals(DataGridSelectionUnit.FullRow))
@@ -1400,7 +1425,7 @@ namespace Raspored.Tabele
             //TODO: Retrieve and focus a DataGridCell object
         }
 
-
+        
     }
 
 }
