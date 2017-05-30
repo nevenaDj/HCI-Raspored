@@ -105,23 +105,41 @@ namespace Raspored.Tabele
 
             if (Ucionice.Count > 0)
             {
-                SelectedUcionica = Ucionice[0]; 
+                SelectedUcionica = Ucionice[0];
+            }else
+            {
+
+                EnableIzbrisiUcionicu = "False";
+                EnablePromeniUcionicu = "False";
             }
 
             if (Predmeti.Count > 0)
             {
                 SelectedPredmet = Predmeti[0];
+            }else
+            {
+                EnablePromeniPredmet = "False";
+                EnableIzbrisiPredmet = "False";
             }
 
             if (Softveri.Count > 0)
             {
                 SelectedSoftver = Softveri[0];
+            }else
+            {
+                EnablePromeniSoftver = "False";
+                EnableIzbrisiSoftver = "False";
             }
 
             if (Smerovi.Count > 0)
             {
                 SelectedSmer = Smerovi[0];
+            }else
+            {
+                EnableIzbrisiSmer = "False";
+                EnablePromeniSmer = "False";
             }
+ 
         }
 
         /** KOLEKCIJE **/
@@ -251,7 +269,7 @@ namespace Raspored.Tabele
             }
         }
 
-        /********************************** MANIPULACIJA UCIONICAMA *****************************/
+        /************************************************* MANIPULACIJA UCIONICAMA ******************************************/
         private Ucionica _selectedUcionica;
         public Ucionica SelectedUcionica
         {
@@ -325,11 +343,16 @@ namespace Raspored.Tabele
             if (Ucionice.Count > 0)
             {
                 SelectedUcionica = Ucionice[0];
+                EnablePromeniUcionicu = "True";
+                EnableIzbrisiUcionicu = "True";
             }
+            else
+            {
+                SelectedUcionica = null;
+                EnablePromeniUcionicu = "False";
+                EnableIzbrisiUcionicu = "False";
 
-
-            EnablePromeniUcionicu = "True";
-            EnableIzbrisiUcionicu = "True";
+            }
             EnableDodaj = "True";
             TabPredmeti = "True";
             TabSmer = "True";
@@ -442,7 +465,7 @@ namespace Raspored.Tabele
 
         }
 
-        /**************************************** MANIPULACIJA PREDMETIMA ************************************************/
+        /********************************************* MANIPULACIJA PREDMETIMA ************************************************/
 
         private Predmet _selectedPredmet;
         public Predmet SelectedPredmet
@@ -516,9 +539,15 @@ namespace Raspored.Tabele
             if (Predmeti.Count > 0)
             {
                 SelectedPredmet = Predmeti[0];
+                EnablePromeniPredmet = "True";
+                EnableIzbrisiPredmet = "True";
+            }else
+            {
+                SelectedPredmet = null;
+                EnablePromeniPredmet = "False";
+                EnableIzbrisiPredmet = "False";
             }
-            EnablePromeniPredmet = "True";
-            EnableIzbrisiPredmet = "True";
+            
             EnableDodaj = "True";
             TabUcionice = "True";
             TabSmer = "True";
@@ -629,7 +658,7 @@ namespace Raspored.Tabele
 
         }
 
-        /******************************************   MANIPULACIJA SMEROVIMA  **************************************/
+        /***************************************************   MANIPULACIJA SMEROVIMA  **************************************/
         private Smer _selectedSmer;
         public Smer SelectedSmer
         {
@@ -703,10 +732,15 @@ namespace Raspored.Tabele
             if (Smerovi.Count > 0)
             {
                 SelectedSmer = Smerovi[0];
+                EnablePromeniSmer = "True";
+                EnableIzbrisiSmer = "True";
+            }else
+            {
+                SelectedSmer = null;
+                EnablePromeniSmer = "False";
+                EnableIzbrisiSmer = "False";
             }
 
-            EnablePromeniSmer = "True";
-            EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -815,7 +849,7 @@ namespace Raspored.Tabele
         }
 
 
-        /***********************************************    MANIPULACIJA SOFTVERIMA   ************************************/
+        /****************************************************    MANIPULACIJA SOFTVERIMA   ************************************/
 
         private Softver _selectedSoftver;
         public Softver SelectedSoftver
@@ -890,9 +924,16 @@ namespace Raspored.Tabele
             if (Softveri.Count > 0)
             {
                 SelectedSoftver = Softveri[0];
+                EnablePromeniSoftver = "True";
+                EnableIzbrisiSoftver = "True";
             }
-            EnablePromeniSoftver = "True";
-            EnableIzbrisiSoftver = "True";
+            else
+            {
+                SelectedSoftver = null;
+                EnablePromeniSoftver = "False";
+                EnableIzbrisiSoftver = "False";
+            }
+            
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -1050,10 +1091,16 @@ namespace Raspored.Tabele
                     f.Write(2);
 
                 f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
-                if (u.Softveri!= null)
-                    foreach (Softver s in u.Softveri)
+                if (u.Softveri != null)
+                    if (u.Softveri.Count > 0)
                     {
-                        f.Write(s.Oznaka + ",");
+                        foreach (Softver s in u.Softveri)
+                        {
+                            if (s != null)
+                            {
+                                f.Write(s.Oznaka + ",");
+                            }
+                        }
                     }
                 f.WriteLine();
             }

@@ -95,25 +95,21 @@
                                     IsSynchronizedWithCurrentItem="True"
                                     ItemsSource="{Binding Path=Ucionice}"
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
+
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="80" Header="Oznaka">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Oznaka}" />
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
+                                            Binding="{Binding Oznaka}"
+                                            Header="Oznaka" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
                                             Binding="{Binding Opis}"
                                             Header="Opis" />
                                         <DataGridTextColumn
-                                            Width="120"
+                                            Width="Auto"
                                             Binding="{Binding BrojRadnihMesta}"
                                             Header="Broj radnih mesta" />
-                                        <DataGridTextColumn Width="150" Header="Operativni sistem" />
+                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -386,7 +382,7 @@
                                     ItemsSource="{Binding Path=Predmeti}"
                                     SelectedItem="{Binding SelectedPredmet, Mode=TwoWay}">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="50" Header="Oznaka">
+                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -396,27 +392,27 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Naziv}"
                                             Header="Naziv" />
-                                        <DataGridTextColumn Width="40" Header="Smer" />
+                                        <DataGridTextColumn Width="Auto" Header="Smer" />
                                         <DataGridTextColumn
-                                            Width="40"
+                                            Width="Auto"
                                             Binding="{Binding Opis}"
                                             Header="Opis" />
                                         <DataGridTextColumn
-                                            Width="120"
+                                            Width="Auto"
                                             Binding="{Binding VelicinaGrupe}"
                                             Header="Veličina grupe" />
                                         <DataGridTextColumn
-                                            Width="120"
+                                            Width="Auto"
                                             Binding="{Binding DuzinaTermina}"
                                             Header="Duzina termina" />
                                         <DataGridTextColumn
-                                            Width="120"
+                                            Width="Auto"
                                             Binding="{Binding BrojTermina}"
                                             Header="Broj termina" />
-                                        <DataGridTextColumn Width="150" Header="Operativni sistem" />
+                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -778,7 +774,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
-
                         </Grid.RowDefinitions>
                         <Border
                             Padding="8"
@@ -810,7 +805,7 @@
                                     ItemsSource="{Binding Path=Smerovi}"
                                     SelectedItem="{Binding SelectedSmer, Mode=TwoWay}">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="80" Header="Oznaka">
+                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -820,19 +815,19 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
-                                            Width="100"
+                                            Width="Auto"
                                             Binding="{Binding Skracenica}"
                                             Header="Skracenica" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Naziv}"
                                             Header="Naziv" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding DatumUvodjenja}"
                                             Header="Datum uvodjenja" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Opis}"
                                             Header="Opis" />
                                     </DataGrid.Columns>
@@ -1024,7 +1019,7 @@
                                     ItemsSource="{Binding Path=Softveri}"
                                     SelectedItem="{Binding SelectedSoftver, Mode=TwoWay}">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="80" Header="Oznaka">
+                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -1034,28 +1029,28 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Naziv}"
                                             Header="Naziv" />
-                                        <DataGridTextColumn Width="SizeToCells" Header="Operativni sistem" />
+                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Proizvođač}"
                                             Header="Proizvodjac" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Sajt}"
                                             Header="Sajt" />
                                         <DataGridTextColumn
-                                            Width="150"
+                                            Width="Auto"
                                             Binding="{Binding GodinaIzdavanja}"
                                             Header="Godina izdavanja" />
                                         <DataGridTextColumn
-                                            Width="50"
+                                            Width="Auto"
                                             Binding="{Binding Cena}"
                                             Header="Cena" />
                                         <DataGridTextColumn
-                                            Width="SizeToCells"
+                                            Width="Auto"
                                             Binding="{Binding Opis}"
                                             Header="Opis" />
                                     </DataGrid.Columns>
