@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Raspored.Model;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Raspored.Tabele
 {
@@ -26,7 +28,7 @@ namespace Raspored.Tabele
         {
             InitializeComponent();
             this.DataContext = this;
-
+            /*
             List<Smer> s = new List<Smer>();
             List<Predmet> p = new List<Predmet>();
             List<Softver> sf = new List<Softver>();
@@ -48,6 +50,31 @@ namespace Raspored.Tabele
 
             sf.Add(new Softver { Naziv = "Visual Studio", GodinaIzdavanja = 2000, Cena = 50000, Opis = "Mircosoft", Proizvodjac = "Mircosoft", Oznaka = "VS" });
             Softveri = new ObservableCollection<Softver>(sf);
+
+            */
+
+            //List<Smer> s = new List<Smer>(); 
+            List<Smer> s = otvoriSmer();
+            Smerovi = new ObservableCollection<Smer>(s);
+
+            //List<Softver> sf = new List<Softver>();
+            List<Softver> sf = otvoriSoftver();
+            Softveri = new ObservableCollection<Softver>(sf);
+
+            // List<Predmet> p = new List<Predmet>();
+            List<Predmet> p = otvoriPredmet();
+            //p.Add(new Predmet { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "HCI (SIIT)", DuzinaTermina = 2, BrojTermina = 6, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = true, TrebaPametnaTabla = false, TrebaProjektor = true });
+            //p.Add(new Predmet { Naziv = "Internet softverske arhitekture", Oznaka = "ISA", Skracenica = "ISA (SIIT)", DuzinaTermina = 2, BrojTermina = 5, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = false, TrebaPametnaTabla = false, TrebaProjektor = true });
+            Predmeti = new ObservableCollection<Predmet>(p);
+
+            // List<Ucionica> u = new List<Ucionica>();
+            List<Ucionica> u = otvoriUcionicu();
+            //u.Add(new Ucionica{ Oznaka = "L1", BrojRadnihMesta=16, ImaPametnaTabla=false, ImaTabla=true, ImaProjektor = true});
+            //u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            //u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+
+            Ucionice = new ObservableCollection<Ucionica>(u);
+            
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             SacuvajPredmet.Visibility = Visibility.Hidden;
@@ -336,6 +363,8 @@ namespace Raspored.Tabele
                 EnableIzbrisiUcionicu = "True";
                 EnablePromeniUcionicu = "True";
             }
+
+            sacuvajUcionicu();
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
@@ -348,6 +377,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiUcionicu = "False";
                 EnablePromeniUcionicu = "False";
             }
+            sacuvajUcionicu();
         }
 
         /***** REZIM ZA IZMENU UCIONICE ****/
@@ -389,6 +419,7 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridUcionice.IsEnabled = false;
+            sacuvajUcionicu();
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -522,6 +553,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiPredmet = "True";
                 EnablePromeniPredmet = "True";
             }
+            sacuvajPredmet();
         }
 
         private void IzbrisiPredmet_Click(object sender, RoutedEventArgs e)
@@ -532,6 +564,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiPredmet = "False";
                 EnablePromeniPredmet = "False";
             }
+            sacuvajPredmet();
         }
 
         private void RezimIzmeniPredmet_Click(object sender, RoutedEventArgs e)
@@ -573,6 +606,7 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridPredmeti.IsEnabled = false;
+            sacuvajPredmet();
 
         }
 
@@ -705,6 +739,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiSmer = "True";
                 EnablePromeniSmer = "True";
             }
+            sacuvajSmer();
 
         }
 
@@ -716,6 +751,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiSmer = "False";
                 EnablePromeniSmer = "False";
             }
+            sacuvajSmer();
 
         }
 
@@ -755,6 +791,7 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridSmer.IsEnabled = false;
+            sacuvajSmer();
 
         }
 
@@ -890,6 +927,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiSoftver = "True";
                 EnablePromeniSoftver = "True";
             }
+            sacuvajSoftver();
 
         }
 
@@ -901,6 +939,7 @@ namespace Raspored.Tabele
                 EnableIzbrisiSoftver = "False";
                 EnablePromeniSoftver = "False";
             }
+            sacuvajSoftver();
 
         }
 
@@ -942,6 +981,7 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridSoftver.IsEnabled = false;
+            sacuvajSoftver();
         }
 
         private void IzmenaOdustaniSoftver_Click(object sender, RoutedEventArgs e)
@@ -989,5 +1029,281 @@ namespace Raspored.Tabele
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+
+        /***********************************************    MANIPULACIJA FAJLOVIMA   ************************************/
+
+        void sacuvajUcionicu()
+        {
+            FileStream f1 = new FileStream("../../Save/ucionica.txt", FileMode.Create);
+            f1.Close();
+
+            StreamWriter f = new StreamWriter("../../Save/ucionica.txt");
+            // MessageBox.Show("123");
+            foreach (Ucionica u in Ucionice)
+            {
+                f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
+                if (u.OperativniSistem == OS.widows)
+                    f.Write(0);
+                else if (u.OperativniSistem == OS.linux)
+                    f.Write(1);
+                else
+                    f.Write(2);
+
+                f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
+                if (u.Softveri!= null)
+                    foreach (Softver s in u.Softveri)
+                    {
+                        f.Write(s.Oznaka + ",");
+                    }
+                f.WriteLine();
+            }
+            f.Close();
+        }
+
+        List<Ucionica> otvoriUcionicu()
+        {
+            List<Ucionica> ucionice = new List<Ucionica>();
+            FileStream f = new FileStream("../../Save/ucionica.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/ucionica.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string ucionica in tekst)
+            {
+                Ucionica u = new Ucionica();
+                if (ucionica == "")
+                    return ucionice;
+                string[] uc = ucionica.Split('|');
+                u.BrojRadnihMesta = Convert.ToInt32(uc[0]);
+                u.ImaTabla = Convert.ToBoolean(uc[3]);
+                u.ImaPametnaTabla = Convert.ToBoolean(uc[1]);
+                u.ImaProjektor = Convert.ToBoolean(uc[2]);
+                if (Convert.ToInt32(uc[4]) == 0)
+                    u.OperativniSistem = OS.widows;
+                else if (Convert.ToInt32(uc[4]) == 1)
+                    u.OperativniSistem = OS.linux;
+                else
+                    u.OperativniSistem = OS.ostalo;
+                u.Opis = uc[5];
+                u.Oznaka = uc[6];
+                ObservableCollection<Softver> softveri = new ObservableCollection<Softver>();
+                foreach (string sof in uc[7].Split(','))
+                {
+                    Softver s = nadjiSoftver(sof);
+                    softveri.Add(s);
+                }
+                u.Softveri = softveri;
+
+                ucionice.Add(u);
+            }
+
+            return ucionice;
+        }
+
+        void sacuvajSmer()
+        {
+            StreamWriter f = new StreamWriter("../../Save/smer.txt");
+            foreach (Smer s in Smerovi)
+            {
+                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja);
+            }
+            f.Close();
+        }
+
+        List<Smer> otvoriSmer()
+        {
+
+            List<Smer> smerovi = new List<Smer>();
+            FileStream f = new FileStream("../../Save/smer.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/smer.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string smer in tekst)
+            {
+                Smer s = new Smer();
+                if (smer == "")
+                {
+                    return smerovi;
+                }
+
+                string[] sm = smer.Split('|');
+
+                s.Oznaka = sm[0];
+                s.Skracenica = sm[1];
+                s.Opis = sm[2];
+                s.Naziv = sm[3];
+                s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
+
+                smerovi.Add(s);
+            }
+
+            return smerovi;
+        }
+
+        void sacuvajSoftver()
+        {
+            StreamWriter f = new StreamWriter("../../Save/softver.txt");
+            foreach (Softver s in Softveri)
+            {
+                f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
+                if (s.OperativniSistem == OS.widows)
+                    f.Write(0);
+                else if (s.OperativniSistem == OS.linux)
+                    f.Write(1);
+                else
+                    f.Write(2);
+                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.Sajt);
+            }
+            f.Close();
+        }
+
+        List<Softver> otvoriSoftver()
+        {
+            List<Softver> softveri = new List<Softver>();
+            FileStream f = new FileStream("../../Save/softver.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/softver.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string softver in tekst)
+            {
+                Softver s = new Softver();
+                if (softver == "")
+                    return softveri;
+                string[] sf = softver.Split('|');
+
+                s.Oznaka = sf[0];
+                s.Naziv = sf[1];
+                s.Cena = Convert.ToDouble(sf[2]);
+                if (Convert.ToInt32(sf[3]) == 0)
+                    s.OperativniSistem = OS.widows;
+                else if (Convert.ToInt32(sf[3]) == 1)
+                    s.OperativniSistem = OS.linux;
+                else
+                    s.OperativniSistem = OS.ostalo;
+                s.Opis = sf[4];
+                s.Proizvodjac = sf[5];
+                s.Sajt = sf[6];
+
+                softveri.Add(s);
+            }
+
+            return softveri;
+        }
+
+        void sacuvajPredmet()
+        {
+            StreamWriter f = new StreamWriter("../../Save/predmet.txt");
+            foreach (Predmet p in Predmeti)
+            {
+                f.Write(p.Naziv + "|" + p.BrojTermina + "|" + p.DuzinaTermina + "|");
+
+                if (p.NeophodanOS == OS.widows)
+                    f.Write(0);
+                else if (p.NeophodanOS == OS.linux)
+                    f.Write(1);
+                else
+                    f.Write(2);
+                f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
+                if (p.SmerPredmeta != null)
+                    f.Write(p.SmerPredmeta.Oznaka);
+                f.Write("|"+p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
+                if (p.Softveri == null || p.Softveri.Count==0)
+                    foreach (Softver s in p.Softveri)
+                    {
+                        f.Write(s.Oznaka + ",");
+                    }
+                f.WriteLine();
+            }
+            f.Close();
+        }
+
+
+
+        List<Predmet> otvoriPredmet()
+        {
+            List<Predmet> predmeti = new List<Predmet>();
+            FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/predmet.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string predmet in tekst)
+            {
+                Predmet p = new Predmet();
+                if (predmet == "")
+                    return predmeti;
+                string[] pr = predmet.Split('|');
+
+                p.Naziv = pr[0];
+                 
+                p.BrojTermina = Convert.ToInt32(pr[1]);
+                p.DuzinaTermina = Convert.ToInt32(pr[2]);
+                if (Convert.ToInt32(pr[3]) == 0)
+                    p.NeophodanOS = OS.widows;
+                else if (Convert.ToInt32(pr[3]) == 1)
+                    p.NeophodanOS = OS.linux;
+                else
+                    p.NeophodanOS = OS.ostalo;
+                p.Opis = pr[4];
+                p.Oznaka = pr[5];
+                p.Skracenica = pr[6];
+                p.SmerPredmeta = nadjiSmer(pr[7]);
+                //MessageBox.Show("TrebaPametnaTabla: " + pr[8]);
+                p.TrebaPametnaTabla = Convert.ToBoolean(pr[8]);
+                //MessageBox.Show("TrebaProjektor: " + pr[9]);
+                p.TrebaProjektor = Convert.ToBoolean(pr[9]);
+                //MessageBox.Show("TrebaTabla: " + pr[10]);
+                p.TrebaTabla = Convert.ToBoolean(pr[10]);
+                p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                ObservableCollection<Softver> softveri = new ObservableCollection<Softver>();
+                foreach (string sof in pr[12].Split(','))
+                {
+                    Softver s = nadjiSoftver(sof);
+                    softveri.Add(s);
+                }
+                p.Softveri = softveri;
+                predmeti.Add(p);
+
+            }
+
+            return predmeti;
+        }
+
+        Smer nadjiSmer(string oznaka)
+        {
+            //MessageBox.Show(""+Smerovi.Count);
+            foreach (Smer s in Smerovi)
+            {
+                if (s.Oznaka == oznaka)
+                    return s;
+            }
+            return null;
+        }
+
+        Softver nadjiSoftver(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Softver s in Softveri)
+            {
+                if (s.Oznaka == oznaka)
+                    return s;
+            }
+            return null;
+        }
     }
+
 }
