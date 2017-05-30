@@ -394,23 +394,31 @@
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Naziv}"
+                                            CanUserSort="False"
                                             Header="Naziv" />
-                                        <DataGridTextColumn Width="Auto" Header="Smer" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            CanUserSort="False"
+                                            Header="Smer" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Opis}"
+                                            CanUserSort="False"
                                             Header="Opis" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding VelicinaGrupe}"
+                                            CanUserSort="False"
                                             Header="Veličina grupe" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding DuzinaTermina}"
+                                            CanUserSort="False"
                                             Header="Duzina termina" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding BrojTermina}"
+                                            CanUserSort="False"
                                             Header="Broj termina" />
                                         <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
                                     </DataGrid.Columns>
@@ -461,6 +469,12 @@
                                 x:Name="GridPredmeti"
                                 Margin="10,0,10,0"
                                 DataContext="{Binding SelectedPredmet}">
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="SacuvajPredmet_CanExecute"
+                                        Command="New"
+                                        Executed="SacuvajPredmet_Executed" />
+                                </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -557,7 +571,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Click="SacuvajPredmet_Click">
+                                    Command="New">
                                     Dodaj predmet
                                 </Button>
                                 <Button
@@ -600,9 +614,16 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Opis}" />
-                                <TextBox Grid.Row="5" Grid.Column="1">
+                                <TextBox
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="VelicinaGrupe" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="VelicinaGrupe"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
                                                 <val:MinMaxValidationRule
@@ -636,9 +657,16 @@
                                         </ControlTemplate>
                                     </Validation.ErrorTemplate>
                                 </TextBox>
-                                <TextBox Grid.Row="6" Grid.Column="1">
+                                <TextBox
+                                    Grid.Row="6"
+                                    Grid.Column="1"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="DuzinaTermina" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="DuzinaTermina"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
                                                 <val:MinMaxValidationRule
@@ -677,9 +705,14 @@
                                     Grid.Column="1"
                                     Height="25"
                                     Margin="0,0,60,0"
-                                    VerticalAlignment="Top">
+                                    VerticalAlignment="Top"
+                                    Validation.Error="Validation_Error">
                                     <TextBox.Text>
-                                        <Binding Path="BrojTermina" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding
+                                            NotifyOnValidationError="True"
+                                            Path="BrojTermina"
+                                            UpdateSourceTrigger="PropertyChanged"
+                                            ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
                                                 <val:MinMaxValidationRule

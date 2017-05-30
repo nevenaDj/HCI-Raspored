@@ -561,7 +561,7 @@ namespace Raspored.Tabele
 
         }
 
-        private void SacuvajPredmet_Click(object sender, RoutedEventArgs e)
+        private void SacuvajPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Predmeti.Add(SelectedPredmet);
             EnablePromeniPredmet = "True";
@@ -583,6 +583,13 @@ namespace Raspored.Tabele
                 EnablePromeniPredmet = "True";
             }
             sacuvajPredmet();
+
+            e.Handled = true;
+
+
+            SelectRowByIndex(dgrMainPredmet, Predmeti.Count-1);
+            
+            
         }
 
         private void IzbrisiPredmet_Click(object sender, RoutedEventArgs e)
@@ -1351,6 +1358,49 @@ namespace Raspored.Tabele
             }
             return null;
         }
+
+        /****************************************        VALIDATION          **********************************************/
+        private int _noOfErrorsOnScreen = 0;
+
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+                _noOfErrorsOnScreen++;
+            else
+                _noOfErrorsOnScreen--;
+        }
+
+        private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.Handled = true;
+        }
+
+        public static void SelectRowByIndex(DataGrid dataGrid, int rowIndex)
+        {
+            if (!dataGrid.SelectionUnit.Equals(DataGridSelectionUnit.FullRow))
+                throw new ArgumentException("The SelectionUnit of the DataGrid must be set to FullRow.");
+
+            if (rowIndex < 0 || rowIndex > (dataGrid.Items.Count - 1))
+                throw new ArgumentException(string.Format("{0} is an invalid row index.", rowIndex));
+
+            dataGrid.SelectedItems.Clear();
+            /* set the SelectedItem property */
+            object item = dataGrid.Items[rowIndex]; // = Product X
+            dataGrid.SelectedItem = item;
+
+            DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromIndex(rowIndex) as DataGridRow;
+            if (row == null)
+            {
+                /* bring the data item (Product object) into view
+                 * in case it has been virtualized away */
+                dataGrid.ScrollIntoView(item);
+                row = dataGrid.ItemContainerGenerator.ContainerFromIndex(rowIndex) as DataGridRow;
+            }
+            //TODO: Retrieve and focus a DataGridCell object
+        }
+
+
     }
 
 }
