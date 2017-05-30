@@ -58,7 +58,7 @@
                 <TabItem IsEnabled="{Binding TabUcionice}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ucionica" />
+                            <TextBlock Text="Učionica" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
@@ -119,32 +119,32 @@
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Width="80"
+                                    Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="DodajUcionicu_Click"
                                     IsEnabled="{Binding EnableDodaj}">
-                                    Dodaj
+                                    Dodaj novu učionicu
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="2"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="RezimIzmeniUcionicu_Click"
                                     IsEnabled="{Binding EnablePromeniUcionicu}">
-                                    Izmeni
+                                    Izmeni učionicu
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="3"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiUcionicu_Click"
                                     IsEnabled="{Binding EnableIzbrisiUcionicu}">
-                                    Izbrisi
+                                    Obriši učionicu
                                 </Button>
 
                             </Grid>
@@ -407,7 +407,7 @@
                                         <DataGridTextColumn
                                             Width="120"
                                             Binding="{Binding VelicinaGrupe}"
-                                            Header="Velicina grupe" />
+                                            Header="Veličina grupe" />
                                         <DataGridTextColumn
                                             Width="120"
                                             Binding="{Binding DuzinaTermina}"
@@ -422,32 +422,32 @@
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Width="80"
+                                    Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="DodajPredmet_Click"
                                     IsEnabled="{Binding EnableDodaj}">
-                                    Dodaj
+                                    Dodaj novi predmet
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="RezimIzmeniPredmet_Click"
                                     IsEnabled="{Binding EnablePromeniPredmet}">
-                                    Izmeni
+                                    Izmeni predmet
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="2"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiPredmet_Click"
                                     IsEnabled="{Binding EnableIzbrisiPredmet}">
-                                    Izbrisi
+                                    Obriši predmet
                                 </Button>
                             </Grid>
                         </Border>
@@ -518,8 +518,8 @@
                                     Operativni sistem
                                 </TextBlock>
 
-                                <TextBlock Grid.Row="5" Grid.Column="0">Velicina grupe</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="0">Minimalna duzina termina</TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="0">Veličina grupe</TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="0">Minimalna dužina termina</TextBlock>
                                 <TextBlock Grid.Row="7" Grid.Column="0">Broj termina</TextBlock>
 
                                 <TextBlock
@@ -840,32 +840,32 @@
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="2"
-                                    Width="80"
+                                    Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="DodajSmer_Click"
                                     IsEnabled="{Binding EnableDodaj}">
-                                    Dodaj
+                                    Dodaj novi smer
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="3"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="RezimIzmeniSmer_Click"
                                     IsEnabled="{Binding EnablePromeniSmer}">
-                                    Izmeni
+                                    Izmeni smer
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="4"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiSmer_Click"
                                     IsEnabled="{Binding EnableIzbrisiSmer}">
-                                    Izbrisi
+                                    Obriši smer
                                 </Button>
                             </Grid>
                         </Border>
@@ -1040,7 +1040,7 @@
                                         <DataGridTextColumn Width="SizeToCells" Header="Operativni sistem" />
                                         <DataGridTextColumn
                                             Width="SizeToCells"
-                                            Binding="{Binding Proizvodjac}"
+                                            Binding="{Binding Proizvođač}"
                                             Header="Proizvodjac" />
                                         <DataGridTextColumn
                                             Width="SizeToCells"
@@ -1063,32 +1063,32 @@
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Width="80"
+                                    Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="DodajSoftver_Click"
                                     IsEnabled="{Binding EnableDodaj}">
-                                    Dodaj
+                                    Dodaj novi softver
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="RezimIzmeniSoftver_Click"
                                     IsEnabled="{Binding EnablePromeniSoftver}">
-                                    Izmeni
+                                    Izmeni softver
                                 </Button>
                                 <Button
                                     Grid.Row="1"
                                     Grid.Column="2"
-                                    Width="80"
+                                    Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     Click="IzbrisiSoftver_Click"
                                     IsEnabled="{Binding EnableIzbrisiSoftver}">
-                                    Izbrisi
+                                    Obriši softver
                                 </Button>
                             </Grid>
                         </Border>
@@ -1137,7 +1137,7 @@
                                 <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
                                 <TextBlock Grid.Row="2" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem:</TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="3">Proizvodjac</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="3">Proizvođač</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="3">Sajt</TextBlock>
                                 <TextBlock Grid.Row="4" Grid.Column="0">Godina izdavanja</TextBlock>
                                 <TextBlock Grid.Row="5" Grid.Column="0">Cena</TextBlock>

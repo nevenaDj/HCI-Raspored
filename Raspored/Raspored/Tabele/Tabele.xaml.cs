@@ -295,7 +295,12 @@ namespace Raspored.Tabele
         /**** KLIK NA DUGME ODUSTANI OD DODAVANJA UCIONICE ****/
         private void OdustaniUcionica_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (Ucionice.Count > 0)
+            {
+                SelectedUcionica = Ucionice[0];
+            }
+
+
             EnablePromeniUcionicu = "True";
             EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
@@ -312,10 +317,6 @@ namespace Raspored.Tabele
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
         private void SacuvajUcionicu_Click(object sender, RoutedEventArgs e)
         {
-            if (Ucionice.Count > 0)
-            {
-                SelectedUcionica = Ucionice[0];
-            }
 
             Ucionice.Add(SelectedUcionica);
             EnablePromeniUcionicu = "True";
