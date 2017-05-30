@@ -33,6 +33,16 @@ namespace Raspored.Model
 
         }
 
+        public Smer(string oznaka, string naziv, string skracenica, DateTime datumUvodjenja, string opis)
+        {
+            _oznaka = oznaka;
+            _naziv = naziv;
+            _skracenica = skracenica;
+            _datumUvodjenja = datumUvodjenja;
+            _opis = opis;
+
+        }
+
         public string Oznaka
         {
             get

@@ -29,7 +29,19 @@ namespace Raspored.Model
 
         public Softver()
         {
+        }
 
+        public Softver(string oznaka, string naziv, OS operativniSistem, string proizvodjac,
+            string sajt, int godinaIzdavanja, double cena, string opis)
+        {
+            _oznaka = oznaka;
+            _naziv = naziv;
+            _opetativniSistem = operativniSistem;
+            _proizvodjac = proizvodjac;
+            _sajt = sajt;
+            _godinaIzdavanja = godinaIzdavanja;
+            _cena = cena;
+            _opis = opis;
         }
 
 

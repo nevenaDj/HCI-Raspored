@@ -43,8 +43,18 @@ namespace Raspored.Model
             _imaProjektor = true;
             _imaTabla = true;
             _brojRadnihMesta = 16;
-            
+        }
 
+        public Ucionica(string oznaka, string opis, int brojRadnihMesta, 
+            bool imaProjektor, bool imaTabla, bool imaPametnaTabla, OS operativniSistem)
+        {
+            _oznaka = oznaka;
+            _opis = opis;
+            _brojRadnihMesta = brojRadnihMesta;
+            _imaProjektor = imaProjektor;
+            _imaTabla = imaTabla;
+            _imaPametnaTabla = imaPametnaTabla;
+            _operativniSistem = operativniSistem;
         }
 
         public string Oznaka

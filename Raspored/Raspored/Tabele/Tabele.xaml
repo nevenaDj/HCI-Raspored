@@ -194,7 +194,7 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="80" />
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
@@ -206,22 +206,29 @@
                                 <TextBlock
                                     Grid.Row="2"
                                     Grid.Column="3"
-                                    Margin="2,2,2,2">
+                                    Height="21"
+                                    Margin="30,2,2,0"
+                                    VerticalAlignment="Top">
                                     Projektor
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="3"
                                     Grid.Column="3"
-                                    Margin="2,2,2,2">
+                                    Margin="30,2,2,2">
                                     Tabla
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="4"
                                     Grid.Column="3"
-                                    Margin="2,2,2,2">
+                                    Margin="30,2,2,2">
                                     Pametna tabla
                                 </TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="3">Operativni sistem</TextBlock>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Margin="20,0,10,0">
+                                    Operativni sistem
+                                </TextBlock>
                                 <Button
                                     x:Name="SacuvajUcionicu"
                                     Grid.Row="7"
@@ -292,10 +299,25 @@
                                     </TextBox.Text>
                                     <Validation.ErrorTemplate>
                                         <ControlTemplate>
-                                            <StackPanel>
-                                                <AdornedElementPlaceholder x:Name="textBox" />
-                                                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}" />
-                                            </StackPanel>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <AdornedElementPlaceholder
+                                                    x:Name="textBox"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Foreground="Red"
+                                                    Text="{Binding [0].ErrorContent}" />
+                                            </Grid>
                                         </ControlTemplate>
                                     </Validation.ErrorTemplate>
                                 </TextBox>
@@ -303,14 +325,17 @@
                                 <CheckBox
                                     Grid.Row="2"
                                     Grid.Column="4"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
                                     Grid.Row="3"
                                     Grid.Column="4"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
                                     Grid.Row="4"
                                     Grid.Column="4"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaPametnaTabla}" />
                             </Grid>
                         </Border>
@@ -466,10 +491,10 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="134" />
+                                    <ColumnDefinition Width="134*" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="135*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -486,15 +511,35 @@
                                     Smer
                                 </TextBlock>
 
-                                <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem</TextBlock>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    Margin="40,0,10,0">
+                                    Operativni sistem
+                                </TextBlock>
 
                                 <TextBlock Grid.Row="5" Grid.Column="0">Velicina grupe</TextBlock>
                                 <TextBlock Grid.Row="6" Grid.Column="0">Minimalna duzina termina</TextBlock>
                                 <TextBlock Grid.Row="7" Grid.Column="0">Broj termina</TextBlock>
 
-                                <TextBlock Grid.Row="5" Grid.Column="3">Projektor</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="3">Tabla</TextBlock>
-                                <TextBlock Grid.Row="7" Grid.Column="3">Pametna tabla</TextBlock>
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="3"
+                                    Margin="40,0,0,0">
+                                    Projektor
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="6"
+                                    Grid.Column="3"
+                                    Margin="40,0,0,0">
+                                    Tabla
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="7"
+                                    Grid.Column="3"
+                                    Margin="40,0,0,0">
+                                    Pametna tabla
+                                </TextBlock>
 
                                 <Button
                                     x:Name="SacuvajIzmenuPredmet"
@@ -691,7 +736,7 @@
                                     Grid.Row="1"
                                     Grid.Column="3"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,0,5,0"
+                                    Margin="40,0,5,0"
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
                                     Text="" />

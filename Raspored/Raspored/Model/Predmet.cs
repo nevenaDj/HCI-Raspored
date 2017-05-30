@@ -55,6 +55,26 @@ namespace Raspored.Model
 
         }
 
+        public Predmet(string oznaka, string naziv,string skracenica, Smer smer, 
+            string opis,int velicinaGrupe,int duzinaTermina, int brojTermina,
+            bool trebaProjektor, bool trebaTabla, bool trebaPametnaTabla,
+            OS neophodanOS, ObservableCollection<Softver> softveri)
+        {
+            _oznaka = oznaka;
+            _naziv = naziv;
+            _skracenica = skracenica;
+            _smer = smer;
+            _opis = opis;
+            _velicinaGrupe = velicinaGrupe;
+            _duzinaTermina = duzinaTermina;
+            _brojTermina = brojTermina;
+            _trebaProjektor = trebaProjektor;
+            _trebaTabla = trebaTabla;
+            _trebaPametnaTabla = trebaPametnaTabla;
+            _neophodanOS = neophodanOS;
+            Softveri = softveri;
+        }
+
         public string Oznaka
         {
             get
