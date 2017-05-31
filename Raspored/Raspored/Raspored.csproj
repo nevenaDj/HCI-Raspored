@@ -58,6 +58,7 @@
     <Compile Include="DDrop\PravljenjeRasporeda.xaml.cs">
       <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tabele\Komande.cs" />
     <Compile Include="Tabele\StringToDoubleValidationRule.cs" />
     <Compile Include="Tabele\Tabele.xaml.cs">
       <DependentUpon>Tabele.xaml</DependentUpon>
@@ -119,7 +120,7 @@
     <Resource Include="foldero.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Precice\" />
+    <Folder Include="Komande\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

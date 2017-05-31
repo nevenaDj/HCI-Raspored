@@ -30,6 +30,7 @@ namespace Raspored.Model
             _opis = "";
             _skracenica = "";
             _oznaka = "";
+            _datumUvodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
         }
 

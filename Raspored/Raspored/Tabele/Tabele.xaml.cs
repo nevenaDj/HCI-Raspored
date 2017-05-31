@@ -324,6 +324,8 @@ namespace Raspored.Tabele
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Click(object sender, RoutedEventArgs e)
         {
+            _greskeDodavanje = 0;
+            _greskeIzmena = -100;
             SelectedUcionica = new Ucionica();
             EnablePromeniUcionicu = "False";
             EnableIzbrisiUcionicu = "False";
@@ -389,10 +391,12 @@ namespace Raspored.Tabele
 
             sacuvajUcionicu();
 
-            e.Handled = true;
+            
 
 
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
+
+            e.Handled = true;
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
@@ -411,6 +415,8 @@ namespace Raspored.Tabele
         /***** REZIM ZA IZMENU UCIONICE ****/
         private void RezimIzmeniUcionicu_Click(object sender, RoutedEventArgs e)
         {
+            _greskeIzmena = 0;
+            _greskeDodavanje = -100;
 
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
@@ -431,7 +437,7 @@ namespace Raspored.Tabele
         }
 
         /***** KLINK NA DUGME SACUVAJ IZMENU UCIONICE ****/
-        private void SacuvajIzmenuUcionice_Click(object sender, RoutedEventArgs e)
+        private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Ucionice[_index] = SelectedUcionica;
 
@@ -448,6 +454,8 @@ namespace Raspored.Tabele
 
             GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
+
+            e.Handled = true;
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -525,6 +533,8 @@ namespace Raspored.Tabele
 
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
+            _greskeDodavanje = 0;
+            _greskeIzmena = -100;
             SelectedPredmet = new Predmet();
             EnablePromeniPredmet = "False";
             EnableIzbrisiPredmet = "False";
@@ -589,12 +599,14 @@ namespace Raspored.Tabele
             }
             sacuvajPredmet();
 
-            e.Handled = true;
+            
 
 
             SelectRowByIndex(dgrMainPredmet, Predmeti.Count-1);
-            
-            
+
+            e.Handled = true;
+
+
         }
 
         private void IzbrisiPredmet_Click(object sender, RoutedEventArgs e)
@@ -610,6 +622,9 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniPredmet_Click(object sender, RoutedEventArgs e)
         {
+            _greskeIzmena = 0;
+            _greskeDodavanje = -100;
+
             _index = Predmeti.IndexOf(SelectedPredmet);
             SelectedPredmet = new Predmet(SelectedPredmet.Oznaka, SelectedPredmet.Naziv, SelectedPredmet.Skracenica,
                 SelectedPredmet.SmerPredmeta, SelectedPredmet.Opis, SelectedPredmet.VelicinaGrupe,
@@ -631,7 +646,7 @@ namespace Raspored.Tabele
 
         }
 
-        private void SacuvajIzmenuPredmet_Click(object sender, RoutedEventArgs e)
+        private void SacuvajIzmenuPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Predmeti[_index] = SelectedPredmet;
 
@@ -648,6 +663,8 @@ namespace Raspored.Tabele
 
             GridPredmeti.IsEnabled = false;
             sacuvajPredmet();
+
+            e.Handled = true;
 
         }
 
@@ -724,6 +741,9 @@ namespace Raspored.Tabele
 
         private void DodajSmer_Click(object sender, RoutedEventArgs e)
         {
+            _greskeDodavanje = 0;
+            _greskeIzmena = -100;
+
             SelectedSmer = new Smer();
             EnablePromeniSmer = "False";
             EnableIzbrisiSmer = "False";
@@ -805,6 +825,9 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniSmer_Click(object sender, RoutedEventArgs e)
         {
+            _greskeIzmena = 0;
+            _greskeDodavanje = -100;
+
             _index = Smerovi.IndexOf(SelectedSmer);
             SelectedSmer = new Smer(SelectedSmer.Oznaka, SelectedSmer.Naziv,
                 SelectedSmer.Skracenica, SelectedSmer.DatumUvodjenja, SelectedSmer.Opis);
@@ -918,6 +941,9 @@ namespace Raspored.Tabele
 
         private void DodajSoftver_Click(object sender, RoutedEventArgs e)
         {
+            _greskeDodavanje = 0;
+            _greskeIzmena = -100;
+
             SelectedSoftver = new Softver();
             EnablePromeniSoftver = "False";
             EnableIzbrisiSoftver = "False";
@@ -984,10 +1010,12 @@ namespace Raspored.Tabele
             }
             sacuvajSoftver();
 
-            e.Handled = true;
+           
 
 
             SelectRowByIndex(dgrMainSoftver, Softveri.Count - 1);
+
+            e.Handled = true;
 
         }
 
@@ -1005,6 +1033,9 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniSoftver_Click(object sender, RoutedEventArgs e)
         {
+            _greskeIzmena = 0;
+            _greskeDodavanje = -100;
+
             _index = Softveri.IndexOf(SelectedSoftver);
 
             SelectedSoftver = new Softver(SelectedSoftver.Oznaka, SelectedSoftver.Naziv, 
@@ -1025,7 +1056,7 @@ namespace Raspored.Tabele
             Podaci = "False";
         }
 
-        private void IzmeniSoftver_Click(object sender, RoutedEventArgs e)
+        private void IzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Softveri[_index] = SelectedSoftver;
 
@@ -1042,6 +1073,8 @@ namespace Raspored.Tabele
 
             GridSoftver.IsEnabled = false;
             sacuvajSoftver();
+
+            e.Handled = true;
         }
 
         private void IzmenaOdustaniSoftver_Click(object sender, RoutedEventArgs e)
@@ -1373,31 +1406,58 @@ namespace Raspored.Tabele
         }
 
         /****************************************        VALIDATION          **********************************************/
-        private int _noOfErrorsOnScreen = 0;
+        private int _greskeDodavanje;
+        private int _greskeIzmena;
 
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
-                _noOfErrorsOnScreen++;
-            else
-                _noOfErrorsOnScreen--;
-        }
+            {
+                _greskeDodavanje++;
+                _greskeIzmena++;
+            }
 
-        private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+            else
+            {
+                _greskeDodavanje--;
+                _greskeIzmena--;
+            }
+         }
+
+
+    private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.CanExecute = _greskeDodavanje == 0;
             e.Handled = true;
         }
 
         private void SacuvajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.CanExecute = _greskeDodavanje == 0;
             e.Handled = true;
         }
 
         private void SacuvajSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0;
+            e.CanExecute = _greskeDodavanje == 0;
+            e.Handled = true;
+        }
+
+        private void IzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _greskeIzmena == 0;
+            e.Handled = true;
+        }
+
+        private void IzmeniUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _greskeIzmena == 0;
+            e.Handled = true;
+        }
+
+        private void IzmeniSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _greskeIzmena == 0;
             e.Handled = true;
         }
 
@@ -1425,7 +1485,7 @@ namespace Raspored.Tabele
             //TODO: Retrieve and focus a DataGridCell object
         }
 
-        
+
     }
 
 }

@@ -97,10 +97,15 @@
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
 
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn
-                                            Width="Auto"
-                                            Binding="{Binding Oznaka}"
-                                            Header="Oznaka" />
+                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Oznaka}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Opis}"
@@ -160,8 +165,12 @@
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="SacuvajUcionicu_CanExecute"
-                                        Command="New"
+                                        Command="local:Komande.Dodavanje"
                                         Executed="SacuvajUcionicu_Executed" />
+                                    <CommandBinding
+                                        CanExecute="IzmeniUcionicu_CanExecute"
+                                        Command="local:Komande.Izmena"
+                                        Executed="SacuvajIzmenuUcionice_Executed" />
                                 </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
@@ -238,7 +247,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Command="New"
+                                    Command="local:Komande.Dodavanje"
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Dodaj ucionicu
                                 </Button>
@@ -249,7 +258,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Click="SacuvajIzmenuUcionice_Click"
+                                    Command="local:Komande.Izmena"
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Sacuvaj izmenu
                                 </Button>
@@ -483,8 +492,12 @@
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="SacuvajPredmet_CanExecute"
-                                        Command="New"
+                                        Command="local:Komande.Dodavanje"
                                         Executed="SacuvajPredmet_Executed" />
+                                    <CommandBinding
+                                        CanExecute="IzmeniPredmet_CanExecute"
+                                        Command="local:Komande.Izmena"
+                                        Executed="SacuvajIzmenuPredmet_Executed" />
                                 </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
@@ -570,7 +583,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Click="SacuvajIzmenuPredmet_Click">
+                                    Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
                                 </Button>
 
@@ -582,7 +595,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
-                                    Command="New">
+                                    Command="local:Komande.Dodavanje">
                                     Dodaj predmet
                                 </Button>
                                 <Button
@@ -815,11 +828,16 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="127*" />
+                            <ColumnDefinition Width="859*" />
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
+                            Grid.ColumnSpan="2"
                             Padding="8"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -911,6 +929,7 @@
                         <Border
                             Grid.Row="1"
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Padding="20"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -1019,7 +1038,7 @@
                                 <DatePicker
                                     Grid.Row="0"
                                     Grid.Column="4"
-                                    Text="{Binding Path=DatumUvodjenja}" />
+                                    SelectedDate="{Binding Path=DatumUvodjenja}" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -1146,8 +1165,12 @@
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="SacuvajSoftver_CanExecute"
-                                        Command="New"
+                                        Command="local:Komande.Dodavanje"
                                         Executed="SacuvajSoftver_Executed" />
+                                    <CommandBinding
+                                        CanExecute="IzmeniSoftver_CanExecute"
+                                        Command="local:Komande.Izmena"
+                                        Executed="IzmeniSoftver_Executed" />
                                 </Grid.CommandBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
@@ -1196,7 +1219,7 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
-                                    Click="IzmeniSoftver_Click">
+                                    Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
                                 </Button>
                                 <Button
@@ -1208,7 +1231,7 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
-                                    Command="New">
+                                    Command="local:Komande.Dodavanje">
                                     Dodaj softver
                                 </Button>
                                 <Button
@@ -1258,7 +1281,7 @@
                                             UpdateSourceTrigger="PropertyChanged"
                                             ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
-
+                                                <val:StringToIntValidationRule ValidationStep="RawProposedValue" />
                                                 <val:GodinaValidationRule
                                                     Max="2017"
                                                     Min="1980"
