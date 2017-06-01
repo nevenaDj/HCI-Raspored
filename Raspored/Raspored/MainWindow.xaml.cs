@@ -37,5 +37,10 @@ namespace Raspored
             r.ShowDialog();
 
         }
+
+        private void HandleWindowActivated(object sender, EventArgs e)
+        {
+            this.Focus();
+        }
     }
 }

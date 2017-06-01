@@ -140,6 +140,8 @@ namespace Raspored.Tabele
                 EnableIzbrisiSmer = "False";
                 EnablePromeniSmer = "False";
             }
+
+          
  
         }
 
@@ -1542,6 +1544,14 @@ namespace Raspored.Tabele
         {
             e.CanExecute = true;
             e.Handled = true;
+
+        }
+
+        private void HandleWindowActivated(object sender, EventArgs e)
+        {
+
+            this.Focus();
+            
 
         }
     }

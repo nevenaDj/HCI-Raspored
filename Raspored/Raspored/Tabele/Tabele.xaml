@@ -12,10 +12,16 @@
     Height="650"
     MinWidth="1000"
     MinHeight="650"
+    Activated="HandleWindowActivated"
     FontSize="16"
     Top="50"
     mc:Ignorable="d">
-
+    <Window.CommandBindings>
+        <CommandBinding
+            CanExecute="CommandBinding_CanExecute"
+            Command="local:Komande.Novi"
+            Executed="DodajUcionicu_Executed" />
+    </Window.CommandBindings>
     <Grid x:Name="Proba">
         <Grid>
             <TabControl>
@@ -56,16 +62,12 @@
                     </Style>
                 </TabControl.Resources>
                 <TabItem IsEnabled="{Binding TabUcionice}">
-
-
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Učionica" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-
-
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
@@ -76,13 +78,8 @@
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid>
-                                <Grid.CommandBindings>
-                                    <CommandBinding
-                                        CanExecute="CommandBinding_CanExecute"
-                                        Command="local:Komande.Novi"
-                                        Executed="DodajUcionicu_Executed" />
-                                </Grid.CommandBindings>
+                            <Grid x:Name="Grid1">
+
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />

@@ -8,6 +8,7 @@
     Title="MainWindow"
     Width="525"
     Height="350"
+    Activated="HandleWindowActivated"
     mc:Ignorable="d">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
