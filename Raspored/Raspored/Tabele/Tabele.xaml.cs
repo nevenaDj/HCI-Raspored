@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using Raspored.Model;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Threading;
 
 namespace Raspored.Tabele
 {
@@ -322,8 +323,14 @@ namespace Raspored.Tabele
         }
 
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
-        private void DodajUcionicu_Click(object sender, RoutedEventArgs e)
+        private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+           
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();         // Set Logical Focus
+                    Keyboard.Focus(Box); // Set Keyboard Focus
+                }));
             _greskeDodavanje = 0;
             _greskeIzmena = -100;
             SelectedUcionica = new Ucionica();
@@ -415,6 +422,12 @@ namespace Raspored.Tabele
         /***** REZIM ZA IZMENU UCIONICE ****/
         private void RezimIzmeniUcionicu_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();         
+                    Keyboard.Focus(Box); 
+                }));
+
             _greskeIzmena = 0;
             _greskeDodavanje = -100;
 
@@ -439,6 +452,9 @@ namespace Raspored.Tabele
         /***** KLINK NA DUGME SACUVAJ IZMENU UCIONICE ****/
         private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+          
+            MessageBox.Show(SelectedUcionica.Oznaka + " " + SelectedUcionica.Opis + " " + SelectedUcionica.ImaProjektor);
+
             Ucionice[_index] = SelectedUcionica;
 
             SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
@@ -455,7 +471,9 @@ namespace Raspored.Tabele
             GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
 
-            e.Handled = true;
+            
+
+        e.Handled = true;
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -533,6 +551,12 @@ namespace Raspored.Tabele
 
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box2);
+                }));
+
             _greskeDodavanje = 0;
             _greskeIzmena = -100;
             SelectedPredmet = new Predmet();
@@ -622,6 +646,12 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniPredmet_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box2);
+                }));
+
             _greskeIzmena = 0;
             _greskeDodavanje = -100;
 
@@ -741,6 +771,12 @@ namespace Raspored.Tabele
 
         private void DodajSmer_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box3);
+                }));
+
             _greskeDodavanje = 0;
             _greskeIzmena = -100;
 
@@ -825,6 +861,12 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniSmer_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box3);
+                }));
+
             _greskeIzmena = 0;
             _greskeDodavanje = -100;
 
@@ -941,6 +983,12 @@ namespace Raspored.Tabele
 
         private void DodajSoftver_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box4);
+                }));
+
             _greskeDodavanje = 0;
             _greskeIzmena = -100;
 
@@ -1033,6 +1081,11 @@ namespace Raspored.Tabele
 
         private void RezimIzmeniSoftver_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    Box.Focus();
+                    Keyboard.Focus(Box4);
+                }));
             _greskeIzmena = 0;
             _greskeDodavanje = -100;
 
@@ -1485,7 +1538,12 @@ namespace Raspored.Tabele
             //TODO: Retrieve and focus a DataGridCell object
         }
 
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
 
+        }
     }
 
 }

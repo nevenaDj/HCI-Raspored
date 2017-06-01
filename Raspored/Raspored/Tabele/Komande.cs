@@ -28,5 +28,15 @@ namespace Raspored.Tabele
              //   new KeyGesture(Key.D, ModifierKeys.Control),
             }
             );
+
+        public static readonly RoutedUICommand Novi = new RoutedUICommand(
+          "Novi",
+          "Novi",
+          typeof(Komande),
+          new InputGestureCollection()
+          {
+                new KeyGesture(Key.N, ModifierKeys.Control),
+            }
+          );
     }
 }

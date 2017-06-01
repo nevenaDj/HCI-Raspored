@@ -56,12 +56,16 @@
                     </Style>
                 </TabControl.Resources>
                 <TabItem IsEnabled="{Binding TabUcionice}">
+
+
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Učionica" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
+
+
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
@@ -73,6 +77,12 @@
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
                             <Grid>
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="CommandBinding_CanExecute"
+                                        Command="local:Komande.Novi"
+                                        Executed="DodajUcionicu_Executed" />
+                                </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
@@ -109,12 +119,17 @@
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Opis}"
+                                            CanUserSort="False"
                                             Header="Opis" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding BrojRadnihMesta}"
+                                            CanUserSort="False"
                                             Header="Broj radnih mesta" />
-                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            CanUserSort="False"
+                                            Header="Operativni sistem" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -123,7 +138,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="DodajUcionicu_Click"
+                                    Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novu učionicu
                                 </Button>
@@ -147,7 +162,6 @@
                                     IsEnabled="{Binding EnableIzbrisiUcionicu}">
                                     Obriši učionicu
                                 </Button>
-
                             </Grid>
                         </Border>
                         <Border
@@ -162,6 +176,17 @@
                                 x:Name="GridUcionice"
                                 Margin="10"
                                 DataContext="{Binding Path=SelectedUcionica, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                <Grid.InputBindings>
+                                    <KeyBinding
+                                        Key="S"
+                                        Command="local:Komande.Izmena"
+                                        Modifiers="Ctrl" />
+                                    <KeyBinding
+                                        Key="D"
+                                        Command="local:Komande.Dodavanje"
+                                        Modifiers="Ctrl" />
+                                </Grid.InputBindings>
+
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="SacuvajUcionicu_CanExecute"
@@ -284,6 +309,7 @@
                                     Ponisti izmenu
                                 </Button>
                                 <TextBox
+                                    Name="Box"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
@@ -499,6 +525,17 @@
                                         Command="local:Komande.Izmena"
                                         Executed="SacuvajIzmenuPredmet_Executed" />
                                 </Grid.CommandBindings>
+                                <Grid.InputBindings>
+                                    <KeyBinding
+                                        Key="S"
+                                        Command="local:Komande.Izmena"
+                                        Modifiers="Ctrl" />
+                                    <KeyBinding
+                                        Key="D"
+                                        Command="local:Komande.Dodavanje"
+                                        Modifiers="Ctrl" />
+                                </Grid.InputBindings>
+
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -619,6 +656,7 @@
                                     Odustani
                                 </Button>
                                 <TextBox
+                                    x:Name="Box2"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
@@ -867,7 +905,10 @@
                                     ItemsSource="{Binding Path=Smerovi}"
                                     SelectedItem="{Binding SelectedSmer, Mode=TwoWay}">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
+                                        <DataGridTemplateColumn
+                                            Width="Auto"
+                                            CanUserSort="False"
+                                            Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -879,18 +920,22 @@
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Skracenica}"
+                                            CanUserSort="False"
                                             Header="Skracenica" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Naziv}"
+                                            CanUserSort="False"
                                             Header="Naziv" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding DatumUvodjenja}"
+                                            CanUserSort="False"
                                             Header="Datum uvodjenja" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Opis}"
+                                            CanUserSort="False"
                                             Header="Opis" />
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -1016,6 +1061,7 @@
                                     Odustani
                                 </Button>
                                 <TextBox
+                                    x:Name="Box3"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
@@ -1094,27 +1140,36 @@
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Naziv}"
+                                            CanUserSort="False"
                                             Header="Naziv" />
-                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            CanUserSort="False"
+                                            Header="Operativni sistem" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Proizvođač}"
+                                            CanUserSort="False"
                                             Header="Proizvodjac" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Sajt}"
+                                            CanUserSort="False"
                                             Header="Sajt" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding GodinaIzdavanja}"
+                                            CanUserSort="False"
                                             Header="Godina izdavanja" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Cena}"
+                                            CanUserSort="False"
                                             Header="Cena" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Opis}"
+                                            CanUserSort="False"
                                             Header="Opis" />
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -1172,6 +1227,16 @@
                                         Command="local:Komande.Izmena"
                                         Executed="IzmeniSoftver_Executed" />
                                 </Grid.CommandBindings>
+                                <Grid.InputBindings>
+                                    <KeyBinding
+                                        Key="S"
+                                        Command="local:Komande.Izmena"
+                                        Modifiers="Ctrl" />
+                                    <KeyBinding
+                                        Key="D"
+                                        Command="local:Komande.Dodavanje"
+                                        Modifiers="Ctrl" />
+                                </Grid.InputBindings>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Margin" Value="0,0,60,4" />
@@ -1255,6 +1320,7 @@
                                     Odustani
                                 </Button>
                                 <TextBox
+                                    x:Name="Box4"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
