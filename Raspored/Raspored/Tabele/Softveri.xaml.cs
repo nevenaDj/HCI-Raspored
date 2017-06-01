@@ -186,17 +186,11 @@ namespace Raspored.Tabele
                 if (e.Data.GetDataPresent("myFormat"))
                 {
                     Model.Softver soft = e.Data.GetData("myFormat") as Model.Softver;
-                    if (SaveList2 != null)
-                        foreach (Softver s in SaveList2)
-                            if (!List2.Contains(s))
-                                List2.Add(s);
+                 
                     List1.Remove(soft);
                     List2.Add(soft);
-                    
-                    SaveList2 = new List<Softver>();
-                    foreach (Softver s in List2)
-                        if (s != null)
-                            SaveList2.Add(s);
+                    //SaveList2.Add(soft);
+                   
                 }
         }
 
@@ -206,17 +200,19 @@ namespace Raspored.Tabele
                 if (e.Data.GetDataPresent("myFormat"))
                 {
                     Model.Softver soft = e.Data.GetData("myFormat") as Model.Softver;
-                    if (SaveList2 != null)
+                   /* if (SaveList2 != null)
                         foreach (Softver s in SaveList2)
                             if (!List2.Contains(s))
-                                List2.Add(s);
+                                List2.Add(s);*/
                     List2.Remove(soft);
                     List1.Add(soft);
-                    
-                    SaveList2 = new List<Softver>();
-                    foreach (Softver s in List2)
-                        if (s != null)
-                            SaveList2.Add(s);
+                    SaveList2.Remove(soft);
+                    /* SaveList2 = new List<Softver>();
+                     foreach (Softver s in List2)
+                         if (s != null)
+                             SaveList2.Add(s);
+                     Search = "";
+                     just_do_it();*/
                 }
         }
 
@@ -272,14 +268,21 @@ namespace Raspored.Tabele
             return retVal;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+     
+
+      
+
+
+        private void Text_Changed(object sender, TextChangedEventArgs e)
         {
-            if (SaveList2!=null)
-            foreach (Softver s in SaveList2)
-                if (!List2.Contains(s))
-                    List2.Add(s);
-            if (Search != "")
-            
+            var textBox = sender as TextBox;
+           // MessageBox.Show("Search "+ textBox.Text);
+            if (SaveList2 != null)
+                foreach (Softver s in SaveList2)
+                    if (!List2.Contains(s))
+                        List2.Add(s);
+            if (textBox.Text != "")
+
             {
                 SaveList2 = new List<Softver>();
                 foreach (Softver s in List2)
@@ -287,27 +290,27 @@ namespace Raspored.Tabele
                         SaveList2.Add(s);
 
                 //MessageBox.Show("Savelist: "+ SaveList2.Count);
-    
+
                 List<Softver> filtered = new List<Softver>();
                 foreach (Softver s in List2)
                 {
-                    if (!s.Naziv.Contains(Search) && !s.Oznaka.Contains(Search))
+                    if (!s.Naziv.Contains(textBox.Text) && !s.Oznaka.Contains(textBox.Text))
                     {
                         filtered.Add(s);
                     }
-                        
+
                 }
                 if (filtered.Count != 0)
                 {
                     foreach (Softver f in filtered)
                         List2.Remove(f);
                     //List2.Remove(s => s);
-                   // List2 = new ObservableCollection<Softver>(filtered);
-                   // MessageBox.Show("jepp: "+filtered.Count);
+                    // List2 = new ObservableCollection<Softver>(filtered);
+                    // MessageBox.Show("jepp: "+filtered.Count);
                 }
-                
+
             }
-           
+
         }
 
     }

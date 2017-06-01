@@ -53,14 +53,8 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2">
-                <TextBox Text="{Binding Path=Search}" Margin="5,5,60,5" />
-                <Button
-                                
-                                    Width="50"
-                                    Margin="10,5,5,5"
-                                    HorizontalAlignment="Right" Click="Button_Click">
-                    Find
-                </Button>
+                <TextBox Text="{Binding  ElementName=Search,  Path=Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,5,5" TextChanged="Text_Changed" />
+                
             </Grid>
         </Grid>
     </Grid>
