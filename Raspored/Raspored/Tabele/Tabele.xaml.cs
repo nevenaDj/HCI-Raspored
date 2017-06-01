@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Raspored.Model;
+using Raspored.Tabele;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
@@ -436,7 +437,7 @@ namespace Raspored.Tabele
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
                 SelectedUcionica.BrojRadnihMesta, SelectedUcionica.ImaProjektor,
-                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, SelectedUcionica.OperativniSistem);
+                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, SelectedUcionica.OperativniSistem, SelectedUcionica.Softveri);
 
             GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
@@ -1243,14 +1244,18 @@ namespace Raspored.Tabele
                     u.OperativniSistem = OS.ostalo;
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
-                ObservableCollection<Softver> softveri = new ObservableCollection<Softver>();
+                List<Softver> softveri = new List<Softver>();
                 foreach (string sof in uc[7].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
-                    softveri.Add(s);
-                }
-                u.Softveri = softveri;
+                    if (s!=null)
+                        softveri.Add(s);
 
+                }
+                // 
+                u.Softveri = softveri;
+                // u.Softveri = new ObservableCollection<Softver>( softveri);
+               // MessageBox.Show("" + u.Softveri.Count);
                 ucionice.Add(u);
             }
 
@@ -1373,7 +1378,7 @@ namespace Raspored.Tabele
                 if (p.SmerPredmeta != null)
                     f.Write(p.SmerPredmeta.Oznaka);
                 f.Write("|"+p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
-                if (p.Softveri == null || p.Softveri.Count==0)
+                //if (p.Softveri == null || p.Softveri.Count==0)
                     foreach (Softver s in p.Softveri)
                     {
                         f.Write(s.Oznaka + ",");
@@ -1424,13 +1429,15 @@ namespace Raspored.Tabele
                 //MessageBox.Show("TrebaTabla: " + pr[10]);
                 p.TrebaTabla = Convert.ToBoolean(pr[10]);
                 p.VelicinaGrupe = Convert.ToInt32(pr[11]);
-                ObservableCollection<Softver> softveri = new ObservableCollection<Softver>();
+                List<Softver> softveri = new List<Softver>();
                 foreach (string sof in pr[12].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
-                    softveri.Add(s);
+                    if (s!=null)
+                        softveri.Add(s);
                 }
                 p.Softveri = softveri;
+               // MessageBox.Show(""+p.Softveri.Count);
                 predmeti.Add(p);
 
             }
@@ -1546,13 +1553,31 @@ namespace Raspored.Tabele
             e.Handled = true;
 
         }
-
+        
         private void HandleWindowActivated(object sender, EventArgs e)
         {
 
             this.Focus();
-            
+           
+        }
 
+        private void SoftveriOtvori_Click(object sender, RoutedEventArgs e)
+        {
+
+            var w = new SoftveriOtvori(SelectedUcionica);
+            
+            w.ShowDialog();
+            List<Softver> s = w.getList1();
+            SelectedUcionica.Softveri = s;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var w = new SoftveriOtvori(SelectedPredmet);
+
+            w.ShowDialog();
+            List<Softver> s = w.getList1();
+            SelectedPredmet.Softveri = s;
         }
     }
 

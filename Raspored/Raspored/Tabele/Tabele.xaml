@@ -262,6 +262,13 @@
                                     Margin="20,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    Margin="20,0,10,0">
+                                    Softveri
+                                </TextBlock>
+
                                 <Button
                                     x:Name="SacuvajUcionicu"
                                     Grid.Row="7"
@@ -273,6 +280,7 @@
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Dodaj ucionicu
                                 </Button>
+
                                 <Button
                                     x:Name="SacuvajIzmenuUcionice"
                                     Grid.Row="7"
@@ -361,6 +369,16 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <ComboBox Grid.Row="0" Grid.Column="4" />
+                                <Button 
+                                    x:Name="SoftveriOtvori"
+                                    Width="120"
+                                    Margin="41,5,50,0"
+                                    HorizontalAlignment="Center"
+                                    Click="SoftveriOtvori_Click"
+                                    Grid.Row="1"
+                                    Grid.Column="4" Height="25" VerticalAlignment="Top">
+                                    Otvori
+                                </Button>
                                 <CheckBox
                                     Grid.Row="2"
                                     Grid.Column="4"
@@ -577,6 +595,13 @@
                                     Margin="0,0,0,0"
                                     HorizontalAlignment="Center">
                                     Smer
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Center">
+                                    Softveri
                                 </TextBlock>
 
                                 <TextBlock
@@ -819,6 +844,15 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     ...
+                                </Button>
+                                <Button
+                                    Grid.Row="2"
+                                    Grid.Column="4"
+                                    Width="50"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" Click="Button_Click">
+                                    Otvori
                                 </Button>
                                 <TextBox
                                     Grid.Row="1"

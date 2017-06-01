@@ -27,7 +27,7 @@ namespace Raspored.Model
         private bool _imaPametnaTabla;
         private OS _operativniSistem;
 
-        public ObservableCollection<Softver> Softveri
+        public List<Softver> Softveri
         {
             get;
             set;
@@ -35,7 +35,7 @@ namespace Raspored.Model
 
         public Ucionica()
         {
-            Softveri = new ObservableCollection<Softver>();
+            Softveri = new List<Softver>();
 
             _oznaka = "";
             _opis = "";
@@ -46,7 +46,7 @@ namespace Raspored.Model
         }
 
         public Ucionica(string oznaka, string opis, int brojRadnihMesta, 
-            bool imaProjektor, bool imaTabla, bool imaPametnaTabla, OS operativniSistem)
+            bool imaProjektor, bool imaTabla, bool imaPametnaTabla, OS operativniSistem, List<Softver> softver)
         {
             _oznaka = oznaka;
             _opis = opis;
@@ -55,6 +55,7 @@ namespace Raspored.Model
             _imaTabla = imaTabla;
             _imaPametnaTabla = imaPametnaTabla;
             _operativniSistem = operativniSistem;
+            Softveri = softver;
         }
 
         public string Oznaka

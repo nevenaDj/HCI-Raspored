@@ -34,7 +34,7 @@ namespace Raspored.Model
         private OS _neophodanOS;
         private Softver _softver;
 
-        public ObservableCollection<Softver> Softveri
+        public List<Softver> Softveri
         {
             get;
             set;
@@ -42,7 +42,7 @@ namespace Raspored.Model
 
         public Predmet()
         {
-            Softveri = new ObservableCollection<Softver>();
+            Softveri = new List<Softver>();
             _oznaka = "";
             _opis = "";
             _naziv = "";
@@ -58,7 +58,7 @@ namespace Raspored.Model
         public Predmet(string oznaka, string naziv,string skracenica, Smer smer, 
             string opis,int velicinaGrupe,int duzinaTermina, int brojTermina,
             bool trebaProjektor, bool trebaTabla, bool trebaPametnaTabla,
-            OS neophodanOS, ObservableCollection<Softver> softveri)
+            OS neophodanOS, List<Softver> softveri)
         {
             _oznaka = oznaka;
             _naziv = naziv;
