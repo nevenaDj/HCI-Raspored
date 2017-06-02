@@ -29,6 +29,7 @@ namespace Raspored.DDrop
         {
             InitializeComponent();
             this.DataContext = this;
+            this.rasp = new Model.Raspored();
             Smerovi = new ObservableCollection<Smer>();
             Smer s = new Smer() { Naziv = "E2" };
             Smerovi.Add(s);
@@ -38,11 +39,11 @@ namespace Raspored.DDrop
             Predmeti = new ObservableCollection<Predmet>();
 
             List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1", VelicinaGrupe = 3, DuzinaTermina = 45 });
-            l.Add(new Predmet { Naziv = "2", VelicinaGrupe = 3, DuzinaTermina = 90 });
-            l.Add(new Predmet { Naziv = "3", VelicinaGrupe = 3, DuzinaTermina = 45 });
-            l.Add(new Predmet { Naziv = "4", VelicinaGrupe = 3, DuzinaTermina = 45 });
-            l.Add(new Predmet { Naziv = "5", VelicinaGrupe = 3, DuzinaTermina = 45 });
+            l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
+            l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
 
             Studenti = new ObservableCollection<Predmet>(l);
 
@@ -56,6 +57,41 @@ namespace Raspored.DDrop
                 StudentiTo.Add(temp);
             }
         }
+
+        public PravljenjeRasporeda(Model.Raspored rasp)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            this.rasp = rasp;
+            Smerovi = new ObservableCollection<Smer>();
+            Smer s = new Smer() { Naziv = "E2" };
+            Smerovi.Add(s);
+            s = new Smer() { Naziv = "SIIT" };
+            Smerovi.Add(s);
+
+            Predmeti = new ObservableCollection<Predmet>();
+
+            List<Predmet> l = new List<Predmet>();
+            l.Add(new Predmet { Naziv = "1", Oznaka="1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
+            l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+
+            Studenti = new ObservableCollection<Predmet>(l);
+
+
+            StudentiTo = new List<List<ObservableCollection<Predmet>>>();
+            for (int i = 0; i < 60; i++)
+            {
+                List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                for (int j = 0; j < 7; j++)
+                    temp.Add(new ObservableCollection<Predmet>());
+                StudentiTo.Add(temp);
+            }
+        }
+
+        private Model.Raspored rasp;
         public ObservableCollection<Smer> Smerovi
         {
             get;
@@ -189,11 +225,45 @@ namespace Raspored.DDrop
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
+                int broj_termina = student.BrojTermina;
                 if (StudentiTo[c1][r1].Count == 0)
                 {
                     if (fromList)
                     {
-                        Studenti.Remove(student);
+                        int cas = student.DuzinaTermina / 45;
+                        //MessageBox.Show("Cas: " + cas);
+                        bool nasla = false;
+                        foreach (Predmet p in rasp.OstaliTermini)
+                            if (p.Oznaka == student.Oznaka)
+                            {
+                                //MessageBox.Show("Nasla je");
+                               // MessageBox.Show("Student oznaka: "+student.Oznaka);
+                                //MessageBox.Show("Predme oznaka: " + p.Oznaka);
+                                p.BrojTermina += cas;
+                                if (p.BrojTermina >= broj_termina)
+                                {
+                                    //MessageBox.Show("p.BrojTermina: " + p.BrojTermina);
+                                    //MessageBox.Show("student.BrojTermina: " + broj_termina);
+                                    Studenti.Remove(student);
+                                }
+                                nasla = true;
+                            }
+                       if (!nasla)
+                       {
+                            //MessageBox.Show("Nije Nasla ");
+                            Predmet termini = student;
+                            termini.BrojTermina = cas;
+                            rasp.OstaliTermini.Add(termini);
+                            if (termini.BrojTermina >= broj_termina)
+                            {
+                                //MessageBox.Show("termini.BrojTermina: " + termini.BrojTermina);
+                                //MessageBox.Show("broj_termina: " + broj_termina);
+                                //MessageBox.Show("student.BrojTermina: " + student.BrojTermina);
+                                Studenti.Remove(student);
+                            }
+                                
+                        }       
+                           
                     }
                     else
                     {
@@ -225,9 +295,9 @@ namespace Raspored.DDrop
                     for (int i = 0; i < student.DuzinaTermina / 15; i++)
                     {
                         StudentiTo[c1 + i][r1].Add(student);
-
-
                     }
+                    
+
 
                 }
                 fromList = false;

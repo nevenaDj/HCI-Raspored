@@ -23,6 +23,8 @@ namespace Raspored
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Model.Raspored raspored;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +45,9 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
+                //ocitanje rasporeda iz fajla
+                raspored = new Model.Raspored();
+
             } catch (Exception e)
             {
                 Prozor2.Visibility = Visibility.Visible;
@@ -52,7 +57,7 @@ namespace Raspored
             }
         }
 
-        private Model.Raspored raspored;
+        
 
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
@@ -63,7 +68,7 @@ namespace Raspored
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var r = new DDrop.PravljenjeRasporeda();
+            var r = new DDrop.PravljenjeRasporeda(raspored);
             r.ShowDialog();
 
         }
@@ -87,6 +92,7 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
+                raspored = new Model.Raspored();
             }
         }
 
@@ -103,6 +109,7 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
+                raspored = new Model.Raspored();
             }
         }
 
