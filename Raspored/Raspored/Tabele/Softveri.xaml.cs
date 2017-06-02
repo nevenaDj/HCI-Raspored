@@ -200,10 +200,13 @@ namespace Raspored.Tabele
                 if (e.Data.GetDataPresent("myFormat"))
                 {
                     Model.Softver soft = e.Data.GetData("myFormat") as Model.Softver;
-                   /* if (SaveList2 != null)
-                        foreach (Softver s in SaveList2)
-                            if (!List2.Contains(s))
-                                List2.Add(s);*/
+                    if (SaveList2 == null)
+                    {
+                        SaveList2 = new List<Softver>();
+                        foreach (Softver s in List2)
+                            if (s != null)
+                                SaveList2.Add(s);
+                    }
                     List2.Remove(soft);
                     List1.Add(soft);
                     SaveList2.Remove(soft);

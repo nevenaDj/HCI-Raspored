@@ -32,6 +32,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <Button Grid.Row="1"
+                Grid.Column="0">
+                tekst
+            </Button>
             <TreeView
                 Name="trvPredmeti"
                 Grid.Row="0"
@@ -64,6 +68,7 @@
                     </DataTemplate>
                 </TreeView.Resources>
             </TreeView>
+            
             <GridSplitter
                 Grid.RowSpan="2"
                 Grid.Column="1"
@@ -137,6 +142,7 @@
                 Click="Korak1_Click">
                 Dalje
             </Button>
+
         </Grid>
 
         <Grid x:Name="Raspored2" Visibility="Collapsed">
@@ -241,7 +247,7 @@
                 Grid.Column="1"
                 VerticalScrollBarVisibility="Visible"
                 >
-                <Grid>
+                <Grid x:Name="grid2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
