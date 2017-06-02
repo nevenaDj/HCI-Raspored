@@ -58,6 +58,7 @@
     <Compile Include="DDrop\PravljenjeRasporeda.xaml.cs">
       <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Raspored.cs" />
     <Compile Include="Tabele\Komande.cs" />
     <Compile Include="Tabele\Softveri.xaml.cs">
       <DependentUpon>Softveri.xaml</DependentUpon>

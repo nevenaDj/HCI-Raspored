@@ -10,19 +10,51 @@
     Height="350"
     Activated="HandleWindowActivated"
     mc:Ignorable="d">
-    <DockPanel>
+    <DockPanel >
         <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Datoteka">
+                <MenuItem Click="Button_Click" Header="_Novi" />
+                <MenuItem Click="Button_Click_1" Header="_Otvori" />
+            </MenuItem>
             <MenuItem Header="_Prikaz">
                 <MenuItem Click="Ucionice_Click" Header="_Ucionice" />
                 <MenuItem Header="_Predmeta" />
                 <MenuItem Header="Smera" />
                 <MenuItem Header="Softvera" />
             </MenuItem>
-            <MenuItem Click="MenuItem_Click" Header="_Raspored" />
+            
+            <MenuItem x:Name="Raspored_Button" Click="MenuItem_Click" Header="_Raspored" IsEnabled="False" />
         </Menu>
         <Grid
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            DockPanel.Dock="Bottom" />
+            DockPanel.Dock="Bottom" Visibility="Visible" >
+            <Grid.RowDefinitions>
+                <RowDefinition  />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="Prozor1"
+                  Grid.Row="0" Grid.Column="0">
+                <TextBlock>Raspored</TextBlock>
+            </Grid>
+            <Grid x:Name="Prozor2"
+                  Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition  />
+                    <RowDefinition  />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="50" Height="20" Click="Button_Click" >Novi</Button>
+                <Button Grid.Column="1" Width="50" Height="20" Click="Button_Click_1" > Otvori</Button>
+            </Grid>
+        </Grid>
+        
     </DockPanel>
+    
 </Window>
