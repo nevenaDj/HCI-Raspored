@@ -20,10 +20,9 @@ namespace Raspored.Model
 
         private string _file;
         private string _naziv;
-        private List<List<Predmet>> _rasporedi;
         private List<Predmet> _ostali_termini;
 
-        public List<List<Predmet>> Rasporedi
+        public List<UcionicaRaspored> Rasporedi
         {
             get;
             set;
@@ -31,13 +30,13 @@ namespace Raspored.Model
 
         public Raspored()
         {
-            Rasporedi = new List<List<Predmet>>();
+            Rasporedi = new List<UcionicaRaspored>();
             _file = "";
             _naziv = "";
             _ostali_termini = new List<Predmet>();
         }
 
-        public Raspored(string file, string naziv, List<Predmet> ostali, List<List<Predmet>> raspored)
+        public Raspored(string file, string naziv, List<Predmet> ostali, List<UcionicaRaspored> raspored)
         {
             _file = file;
             _naziv = naziv;
