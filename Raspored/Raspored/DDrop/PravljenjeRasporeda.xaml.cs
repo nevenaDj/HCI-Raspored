@@ -36,6 +36,7 @@ namespace Raspored.DDrop
             s = new Smer() { Naziv = "SIIT" };
             Smerovi.Add(s);
 
+
             Predmeti = new ObservableCollection<Predmet>();
 
             List<Predmet> l = new List<Predmet>();

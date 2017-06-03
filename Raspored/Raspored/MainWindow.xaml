@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Raspored"
+    xmlns:common="clr-namespace:Common;assembly=RecentFileListLib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="525"
@@ -15,6 +16,7 @@
             <MenuItem Header="_Datoteka">
                 <MenuItem Click="Button_Click" Header="_Novi" />
                 <MenuItem Click="Button_Click_1" Header="_Otvori" />
+                <common:RecentFileList x:Name="RecentFileList" />
             </MenuItem>
             <MenuItem Header="_Prikaz">
                 <MenuItem Click="Ucionice_Click" Header="_Ucionice" />

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Common;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +32,8 @@ namespace Raspored
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
 
+            RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
+
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[\r\n]{3,}", options);
             string recentText = File.ReadAllText("../../Save/recent.txt");
@@ -45,7 +48,7 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
-                //ocitanje rasporeda iz fajla
+                //TO_DO: ocitanje rasporeda iz fajla
                 raspored = new Model.Raspored();
 
             } catch (Exception e)
@@ -73,6 +76,19 @@ namespace Raspored
 
         }
 
+        bool FileOpenCore(string filepath)
+        {
+            MessageBox.Show(filepath);
+            if (!File.Exists(filepath))
+            {
+                MessageBox.Show("File is removed or moved.");
+                RecentFileList.RemoveFile(filepath);
+
+            }
+            // if deleted -> MessageBox and remove
+            return true;
+        }
+
         private void HandleWindowActivated(object sender, EventArgs e)
         {
             this.Focus();
@@ -89,6 +105,7 @@ namespace Raspored
                 FileStream f = new FileStream(filename, FileMode.Create);
                 f.Close();
                 saveRecent(filename);
+                RecentFileList.InsertFile(filename);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
@@ -105,10 +122,12 @@ namespace Raspored
             if (openFileDialog.ShowDialog() == true)
             {
                 String filename = openFileDialog.FileName;
+                RecentFileList.InsertFile(filename);
                 saveRecent(filename);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
+                //TO_DO: raspored -> citanjeIz fajla
                 raspored = new Model.Raspored();
             }
         }
@@ -133,6 +152,11 @@ namespace Raspored
             f_save.Write(file_tekst);
             f_save.Close();
         }
-        
+
+        private void RecentFileList_MenuClick(object sender, RecentFileList.MenuClickEventArgs e)
+        {
+            String listView = sender as String;
+            MessageBox.Show(listView);
+        }
     }
 }

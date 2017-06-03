@@ -59,6 +59,7 @@
       <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Raspored.cs" />
+    <Compile Include="Model\UcionicaRaspore.cs" />
     <Compile Include="Tabele\Komande.cs" />
     <Compile Include="Tabele\Softveri.xaml.cs">
       <DependentUpon>Softveri.xaml</DependentUpon>
@@ -129,6 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Komande\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecentFileListLib\RecentFileListLib.csproj">
+      <Project>{8bbcf65c-a3a5-461b-96fb-492f97714257}</Project>
+      <Name>RecentFileListLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
