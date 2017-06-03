@@ -45,7 +45,6 @@ namespace Raspored
             {
                 
                 string fileText = File.ReadAllText(recentFile);
-                //MessageBox.Show(recentFile);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
