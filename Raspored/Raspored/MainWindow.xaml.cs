@@ -32,7 +32,7 @@ namespace Raspored
             InitializeComponent();
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
-
+            w = new Tabele.Tabele(); 
             RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
 
             RegexOptions options = RegexOptions.None;
@@ -50,7 +50,8 @@ namespace Raspored
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: ocitanje rasporeda iz fajla
-                raspored = new Model.Raspored();
+                //raspored = new Model.Raspored();
+                raspored = otvoriRaspored(recentFile);
                 raspored.File = recentFile;
 
             } catch (Exception e)
@@ -62,7 +63,7 @@ namespace Raspored
             }
         }
 
-        Tabele.Tabele w = new Tabele.Tabele();
+        Tabele.Tabele w; 
 
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
@@ -162,59 +163,63 @@ namespace Raspored
             MessageBox.Show(listView);
         }
 
-        Model.Raspored OtvoriRaspored(String fileName)
+        Model.Raspored otvoriRaspored(String fileName)
         {
             Model.Raspored rasp = new Model.Raspored();
-
-           /* List<Predmet> predmeti = new List<Predmet>();
-            FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
-            f.Close();
-
+            rasp.File = fileName;
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[\r\n]{3,}", options);
-            string recentText = File.ReadAllText("../../Save/predmet.txt");
+            string open_text = File.ReadAllText(fileName);
 
-            string[] tekst = recentText.Split('\n');
-            foreach (string predmet in tekst)
+            string[] tekst = open_text.Split('\n');
+            rasp.Naziv = tekst[0];
+
+            foreach (string pr in tekst[1].Split('|'))
             {
-                Predmet p = new Predmet();
-                if (predmet == "")
-                    return predmeti;
-                string[] pr = predmet.Split('|');
-
-                p.Naziv = pr[0];
-
-                p.BrojTermina = Convert.ToInt32(pr[1]);
-                p.DuzinaTermina = Convert.ToInt32(pr[2]);
-                if (Convert.ToInt32(pr[3]) == 0)
-                    p.NeophodanOS = OS.widows;
-                else if (Convert.ToInt32(pr[3]) == 1)
-                    p.NeophodanOS = OS.linux;
-                else
-                    p.NeophodanOS = OS.ostalo;
-                p.Opis = pr[4];
-                p.Oznaka = pr[5];
-                p.Skracenica = pr[6];
-                p.SmerPredmeta = nadjiSmer(pr[7]);
-                //MessageBox.Show("TrebaPametnaTabla: " + pr[8]);
-                p.TrebaPametnaTabla = Convert.ToBoolean(pr[8]);
-                //MessageBox.Show("TrebaProjektor: " + pr[9]);
-                p.TrebaProjektor = Convert.ToBoolean(pr[9]);
-                //MessageBox.Show("TrebaTabla: " + pr[10]);
-                p.TrebaTabla = Convert.ToBoolean(pr[10]);
-                p.VelicinaGrupe = Convert.ToInt32(pr[11]);
-                List<Softver> softveri = new List<Softver>();
-                foreach (string sof in pr[12].Split(','))
+                string[] pr_termin = pr.Split(',');
+               // pr_termin.ToList().Count
+                if (pr_termin.ToList().Count == 2)
                 {
-                    Softver s = nadjiSoftver(sof);
-                    if (s != null)
-                        softveri.Add(s);
+                    if (pr_termin[0] != "" && pr_termin[1] != "")
+                    {
+                        Predmet p = w.nadjiPredmet(pr_termin[0]);
+                        if (p != null)
+                        {
+                            p.BrojTermina = Convert.ToInt32(pr_termin[1]);
+                            rasp.OstaliTermini.Add(p);
+                        }
+                       
+                    }
                 }
-                p.Softveri = softveri;
-                // MessageBox.Show(""+p.Softveri.Count);
-                predmeti.Add(p);
+            }
+            int broj = 2;
+            while (true)
+            {
+                if (tekst.ToList().Count == broj || tekst[broj] == "" || tekst[broj] == "\r")
+                    return rasp;
+                string[] uc_term = tekst[broj].Split(':');               
+                Ucionica u = w.nadjiUcionicu(uc_term[0]);
+                UcionicaRaspored ur = new UcionicaRaspored(u);
+                string[] pr = uc_term[1].Split('|');
+                for (int i=0; i <61; i++ )
+                {
+                    if (pr[i] != "" || pr[i] != "\r")
+                    {
+                        string[] predmeti = pr[i].Split(',');
+                        for (int j = 0; j < 7; j++)
+                        {
+                            Predmet p = w.nadjiPredmet(predmeti[j]);
+                            if (p != null)
+                                ur.Rasporedi[i][j] = p;
+                        }
+                    
+                    }
+                }
+                rasp.Rasporedi.Add(ur);
+                broj++;
+                
+            }
 
-            }*/
             return rasp;
         }
 

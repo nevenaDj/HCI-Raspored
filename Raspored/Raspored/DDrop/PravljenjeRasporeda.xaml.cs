@@ -389,9 +389,9 @@ namespace Raspored.DDrop
             foreach (UcionicaRaspored r in rasp.Rasporedi)
             {
                 f.Write(r.Ucionica.Oznaka + ":");
-                for (int i=1; i<61; i++)
+                for (int i=0; i<61; i++)
                 {
-                    for (int j=1; j<7; j++)
+                    for (int j=0; j<7; j++)
                     {
                         f.Write(r.Rasporedi[i][j].Oznaka+",");
                     }
