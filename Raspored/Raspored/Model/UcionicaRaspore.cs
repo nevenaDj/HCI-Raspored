@@ -29,7 +29,34 @@ namespace Raspored.Model
         public UcionicaRaspored()
         {
             Rasporedi = new List<List<Predmet>>();
+           // Rasporedi = new List<List<Predmet>>();
+            for (int i = 0; i < 61; i++)
+            {
+                List<Predmet> novi_red = new List<Predmet>();
+                for (int j = 0; j < 7; j++)
+                {
+                    Predmet p = new Predmet();
+                    novi_red.Add(p);
+                }
+                Rasporedi.Add(novi_red);
+            }
             _ucionica = new Ucionica();
+        }
+
+        public UcionicaRaspored(Ucionica u)
+        {
+            Rasporedi = new List<List<Predmet>>();
+            for (int i = 0; i < 61; i++)
+            {
+                List<Predmet> novi_red = new List<Predmet>();
+                for (int j = 0; j < 7; j++)
+                {
+                    Predmet p = new Predmet();
+                    novi_red.Add(p);
+                }
+                Rasporedi.Add(novi_red);
+            }
+            _ucionica = u;
         }
 
         public UcionicaRaspored( Ucionica ucionica, List<List<Predmet>> raspored)

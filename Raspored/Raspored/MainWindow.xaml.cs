@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Raspored.Model;
 
 namespace Raspored
 {
@@ -50,6 +51,7 @@ namespace Raspored
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: ocitanje rasporeda iz fajla
                 raspored = new Model.Raspored();
+                raspored.File = recentFile;
 
             } catch (Exception e)
             {
@@ -60,12 +62,12 @@ namespace Raspored
             }
         }
 
-        
+        Tabele.Tabele w = new Tabele.Tabele();
 
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-           var w = new Tabele.Tabele();
+           
            w.ShowDialog();
         }
 
@@ -73,6 +75,7 @@ namespace Raspored
         {
             var r = new DDrop.PravljenjeRasporeda(raspored);
             r.ShowDialog();
+            r.sacuvajRaspored();
 
         }
 
@@ -158,5 +161,64 @@ namespace Raspored
             String listView = sender as String;
             MessageBox.Show(listView);
         }
+
+        Model.Raspored OtvoriRaspored(String fileName)
+        {
+            Model.Raspored rasp = new Model.Raspored();
+
+           /* List<Predmet> predmeti = new List<Predmet>();
+            FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/predmet.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string predmet in tekst)
+            {
+                Predmet p = new Predmet();
+                if (predmet == "")
+                    return predmeti;
+                string[] pr = predmet.Split('|');
+
+                p.Naziv = pr[0];
+
+                p.BrojTermina = Convert.ToInt32(pr[1]);
+                p.DuzinaTermina = Convert.ToInt32(pr[2]);
+                if (Convert.ToInt32(pr[3]) == 0)
+                    p.NeophodanOS = OS.widows;
+                else if (Convert.ToInt32(pr[3]) == 1)
+                    p.NeophodanOS = OS.linux;
+                else
+                    p.NeophodanOS = OS.ostalo;
+                p.Opis = pr[4];
+                p.Oznaka = pr[5];
+                p.Skracenica = pr[6];
+                p.SmerPredmeta = nadjiSmer(pr[7]);
+                //MessageBox.Show("TrebaPametnaTabla: " + pr[8]);
+                p.TrebaPametnaTabla = Convert.ToBoolean(pr[8]);
+                //MessageBox.Show("TrebaProjektor: " + pr[9]);
+                p.TrebaProjektor = Convert.ToBoolean(pr[9]);
+                //MessageBox.Show("TrebaTabla: " + pr[10]);
+                p.TrebaTabla = Convert.ToBoolean(pr[10]);
+                p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                List<Softver> softveri = new List<Softver>();
+                foreach (string sof in pr[12].Split(','))
+                {
+                    Softver s = nadjiSoftver(sof);
+                    if (s != null)
+                        softveri.Add(s);
+                }
+                p.Softveri = softveri;
+                // MessageBox.Show(""+p.Softveri.Count);
+                predmeti.Add(p);
+
+            }*/
+            return rasp;
+        }
+
+
+
     }
 }

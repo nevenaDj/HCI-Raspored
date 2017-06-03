@@ -1181,7 +1181,7 @@ namespace Raspored.Tabele
 
         /***********************************************    MANIPULACIJA FAJLOVIMA   ************************************/
 
-        void sacuvajUcionicu()
+        public void sacuvajUcionicu()
         {
             FileStream f1 = new FileStream("../../Save/ucionica.txt", FileMode.Create);
             f1.Close();
@@ -1215,7 +1215,7 @@ namespace Raspored.Tabele
             f.Close();
         }
 
-        List<Ucionica> otvoriUcionicu()
+        public List<Ucionica> otvoriUcionicu()
         {
             List<Ucionica> ucionice = new List<Ucionica>();
             FileStream f = new FileStream("../../Save/ucionica.txt", FileMode.OpenOrCreate);
@@ -1262,7 +1262,7 @@ namespace Raspored.Tabele
             return ucionice;
         }
 
-        void sacuvajSmer()
+        public void sacuvajSmer()
         {
             StreamWriter f = new StreamWriter("../../Save/smer.txt");
             foreach (Smer s in Smerovi)
@@ -1272,7 +1272,7 @@ namespace Raspored.Tabele
             f.Close();
         }
 
-        List<Smer> otvoriSmer()
+        public List<Smer> otvoriSmer()
         {
 
             List<Smer> smerovi = new List<Smer>();
@@ -1306,7 +1306,7 @@ namespace Raspored.Tabele
             return smerovi;
         }
 
-        void sacuvajSoftver()
+        public  void sacuvajSoftver()
         {
             StreamWriter f = new StreamWriter("../../Save/softver.txt");
             foreach (Softver s in Softveri)
@@ -1324,7 +1324,7 @@ namespace Raspored.Tabele
             f.Close();
         }
 
-        List<Softver> otvoriSoftver()
+        public List<Softver> otvoriSoftver()
         {
             List<Softver> softveri = new List<Softver>();
             FileStream f = new FileStream("../../Save/softver.txt", FileMode.OpenOrCreate);
@@ -1361,7 +1361,7 @@ namespace Raspored.Tabele
             return softveri;
         }
 
-        void sacuvajPredmet()
+        public void sacuvajPredmet()
         {
             StreamWriter f = new StreamWriter("../../Save/predmet.txt");
             foreach (Predmet p in Predmeti)
@@ -1390,7 +1390,7 @@ namespace Raspored.Tabele
 
 
 
-        List<Predmet> otvoriPredmet()
+        public List<Predmet> otvoriPredmet()
         {
             List<Predmet> predmeti = new List<Predmet>();
             FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
@@ -1445,7 +1445,7 @@ namespace Raspored.Tabele
             return predmeti;
         }
 
-        Smer nadjiSmer(string oznaka)
+        public Smer nadjiSmer(string oznaka)
         {
             //MessageBox.Show(""+Smerovi.Count);
             foreach (Smer s in Smerovi)
@@ -1456,13 +1456,35 @@ namespace Raspored.Tabele
             return null;
         }
 
-        Softver nadjiSoftver(string oznaka)
+        public  Softver nadjiSoftver(string oznaka)
         {
             //MessageBox.Show("" + Softveri.Count);
             foreach (Softver s in Softveri)
             {
                 if (s.Oznaka == oznaka)
                     return s;
+            }
+            return null;
+        }
+
+        public Ucionica nadjiUcionicu(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Ucionica u in Ucionice)
+            {
+                if (u.Oznaka == oznaka)
+                    return u;
+            }
+            return null;
+        }
+
+        public Predmet nadjiPredmet(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Predmet p in Predmeti)
+            {
+                if (p.Oznaka == oznaka)
+                    return p;
             }
             return null;
         }
