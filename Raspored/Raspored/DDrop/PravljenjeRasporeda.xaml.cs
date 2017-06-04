@@ -34,9 +34,17 @@ namespace Raspored.DDrop
             this.rasp = new Model.Raspored();
             Smerovi = new ObservableCollection<Smer>();
             Smer s = new Smer() { Naziv = "E2" };
+            s.Predmeti = new ObservableCollection<Predmet>();
+            s.Predmeti.Add(new Predmet() { Naziv = "Aleksandar", Oznaka = "Aleksandrov", Skracenica = "aleksaa@somemail.info"});
             Smerovi.Add(s);
             s = new Smer() { Naziv = "SIIT" };
+            s.Predmeti = new ObservableCollection<Predmet>();
+            s.Predmeti.Add(new Predmet() { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+          
             Smerovi.Add(s);
+          
+
+            
 
 
             Predmeti = new ObservableCollection<Predmet>();
@@ -49,6 +57,8 @@ namespace Raspored.DDrop
             l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
             l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+
+
 
             Studenti = new ObservableCollection<Predmet>(l);
 
@@ -403,5 +413,22 @@ namespace Raspored.DDrop
             f.Close();
         }
 
+        private Predmet _selectedPredmet;
+
+
+        private void trvPredmeti_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Predmet)))
+            {
+                _selectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
+               // MessageBox.Show(P.Oznaka);
+            }
+            
+            
+
+            
+
+        }
     }
 }

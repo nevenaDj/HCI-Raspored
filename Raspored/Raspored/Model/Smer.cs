@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Raspored.Model
 {
@@ -31,6 +32,7 @@ namespace Raspored.Model
             _skracenica = "";
             _oznaka = "";
             _datumUvodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            Predmeti = new ObservableCollection<Predmet>();
 
         }
 
@@ -41,6 +43,7 @@ namespace Raspored.Model
             _skracenica = skracenica;
             _datumUvodjenja = datumUvodjenja;
             _opis = opis;
+            Predmeti = new ObservableCollection<Predmet>();
 
         }
 
@@ -122,6 +125,12 @@ namespace Raspored.Model
                     OnPropertyChanged("Opis");
                 }
             }
+        }
+
+        public ObservableCollection<Predmet> Predmeti
+        {
+            get;
+            set;
         }
     }
 }

@@ -222,7 +222,11 @@ namespace Raspored
             return rasp;
         }
 
+        private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
+        {
+            var r = new Raspored.DDrop.PravljenjeRasporeda();
+            r.ShowDialog();
 
-
+        }
     }
 }
