@@ -108,6 +108,7 @@ namespace Raspored.Tabele
             if (Ucionice.Count > 0)
             {
                 SelectedUcionica = Ucionice[0];
+               
             }else
             {
 
@@ -355,6 +356,7 @@ namespace Raspored.Tabele
             if (Ucionice.Count > 0)
             {
                 SelectedUcionica = Ucionice[0];
+                SelectRowByIndex(dgrMainUcionica, 0);
                 EnablePromeniUcionicu = "True";
                 EnableIzbrisiUcionicu = "True";
             }
@@ -423,7 +425,7 @@ namespace Raspored.Tabele
         }
 
         /***** REZIM ZA IZMENU UCIONICE ****/
-        private void RezimIzmeniUcionicu_Click(object sender, RoutedEventArgs e)
+        private void RezimIzmeniUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -647,7 +649,7 @@ namespace Raspored.Tabele
             sacuvajPredmet();
         }
 
-        private void RezimIzmeniPredmet_Click(object sender, RoutedEventArgs e)
+        private void RezimIzmeniPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -862,7 +864,7 @@ namespace Raspored.Tabele
 
         }
 
-        private void RezimIzmeniSmer_Click(object sender, RoutedEventArgs e)
+        private void RezimIzmeniSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -1082,7 +1084,7 @@ namespace Raspored.Tabele
 
         }
 
-        private void RezimIzmeniSoftver_Click(object sender, RoutedEventArgs e)
+        private void RezimIzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -1567,6 +1569,8 @@ namespace Raspored.Tabele
                 row = dataGrid.ItemContainerGenerator.ContainerFromIndex(rowIndex) as DataGridRow;
             }
             //TODO: Retrieve and focus a DataGridCell object
+            Keyboard.Focus(dataGrid);
+            
         }
 
         private void DodajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1706,6 +1710,50 @@ namespace Raspored.Tabele
             {
                 e.CanExecute = true;
                 e.Handled = true;
+            }
+
+        }
+
+        private void RezimIzmeniUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedUcionica != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void RezimIzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void RezimIzmeniSmer_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedSmer != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void RezimIzmeniSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedSoftver != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
             }
 
         }

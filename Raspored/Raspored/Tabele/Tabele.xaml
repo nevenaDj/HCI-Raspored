@@ -81,6 +81,13 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
+                        <Grid.CommandBindings>
+                            <CommandBinding
+                                CanExecute="RezimIzmeniUcionicu_CanExecute"
+                                Command="local:Komande.Izmeni"
+                                Executed="RezimIzmeniUcionicu_Executed" />
+
+                        </Grid.CommandBindings>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="71*" />
                             <ColumnDefinition Width="422*" />
@@ -178,7 +185,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="RezimIzmeniUcionicu_Click"
+                                    Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniUcionicu}">
                                     Izmeni učionicu
                                 </Button>
@@ -476,6 +483,13 @@
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
                             <Grid>
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniPredmet_CanExecute"
+                                        Command="local:Komande.Izmeni"
+                                        Executed="RezimIzmeniPredmet_Executed" />
+
+                                </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
@@ -554,7 +568,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="RezimIzmeniPredmet_Click"
+                                    Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniPredmet}">
                                     Izmeni predmet
                                 </Button>
@@ -1016,6 +1030,13 @@
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
                             <Grid>
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniSmer_CanExecute"
+                                        Command="local:Komande.Izmeni"
+                                        Executed="RezimIzmeniSmer_Executed" />
+
+                                </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
@@ -1089,7 +1110,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="RezimIzmeniSmer_Click"
+                                    Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniSmer}">
                                     Izmeni smer
                                 </Button>
@@ -1245,6 +1266,13 @@
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
                             <Grid>
+                                <Grid.CommandBindings>
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniSoftver_CanExecute"
+                                        Command="local:Komande.Izmeni"
+                                        Executed="RezimIzmeniSoftver_Executed" />
+
+                                </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
@@ -1327,7 +1355,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="RezimIzmeniSoftver_Click"
+                                    Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniSoftver}">
                                     Izmeni softver
                                 </Button>
