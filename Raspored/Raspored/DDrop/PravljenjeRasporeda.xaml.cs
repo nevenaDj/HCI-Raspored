@@ -429,6 +429,15 @@ namespace Raspored.DDrop
             f.Close();
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
         private Predmet _selectedPredmet;
         public Predmet SelectedPredmet
         {
@@ -446,37 +455,22 @@ namespace Raspored.DDrop
             }
         }
 
-
-        private void trvPredmeti_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private Ucionica _selectedUcionica;
+        public Ucionica SelectedUcionica
         {
-
-            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Predmet)))
+            get
             {
-                SelectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
-                Korak1Enable = "True";
-              
+                return _selectedUcionica;
             }
-            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Smer)))
+            set
             {
-                Korak1Enable = "False";
-
-            }
-            
-            
-
-            
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
+                if (_selectedUcionica != value)
+                {
+                    _selectedUcionica = value;
+                    OnPropertyChanged("SelectedUcionica");
+                }
             }
         }
-
 
         private string _korak1Enable;
         public string Korak1Enable
@@ -512,15 +506,26 @@ namespace Raspored.DDrop
             }
         }
 
-        private Ucionica _selectedUcionica;
+        private void trvPredmeti_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Predmet)))
+            {
+                SelectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
+                Korak1Enable = "True";
+            }
+            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Smer)))
+            {
+                Korak1Enable = "False";
+
+            }
+        }
+
 
         private void lsUcionice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Korak2Enable = "True";
-            _selectedUcionica = (Ucionica)lsUcionice.SelectedItem;
-
-           // MessageBox.Show(u.Oznaka);
-
+            SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
         }
     }
 }
