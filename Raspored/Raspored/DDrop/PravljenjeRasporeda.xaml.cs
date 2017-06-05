@@ -32,22 +32,32 @@ namespace Raspored.DDrop
             InitializeComponent();
             this.DataContext = this;
             this.rasp = new Model.Raspored();
-            Smerovi = new ObservableCollection<Smer>();
-            Smer s = new Smer() { Naziv = "E2" };
-            s.Predmeti = new ObservableCollection<Predmet>();
-            s.Predmeti.Add(new Predmet() { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "ICR"});
-            Smerovi.Add(s);
-            s = new Smer() { Naziv = "SIIT" };
-            s.Predmeti = new ObservableCollection<Predmet>();
-            s.Predmeti.Add(new Predmet() { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-          
-            Smerovi.Add(s);
-            List<Ucionica> u = new List<Ucionica>();
-            u.Add(new Ucionica { Oznaka = "L1", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
-            u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
-            u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
-            Ucionice = new ObservableCollection<Ucionica>(u);
+        }
 
+        public PravljenjeRasporeda(Model.Raspored rasp, Tabele.Tabele tab)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            this.rasp = rasp;
+
+            List<Smer> s = tab.otvoriSmer();
+            List<Predmet> p = tab.otvoriPredmet();
+            foreach (Smer smer in s)
+            {
+                foreach (Predmet pred in p)
+                {
+                    if (pred.SmerPredmeta.Oznaka == smer.Oznaka)
+                        smer.Predmeti.Add(pred);
+                }
+
+            }
+
+
+            Smerovi = new ObservableCollection<Smer>(s);
+
+            List<Ucionica> u = tab.otvoriUcionicu();
+            Ucionice = new ObservableCollection<Ucionica>(u);
+            
 
             Korak1Enable = "False";
             Korak2Enable = "False";
@@ -55,52 +65,14 @@ namespace Raspored.DDrop
 
             Predmeti = new ObservableCollection<Predmet>();
 
-             Selected = new Ucionica { Oznaka= "1"};
-
-            List<Predmet> l = new List<Predmet>();
+           /* List<Predmet> l = new List<Predmet>();
             l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
             l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-
-
-
-            Studenti = new ObservableCollection<Predmet>(l);
-
-
-            Termini = new List<List<ObservableCollection<Predmet>>>();
-            for (int i = 0; i < 61; i++)
-            {
-                List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
-                for (int j = 0; j < 7; j++)
-                    temp.Add(new ObservableCollection<Predmet>());
-                Termini.Add(temp);
-            }
-        }
-
-        public PravljenjeRasporeda(Model.Raspored rasp)
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            this.rasp = rasp;
-            Smerovi = new ObservableCollection<Smer>();
-            Smer s = new Smer() { Naziv = "E2" };
-            Smerovi.Add(s);
-            s = new Smer() { Naziv = "SIIT" };
-            Smerovi.Add(s);
-
-            Predmeti = new ObservableCollection<Predmet>();
-
-            List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1", Oznaka="1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
-            l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-
-            Studenti = new ObservableCollection<Predmet>(l);
-            Selected = new Ucionica { Oznaka = "1" };
+            Studenti = new ObservableCollection<Predmet>(l);*/
+            Studenti = new ObservableCollection<Predmet>();
 
             Termini = new List<List<ObservableCollection<Predmet>>>();
             for (int i = 0; i < 61; i++)
@@ -155,11 +127,13 @@ namespace Raspored.DDrop
 
         private void Korak1_Nazad_Click(object sender, RoutedEventArgs e)
         {
+            Korak2Enable = "True";
+            Studenti.Remove(SelectedPredmet);
             Raspored2.Visibility = Visibility.Visible;
             Raspored3.Visibility = Visibility.Collapsed;
             //TO_DO : ments el a Termini-t
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == Selected.Oznaka)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
                     //TO_DO: studentiTo -ba atkonvertalni 
                     for (int i = 1; i < 61; i++)
@@ -174,6 +148,7 @@ namespace Raspored.DDrop
                         }
                     }
                 }
+           // sacuvajRaspored();
             
         }
 
@@ -182,16 +157,16 @@ namespace Raspored.DDrop
         private void Korak2_Click(object sender, RoutedEventArgs e)
         {
             Korak2Enable = "False";
+            Studenti.Add(SelectedPredmet);
             Raspored2.Visibility = Visibility.Collapsed;
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka== Selected.Oznaka)
+                if (ur.Ucionica.Oznaka== SelectedUcionica.Oznaka)
                 {
-                    //TO_DO: studentiTo -ba atkonvertalni 
-                     for (int i = 1; i < 61; i++)
+                     for (int i = 0; i < 61; i++)
                      {
-                          for (int j = 1; j < 7; j++)
+                          for (int j = 0; j < 7; j++)
                           {
                             if (ur.Rasporedi[i][j].Oznaka!="")
                                 Termini[i][j].Add(ur.Rasporedi[i][j]);
@@ -200,15 +175,17 @@ namespace Raspored.DDrop
                      x = 1;
                 }
             if (x == 0)
-                rasp.Rasporedi.Add(new UcionicaRaspored(Selected));
+                rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
 
         }
 
         void DataWindow_Closing(object sender, CancelEventArgs e)
         {
             //TO_DO : ments el a Termini-t
+
+            if (SelectedUcionica!=null)
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == Selected.Oznaka)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
                     //TO_DO: studentiTo -ba atkonvertalni 
                     for (int i = 1; i < 61; i++)
@@ -221,6 +198,7 @@ namespace Raspored.DDrop
                     }
                 }
 
+           // sacuvajRaspored();
         }
 
 
@@ -336,14 +314,10 @@ namespace Raspored.DDrop
                         foreach (Predmet p in rasp.OstaliTermini)
                             if (p.Oznaka == student.Oznaka)
                             {
-                                //MessageBox.Show("Nasla je");
-                                // MessageBox.Show("Student oznaka: "+student.Oznaka);
-                                //MessageBox.Show("Predme oznaka: " + p.Oznaka);
+
                                 p.BrojTermina += cas;
                                 if (p.BrojTermina >= broj_termina)
                                 {
-                                    //MessageBox.Show("p.BrojTermina: " + p.BrojTermina);
-                                    //MessageBox.Show("student.BrojTermina: " + broj_termina);
                                     Studenti.Remove(student);
                                 }
                                 nasla = true;
@@ -356,9 +330,6 @@ namespace Raspored.DDrop
                             rasp.OstaliTermini.Add(termini);
                             if (termini.BrojTermina >= broj_termina)
                             {
-                                //MessageBox.Show("termini.BrojTermina: " + termini.BrojTermina);
-                                //MessageBox.Show("broj_termina: " + broj_termina);
-                                //MessageBox.Show("student.BrojTermina: " + student.BrojTermina);
                                 Studenti.Remove(student);
                             }
 
