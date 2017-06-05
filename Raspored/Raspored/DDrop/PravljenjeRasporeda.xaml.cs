@@ -32,7 +32,7 @@ namespace Raspored.DDrop
             InitializeComponent();
             this.DataContext = this;
             this.rasp = new Model.Raspored();
-            Smerovi = new ObservableCollection<Smer>();
+            //Smerovi = new ObservableCollection<Smer>();
             Smer s = new Smer() { Naziv = "E2" };
             s.Predmeti = new ObservableCollection<Predmet>();
             s.Predmeti.Add(new Predmet() { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "ICR"});
@@ -79,26 +79,44 @@ namespace Raspored.DDrop
             }
         }
 
-        public PravljenjeRasporeda(Model.Raspored rasp)
+        public PravljenjeRasporeda(Model.Raspored rasp, Tabele.Tabele tab)
         {
             InitializeComponent();
             this.DataContext = this;
             this.rasp = rasp;
             Smerovi = new ObservableCollection<Smer>();
             Smer s = new Smer() { Naziv = "E2" };
+            s.Predmeti = new ObservableCollection<Predmet>();
+            s.Predmeti.Add(new Predmet() { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "ICR"});
             Smerovi.Add(s);
             s = new Smer() { Naziv = "SIIT" };
+            s.Predmeti = new ObservableCollection<Predmet>();
+            s.Predmeti.Add(new Predmet() { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+          
             Smerovi.Add(s);
+
+
+            List<Ucionica> u = tab.otvoriUcionicu();
+           /* u.Add(new Ucionica { Oznaka = "L1", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });*/
+            Ucionice = new ObservableCollection<Ucionica>(u);
+            
+
+            Korak1Enable = "False";
+            Korak2Enable = "False";
+
 
             Predmeti = new ObservableCollection<Predmet>();
 
+             Selected = new Ucionica { Oznaka= "1"};
+
             List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1", Oznaka="1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+            l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
             l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
             l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-
             Studenti = new ObservableCollection<Predmet>(l);
             Selected = new Ucionica { Oznaka = "1" };
 
@@ -155,11 +173,12 @@ namespace Raspored.DDrop
 
         private void Korak1_Nazad_Click(object sender, RoutedEventArgs e)
         {
+            Korak2Enable = "True";
             Raspored2.Visibility = Visibility.Visible;
             Raspored3.Visibility = Visibility.Collapsed;
             //TO_DO : ments el a Termini-t
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == Selected.Oznaka)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
                     //TO_DO: studentiTo -ba atkonvertalni 
                     for (int i = 1; i < 61; i++)
@@ -174,6 +193,7 @@ namespace Raspored.DDrop
                         }
                     }
                 }
+           // sacuvajRaspored();
             
         }
 
@@ -186,7 +206,7 @@ namespace Raspored.DDrop
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka== Selected.Oznaka)
+                if (ur.Ucionica.Oznaka== SelectedUcionica.Oznaka)
                 {
                     //TO_DO: studentiTo -ba atkonvertalni 
                      for (int i = 1; i < 61; i++)
@@ -200,15 +220,16 @@ namespace Raspored.DDrop
                      x = 1;
                 }
             if (x == 0)
-                rasp.Rasporedi.Add(new UcionicaRaspored(Selected));
+                rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
 
         }
 
         void DataWindow_Closing(object sender, CancelEventArgs e)
         {
             //TO_DO : ments el a Termini-t
+            if (SelectedUcionica!=null)
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == Selected.Oznaka)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
                     //TO_DO: studentiTo -ba atkonvertalni 
                     for (int i = 1; i < 61; i++)
@@ -221,6 +242,7 @@ namespace Raspored.DDrop
                     }
                 }
 
+           // sacuvajRaspored();
         }
 
 

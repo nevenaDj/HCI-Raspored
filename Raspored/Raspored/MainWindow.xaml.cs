@@ -73,7 +73,7 @@ namespace Raspored
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var r = new DDrop.PravljenjeRasporeda(raspored);
+            var r = new DDrop.PravljenjeRasporeda(raspored, w);
             r.ShowDialog();
             r.sacuvajRaspored();
 
@@ -131,7 +131,8 @@ namespace Raspored
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: raspored -> citanjeIz fajla
-                raspored = new Model.Raspored();
+                raspored = otvoriRaspored(filename);
+                //raspored = new Model.Raspored();
             }
         }
 
@@ -166,9 +167,12 @@ namespace Raspored
         {
             Model.Raspored rasp = new Model.Raspored();
             rasp.File = fileName;
+
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[\r\n]{3,}", options);
             string open_text = File.ReadAllText(fileName);
+            if (open_text == "")
+                return rasp;
 
             string[] tekst = open_text.Split('\n');
             rasp.Naziv = tekst[0];
@@ -218,15 +222,14 @@ namespace Raspored
                 broj++;
                 
             }
-
-            return rasp;
+            //return rasp;
         }
 
         private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
         {
-            var r = new Raspored.DDrop.PravljenjeRasporeda();
+            var r = new Raspored.DDrop.PravljenjeRasporeda(raspored, w);
             r.ShowDialog();
-
+            r.sacuvajRaspored();
         }
     }
 }
