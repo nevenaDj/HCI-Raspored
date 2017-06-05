@@ -8,14 +8,15 @@
     xmlns:model="clr-namespace:Raspored.Model"
     xmlns:val="clr-namespace:Raspored.Tabele"
     Title="Tabele"
-    Width="1000"
+    Width="1100"
     Height="650"
-    MinWidth="1000"
+    MinWidth="1100"
     MinHeight="650"
     Activated="HandleWindowActivated"
     FontSize="16"
     Top="50"
     mc:Ignorable="d">
+
     <Window.CommandBindings>
         <CommandBinding
             CanExecute="CommandBinding_CanExecute"
@@ -68,11 +69,16 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="71*" />
+                            <ColumnDefinition Width="422*" />
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
+                            Grid.ColumnSpan="2"
                             Padding="8"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -127,6 +133,21 @@
                                             Width="Auto"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            Binding="{Binding ImaTabla}"
+                                            CanUserSort="False"
+                                            Header="Ima tablu" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            Binding="{Binding ImaProjektor}"
+                                            CanUserSort="False"
+                                            Header="Ima projektor" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            Binding="{Binding ImaPametnaTabla}"
+                                            CanUserSort="False"
+                                            Header="Ima pametnu tablu" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -164,6 +185,7 @@
                         <Border
                             Grid.Row="1"
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Padding="20"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
@@ -227,7 +249,8 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
@@ -235,44 +258,50 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Opis</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Broj radnih mesta</TextBlock>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Broj radnih mesta
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Instalirani softveri
+                                </TextBlock>
                                 <TextBlock
                                     Grid.Row="2"
-                                    Grid.Column="3"
+                                    Grid.Column="4"
                                     Height="21"
-                                    Margin="30,2,2,0"
+                                    Margin="30,2,2,2"
                                     VerticalAlignment="Top">
                                     Projektor
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="3"
-                                    Grid.Column="3"
+                                    Grid.Column="4"
                                     Margin="30,2,2,2">
                                     Tabla
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="4"
-                                    Grid.Column="3"
+                                    Grid.Column="4"
                                     Margin="30,2,2,2">
                                     Pametna tabla
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="0"
-                                    Grid.Column="3"
+                                    Grid.Column="4"
                                     Margin="20,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Grid.Column="3"
-                                    Margin="20,0,10,0">
-                                    Softveri
-                                </TextBlock>
+
 
                                 <Button
                                     x:Name="SacuvajUcionicu"
                                     Grid.Row="7"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
@@ -284,7 +313,7 @@
                                 <Button
                                     x:Name="SacuvajIzmenuUcionice"
                                     Grid.Row="7"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
@@ -296,7 +325,7 @@
                                 <Button
                                     x:Name="OdusatniUcionica"
                                     Grid.Row="7"
-                                    Grid.Column="5"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
@@ -306,7 +335,7 @@
                                 <Button
                                     x:Name="IzmenaOdustaniUcionica"
                                     Grid.Row="7"
-                                    Grid.Column="5"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
@@ -318,15 +347,16 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    Margin="0,0,0,4"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="3"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="3"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Margin="0,0,0,0"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -368,30 +398,42 @@
                                         </ControlTemplate>
                                     </Validation.ErrorTemplate>
                                 </TextBox>
-                                <ComboBox Grid.Row="0" Grid.Column="4" />
-                                <Button 
+                                <Button
                                     x:Name="SoftveriOtvori"
-                                    Width="120"
-                                    Margin="41,5,50,0"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                    Width="80"
                                     HorizontalAlignment="Center"
-                                    Click="SoftveriOtvori_Click"
-                                    Grid.Row="1"
-                                    Grid.Column="4" Height="25" VerticalAlignment="Top">
-                                    Otvori
+                                    VerticalAlignment="Top"
+                                    Click="SoftveriOtvori_Click">
+                                    Prikazi
                                 </Button>
+                                <ComboBox
+                                    x:Name="CB"
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Width="200"
+                                    HorizontalAlignment="Left"
+                                    SelectionChanged="CB_SelectionChanged">
+                                    <ComboBoxItem IsSelected="True">Windows</ComboBoxItem>
+                                    <ComboBoxItem>Linux</ComboBoxItem>
+                                    <ComboBoxItem>Ostalo</ComboBoxItem>
+
+                                </ComboBox>
+
                                 <CheckBox
                                     Grid.Row="2"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
                                     Grid.Row="3"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
                                     Grid.Row="4"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaPametnaTabla}" />
                             </Grid>
@@ -577,70 +619,102 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="134" />
-                                    <ColumnDefinition Width="134*" />
+                                    <ColumnDefinition Width="Auto" MinWidth="108" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="135*" />
+                                    <ColumnDefinition MaxWidth="300" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" MaxWidth="100" />
+                                    <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
+
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Skracenica</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Width="74"
+                                    Height="29"
+                                    Margin="50,0,0,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom">
+                                    Skracenica
+                                </TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">
+                                    Opis
+                                </TextBlock>
 
                                 <TextBlock
                                     Grid.Row="0"
-                                    Grid.Column="3"
-                                    Margin="0,0,0,0"
-                                    HorizontalAlignment="Center">
+                                    Grid.Column="4"
+                                    Width="36"
+                                    Height="29"
+                                    Margin="96,0,41,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom">
                                     Smer
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="2"
-                                    Grid.Column="3"
-                                    Margin="0,0,0,0"
+                                    Grid.Row="8"
+                                    Grid.Column="0"
+                                    Width="54"
                                     HorizontalAlignment="Center">
                                     Softveri
                                 </TextBlock>
 
                                 <TextBlock
                                     Grid.Row="3"
-                                    Grid.Column="3"
-                                    Margin="40,0,10,0">
+                                    Grid.Column="4"
+                                    Margin="78,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
 
-                                <TextBlock Grid.Row="5" Grid.Column="0">Veličina grupe</TextBlock>
-                                <TextBlock Grid.Row="6" Grid.Column="0">Minimalna dužina termina</TextBlock>
-                                <TextBlock Grid.Row="7" Grid.Column="0">Broj termina</TextBlock>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Veličina grupe
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Minimalna dužina termina
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Broj termina
+                                </TextBlock>
 
                                 <TextBlock
                                     Grid.Row="5"
-                                    Grid.Column="3"
-                                    Margin="40,0,0,0">
+                                    Grid.Column="4"
+                                    Margin="78,2,2,2">
                                     Projektor
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="6"
-                                    Grid.Column="3"
-                                    Margin="40,0,0,0">
+                                    Grid.Column="4"
+                                    Margin="78,2,2,2">
                                     Tabla
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="7"
-                                    Grid.Column="3"
-                                    Margin="40,0,0,0">
+                                    Grid.RowSpan="2"
+                                    Grid.Column="4"
+                                    Margin="78,2,2,2"
+                                    VerticalAlignment="Top">
                                     Pametna tabla
                                 </TextBlock>
 
                                 <Button
                                     x:Name="SacuvajIzmenuPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
+                                    Grid.Column="6"
                                     Width="120"
-                                    Margin="0,5,5,0"
+                                    Margin="0,4,5,1"
                                     HorizontalAlignment="Right"
                                     Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
@@ -649,10 +723,9 @@
                                 <Button
                                     x:Name="SacuvajPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
+                                    Grid.Column="6"
                                     Width="120"
-                                    Margin="0,5,5,0"
+                                    Margin="0,4,5,1"
                                     HorizontalAlignment="Right"
                                     Command="local:Komande.Dodavanje">
                                     Dodaj predmet
@@ -660,9 +733,9 @@
                                 <Button
                                     x:Name="IzmenaOdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="6"
+                                    Grid.Column="7"
                                     Width="120"
-                                    Margin="0,5,10,0"
+                                    Margin="0,4,10,1"
                                     HorizontalAlignment="Right"
                                     Click="IzmenaOdustaniPredmet_Click">
                                     Ponisti izmenu
@@ -670,9 +743,9 @@
                                 <Button
                                     x:Name="OdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="6"
+                                    Grid.Column="7"
                                     Width="120"
-                                    Margin="0,5,10,0"
+                                    Margin="0,4,10,1"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniPredmet_Click">
                                     Odustani
@@ -681,26 +754,32 @@
                                     x:Name="Box2"
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,0,4"
                                     Text="{Binding Path=Oznaka}" />
+                                <TextBox
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Width="108"
+                                    Margin="10,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Text="{Binding Path=Skracenica}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0,0,54,4"
                                     Text="{Binding Path=Naziv}" />
+
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding Path=Skracenica}" />
-                                <TextBox
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0,0,54,37"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
-                                    Grid.Row="5"
-                                    Grid.Column="1"
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Margin="0,0,21,4"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -742,8 +821,9 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
-                                    Grid.Row="6"
-                                    Grid.Column="1"
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                    Margin="0,0,21,4"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -785,10 +865,10 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
-                                    Grid.Row="7"
-                                    Grid.Column="1"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
                                     Height="25"
-                                    Margin="0,0,60,0"
+                                    Margin="0,0,21,0"
                                     VerticalAlignment="Top"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -830,60 +910,71 @@
                                         </ControlTemplate>
                                     </Validation.ErrorTemplate>
                                 </TextBox>
+                                <Button
+                                    Grid.Row="8"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="Button_Click">
+                                    Prikazi
+                                </Button>
                                 <TextBox
                                     Grid.Row="0"
-                                    Grid.Column="4"
-                                    Margin="0,0,5,0"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding Path=Smer.Oznaka}" />
+                                    Grid.Column="6"
+                                    Height="25"
+                                    Margin="40,2,61,0"
+                                    VerticalAlignment="Top" />
                                 <Button
                                     Grid.Row="0"
-                                    Grid.Column="5"
+                                    Grid.Column="7"
                                     Width="50"
-                                    Margin="10,0,0,0"
+                                    Height="25"
+                                    Margin="10,2,0,2"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     ...
                                 </Button>
-                                <Button
-                                    Grid.Row="2"
-                                    Grid.Column="4"
-                                    Width="50"
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" Click="Button_Click">
-                                    Otvori
-                                </Button>
+
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="3"
-                                    Grid.ColumnSpan="2"
-                                    Margin="40,0,5,0"
+                                    Grid.Column="4"
+                                    Grid.ColumnSpan="3"
+                                    Height="25"
+                                    Margin="78,2,0,2"
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
                                     Text="" />
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="5"
-                                    Grid.ColumnSpan="2"
-                                    Margin="5,0,15,0"
+                                    Grid.Column="7"
+                                    Height="25"
+                                    Margin="5,2,0,2"
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
                                     Text="" />
 
-                                <ComboBox Grid.Row="3" Grid.Column="4" />
+                                <ComboBox
+                                    Grid.Row="3"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Top" />
 
                                 <CheckBox
                                     Grid.Row="5"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaProjektor}" />
                                 <CheckBox
                                     Grid.Row="6"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaTabla}" />
                                 <CheckBox
                                     Grid.Row="7"
-                                    Grid.Column="4"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaPametnaTabla}" />
                             </Grid>
                         </Border>
