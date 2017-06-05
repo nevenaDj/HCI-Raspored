@@ -552,7 +552,7 @@ namespace Raspored.Tabele
             }
         }
 
-        private void DodajPredmet_Click(object sender, RoutedEventArgs e)
+        private void DodajPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -772,7 +772,7 @@ namespace Raspored.Tabele
             }
         }
 
-        private void DodajSmer_Click(object sender, RoutedEventArgs e)
+        private void DodajSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -984,7 +984,7 @@ namespace Raspored.Tabele
             }
         }        
 
-        private void DodajSoftver_Click(object sender, RoutedEventArgs e)
+        private void DodajSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate () {
@@ -1569,10 +1569,14 @@ namespace Raspored.Tabele
             //TODO: Retrieve and focus a DataGridCell object
         }
 
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void DodajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
-            e.Handled = true;
+            
+            if (SelectedTabUcionice == true)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+            }
 
         }
         
@@ -1606,6 +1610,103 @@ namespace Raspored.Tabele
         {
 
            // MessageBox.Show("daa" + CB.SelectedItem);
+
+        }
+
+        private bool _selectedTabUcionice;
+        public bool SelectedTabUcionice
+        {
+            get
+            {
+                return _selectedTabUcionice;
+            }
+            set
+            {
+                if (_selectedTabUcionice != value)
+                {
+                    _selectedTabUcionice = value;
+                    OnPropertyChanged("SelectedTabUcionice");
+                }
+            }
+        }
+
+        private bool _selectedTabPredmeti;
+        public bool SelectedTabPredmeti
+        {
+            get
+            {
+                return _selectedTabPredmeti;
+            }
+            set
+            {
+                if (_selectedTabPredmeti != value)
+                {
+                    _selectedTabPredmeti = value;
+                    OnPropertyChanged("SelectedTabPredmeti");
+                }
+            }
+        }
+
+        private bool _selectedTabSmer;
+        public bool SelectedTabSmer
+        {
+            get
+            {
+                return _selectedTabSmer;
+            }
+            set
+            {
+                if (_selectedTabSmer != value)
+                {
+                    _selectedTabSmer = value;
+                    OnPropertyChanged("SelectedTabSmer");
+                }
+            }
+        }
+
+        private bool _selectedTabSoftver;
+        public bool SelectedTabSoftver
+        {
+            get
+            {
+                return _selectedTabSoftver;
+            }
+            set
+            {
+                if (_selectedTabSoftver != value)
+                {
+                    _selectedTabSoftver = value;
+                    OnPropertyChanged("SelectedTabSoftver");
+                }
+            }
+        }
+
+        private void DodajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedTabPredmeti == true)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+            }
+        }
+
+        private void DodajSmer_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedTabSmer == true)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+            }
+
+        }
+
+        private void DodajSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedTabSoftver == true)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+            }
 
         }
     }

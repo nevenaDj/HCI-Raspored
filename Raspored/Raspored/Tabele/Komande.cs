@@ -38,5 +38,14 @@ namespace Raspored.Tabele
                 new KeyGesture(Key.N, ModifierKeys.Control),
             }
           );
+        public static readonly RoutedUICommand Izmeni = new RoutedUICommand(
+          "Izmeni",
+          "Izmeni",
+          typeof(Komande),
+          new InputGestureCollection()
+          {
+                new KeyGesture(Key.U, ModifierKeys.Control),
+            }
+          );
     }
 }

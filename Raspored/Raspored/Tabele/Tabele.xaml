@@ -19,9 +19,21 @@
 
     <Window.CommandBindings>
         <CommandBinding
-            CanExecute="CommandBinding_CanExecute"
+            CanExecute="DodajUcionicu_CanExecute"
             Command="local:Komande.Novi"
             Executed="DodajUcionicu_Executed" />
+        <CommandBinding
+            CanExecute="DodajPredmet_CanExecute"
+            Command="local:Komande.Novi"
+            Executed="DodajPredmet_Executed" />
+        <CommandBinding
+            CanExecute="DodajSmer_CanExecute"
+            Command="local:Komande.Novi"
+            Executed="DodajSmer_Executed" />
+        <CommandBinding
+            CanExecute="DodajSoftver_CanExecute"
+            Command="local:Komande.Novi"
+            Executed="DodajSoftver_Executed" />
     </Window.CommandBindings>
     <Grid x:Name="Proba">
         <Grid>
@@ -62,7 +74,7 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem IsEnabled="{Binding TabUcionice}">
+                <TabItem IsEnabled="{Binding TabUcionice}" IsSelected="{Binding SelectedTabUcionice}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Učionica" />
@@ -441,7 +453,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem IsEnabled="{Binding TabPredmeti}">
+                <TabItem IsEnabled="{Binding TabPredmeti}" IsSelected="{Binding SelectedTabPredmeti}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Predmet" />
@@ -532,7 +544,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="DodajPredmet_Click"
+                                    Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi predmet
                                 </Button>
@@ -759,7 +771,7 @@
                                 <TextBox
                                     Grid.Row="0"
                                     Grid.Column="3"
-                                    Width="108"
+                                    Width="152"
                                     Margin="10,0,0,4"
                                     HorizontalAlignment="Left"
                                     Text="{Binding Path=Skracenica}" />
@@ -767,14 +779,14 @@
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
-                                    Margin="0,0,54,4"
+                                    Margin="0,0,10,4"
                                     Text="{Binding Path=Naziv}" />
 
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
-                                    Margin="0,0,54,37"
+                                    Margin="0,0,10,37"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="3"
@@ -981,7 +993,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem IsEnabled="{Binding TabSmer}">
+                <TabItem IsEnabled="{Binding TabSmer}" IsSelected="{Binding SelectedTabSmer}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Smer" />
@@ -1067,7 +1079,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="DodajSmer_Click"
+                                    Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi smer
                                 </Button>
@@ -1211,7 +1223,11 @@
                         </Border>
                     </Grid>
                 </TabItem>
-                <TabItem IsEnabled="{Binding TabSoftver}">
+                <TabItem
+                    Height="26"
+                    VerticalAlignment="Bottom"
+                    IsEnabled="{Binding TabSoftver}"
+                    IsSelected="{Binding SelectedTabSoftver}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Softver" />
@@ -1301,7 +1317,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
-                                    Click="DodajSoftver_Click"
+                                    Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi softver
                                 </Button>
