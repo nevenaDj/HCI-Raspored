@@ -92,25 +92,33 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0">Izabrani predmet</TextBlock>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                            <TextBlock Grid.Row="1" Grid.Column="0">Naziv:</TextBlock>
-                            <TextBlock Grid.Row="2" Grid.Column="0">Opis:</TextBlock>
-                            <TextBox
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding Path=Oznaka}" />
-                            <TextBox
+                            <TextBlock Grid.Row="1" Grid.Column="0">Oznaka</TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0">Naziv</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0">Skracenica</TextBlock>
+                            <TextBlock Grid.Row="4" Grid.Column="0">Opis</TextBlock>
+                            <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Text="{Binding Path=Naziv}" />
-                            <TextBox
+                                Text="{Binding Path=Oznaka}" />
+                            <TextBlock
                                 Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding Path=Naziv}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding Path=Skracenica}" />
+                            <TextBlock
+                                Grid.Row="3"
                                 Grid.Column="1"
                                 Text="{Binding Path=Opis}" />
                         </Grid>
@@ -120,21 +128,29 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0">Oznaka:</TextBlock>
-                            <TextBlock Grid.Row="1" Grid.Column="0">Naziv:</TextBlock>
-                            <TextBox
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding Path=Oznaka}" />
-                            <TextBox
+                            <TextBlock Grid.Row="0" Grid.Column="0">Podaci o smeru</TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0">Oznaka</TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0">Naziv</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
+                            <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="1"
+                                Text="{Binding Path=Oznaka}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
                                 Text="{Binding Path=Naziv}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding Path=Opis}" />
                         </Grid>
                     </DataTemplate>
                 </ContentPresenter.Resources>
@@ -145,7 +161,8 @@
                 Width="80"
                 Margin="0,15,15,15"
                 HorizontalAlignment="Right"
-                Click="Korak1_Click">
+                Click="Korak1_Click"
+                IsEnabled="{Binding Korak1Enable}">
                 Dalje
             </Button>
 
@@ -153,6 +170,7 @@
 
         <Grid x:Name="Raspored2" Visibility="Collapsed">
             <Grid.RowDefinitions>
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -164,12 +182,18 @@
             </Grid.ColumnDefinitions>
 
             <ListView
+                x:Name="lsUcionice"
                 Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="0">
+                Grid.RowSpan="3"
+                Grid.Column="0"
+                ItemsSource="{Binding Ucionice}"
+                SelectionChanged="lsUcionice_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <WrapPanel />
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Oznaka}" />
+
+                        </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -183,33 +207,80 @@
             <ContentPresenter
                 Grid.Row="0"
                 Grid.Column="2"
-                Content="{Binding ElementName=trvStudenti, Path=SelectedItem}">
+                Content="{Binding ElementName=lsUcionice, Path=SelectedItem}">
                 <ContentPresenter.Resources>
-                    <DataTemplate DataType="{x:Type model:Smer}">
+                    <DataTemplate DataType="{x:Type model:Ucionica}">
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0">Naziv:</TextBlock>
-                            <TextBox
-                                Grid.Row="0"
+                            <TextBlock Grid.Row="0" Grid.Column="0">Izabrana ucionica</TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0">Oznaka</TextBlock>
+                            <TextBlock
+                                Grid.Row="1"
                                 Grid.Column="1"
-                                Text="{Binding Path=Naziv}" />
+                                Text="{Binding Path=Oznaka}" />
                         </Grid>
                     </DataTemplate>
                 </ContentPresenter.Resources>
             </ContentPresenter>
-            <Button
+
+            <Grid
                 Grid.Row="1"
+                Grid.Column="2"
+                DataContext="{Binding Path=SelectedPredmet, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+
+
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0">Izabrani predmet</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0">Oznaka</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0">Naziv</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0">Skracenica</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0">Opis</TextBlock>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Path=Oznaka}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding Path=Naziv}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="{Binding Path=Skracenica}" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Text="{Binding Path=Opis}" />
+
+            </Grid>
+            <Button
+                Grid.Row="2"
                 Grid.Column="2"
                 Width="80"
                 Margin="0,15,15,15"
                 HorizontalAlignment="Right"
-                Click="Korak2_Click">
+                Click="Korak2_Click"
+                IsEnabled="{Binding Korak2Enable}">
                 Dalje
             </Button>
         </Grid>

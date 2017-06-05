@@ -22,7 +22,7 @@ namespace Raspored.DDrop
     /// <summary>
     /// Interaction logic for PravljenjeRasporeda.xaml
     /// </summary>
-    public partial class PravljenjeRasporeda : Window
+    public partial class PravljenjeRasporeda : Window, INotifyPropertyChanged
     {
         private Point startPoint;
 
@@ -35,16 +35,22 @@ namespace Raspored.DDrop
             Smerovi = new ObservableCollection<Smer>();
             Smer s = new Smer() { Naziv = "E2" };
             s.Predmeti = new ObservableCollection<Predmet>();
-            s.Predmeti.Add(new Predmet() { Naziv = "Aleksandar", Oznaka = "Aleksandrov", Skracenica = "aleksaa@somemail.info"});
+            s.Predmeti.Add(new Predmet() { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "ICR"});
             Smerovi.Add(s);
             s = new Smer() { Naziv = "SIIT" };
             s.Predmeti = new ObservableCollection<Predmet>();
             s.Predmeti.Add(new Predmet() { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
           
             Smerovi.Add(s);
-          
+            List<Ucionica> u = new List<Ucionica>();
+            u.Add(new Ucionica { Oznaka = "L1", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            Ucionice = new ObservableCollection<Ucionica>(u);
 
-            
+
+            Korak1Enable = "False";
+            Korak2Enable = "False";
 
 
             Predmeti = new ObservableCollection<Predmet>();
@@ -118,6 +124,14 @@ namespace Raspored.DDrop
             get;
             set;
         }
+
+
+        public ObservableCollection<Ucionica> Ucionice
+        {
+            get;
+            set;
+        }
+
         public Ucionica Selected
         {
             get;
@@ -132,6 +146,7 @@ namespace Raspored.DDrop
 
         private void Korak1_Click(object sender, RoutedEventArgs e)
         {
+            Korak1Enable = "False";
             Raspored1.Visibility = Visibility.Collapsed;
             Raspored2.Visibility = Visibility.Visible;
            // Raspored3.Visibility = Visibility.Collapsed;
@@ -166,6 +181,7 @@ namespace Raspored.DDrop
 
         private void Korak2_Click(object sender, RoutedEventArgs e)
         {
+            Korak2Enable = "False";
             Raspored2.Visibility = Visibility.Collapsed;
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
@@ -414,6 +430,21 @@ namespace Raspored.DDrop
         }
 
         private Predmet _selectedPredmet;
+        public Predmet SelectedPredmet
+        {
+            get
+            {
+                return _selectedPredmet;
+            }
+            set
+            {
+                if (_selectedPredmet != value)
+                {
+                    _selectedPredmet = value;
+                    OnPropertyChanged("SelectedPredmet");
+                }
+            }
+        }
 
 
         private void trvPredmeti_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -421,13 +452,74 @@ namespace Raspored.DDrop
 
             if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Predmet)))
             {
-                _selectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
-               // MessageBox.Show(P.Oznaka);
+                SelectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
+                Korak1Enable = "True";
+              
+            }
+            if (trvPredmeti.SelectedItem.GetType().Equals(typeof(Model.Smer)))
+            {
+                Korak1Enable = "False";
+
             }
             
             
 
             
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+
+        private string _korak1Enable;
+        public string Korak1Enable
+        {
+            get
+            {
+                return _korak1Enable;
+            }
+            set
+            {
+                if (_korak1Enable != value)
+                {
+                    _korak1Enable = value;
+                    OnPropertyChanged("Korak1Enable");
+                }
+            }
+        }
+
+        private string _korak2Enable;
+        public string Korak2Enable
+        {
+            get
+            {
+                return _korak2Enable;
+            }
+            set
+            {
+                if (_korak2Enable != value)
+                {
+                    _korak2Enable = value;
+                    OnPropertyChanged("Korak2Enable");
+                }
+            }
+        }
+
+        private Ucionica _selectedUcionica;
+
+        private void lsUcionice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Korak2Enable = "True";
+            _selectedUcionica = (Ucionica)lsUcionice.SelectedItem;
+
+           // MessageBox.Show(u.Oznaka);
 
         }
     }
