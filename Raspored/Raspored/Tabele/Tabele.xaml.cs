@@ -1601,6 +1601,13 @@ namespace Raspored.Tabele
             List<Softver> s = w.getList1();
             SelectedPredmet.Softveri = s;
         }
+
+        private void CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+           // MessageBox.Show("daa" + CB.SelectedItem);
+
+        }
     }
 
 }
