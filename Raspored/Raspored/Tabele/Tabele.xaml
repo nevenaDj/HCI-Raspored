@@ -647,10 +647,11 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" MinWidth="108" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition MaxWidth="300" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" MaxWidth="100" />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="197*" MaxWidth="300" />
+                                    <ColumnDefinition Width="Auto" MinWidth="229" />
+                                    <ColumnDefinition Width="0" MaxWidth="100" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="176*" />
                                     <ColumnDefinition Width="Auto" />
 
                                 </Grid.ColumnDefinitions>
@@ -661,7 +662,7 @@
                                     Grid.Column="2"
                                     Width="74"
                                     Height="29"
-                                    Margin="50,0,0,0"
+                                    Margin="0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom">
                                     Skracenica
@@ -675,15 +676,17 @@
                                     Grid.Column="4"
                                     Width="36"
                                     Height="29"
-                                    Margin="96,0,41,0"
+                                    Margin="123,0,70,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Bottom">
                                     Smer
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="8"
+                                    Grid.Row="6"
+                                    Grid.RowSpan="3"
                                     Grid.Column="0"
                                     Width="54"
+                                    Margin="6,24,15,2"
                                     HorizontalAlignment="Center">
                                     Softveri
                                 </TextBlock>
@@ -691,7 +694,7 @@
                                 <TextBlock
                                     Grid.Row="3"
                                     Grid.Column="4"
-                                    Margin="78,0,10,0">
+                                    Margin="104,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
 
@@ -704,33 +707,36 @@
                                 <TextBlock
                                     Grid.Row="4"
                                     Grid.Column="0"
-                                    Grid.ColumnSpan="2">
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,10,1">
                                     Minimalna dužina termina
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="5"
+                                    Grid.Row="4"
+                                    Grid.RowSpan="2"
                                     Grid.Column="0"
-                                    Grid.ColumnSpan="2">
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,30,10,1">
                                     Broj termina
                                 </TextBlock>
 
                                 <TextBlock
                                     Grid.Row="5"
                                     Grid.Column="4"
-                                    Margin="78,2,2,2">
+                                    Margin="104,1,2,3">
                                     Projektor
                                 </TextBlock>
                                 <TextBlock
                                     Grid.Row="6"
                                     Grid.Column="4"
-                                    Margin="78,2,2,2">
+                                    Margin="104,2,2,2">
                                     Tabla
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="7"
-                                    Grid.RowSpan="2"
+                                    Grid.Row="8"
                                     Grid.Column="4"
-                                    Margin="78,2,2,2"
+                                    Height="21"
+                                    Margin="104,1,2,0"
                                     VerticalAlignment="Top">
                                     Pametna tabla
                                 </TextBlock>
@@ -738,9 +744,9 @@
                                 <Button
                                     x:Name="SacuvajIzmenuPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="6"
+                                    Grid.Column="7"
                                     Width="120"
-                                    Margin="0,4,5,1"
+                                    Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
                                     Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
@@ -749,9 +755,9 @@
                                 <Button
                                     x:Name="SacuvajPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="6"
+                                    Grid.Column="7"
                                     Width="120"
-                                    Margin="0,4,5,1"
+                                    Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
                                     Command="local:Komande.Dodavanje">
                                     Dodaj predmet
@@ -759,9 +765,9 @@
                                 <Button
                                     x:Name="IzmenaOdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="7"
+                                    Grid.Column="8"
                                     Width="120"
-                                    Margin="0,4,10,1"
+                                    Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
                                     Click="IzmenaOdustaniPredmet_Click">
                                     Ponisti izmenu
@@ -769,9 +775,9 @@
                                 <Button
                                     x:Name="OdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="7"
+                                    Grid.Column="8"
                                     Width="120"
-                                    Margin="0,4,10,1"
+                                    Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
                                     Click="OdustaniPredmet_Click">
                                     Odustani
@@ -940,6 +946,8 @@
                                     Grid.Row="8"
                                     Grid.Column="1"
                                     Width="80"
+                                    Height="25"
+                                    Margin="19,0,20,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Click="Button_Click">
@@ -947,16 +955,17 @@
                                 </Button>
                                 <TextBox
                                     Grid.Row="0"
-                                    Grid.Column="6"
+                                    Grid.Column="7"
                                     Height="25"
-                                    Margin="40,2,61,0"
+                                    Margin="0,2,0,0"
                                     VerticalAlignment="Top" />
                                 <Button
                                     Grid.Row="0"
-                                    Grid.Column="7"
+                                    Grid.Column="8"
                                     Width="50"
                                     Height="25"
-                                    Margin="10,2,0,2"
+                                    Margin="5,2,0,2"
+                                    Click="Button_Click_1"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     ...
@@ -965,7 +974,7 @@
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="4"
-                                    Grid.ColumnSpan="3"
+                                    Grid.ColumnSpan="4"
                                     Height="25"
                                     Margin="78,2,0,2"
                                     VerticalAlignment="Center"
@@ -973,7 +982,7 @@
                                     Text="" />
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="7"
+                                    Grid.Column="8"
                                     Height="25"
                                     Margin="5,2,0,2"
                                     VerticalAlignment="Center"
@@ -983,23 +992,32 @@
                                 <ComboBox
                                     Grid.Row="3"
                                     Grid.Column="5"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="3"
+                                    Height="27"
                                     VerticalAlignment="Top" />
 
                                 <CheckBox
                                     Grid.Row="5"
                                     Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Height="15"
+                                    Margin="0,5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaProjektor}" />
                                 <CheckBox
                                     Grid.Row="6"
                                     Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Height="15"
+                                    Margin="0,5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaTabla}" />
                                 <CheckBox
-                                    Grid.Row="7"
-                                    Grid.RowSpan="2"
+                                    Grid.Row="8"
                                     Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Height="14"
+                                    Margin="0,5,0,6"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=TrebaPametnaTabla}" />
                             </Grid>
@@ -1158,15 +1176,15 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="27*" MaxWidth="108" />
+                                    <ColumnDefinition Width="61*" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Skracenica</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Naziv</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Skracenica</TextBlock>
                                 <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock
                                     Grid.Row="0"
@@ -1219,18 +1237,19 @@
                                     x:Name="Box3"
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,0,4"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Text="{Binding Path=Naziv}" />
+                                    Margin="0,0,0,4"
+                                    Text="{Binding Path=Skracenica}" />
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
-                                    Text="{Binding Path=Skracenica}" />
+                                    Text="{Binding Path=Naziv}" />
+
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="1"
@@ -1557,7 +1576,7 @@
                                             ValidatesOnDataErrors="True">
                                             <Binding.ValidationRules>
                                                 <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
-
+                                                <val:MinMaxValidationRuleDouble Min="0" ValidationStep="ConvertedProposedValue" />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>

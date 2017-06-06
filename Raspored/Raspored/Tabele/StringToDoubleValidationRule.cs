@@ -19,7 +19,7 @@ namespace Raspored.Tabele
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Unesite pozitivan broj.");
+                return new ValidationResult(false, "Molimo Vas unesite pozitivan broj.");
             }
             catch
             {
@@ -34,12 +34,12 @@ namespace Raspored.Tabele
             try
             {
                 var s = value as string;
-                double r;
-                if (double.TryParse(s, out r))
+                int r;
+                if (int.TryParse(s, out r))
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Unesite pozitivan ceo broj.");
+                return new ValidationResult(false, "Molimo Vas unesite pozitivan ceo broj.");
             }
             catch
             {
@@ -99,6 +99,36 @@ namespace Raspored.Tabele
                 int d = (int)value;
                 if (d < Min) return new ValidationResult(false, "Godina nije ispravna.");
                 if (d > Max) return new ValidationResult(false, "Godina nije ispravna.");
+                return new ValidationResult(true, null);
+            }
+            else
+            {
+                return new ValidationResult(false, "Greska prilikom unosa.");
+            }
+        }
+    }
+
+    public class MinMaxValidationRuleDouble : ValidationRule
+    {
+        public double Min
+        {
+            get;
+            set;
+        }
+
+        public double Max
+        {
+            get;
+            set;
+        }
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value is double)
+            {
+                double d = (double)value;
+                if (d < Min) return new ValidationResult(false, "Molimo Vas unesite pozitivan broj.");
+              //  if (d > Max) return new ValidationResult(false, "Value too large.");
                 return new ValidationResult(true, null);
             }
             else

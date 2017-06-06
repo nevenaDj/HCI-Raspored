@@ -5,9 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Raspored.Model
 {
+
+    public class AddCommand : ICommand
+    {
+        private Smer smer;
+        public AddCommand(Smer s)
+        {
+            smer = s;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+           
+        }
+    }
+
     public class Smer: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,6 +67,7 @@ namespace Raspored.Model
             _datumUvodjenja = datumUvodjenja;
             _opis = opis;
             Predmeti = new ObservableCollection<Predmet>();
+            AddCommand add = new AddCommand(this);
 
         }
 
@@ -131,6 +155,23 @@ namespace Raspored.Model
         {
             get;
             set;
+        }
+
+         private AddCommand _add;
+        public AddCommand Add
+        {
+            get
+            {
+                return _add;
+            }
+            set
+            {
+                if (_add != value)
+                {
+                    _add = value;
+                    OnPropertyChanged("Add");
+                }
+            }
         }
     }
 }

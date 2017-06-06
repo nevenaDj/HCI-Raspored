@@ -60,6 +60,9 @@
     </Compile>
     <Compile Include="Model\Raspored.cs" />
     <Compile Include="Model\UcionicaRaspore.cs" />
+    <Compile Include="Tabele\IzborSmera.xaml.cs">
+      <DependentUpon>IzborSmera.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tabele\Komande.cs" />
     <Compile Include="Tabele\Softveri.xaml.cs">
       <DependentUpon>Softveri.xaml</DependentUpon>
@@ -84,6 +87,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Tabele\IzborSmera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tabele\Softveri.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

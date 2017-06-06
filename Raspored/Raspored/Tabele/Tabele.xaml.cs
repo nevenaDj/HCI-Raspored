@@ -1757,6 +1757,44 @@ namespace Raspored.Tabele
             }
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            IzabraniSmer = SelectedPredmet.SmerPredmeta;
+          
+
+            var p = new IzborSmera()
+            {
+                DataContext = this
+                
+            };
+            
+            p.ShowDialog();
+        }
+
+        private Smer _izabraniSmer;
+        public Smer IzabraniSmer
+        {
+            get
+            {
+                return _izabraniSmer;
+            }
+            set
+            {
+                if (_izabraniSmer != value)
+                {
+                    _izabraniSmer = value;
+                    OnPropertyChanged("IzabraniSmer");
+                }
+            }
+        }
+
+        public ObservableCollection<Smer> SmeroviPredmeta
+        {
+            get;
+            set;
+        }
+
     }
 
 }
