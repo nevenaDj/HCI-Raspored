@@ -1778,19 +1778,50 @@ namespace Raspored.Tabele
         {
             if (SelectedPredmet != null)
             {
-                if (SelectedPredmet.SmerPredmeta != null)
+               // SelectedPredmet.SmerPredmeta = null;
+                 // MessageBox.Show(SelectedPredmet.OznakaSmera);
+                 foreach(Smer s in Smerovi)
                 {
-                   // MessageBox.Show(SelectedPredmet.SmerPredmeta.Oznaka);
-                    foreach(Smer s in Smerovi)
+                    if (SelectedPredmet.OznakaSmera == s.Oznaka)
                     {
-                        if (s.Oznaka == SelectedPredmet.SmerPredmeta.Oznaka)
-                        {
-                            SelectedPredmet.SmerPredmeta.Naziv = s.Naziv;
-                            SelectedPredmet.SmerPredmeta.Skracenica = s.Skracenica;
-                        }
+                        SelectedPredmet.SmerPredmeta = s;
+                    }
+                }                    
+            }
+        }
+
+        private void TextBox_TouchLeave(object sender, TouchEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                SelectedPredmet.SmerPredmeta = null;
+                // MessageBox.Show(SelectedPredmet.OznakaSmera);
+                foreach (Smer s in Smerovi)
+                {
+                    if (SelectedPredmet.OznakaSmera == s.Oznaka)
+                    {
+                        SelectedPredmet.SmerPredmeta = s;
                     }
                 }
             }
+
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                SelectedPredmet.SmerPredmeta = null;
+              //  MessageBox.Show(SelectedPredmet.OznakaSmera);
+                foreach (Smer s in Smerovi)
+                {
+                    if (UnosSmera.Text == s.Oznaka)
+                    {
+                        SelectedPredmet.SmerPredmeta = s;
+                    }
+                }
+            }
+
         }
     }
 

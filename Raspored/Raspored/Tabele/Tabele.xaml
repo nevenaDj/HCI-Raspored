@@ -954,13 +954,14 @@
                                     Prikazi
                                 </Button>
                                 <TextBox
+                                    x:Name="UnosSmera"
                                     Grid.Row="0"
                                     Grid.Column="7"
                                     Height="25"
                                     Margin="0,2,0,0"
                                     VerticalAlignment="Top"
-                                    Text="{Binding SmerPredmeta.Oznaka}"
-                                    TextChanged="TextBox_TextChanged" />
+                                    LostFocus="TextBox_LostFocus"
+                                    Text="{Binding OznakaSmera}" />
                                 <Button
                                     Grid.Row="0"
                                     Grid.Column="8"

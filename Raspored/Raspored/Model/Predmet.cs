@@ -135,6 +135,10 @@ namespace Raspored.Model
                 if (_smer != value)
                 {
                     _smer = value;
+                    if (_smer != null)
+                    {
+                        OznakaSmera = _smer.Oznaka;
+                    }
                     OnPropertyChanged("SmerPredmeta");
                 }
             }
@@ -289,6 +293,22 @@ namespace Raspored.Model
         public static implicit operator ObservableCollection<object>(Predmet v)
         {
             throw new NotImplementedException();
+        }
+        private string _oznakaSmera; 
+        public string OznakaSmera
+        {
+            get
+            {
+                return _oznakaSmera;
+            }
+            set
+            {
+                if (_oznakaSmera != value)
+                {
+                    _oznakaSmera = value;
+                    OnPropertyChanged("OznakaSmera");
+                }
+            }
         }
     }
 }
