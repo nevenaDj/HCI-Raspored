@@ -1760,34 +1760,13 @@ namespace Raspored.Tabele
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            IzabraniSmer = SelectedPredmet.SmerPredmeta;
-          
-
-            var p = new IzborSmera()
-            {
-                DataContext = this
-                
-            };
-            
+            var p = new IzborSmera(SelectedPredmet); 
             p.ShowDialog();
+            SelectedPredmet.SmerPredmeta = p.IzabraniSmer;
+        //    MessageBox.Show(SelectedPredmet.SmerPredmeta.Naziv);
         }
 
-        private Smer _izabraniSmer;
-        public Smer IzabraniSmer
-        {
-            get
-            {
-                return _izabraniSmer;
-            }
-            set
-            {
-                if (_izabraniSmer != value)
-                {
-                    _izabraniSmer = value;
-                    OnPropertyChanged("IzabraniSmer");
-                }
-            }
-        }
+        
 
         public ObservableCollection<Smer> SmeroviPredmeta
         {
@@ -1795,6 +1774,24 @@ namespace Raspored.Tabele
             set;
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                if (SelectedPredmet.SmerPredmeta != null)
+                {
+                   // MessageBox.Show(SelectedPredmet.SmerPredmeta.Oznaka);
+                    foreach(Smer s in Smerovi)
+                    {
+                        if (s.Oznaka == SelectedPredmet.SmerPredmeta.Oznaka)
+                        {
+                            SelectedPredmet.SmerPredmeta.Naziv = s.Naziv;
+                            SelectedPredmet.SmerPredmeta.Skracenica = s.Skracenica;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

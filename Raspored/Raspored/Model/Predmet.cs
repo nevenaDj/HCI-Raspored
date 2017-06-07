@@ -52,6 +52,7 @@ namespace Raspored.Model
             _trebaPametnaTabla = false;
             _trebaTabla = true;
             _trebaProjektor = true;
+            _smer = null;
 
         }
 

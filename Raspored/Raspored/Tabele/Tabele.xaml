@@ -958,16 +958,18 @@
                                     Grid.Column="7"
                                     Height="25"
                                     Margin="0,2,0,0"
-                                    VerticalAlignment="Top" />
+                                    VerticalAlignment="Top"
+                                    Text="{Binding SmerPredmeta.Oznaka}"
+                                    TextChanged="TextBox_TextChanged" />
                                 <Button
                                     Grid.Row="0"
                                     Grid.Column="8"
                                     Width="50"
                                     Height="25"
                                     Margin="5,2,0,2"
-                                    Click="Button_Click_1"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Center">
+                                    VerticalAlignment="Center"
+                                    Click="Button_Click_1">
                                     ...
                                 </Button>
 
@@ -979,7 +981,7 @@
                                     Margin="78,2,0,2"
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
-                                    Text="" />
+                                    Text="{Binding SmerPredmeta.Naziv}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="8"
@@ -987,7 +989,7 @@
                                     Margin="5,2,0,2"
                                     VerticalAlignment="Center"
                                     IsReadOnly="True"
-                                    Text="" />
+                                    Text="{Binding SmerPredmeta.Skracenica}" />
 
                                 <ComboBox
                                     Grid.Row="3"
