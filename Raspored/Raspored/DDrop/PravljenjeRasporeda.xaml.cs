@@ -528,6 +528,7 @@ namespace Raspored.DDrop
                 u.ImaPametnaTabla = Convert.ToBoolean(uc[1]);
                 u.ImaProjektor = Convert.ToBoolean(uc[2]);
                 u.Sistem = uc[4];
+             
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
@@ -603,8 +604,8 @@ namespace Raspored.DDrop
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-               
                 s.Sistem = sf[3];
+               
                 s.Opis = sf[4];
                 s.Proizvodjac = sf[5];
                 s.Sajt = sf[6];
@@ -639,6 +640,7 @@ namespace Raspored.DDrop
                 p.BrojTermina = Convert.ToInt32(pr[1]);
                 p.DuzinaTermina = Convert.ToInt32(pr[2]);
                 p.Sistem = pr[3];
+               
                 p.Opis = pr[4];
                 p.Oznaka = pr[5];
                 p.Skracenica = pr[6];

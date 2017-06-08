@@ -30,6 +30,11 @@ namespace Raspored.Model
 
         public Softver()
         {
+            _oznaka = "";
+            _naziv = "";
+            _proizvodjac = "";
+            _sajt = "";
+            _godinaIzdavanja = 2017;
             Sistemi = new ObservableCollection<string>();
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");

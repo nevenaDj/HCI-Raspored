@@ -54,11 +54,6 @@ namespace Raspored.Tabele
 
             Ucionice = new ObservableCollection<Ucionica>(u);
 
-            Sistemi = new ObservableCollection<string>();
-            Sistemi.Add("Windows");
-            Sistemi.Add("Linux");
-            Sistemi.Add("Oba");
-
             
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
@@ -151,12 +146,6 @@ namespace Raspored.Tabele
         }
 
         public ObservableCollection<Softver> Softveri
-        {
-            get;
-            set;
-        }
-
-        public ObservableCollection<string> Sistemi
         {
             get;
             set;
@@ -429,7 +418,7 @@ namespace Raspored.Tabele
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
                 SelectedUcionica.BrojRadnihMesta, SelectedUcionica.ImaProjektor,
-                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla,  SelectedUcionica.Softveri);
+                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla,  SelectedUcionica.Softveri, SelectedUcionica.Sistem);
 
             GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
@@ -1472,22 +1461,55 @@ namespace Raspored.Tabele
          }
 
 
-    private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeDodavanje == 0;
-            e.Handled = true;
+            if (_greskeDodavanje == 0)
+            {
+                if (SelectedPredmet != null)
+                {
+                    if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != "" 
+                        && SelectedPredmet.Skracenica != "")
+                    {
+                        e.CanExecute = true;
+                        e.Handled = true;
+                    }
+                }
+
+            }
         }
+
 
         private void SacuvajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeDodavanje == 0;
-            e.Handled = true;
+            if (_greskeDodavanje == 0)
+            {
+                if (SelectedUcionica != null)
+                {
+                    if (SelectedUcionica.Oznaka != "")
+                    {
+                        e.CanExecute = true;
+                        e.Handled = true;
+
+                    }
+                }
+            }
         }
 
         private void SacuvajSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeDodavanje == 0;
-            e.Handled = true;
+            if (_greskeDodavanje == 0)
+            {
+                if (SelectedSoftver != null)
+                {
+                    if (SelectedSoftver.Oznaka != "")
+                    {
+                        e.CanExecute = true ;
+                        e.Handled = true;
+
+                    }
+                }
+            }
+           
         }
 
         private void IzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1754,7 +1776,24 @@ namespace Raspored.Tabele
 
         }
 
-       
+        private string _pretraga;
+        public string Pretraga
+        {
+            get
+            {
+                return _pretraga;
+            }
+            set
+            {
+                if (_pretraga != value)
+                {
+                    _pretraga = value;
+                    OnPropertyChanged("Pretraga");
+                }
+            }
+        }
+
+
     }
 
 }

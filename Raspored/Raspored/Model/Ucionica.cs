@@ -51,7 +51,7 @@ namespace Raspored.Model
         }
 
         public Ucionica(string oznaka, string opis, int brojRadnihMesta, 
-            bool imaProjektor, bool imaTabla, bool imaPametnaTabla,List<Softver> softver)
+            bool imaProjektor, bool imaTabla, bool imaPametnaTabla,List<Softver> softver, string sistem)
         {
             _oznaka = oznaka;
             _opis = opis;
@@ -60,6 +60,7 @@ namespace Raspored.Model
             _imaTabla = imaTabla;
             _imaPametnaTabla = imaPametnaTabla;
             Softveri = softver;
+            _sistem = sistem;
 
 
             Sistemi = new ObservableCollection<string>();

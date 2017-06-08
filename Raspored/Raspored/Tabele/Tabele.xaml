@@ -106,20 +106,41 @@
                             <Grid x:Name="Grid1">
 
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="115*" />
                                     <ColumnDefinition Width="677*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <DataGrid
-                                    x:Name="dgrMainUcionica"
+                                <TextBlock
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Grid.ColumnSpan="4"
+                                    Margin="0,0,10,0">
+                                    Pretraga
+                                </TextBlock>
+                                <TextBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Width="400"
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Left" />
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Margin="2,2,2,2">
+                                    Pretrazi
+                                </Button>
+                                <DataGrid
+                                    x:Name="dgrMainUcionica"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
                                     AutoGenerateColumns="False"
                                     BorderThickness="1"
                                     IsEnabled="{Binding Podaci}"
@@ -171,8 +192,8 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
-                                    Grid.Row="1"
-                                    Grid.Column="1"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
@@ -181,8 +202,8 @@
                                     Dodaj novu učionicu
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
-                                    Grid.Column="2"
+                                    Grid.Row="2"
+                                    Grid.Column="3"
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
@@ -191,8 +212,8 @@
                                     Izmeni učionicu
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
-                                    Grid.Column="3"
+                                    Grid.Row="2"
+                                    Grid.Column="4"
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
@@ -259,15 +280,15 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" MinWidth="73" />
+                                    <ColumnDefinition Width="Auto" MinWidth="61" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="260*" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="261*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock
                                     Grid.Row="3"
@@ -285,7 +306,7 @@
                                     Grid.Row="2"
                                     Grid.Column="4"
                                     Height="21"
-                                    Margin="30,2,2,2"
+                                    Margin="30,2,2,0"
                                     VerticalAlignment="Top">
                                     Projektor
                                 </TextBlock>
@@ -358,7 +379,9 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    Width="119"
                                     Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
@@ -414,6 +437,7 @@
                                     Grid.Row="5"
                                     Grid.Column="2"
                                     Width="80"
+                                    Height="25"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Click="SoftveriOtvori_Click">
@@ -431,16 +455,22 @@
                                 <CheckBox
                                     Grid.Row="2"
                                     Grid.Column="5"
+                                    Height="15"
+                                    Margin="0,5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
                                     Grid.Row="3"
                                     Grid.Column="5"
+                                    Height="15"
+                                    Margin="0,5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
                                     Grid.Row="4"
                                     Grid.Column="5"
+                                    Height="15"
+                                    Margin="0,5"
                                     VerticalAlignment="Center"
                                     IsChecked="{Binding Path=ImaPametnaTabla}" />
                             </Grid>
@@ -638,7 +668,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" MinWidth="108" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" MinWidth="110" />
                                     <ColumnDefinition Width="197*" MaxWidth="300" />
                                     <ColumnDefinition Width="Auto" MinWidth="229" />
                                     <ColumnDefinition Width="0" MaxWidth="100" />
@@ -647,17 +677,17 @@
                                     <ColumnDefinition Width="Auto" />
 
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv*</TextBlock>
                                 <TextBlock
                                     Grid.Row="0"
                                     Grid.Column="2"
-                                    Width="74"
+                                    Width="80"
                                     Height="29"
                                     Margin="0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom">
-                                    Skracenica
+                                    Skraćenica*
                                 </TextBlock>
                                 <TextBlock Grid.Row="2" Grid.Column="0">
                                     Opis
@@ -778,12 +808,13 @@
                                     x:Name="Box2"
                                     Grid.Row="0"
                                     Grid.Column="1"
+                                    Width="119"
                                     Margin="0,0,0,4"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="0"
                                     Grid.Column="3"
-                                    Width="152"
+                                    Width="119"
                                     Margin="10,0,0,4"
                                     HorizontalAlignment="Left"
                                     Text="{Binding Path=Skracenica}" />
@@ -803,6 +834,7 @@
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="2"
+                                    Width="80"
                                     Margin="0,0,21,4"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -847,6 +879,7 @@
                                 <TextBox
                                     Grid.Row="4"
                                     Grid.Column="2"
+                                    Width="80"
                                     Margin="0,0,21,4"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -891,6 +924,7 @@
                                 <TextBox
                                     Grid.Row="5"
                                     Grid.Column="2"
+                                    Width="80"
                                     Height="25"
                                     Margin="0,0,21,0"
                                     VerticalAlignment="Top"
@@ -1058,7 +1092,7 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="90*" />
-                                    <ColumnDefinition Width="175*" />
+                                    <ColumnDefinition Width="175*" MinWidth="130" />
                                     <ColumnDefinition Width="527*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
@@ -1099,7 +1133,7 @@
                                             Header="Naziv" />
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            Binding="{Binding DatumUvodjenja}"
+                                            Binding="{Binding Datum}"
                                             CanUserSort="False"
                                             Header="Datum uvodjenja" />
                                         <DataGridTextColumn
@@ -1156,12 +1190,12 @@
                                 DataContext="{Binding SelectedSmer}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
-                                        <Setter Property="Margin" Value="0,0,80,4" />
+                                        <Setter Property="Margin" Value="0,0,60,4" />
                                         <Setter Property="BorderThickness" Value="2" />
                                         <Setter Property="FontWeight" Value="DemiBold" />
                                     </Style>
                                     <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Margin" Value="0,0,50,0" />
+                                        <Setter Property="Margin" Value="0,0,10,0" />
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -1173,15 +1207,15 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="27*" MaxWidth="108" />
+                                    <ColumnDefinition Width="27*" MinWidth="140" />
                                     <ColumnDefinition Width="61*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Naziv</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Skracenica</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Naziv*</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Skraćenica*</TextBlock>
                                 <TextBlock Grid.Row="3" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock
                                     Grid.Row="0"
@@ -1234,23 +1268,29 @@
                                     x:Name="Box3"
                                     Grid.Row="0"
                                     Grid.Column="1"
+                                    Width="119"
                                     Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
+                                    Width="119"
                                     Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
                                     Text="{Binding Path=Skracenica}" />
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    Margin="0,0,10,4"
                                     Text="{Binding Path=Naziv}" />
 
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    Margin="0,0,10,4"
                                     Text="{Binding Path=Opis}" />
                                 <DatePicker
                                     Grid.Row="0"
@@ -1449,7 +1489,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
                                 <TextBlock Grid.Row="2" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem:</TextBlock>
@@ -1506,7 +1546,8 @@
                                     x:Name="Box4"
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Width="119"
+                                    HorizontalAlignment="Left"
                                     IsReadOnly="{Binding RezimPrikaz, Mode=OneWay}"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
