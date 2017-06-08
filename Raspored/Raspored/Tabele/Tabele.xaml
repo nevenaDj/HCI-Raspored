@@ -150,6 +150,7 @@
                                             Header="Broj radnih mesta" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            Binding="{Binding Sistem}"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
                                         <DataGridTextColumn
@@ -214,16 +215,7 @@
                                 x:Name="GridUcionice"
                                 Margin="10"
                                 DataContext="{Binding Path=SelectedUcionica, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                                <Grid.InputBindings>
-                                    <KeyBinding
-                                        Key="S"
-                                        Command="local:Komande.Izmena"
-                                        Modifiers="Ctrl" />
-                                    <KeyBinding
-                                        Key="D"
-                                        Command="local:Komande.Dodavanje"
-                                        Modifiers="Ctrl" />
-                                </Grid.InputBindings>
+
 
                                 <Grid.CommandBindings>
                                     <CommandBinding
@@ -433,12 +425,8 @@
                                     Grid.Column="5"
                                     Width="200"
                                     HorizontalAlignment="Left"
-                                    SelectionChanged="CB_SelectionChanged">
-                                    <ComboBoxItem IsSelected="True">Windows</ComboBoxItem>
-                                    <ComboBoxItem>Linux</ComboBoxItem>
-                                    <ComboBoxItem>Ostalo</ComboBoxItem>
-
-                                </ComboBox>
+                                    ItemsSource="{Binding Sistemi}"
+                                    SelectedValue="{Binding Sistem}" />
 
                                 <CheckBox
                                     Grid.Row="2"
@@ -549,7 +537,11 @@
                                             Binding="{Binding BrojTermina}"
                                             CanUserSort="False"
                                             Header="Broj termina" />
-                                        <DataGridTextColumn Width="Auto" Header="Operativni sistem" />
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            Binding="{Binding Sistem}"
+                                            CanUserSort="False"
+                                            Header="Operativni sistem" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -997,7 +989,9 @@
                                     Grid.Column="5"
                                     Grid.ColumnSpan="3"
                                     Height="27"
-                                    VerticalAlignment="Top" />
+                                    VerticalAlignment="Top"
+                                    ItemsSource="{Binding Sistemi}"
+                                    SelectedValue="{Binding Sistem}" />
 
                                 <CheckBox
                                     Grid.Row="5"
@@ -1332,6 +1326,7 @@
                                             Header="Naziv" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            Binding="{Binding Sistem}"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
                                         <DataGridTextColumn
@@ -1618,7 +1613,11 @@
                                     Grid.ColumnSpan="2"
                                     Text="{Binding Path=Sajt}" />
 
-                                <ComboBox Grid.Row="3" Grid.Column="4" />
+                                <ComboBox
+                                    Grid.Row="3"
+                                    Grid.Column="4"
+                                    ItemsSource="{Binding Sistemi}"
+                                    SelectedValue="{Binding Sistem}" />
 
                             </Grid>
                         </Border>

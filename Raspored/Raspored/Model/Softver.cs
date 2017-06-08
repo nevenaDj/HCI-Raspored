@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Raspored.Model
 {
@@ -20,28 +21,37 @@ namespace Raspored.Model
 
         private string _oznaka;
         private string _naziv;
-        private OS _opetativniSistem;
         private string _proizvodjac;
         private string _sajt;
         private int _godinaIzdavanja;
         private double _cena;
         private string _opis;
+        private string _sistem;
 
         public Softver()
         {
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
         }
 
-        public Softver(string oznaka, string naziv, OS operativniSistem, string proizvodjac,
-            string sajt, int godinaIzdavanja, double cena, string opis)
+        public Softver(string oznaka, string naziv, string proizvodjac,
+            string sajt, int godinaIzdavanja, double cena, string opis, string sistem)
         {
             _oznaka = oznaka;
             _naziv = naziv;
-            _opetativniSistem = operativniSistem;
             _proizvodjac = proizvodjac;
             _sajt = sajt;
             _godinaIzdavanja = godinaIzdavanja;
             _cena = cena;
             _opis = opis;
+            _sistem = sistem;
+
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
         }
 
 
@@ -76,22 +86,7 @@ namespace Raspored.Model
                 }
             }
         }
-        
-        public OS OperativniSistem
-        {
-            get
-            {
-                return _opetativniSistem;
-            }
-            set
-            {
-                if (_opetativniSistem != value)
-                {
-                    _opetativniSistem = value;
-                    OnPropertyChanged("OperativniSistem");
-                }
-            }
-        }
+       
        
         public string Proizvodjac
         {
@@ -173,7 +168,27 @@ namespace Raspored.Model
             }
         }
 
-    }
+        public string Sistem
+        {
+            get
+            {
+                return _sistem;
+            }
+            set
+            {
+                if (_sistem != value)
+                {
+                    _sistem = value;
+                    OnPropertyChanged("Sistem");
+                }
+            }
+        }
 
-    public enum OS { widows, linux, ostalo};
+        public ObservableCollection<string> Sistemi
+        {
+            get;
+            set;
+        }
+
+    }
 }

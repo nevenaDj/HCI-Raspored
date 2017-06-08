@@ -25,7 +25,7 @@ namespace Raspored.Model
         private bool _imaProjektor;
         private bool _imaTabla;
         private bool _imaPametnaTabla;
-        private OS _operativniSistem;
+        private string _sistem;
 
         public List<Softver> Softveri
         {
@@ -43,10 +43,15 @@ namespace Raspored.Model
             _imaProjektor = true;
             _imaTabla = true;
             _brojRadnihMesta = 16;
+
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
         }
 
         public Ucionica(string oznaka, string opis, int brojRadnihMesta, 
-            bool imaProjektor, bool imaTabla, bool imaPametnaTabla, OS operativniSistem, List<Softver> softver)
+            bool imaProjektor, bool imaTabla, bool imaPametnaTabla,List<Softver> softver)
         {
             _oznaka = oznaka;
             _opis = opis;
@@ -54,8 +59,13 @@ namespace Raspored.Model
             _imaProjektor = imaProjektor;
             _imaTabla = imaTabla;
             _imaPametnaTabla = imaPametnaTabla;
-            _operativniSistem = operativniSistem;
             Softveri = softver;
+
+
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
         }
 
         public string Oznaka
@@ -153,21 +163,28 @@ namespace Raspored.Model
                 }
             }
         }
-        
-        public OS OperativniSistem
+       
+
+        public string Sistem
         {
             get
             {
-                return _operativniSistem;
+                return _sistem;
             }
             set
             {
-                if (_operativniSistem != value)
+                if (_sistem != value)
                 {
-                    _operativniSistem = value;
-                    OnPropertyChanged("OperativniSistem");
+                    _sistem = value;
+                    OnPropertyChanged("Sistem");
                 }
             }
-        } 
+        }
+
+        public ObservableCollection<string> Sistemi
+        {
+            get;
+            set;
+        }
     }
 }

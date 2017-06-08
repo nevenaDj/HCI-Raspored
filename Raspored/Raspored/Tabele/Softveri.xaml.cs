@@ -247,12 +247,8 @@ namespace Raspored.Tabele
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                if (Convert.ToInt32(sf[3]) == 0)
-                    s.OperativniSistem = Model.OS.widows;
-                else if (Convert.ToInt32(sf[3]) == 1)
-                    s.OperativniSistem = OS.linux;
-                else
-                    s.OperativniSistem = OS.ostalo;
+                s.Oznaka = sf[3];
+              
                 s.Opis = sf[4];
                 s.Proizvodjac = sf[5];
                 s.Sajt = sf[6];
