@@ -16,6 +16,7 @@ using Raspored.Model;
 using System.Data;
 using System.IO;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace Raspored.DDrop
 {
@@ -34,14 +35,17 @@ namespace Raspored.DDrop
             this.rasp = new Model.Raspored();
         }
 
-        public PravljenjeRasporeda(Model.Raspored rasp, Tabele.Tabele tab)
+        public PravljenjeRasporeda(Model.Raspored rasp)
         {
             InitializeComponent();
             this.DataContext = this;
             this.rasp = rasp;
 
-            List<Smer> s = tab.otvoriSmer();
-            List<Predmet> p = tab.otvoriPredmet();
+            List<Softver> sof = otvoriSoftver();
+            Softveri = new ObservableCollection<Softver>(sof);
+            List<Smer> s = otvoriSmer();
+            Smerovi = new ObservableCollection<Smer>(s);
+            List<Predmet> p = otvoriPredmet();
             foreach (Smer smer in s)
             {
                 foreach (Predmet pred in p)
@@ -55,9 +59,9 @@ namespace Raspored.DDrop
 
             Smerovi = new ObservableCollection<Smer>(s);
 
-            List<Ucionica> u = tab.otvoriUcionicu();
+            List<Ucionica> u = otvoriUcionicu();
             Ucionice = new ObservableCollection<Ucionica>(u);
-            
+
 
             Korak1Enable = "False";
             Korak2Enable = "False";
@@ -65,13 +69,13 @@ namespace Raspored.DDrop
 
             Predmeti = new ObservableCollection<Predmet>();
 
-           /* List<Predmet> l = new List<Predmet>();
-            l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
-            l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-            l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-            Studenti = new ObservableCollection<Predmet>(l);*/
+            /* List<Predmet> l = new List<Predmet>();
+             l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+             l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
+             l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
+             l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+             l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
+             Studenti = new ObservableCollection<Predmet>(l);*/
             Studenti = new ObservableCollection<Predmet>();
 
             Termini = new List<List<ObservableCollection<Predmet>>>();
@@ -110,6 +114,7 @@ namespace Raspored.DDrop
             set;
         }
         public ObservableCollection<Predmet> Studenti { get; private set; }
+        public ObservableCollection<Softver> Softveri { get; private set; }
         public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
         private bool fromList = true;
         private int from_r = 0;
@@ -121,7 +126,7 @@ namespace Raspored.DDrop
             Korak1Enable = "False";
             Raspored1.Visibility = Visibility.Collapsed;
             Raspored2.Visibility = Visibility.Visible;
-           // Raspored3.Visibility = Visibility.Collapsed;
+            // Raspored3.Visibility = Visibility.Collapsed;
 
         }
 
@@ -148,8 +153,8 @@ namespace Raspored.DDrop
                         }
                     }
                 }
-           // sacuvajRaspored();
-            
+            // sacuvajRaspored();
+
         }
 
 
@@ -162,17 +167,17 @@ namespace Raspored.DDrop
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka== SelectedUcionica.Oznaka)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
-                     for (int i = 0; i < 61; i++)
-                     {
-                          for (int j = 0; j < 7; j++)
-                          {
-                            if (ur.Rasporedi[i][j].Oznaka!="")
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j].Oznaka != "")
                                 Termini[i][j].Add(ur.Rasporedi[i][j]);
-                          }
-                     }
-                     x = 1;
+                        }
+                    }
+                    x = 1;
                 }
             if (x == 0)
                 rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
@@ -183,22 +188,22 @@ namespace Raspored.DDrop
         {
             //TO_DO : ments el a Termini-t
 
-            if (SelectedUcionica!=null)
-            foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
-                {
-                    //TO_DO: studentiTo -ba atkonvertalni 
-                    for (int i = 1; i < 61; i++)
+            if (SelectedUcionica != null)
+                foreach (UcionicaRaspored ur in rasp.Rasporedi)
+                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                     {
-                        for (int j = 1; j < 7; j++)
+                        //TO_DO: studentiTo -ba atkonvertalni 
+                        for (int i = 1; i < 61; i++)
                         {
-                            if (Termini[i][j].Count != 0)
-                                ur.Rasporedi[i][j]= Termini[i][j][0];
+                            for (int j = 1; j < 7; j++)
+                            {
+                                if (Termini[i][j].Count != 0)
+                                    ur.Rasporedi[i][j] = Termini[i][j][0];
+                            }
                         }
                     }
-                }
 
-           // sacuvajRaspored();
+            // sacuvajRaspored();
         }
 
 
@@ -386,17 +391,17 @@ namespace Raspored.DDrop
             foreach (UcionicaRaspored r in rasp.Rasporedi)
             {
                 f.Write(r.Ucionica.Oznaka + ":");
-                for (int i=0; i<61; i++)
+                for (int i = 0; i < 61; i++)
                 {
-                    for (int j=0; j<7; j++)
+                    for (int j = 0; j < 7; j++)
                     {
-                        f.Write(r.Rasporedi[i][j].Oznaka+",");
+                        f.Write(r.Rasporedi[i][j].Oznaka + ",");
                     }
                     f.Write("|");
                 }
                 f.WriteLine();
             }
-            
+
             f.Close();
         }
 
@@ -497,6 +502,226 @@ namespace Raspored.DDrop
         {
             Korak2Enable = "True";
             SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
+        }
+
+
+
+        public List<Ucionica> otvoriUcionicu()
+        {
+            List<Ucionica> ucionice = new List<Ucionica>();
+            FileStream f = new FileStream("../../Save/ucionica.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/ucionica.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string ucionica in tekst)
+            {
+                Ucionica u = new Ucionica();
+                if (ucionica == "")
+                    return ucionice;
+                string[] uc = ucionica.Split('|');
+                u.BrojRadnihMesta = Convert.ToInt32(uc[0]);
+                u.ImaTabla = Convert.ToBoolean(uc[3]);
+                u.ImaPametnaTabla = Convert.ToBoolean(uc[1]);
+                u.ImaProjektor = Convert.ToBoolean(uc[2]);
+                if (Convert.ToInt32(uc[4]) == 0)
+                    u.OperativniSistem = OS.widows;
+                else if (Convert.ToInt32(uc[4]) == 1)
+                    u.OperativniSistem = OS.linux;
+                else
+                    u.OperativniSistem = OS.ostalo;
+                u.Opis = uc[5];
+                u.Oznaka = uc[6];
+                List<Softver> softveri = new List<Softver>();
+                foreach (string sof in uc[7].Split(','))
+                {
+                    Softver s = nadjiSoftver(sof);
+                    if (s != null)
+                        softveri.Add(s);
+
+                }
+                // 
+                u.Softveri = softveri;
+                // u.Softveri = new ObservableCollection<Softver>( softveri);
+                // MessageBox.Show("" + u.Softveri.Count);
+                ucionice.Add(u);
+            }
+
+            return ucionice;
+        }
+
+        public List<Smer> otvoriSmer()
+        {
+
+            List<Smer> smerovi = new List<Smer>();
+            FileStream f = new FileStream("../../Save/smer.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/smer.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string smer in tekst)
+            {
+                Smer s = new Smer();
+                if (smer == "")
+                {
+                    return smerovi;
+                }
+
+                string[] sm = smer.Split('|');
+
+                s.Oznaka = sm[0];
+                s.Skracenica = sm[1];
+                s.Opis = sm[2];
+                s.Naziv = sm[3];
+                s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
+
+                smerovi.Add(s);
+            }
+
+            return smerovi;
+        }
+
+        public List<Softver> otvoriSoftver()
+        {
+            List<Softver> softveri = new List<Softver>();
+            FileStream f = new FileStream("../../Save/softver.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/softver.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string softver in tekst)
+            {
+                Softver s = new Softver();
+                if (softver == "")
+                    return softveri;
+                string[] sf = softver.Split('|');
+
+                s.Oznaka = sf[0];
+                s.Naziv = sf[1];
+                s.Cena = Convert.ToDouble(sf[2]);
+                if (Convert.ToInt32(sf[3]) == 0)
+                    s.OperativniSistem = OS.widows;
+                else if (Convert.ToInt32(sf[3]) == 1)
+                    s.OperativniSistem = OS.linux;
+                else
+                    s.OperativniSistem = OS.ostalo;
+                s.Opis = sf[4];
+                s.Proizvodjac = sf[5];
+                s.Sajt = sf[6];
+
+                softveri.Add(s);
+            }
+
+            return softveri;
+        }
+
+
+        public List<Predmet> otvoriPredmet()
+        {
+            List<Predmet> predmeti = new List<Predmet>();
+            FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/predmet.txt");
+
+            string[] tekst = recentText.Split('\n');
+            foreach (string predmet in tekst)
+            {
+                Predmet p = new Predmet();
+                if (predmet == "")
+                    return predmeti;
+                string[] pr = predmet.Split('|');
+
+                p.Naziv = pr[0];
+
+                p.BrojTermina = Convert.ToInt32(pr[1]);
+                p.DuzinaTermina = Convert.ToInt32(pr[2]);
+                if (Convert.ToInt32(pr[3]) == 0)
+                    p.NeophodanOS = OS.widows;
+                else if (Convert.ToInt32(pr[3]) == 1)
+                    p.NeophodanOS = OS.linux;
+                else
+                    p.NeophodanOS = OS.ostalo;
+                p.Opis = pr[4];
+                p.Oznaka = pr[5];
+                p.Skracenica = pr[6];
+                p.SmerPredmeta = nadjiSmer(pr[7]);
+                //MessageBox.Show("TrebaPametnaTabla: " + pr[8]);
+                p.TrebaPametnaTabla = Convert.ToBoolean(pr[8]);
+                //MessageBox.Show("TrebaProjektor: " + pr[9]);
+                p.TrebaProjektor = Convert.ToBoolean(pr[9]);
+                //MessageBox.Show("TrebaTabla: " + pr[10]);
+                p.TrebaTabla = Convert.ToBoolean(pr[10]);
+                p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                List<Softver> softveri = new List<Softver>();
+                foreach (string sof in pr[12].Split(','))
+                {
+                    Softver s = nadjiSoftver(sof);
+                    if (s != null)
+                        softveri.Add(s);
+                }
+                p.Softveri = softveri;
+                // MessageBox.Show(""+p.Softveri.Count);
+                predmeti.Add(p);
+
+            }
+
+            return predmeti;
+        }
+
+        public Smer nadjiSmer(string oznaka)
+        {
+            //MessageBox.Show(""+Smerovi.Count);
+            foreach (Smer s in Smerovi)
+            {
+                if (s.Oznaka == oznaka)
+                    return s;
+            }
+            return null;
+        }
+
+        public Softver nadjiSoftver(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Softver s in Softveri)
+            {
+                if (s.Oznaka == oznaka)
+                    return s;
+            }
+            return null;
+        }
+
+        public Ucionica nadjiUcionicu(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Ucionica u in Ucionice)
+            {
+                if (u.Oznaka == oznaka)
+                    return u;
+            }
+            return null;
+        }
+
+        public Predmet nadjiPredmet(string oznaka)
+        {
+            //MessageBox.Show("" + Softveri.Count);
+            foreach (Predmet p in Predmeti)
+            {
+                if (p.Oznaka == oznaka)
+                    return p;
+            }
+            return null;
         }
     }
 }

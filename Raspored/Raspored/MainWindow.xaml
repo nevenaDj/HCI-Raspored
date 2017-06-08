@@ -17,6 +17,7 @@
                 <MenuItem Click="Button_Click" Header="_Novi" />
                 <MenuItem Click="Button_Click_1" Header="_Otvori" />
                 <common:RecentFileList x:Name="RecentFileList" />
+                <MenuItem Click="MenuItem_Click_1" Header="_Zatvori" />
             </MenuItem>
             <MenuItem Header="_Prikaz">
                 <MenuItem Click="Ucionice_Click" Header="_Ucionice" />

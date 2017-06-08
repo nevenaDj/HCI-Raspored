@@ -26,15 +26,15 @@ namespace Raspored
     public partial class MainWindow : Window
     {
         private Model.Raspored raspored;
-
+        Tabele.Tabele w;
         public MainWindow()
         {
             InitializeComponent();
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
-            w = new Tabele.Tabele(); 
+            
             RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
-
+            w = new Tabele.Tabele();
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[\r\n]{3,}", options);
             string recentText = File.ReadAllText("../../Save/recent.txt");
@@ -62,18 +62,17 @@ namespace Raspored
             }
         }
 
-        Tabele.Tabele w; 
-
+       
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-           
-           w.ShowDialog();
+            w = new Tabele.Tabele(); 
+            w.ShowDialog();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var r = new DDrop.PravljenjeRasporeda(raspored, w);
+            var r = new DDrop.PravljenjeRasporeda(raspored);
             r.ShowDialog();
             r.sacuvajRaspored();
 
@@ -228,9 +227,14 @@ namespace Raspored
 
         private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
         {
-            var r = new Raspored.DDrop.PravljenjeRasporeda(raspored, w);
+            var r = new Raspored.DDrop.PravljenjeRasporeda(raspored);
             r.ShowDialog();
             r.sacuvajRaspored();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

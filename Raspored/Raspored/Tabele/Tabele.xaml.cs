@@ -30,30 +30,7 @@ namespace Raspored.Tabele
         {
             InitializeComponent();
             this.DataContext = this;
-            /*
-            List<Smer> s = new List<Smer>();
-            List<Predmet> p = new List<Predmet>();
-            List<Softver> sf = new List<Softver>();
-            List<Ucionica> u = new List<Ucionica>();
-
-            s.Add(new Smer { Naziv = "Softversko inzenjerstvo i informacione tehnologije", Skracenica ="SIIT", Oznaka="SW", DatumUvodjenja=new DateTime(), Opis = "Departman za racunarstvo"});
-            s.Add(new Smer { Naziv = "Softversko inzenjerstvo i informacione tehnologije", Skracenica = "SIIT", Oznaka = "SW", DatumUvodjenja = new DateTime(), Opis = "Departman za racunarstvo" });
-            s.Add(new Smer { Naziv = "Softversko inzenjerstvo i informacione tehnologije", Skracenica = "E2", Oznaka = "SW", DatumUvodjenja = new DateTime(), Opis = "Departman za racunarstvo" });
-            Smerovi = new ObservableCollection<Smer>(s);
-
-            p.Add(new Predmet { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "HCI (SIIT)", DuzinaTermina = 2, BrojTermina = 6, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = true, TrebaPametnaTabla = false, TrebaProjektor = true });
-            p.Add(new Predmet { Naziv = "Internet softverske arhitekture", Oznaka = "ISA", Skracenica = "ISA (SIIT)", DuzinaTermina = 2, BrojTermina = 5, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = false, TrebaPametnaTabla = false, TrebaProjektor = true });
-            Predmeti = new ObservableCollection<Predmet>(p);
-
-            u.Add(new Ucionica{ Oznaka = "L1", BrojRadnihMesta=16, ImaPametnaTabla=false, ImaTabla=true, ImaProjektor = true});
-            u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
-            u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
-            Ucionice = new ObservableCollection<Ucionica>(u);
-
-            sf.Add(new Softver { Naziv = "Visual Studio", GodinaIzdavanja = 2000, Cena = 50000, Opis = "Mircosoft", Proizvodjac = "Mircosoft", Oznaka = "VS" });
-            Softveri = new ObservableCollection<Softver>(sf);
-
-            */
+           
 
             //List<Smer> s = new List<Smer>(); 
             List<Smer> s = otvoriSmer();
@@ -142,9 +119,10 @@ namespace Raspored.Tabele
                 EnableIzbrisiSmer = "False";
                 EnablePromeniSmer = "False";
             }
+            SelectedTabUcionice = true;
 
-          
- 
+
+
         }
 
         /** KOLEKCIJE **/
