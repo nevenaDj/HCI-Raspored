@@ -298,6 +298,7 @@
 
         <Grid x:Name="Raspored3" Visibility="Collapsed">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -306,41 +307,105 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-
-            <ListView
+            <Grid
                 Grid.Row="0"
                 Grid.Column="0"
-                ItemsSource="{Binding Studenti}"
-                MouseMove="ListView_MouseMove"
-                PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock FontWeight="Bold" Text="{Binding Ime}" />
-                            <TextBlock Text=", " />
-                            <TextBlock Text="{Binding Naziv}" />
-                            <TextBlock Text=" (" />
-                            <TextBlock
-                                Cursor="Hand"
-                                Foreground="Blue"
-                                Text="{Binding Email}"
-                                TextDecorations="Underline" />
-                            <TextBlock Text=")" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"  />
+                    <RowDefinition />
+                    <RowDefinition Height="20"  />
+                    <RowDefinition  />
+                    <RowDefinition Height="20" />
+                    <RowDefinition  Height="50" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                        Termini
+                </TextBlock>
+                <ListView
+                    Grid.Row="1"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Studenti}"
+                    MouseMove="ListView_MouseMove"
+                    PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock FontWeight="Bold" Text="{Binding Ime}" />
+                                <TextBlock Text=", " />
+                                <TextBlock Text="{Binding Naziv}" />
+                                <TextBlock Text=" (" />
+                                <TextBlock
+                                    Cursor="Hand"
+                                    Foreground="Blue"
+                                    Text="{Binding Email}"
+                                    TextDecorations="Underline" />
+                                <TextBlock Text=")" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="2">
+                        Temp
+                </TextBlock>
+                <ListView
+                    Grid.Row="3"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Studenti}"
+                    MouseMove="ListView_MouseMove"
+                    PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock Grid.Row="4">
+                        Brisanje
+                </TextBlock>
+                <ListView
+                    Grid.Row="5"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Studenti}"
+                    MouseMove="ListView_MouseMove"
+                    PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
             <Button
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 Click="Korak1_Nazad_Click">
                 Nazad
             </Button>
 
+            <Grid Grid.Row="0"
+                Grid.Column="1"
+                  HorizontalAlignment="Center"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">
+                     Ucionica:
+                </TextBlock>
+                <TextBlock  Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka}">
+                </TextBlock>
+            </Grid>
+
 
             <ScrollViewer
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.Column="1"
                 VerticalScrollBarVisibility="Visible">
                 <Grid x:Name="grid2">
