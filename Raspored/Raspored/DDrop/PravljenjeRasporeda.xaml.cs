@@ -527,12 +527,8 @@ namespace Raspored.DDrop
                 u.ImaTabla = Convert.ToBoolean(uc[3]);
                 u.ImaPametnaTabla = Convert.ToBoolean(uc[1]);
                 u.ImaProjektor = Convert.ToBoolean(uc[2]);
-                if (Convert.ToInt32(uc[4]) == 0)
-                    u.OperativniSistem = OS.widows;
-                else if (Convert.ToInt32(uc[4]) == 1)
-                    u.OperativniSistem = OS.linux;
-                else
-                    u.OperativniSistem = OS.ostalo;
+                u.Sistem = uc[4];
+             
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
@@ -608,12 +604,8 @@ namespace Raspored.DDrop
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                if (Convert.ToInt32(sf[3]) == 0)
-                    s.OperativniSistem = OS.widows;
-                else if (Convert.ToInt32(sf[3]) == 1)
-                    s.OperativniSistem = OS.linux;
-                else
-                    s.OperativniSistem = OS.ostalo;
+                s.Sistem = sf[3];
+               
                 s.Opis = sf[4];
                 s.Proizvodjac = sf[5];
                 s.Sajt = sf[6];
@@ -647,12 +639,8 @@ namespace Raspored.DDrop
 
                 p.BrojTermina = Convert.ToInt32(pr[1]);
                 p.DuzinaTermina = Convert.ToInt32(pr[2]);
-                if (Convert.ToInt32(pr[3]) == 0)
-                    p.NeophodanOS = OS.widows;
-                else if (Convert.ToInt32(pr[3]) == 1)
-                    p.NeophodanOS = OS.linux;
-                else
-                    p.NeophodanOS = OS.ostalo;
+                p.Sistem = pr[3];
+               
                 p.Opis = pr[4];
                 p.Oznaka = pr[5];
                 p.Skracenica = pr[6];
