@@ -113,6 +113,7 @@ namespace Raspored
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
                 raspored = new Model.Raspored();
+                raspored.File = filename;
             }
         }
 
