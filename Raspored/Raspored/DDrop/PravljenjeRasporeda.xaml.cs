@@ -66,7 +66,7 @@ namespace Raspored.DDrop
             Korak1Enable = "False";
             Korak2Enable = "False";
 
-
+            Temp = new ObservableCollection<Predmet>();
             Predmeti = new ObservableCollection<Predmet>();
 
             /* List<Predmet> l = new List<Predmet>();
@@ -114,9 +114,12 @@ namespace Raspored.DDrop
             set;
         }
         public ObservableCollection<Predmet> Studenti { get; private set; }
+        public ObservableCollection<Predmet> Delete { get; private set; }
+        public ObservableCollection<Predmet> Temp { get; private set; }
         public ObservableCollection<Softver> Softveri { get; private set; }
         public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
         private bool fromList = false;
+        private bool fromListTemp = false;
         private int from_r = 0;
         private int from_c = 0;
         private ListView lv;
@@ -224,6 +227,14 @@ namespace Raspored.DDrop
             startPoint = e.GetPosition(null);
 
             fromList = true;
+        }
+
+
+        private void ListView_PreviewMouseLeftButtonDown3(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+
+            fromListTemp = true;
         }
 
 
@@ -341,6 +352,37 @@ namespace Raspored.DDrop
                         }
 
                     }
+                    else if (fromListTemp)
+                    {
+                        int cas = student.DuzinaTermina;
+                        //MessageBox.Show("Cas: " + cas);
+                        bool nasla = false;
+                        foreach (Predmet p in rasp.OstaliTermini)
+                            if (p.Oznaka == student.Oznaka)
+                            {
+
+                                p.BrojTermina += cas;
+                                if (p.BrojTermina >= broj_termina)
+                                {
+                                    Temp.Remove(student);
+                                }
+                                nasla = true;
+                            }
+                        if (!nasla)
+                        {
+                            //MessageBox.Show("Nije Nasla ");
+                            Predmet termini = student;
+                            termini.BrojTermina = cas;
+                            rasp.OstaliTermini.Add(termini);
+                            if (termini.BrojTermina >= broj_termina)
+                            {
+                                Temp.Remove(student);
+                            }
+
+                        }
+
+                    }
+
                     else
                     {
                         int i = 0;
@@ -377,8 +419,111 @@ namespace Raspored.DDrop
 
                 }
                 fromList = false;
+                fromListTemp = false;
             }
         }
+
+        private void ListView_Delete(object sender, DragEventArgs e)
+        {
+            ListView listView = sender as ListView;
+           
+            //  CONFIRM
+
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Predmet student = e.Data.GetData("myFormat") as Predmet;
+                
+                
+                    if (fromList || fromListTemp)
+                    {
+                     
+
+                    }
+                    else
+                    {
+                        int i = 0;
+                        int x = 0;
+                        while (true)
+                        {
+
+                            foreach (Predmet p in Termini[from_c - i - 1][from_r])
+                            {
+                                if (p.Naziv != student.Naziv)
+                                    x = 1;
+                            }
+                            // MessageBox.Show("" + x);
+                            if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
+                                break;
+                            i++;
+                        }
+
+                        for (int j = 0; j < student.DuzinaTermina * 3; j++)
+                        {
+                            Termini[from_c - i + j][from_r].Remove(student);
+                            lv.Background = Brushes.White;
+
+                        }
+
+                    Studenti.Add(student);
+                    }
+                   
+
+                
+                fromList = false;
+            }
+        }
+
+        private void ListView_Temp(object sender, DragEventArgs e)
+        {
+            ListView listView = sender as ListView;
+
+            //  CONFIRM
+
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Predmet student = e.Data.GetData("myFormat") as Predmet;
+
+
+                if (fromList || fromListTemp)
+                {
+
+
+                }
+                else
+                {
+                    int i = 0;
+                    int x = 0;
+                    while (true)
+                    {
+
+                        foreach (Predmet p in Termini[from_c - i - 1][from_r])
+                        {
+                            if (p.Naziv != student.Naziv)
+                                x = 1;
+                        }
+                        // MessageBox.Show("" + x);
+                        if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
+                            break;
+                        i++;
+                    }
+
+                    for (int j = 0; j < student.DuzinaTermina * 3; j++)
+                    {
+                        Termini[from_c - i + j][from_r].Remove(student);
+                        lv.Background = Brushes.White;
+
+                    }
+
+                    // ha benne van, csak hozzaadni az orakhoz
+                    Temp.Add(student);
+                }
+
+
+
+                fromList = false;
+            }
+        }
+
         public void sacuvajRaspored()
         {
             StreamWriter f = new StreamWriter(rasp.File);

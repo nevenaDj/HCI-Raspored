@@ -14,6 +14,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <BitmapImage x:Key="FolderOpen" UriSource="/Raspored;component/foldero.png" />
+        <BitmapImage x:Key="Bin" UriSource="/Raspored;component/bin.png" />
         <BitmapImage x:Key="FolderClosed" UriSource="/Raspored;component/folder.png" />
         <Style x:Key="SmallIcon" TargetType="Image">
             <Setter Property="MaxWidth" Value="16" />
@@ -307,10 +308,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid
-                Grid.Row="0"
+            <Grid Grid.Row="0"
                 Grid.Column="0"
                 Grid.RowSpan="2">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"  />
                     <RowDefinition />
@@ -351,13 +352,25 @@
                 <ListView
                     Grid.Row="3"
                     BorderThickness="0"
-                    ItemsSource="{Binding Studenti}"
-                    MouseMove="ListView_MouseMove"
-                    PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                    AllowDrop="True"
+                        DragEnter="ListView_DragEnter"
+                        Drop="ListView_Temp"
+                        ItemsSource="{Binding Temp}"
+                        MouseMove="ListView_MouseMove"
+                        PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown3">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-
+                                <TextBlock FontWeight="Bold" Text="{Binding Ime}" />
+                                <TextBlock Text=", " />
+                                <TextBlock Text="{Binding Naziv}" />
+                                <TextBlock Text=" (" />
+                                <TextBlock
+                                    Cursor="Hand"
+                                    Foreground="Blue"
+                                    Text="{Binding Email}"
+                                    TextDecorations="Underline" />
+                                <TextBlock Text=")" />
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -368,17 +381,21 @@
                 <ListView
                     Grid.Row="5"
                     BorderThickness="0"
-                    ItemsSource="{Binding Studenti}"
-                    MouseMove="ListView_MouseMove"
-                    PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                    AllowDrop="True"
+                        DragEnter="ListView_DragEnter"
+                        Drop="ListView_Delete"
+                        ItemsSource="{Binding Delete}"
+                        MouseMove="ListView_MouseMove"
+                        PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-
+                                
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                
             </Grid>
             <Button
                 Grid.Row="2"
