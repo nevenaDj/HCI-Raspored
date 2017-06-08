@@ -186,5 +186,6 @@ namespace Raspored.Model
             get;
             set;
         }
+        public object OperativniSistem { get; internal set; }
     }
 }
