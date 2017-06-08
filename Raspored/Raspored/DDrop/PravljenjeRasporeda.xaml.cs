@@ -116,7 +116,7 @@ namespace Raspored.DDrop
         public ObservableCollection<Predmet> Studenti { get; private set; }
         public ObservableCollection<Softver> Softveri { get; private set; }
         public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
-        private bool fromList = true;
+        private bool fromList = false;
         private int from_r = 0;
         private int from_c = 0;
         private ListView lv;
@@ -313,7 +313,7 @@ namespace Raspored.DDrop
                 {
                     if (fromList)
                     {
-                        int cas = student.DuzinaTermina / 45;
+                        int cas = student.DuzinaTermina;
                         //MessageBox.Show("Cas: " + cas);
                         bool nasla = false;
                         foreach (Predmet p in rasp.OstaliTermini)
@@ -359,7 +359,7 @@ namespace Raspored.DDrop
                             i++;
                         }
 
-                        for (int j = 0; j < student.DuzinaTermina / 15; j++)
+                        for (int j = 0; j < student.DuzinaTermina *3 ; j++)
                         {
                             Termini[from_c - i + j][from_r].Remove(student);
                             lv.Background = Brushes.White;
@@ -368,7 +368,7 @@ namespace Raspored.DDrop
                     }
                     // Termini[c1][r1].Add(student);
                     listView.Background = Brushes.LightGreen;
-                    for (int i = 0; i < student.DuzinaTermina / 15; i++)
+                    for (int i = 0; i < student.DuzinaTermina *3; i++)
                     {
                         Termini[c1 + i][r1].Add(student);
                     }
@@ -710,6 +710,13 @@ namespace Raspored.DDrop
                     return p;
             }
             return null;
+        }
+
+        private void Korak_Nazad_Click(object sender, RoutedEventArgs e)
+        {
+            Raspored1.Visibility = Visibility.Visible;
+            Raspored2.Visibility = Visibility.Collapsed;
+            Korak1Enable = "True";
         }
     }
 }

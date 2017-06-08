@@ -10,6 +10,7 @@
     Width="800"
     Height="500"
     Closing="DataWindow_Closing"
+    FontSize="14"
     mc:Ignorable="d">
     <Window.Resources>
         <BitmapImage x:Key="FolderOpen" UriSource="/Raspored;component/foldero.png" />
@@ -273,6 +274,16 @@
                     Text="{Binding Path=Opis}" />
 
             </Grid>
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="80"
+                Margin="0,15,100,15"
+                HorizontalAlignment="Right"
+                Click="Korak_Nazad_Click"
+                IsEnabled="True">
+                Nazad
+            </Button>
             <Button
                 Grid.Row="2"
                 Grid.Column="2"
