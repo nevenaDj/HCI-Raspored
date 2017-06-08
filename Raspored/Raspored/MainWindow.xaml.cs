@@ -67,7 +67,7 @@ namespace Raspored
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-           
+
            w.ShowDialog();    //----ovo ne radi  (msm ne moze tako)
         }
 

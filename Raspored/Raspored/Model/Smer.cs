@@ -23,7 +23,7 @@ namespace Raspored.Model
             return true;
         }
 
-        public event EventHandler CanExecuteChanged;
+     public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
@@ -46,6 +46,7 @@ namespace Raspored.Model
         private string _naziv;
         private string _skracenica;
         private DateTime _datumUvodjenja;
+        private string _datum;
         private string _opis;
 
         public Smer()
@@ -55,6 +56,7 @@ namespace Raspored.Model
             _skracenica = "";
             _oznaka = "";
             _datumUvodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            _datum = _datumUvodjenja.ToShortDateString();
             Predmeti = new ObservableCollection<Predmet>();
 
         }
@@ -65,6 +67,7 @@ namespace Raspored.Model
             _naziv = naziv;
             _skracenica = skracenica;
             _datumUvodjenja = datumUvodjenja;
+            _datum = _datumUvodjenja.ToShortDateString();
             _opis = opis;
             Predmeti = new ObservableCollection<Predmet>();
             AddCommand add = new AddCommand(this);
@@ -130,7 +133,24 @@ namespace Raspored.Model
                 if (_datumUvodjenja != value)
                 {
                     _datumUvodjenja = value;
+                    Datum = _datumUvodjenja.ToShortDateString();
                     OnPropertyChanged("DatumUvodjenja");
+                }
+            }
+        }
+
+        public string Datum
+        {
+            get
+            {
+                return _datum;
+            }
+            set
+            {
+                if (_datum != value)
+                {
+                    _datum = value;
+                    OnPropertyChanged("Datum");
                 }
             }
         }
