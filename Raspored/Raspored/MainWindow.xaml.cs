@@ -80,14 +80,22 @@ namespace Raspored
 
         bool FileOpenCore(string filepath)
         {
-            MessageBox.Show(filepath);
+           // MessageBox.Show(filepath);
             if (!File.Exists(filepath))
             {
                 MessageBox.Show("File is removed or moved.");
                 RecentFileList.RemoveFile(filepath);
-
             }
-            // if deleted -> MessageBox and remove
+            else
+            {
+                RecentFileList.InsertFile(filepath);
+                saveRecent(filepath);
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+                Raspored_Button.IsEnabled = true;
+                //TO_DO: raspored -> citanjeIz fajla
+                raspored = otvoriRaspored(filepath);
+            }
             return true;
         }
 
@@ -236,5 +244,7 @@ namespace Raspored
         {
             this.Close();
         }
+
+
     }
 }
