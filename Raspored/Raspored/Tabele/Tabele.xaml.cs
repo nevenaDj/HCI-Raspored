@@ -30,7 +30,7 @@ namespace Raspored.Tabele
         {
             InitializeComponent();
             this.DataContext = this;
-           
+
 
             //List<Smer> s = new List<Smer>(); 
             List<Smer> s = otvoriSmer();
@@ -53,8 +53,9 @@ namespace Raspored.Tabele
             //u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
 
             Ucionice = new ObservableCollection<Ucionica>(u);
+            SveUcionice = new ObservableCollection<Ucionica>(u);
 
-            
+
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             SacuvajPredmet.Visibility = Visibility.Hidden;
@@ -86,8 +87,9 @@ namespace Raspored.Tabele
             if (Ucionice.Count > 0)
             {
                 SelectedUcionica = Ucionice[0];
-               
-            }else
+
+            }
+            else
             {
 
                 EnableIzbrisiUcionicu = "False";
@@ -97,7 +99,8 @@ namespace Raspored.Tabele
             if (Predmeti.Count > 0)
             {
                 SelectedPredmet = Predmeti[0];
-            }else
+            }
+            else
             {
                 EnablePromeniPredmet = "False";
                 EnableIzbrisiPredmet = "False";
@@ -106,7 +109,8 @@ namespace Raspored.Tabele
             if (Softveri.Count > 0)
             {
                 SelectedSoftver = Softveri[0];
-            }else
+            }
+            else
             {
                 EnablePromeniSoftver = "False";
                 EnableIzbrisiSoftver = "False";
@@ -115,13 +119,31 @@ namespace Raspored.Tabele
             if (Smerovi.Count > 0)
             {
                 SelectedSmer = Smerovi[0];
-            }else
+            }
+            else
             {
                 EnableIzbrisiSmer = "False";
                 EnablePromeniSmer = "False";
             }
             SelectedTabUcionice = true;
 
+            Projektor = new ObservableCollection<string>();
+            Projektor.Add("");
+            Projektor.Add("Ima");
+            Projektor.Add("Nema");
+            Tabla = new ObservableCollection<string>();
+            Tabla.Add("");
+            Tabla.Add("Ima");
+            Tabla.Add("Nema");
+            PametnaTabla = new ObservableCollection<string>();
+            PametnaTabla.Add("");
+            PametnaTabla.Add("Ima");
+            PametnaTabla.Add("Nema");
+            OS = new ObservableCollection<string>();
+            OS.Add("");
+            OS.Add("Windows");
+            OS.Add("Linux");
+            OS.Add("Ostalo");
 
 
         }
@@ -140,6 +162,12 @@ namespace Raspored.Tabele
         }
 
         public ObservableCollection<Ucionica> Ucionice
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Ucionica> SveUcionice
         {
             get;
             set;
@@ -308,9 +336,10 @@ namespace Raspored.Tabele
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-           
+
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();         // Set Logical Focus
                     Keyboard.Focus(Box); // Set Keyboard Focus
                 }));
@@ -362,6 +391,7 @@ namespace Raspored.Tabele
         {
 
             Ucionice.Add(SelectedUcionica);
+            SveUcionice.Add(SelectedUcionica);
             EnablePromeniUcionicu = "True";
             EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
@@ -382,7 +412,7 @@ namespace Raspored.Tabele
 
             sacuvajUcionicu();
 
-            
+
 
 
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
@@ -394,6 +424,7 @@ namespace Raspored.Tabele
         private void IzbrisiUcionicu_Click(object sender, RoutedEventArgs e)
         {
             Ucionice.Remove(SelectedUcionica);
+            SveUcionice.Remove(SelectedUcionica);
 
             if (Ucionice.Count <= 0)
             {
@@ -407,9 +438,10 @@ namespace Raspored.Tabele
         private void RezimIzmeniUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
-                    Box.Focus();         
-                    Keyboard.Focus(Box); 
+                new Action(delegate ()
+                {
+                    Box.Focus();
+                    Keyboard.Focus(Box);
                 }));
 
             _greskeIzmena = 0;
@@ -418,7 +450,7 @@ namespace Raspored.Tabele
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
                 SelectedUcionica.BrojRadnihMesta, SelectedUcionica.ImaProjektor,
-                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla,  SelectedUcionica.Softveri, SelectedUcionica.Sistem);
+                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, SelectedUcionica.Softveri, SelectedUcionica.Sistem);
 
             GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
@@ -436,10 +468,11 @@ namespace Raspored.Tabele
         /***** KLINK NA DUGME SACUVAJ IZMENU UCIONICE ****/
         private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-          
+
             MessageBox.Show(SelectedUcionica.Oznaka + " " + SelectedUcionica.Opis + " " + SelectedUcionica.ImaProjektor);
 
             Ucionice[_index] = SelectedUcionica;
+            SveUcionice[_index] = SelectedUcionica;
 
             SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
             IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
@@ -455,9 +488,9 @@ namespace Raspored.Tabele
             GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
 
-            
 
-        e.Handled = true;
+
+            e.Handled = true;
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -536,7 +569,8 @@ namespace Raspored.Tabele
         private void DodajPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box2);
                 }));
@@ -564,13 +598,14 @@ namespace Raspored.Tabele
                 SelectedPredmet = Predmeti[0];
                 EnablePromeniPredmet = "True";
                 EnableIzbrisiPredmet = "True";
-            }else
+            }
+            else
             {
                 SelectedPredmet = null;
                 EnablePromeniPredmet = "False";
                 EnableIzbrisiPredmet = "False";
             }
-            
+
             EnableDodaj = "True";
             TabUcionice = "True";
             TabSmer = "True";
@@ -607,10 +642,10 @@ namespace Raspored.Tabele
             }
             sacuvajPredmet();
 
-            
 
 
-            SelectRowByIndex(dgrMainPredmet, Predmeti.Count-1);
+
+            SelectRowByIndex(dgrMainPredmet, Predmeti.Count - 1);
 
             e.Handled = true;
 
@@ -631,7 +666,8 @@ namespace Raspored.Tabele
         private void RezimIzmeniPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box2);
                 }));
@@ -756,7 +792,8 @@ namespace Raspored.Tabele
         private void DodajSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box3);
                 }));
@@ -786,7 +823,8 @@ namespace Raspored.Tabele
                 SelectedSmer = Smerovi[0];
                 EnablePromeniSmer = "True";
                 EnableIzbrisiSmer = "True";
-            }else
+            }
+            else
             {
                 SelectedSmer = null;
                 EnablePromeniSmer = "False";
@@ -846,7 +884,8 @@ namespace Raspored.Tabele
         private void RezimIzmeniSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box3);
                 }));
@@ -963,12 +1002,13 @@ namespace Raspored.Tabele
                     OnPropertyChanged("EnableIzbrisiSoftver");
                 }
             }
-        }        
+        }
 
         private void DodajSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box4);
                 }));
@@ -1005,7 +1045,7 @@ namespace Raspored.Tabele
                 EnablePromeniSoftver = "False";
                 EnableIzbrisiSoftver = "False";
             }
-            
+
             EnableDodaj = "True";
             TabUcionice = "True";
             TabPredmeti = "True";
@@ -1042,7 +1082,7 @@ namespace Raspored.Tabele
             }
             sacuvajSoftver();
 
-           
+
 
 
             SelectRowByIndex(dgrMainSoftver, Softveri.Count - 1);
@@ -1066,7 +1106,8 @@ namespace Raspored.Tabele
         private void RezimIzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
-                new Action(delegate () {
+                new Action(delegate ()
+                {
                     Box.Focus();
                     Keyboard.Focus(Box4);
                 }));
@@ -1075,8 +1116,8 @@ namespace Raspored.Tabele
 
             _index = Softveri.IndexOf(SelectedSoftver);
 
-            SelectedSoftver = new Softver(SelectedSoftver.Oznaka, SelectedSoftver.Naziv, 
-                SelectedSoftver.Proizvodjac, 
+            SelectedSoftver = new Softver(SelectedSoftver.Oznaka, SelectedSoftver.Naziv,
+                SelectedSoftver.Proizvodjac,
                 SelectedSoftver.Sajt, SelectedSoftver.GodinaIzdavanja,
                 SelectedSoftver.Cena, SelectedSoftver.Opis, SelectedSoftver.Sistem);
 
@@ -1218,14 +1259,14 @@ namespace Raspored.Tabele
                 foreach (string sof in uc[7].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
-                    if (s!=null)
+                    if (s != null)
                         softveri.Add(s);
 
                 }
                 // 
                 u.Softveri = softveri;
                 // u.Softveri = new ObservableCollection<Softver>( softveri);
-               // MessageBox.Show("" + u.Softveri.Count);
+                // MessageBox.Show("" + u.Softveri.Count);
                 ucionice.Add(u);
             }
 
@@ -1276,7 +1317,7 @@ namespace Raspored.Tabele
             return smerovi;
         }
 
-        public  void sacuvajSoftver()
+        public void sacuvajSoftver()
         {
             StreamWriter f = new StreamWriter("../../Save/softver.txt");
             foreach (Softver s in Softveri)
@@ -1311,7 +1352,7 @@ namespace Raspored.Tabele
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
                 s.Sistem = sf[3];
-                
+
                 s.Opis = sf[4];
                 s.Proizvodjac = sf[5];
                 s.Sajt = sf[6];
@@ -1329,16 +1370,16 @@ namespace Raspored.Tabele
             {
                 f.Write(p.Naziv + "|" + p.BrojTermina + "|" + p.DuzinaTermina + "|");
                 f.Write(p.Sistem);
-                
+
                 f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
                 if (p.SmerPredmeta != null)
                     f.Write(p.SmerPredmeta.Oznaka);
-                f.Write("|"+p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
+                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
                 //if (p.Softveri == null || p.Softveri.Count==0)
-                    foreach (Softver s in p.Softveri)
-                    {
-                        f.Write(s.Oznaka + ",");
-                    }
+                foreach (Softver s in p.Softveri)
+                {
+                    f.Write(s.Oznaka + ",");
+                }
                 f.WriteLine();
             }
             f.Close();
@@ -1365,11 +1406,11 @@ namespace Raspored.Tabele
                 string[] pr = predmet.Split('|');
 
                 p.Naziv = pr[0];
-                 
+
                 p.BrojTermina = Convert.ToInt32(pr[1]);
                 p.DuzinaTermina = Convert.ToInt32(pr[2]);
                 p.Sistem = pr[3];
-              
+
                 p.Opis = pr[4];
                 p.Oznaka = pr[5];
                 p.Skracenica = pr[6];
@@ -1385,11 +1426,11 @@ namespace Raspored.Tabele
                 foreach (string sof in pr[12].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
-                    if (s!=null)
+                    if (s != null)
                         softveri.Add(s);
                 }
                 p.Softveri = softveri;
-               // MessageBox.Show(""+p.Softveri.Count);
+                // MessageBox.Show(""+p.Softveri.Count);
                 predmeti.Add(p);
 
             }
@@ -1408,7 +1449,7 @@ namespace Raspored.Tabele
             return null;
         }
 
-        public  Softver nadjiSoftver(string oznaka)
+        public Softver nadjiSoftver(string oznaka)
         {
             //MessageBox.Show("" + Softveri.Count);
             foreach (Softver s in Softveri)
@@ -1458,7 +1499,7 @@ namespace Raspored.Tabele
                 _greskeDodavanje--;
                 _greskeIzmena--;
             }
-         }
+        }
 
 
         private void SacuvajPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1467,7 +1508,7 @@ namespace Raspored.Tabele
             {
                 if (SelectedPredmet != null)
                 {
-                    if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != "" 
+                    if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != ""
                         && SelectedPredmet.Skracenica != "")
                     {
                         e.CanExecute = true;
@@ -1503,13 +1544,13 @@ namespace Raspored.Tabele
                 {
                     if (SelectedSoftver.Oznaka != "")
                     {
-                        e.CanExecute = true ;
+                        e.CanExecute = true;
                         e.Handled = true;
 
                     }
                 }
             }
-           
+
         }
 
         private void IzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1553,12 +1594,12 @@ namespace Raspored.Tabele
             }
             //TODO: Retrieve and focus a DataGridCell object
             Keyboard.Focus(dataGrid);
-            
+
         }
 
         private void DodajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            
+
             if (SelectedTabUcionice == true)
             {
                 e.CanExecute = true;
@@ -1566,19 +1607,19 @@ namespace Raspored.Tabele
             }
 
         }
-        
+
         private void HandleWindowActivated(object sender, EventArgs e)
         {
 
             this.Focus();
-           
+
         }
 
         private void SoftveriOtvori_Click(object sender, RoutedEventArgs e)
         {
 
             var w = new SoftveriOtvori(SelectedUcionica);
-            
+
             w.ShowDialog();
             List<Softver> s = w.getList1();
             SelectedUcionica.Softveri = s;
@@ -1596,7 +1637,7 @@ namespace Raspored.Tabele
         private void CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-           // MessageBox.Show("daa" + CB.SelectedItem);
+            // MessageBox.Show("daa" + CB.SelectedItem);
 
         }
 
@@ -1743,13 +1784,13 @@ namespace Raspored.Tabele
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var p = new IzborSmera(SelectedPredmet); 
+            var p = new IzborSmera(SelectedPredmet);
             p.ShowDialog();
             SelectedPredmet.SmerPredmeta = p.IzabraniSmer;
-        //    MessageBox.Show(SelectedPredmet.SmerPredmeta.Naziv);
+            //    MessageBox.Show(SelectedPredmet.SmerPredmeta.Naziv);
         }
 
-        
+
 
         public ObservableCollection<Smer> SmeroviPredmeta
         {
@@ -1757,14 +1798,14 @@ namespace Raspored.Tabele
             set;
         }
 
-       
+
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (SelectedPredmet != null)
             {
                 SelectedPredmet.SmerPredmeta = null;
-              //  MessageBox.Show(SelectedPredmet.OznakaSmera);
+                //  MessageBox.Show(SelectedPredmet.OznakaSmera);
                 foreach (Smer s in Smerovi)
                 {
                     if (UnosSmera.Text == s.Oznaka)
@@ -1793,7 +1834,461 @@ namespace Raspored.Tabele
             }
         }
 
+        private Dictionary<string, Ucionica> pretragaUcionica(List<Ucionica> ucionice, string kriterijum)
+        {
+            string[] tokens = kriterijum.Split(':');
+            string oznaka = tokens[0];
 
+            Dictionary<string, Ucionica> u = new Dictionary<string, Ucionica>();
+
+            //List<Ucionica> u = new List<Ucionica>(); 
+            if (oznaka.Trim().ToUpper() == "OZNAKA")
+            {
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (ucionica.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(ucionica.Oznaka, ucionica);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "OPIS")
+            {
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (ucionica.Opis.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(ucionica.Oznaka, ucionica);
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "BROJ RADNIH MESTA")
+            {
+                int brojRadnihMesta = -1;
+                bool res = Int32.TryParse(tokens[1].Trim(), out brojRadnihMesta);
+                if (res)
+                {
+                    //   int brojRadnihMesta = Int32.Parse(tokens[1].Trim());
+                    foreach (Ucionica ucionica in ucionice)
+                    {
+                        if (ucionica.BrojRadnihMesta == brojRadnihMesta)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "OS")
+            {
+
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (ucionica.Sistem.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(ucionica.Oznaka, ucionica);
+                    }
+                }
+            }
+            return u;
+
+        }
+
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //PretragaWindow v = new PretragaWindow();
+            // v.Show();
+            //  Pretraga = v.Pretraga;
+
+            //   Ucionice = new ObservableCollection<Ucionica>( otvoriUcionicu());
+            // MessageBox.Show(Pretraga);
+            /*   if (Pretraga != null)
+               {
+                   Pretraga = Pretraga.ToUpper();
+                   if (Pretraga.IndexOf("AND") != -1)
+                   {
+                       string[] andTokens = Regex.Split(Pretraga,"AND");
+                       string[] andTokens1 = andTokens[0].Split(':');
+                       string[] andTokens2 = andTokens[1].Split(':');
+
+
+
+                   }
+
+               }
+               */
+            if (Pretraga == "")
+            {
+                List<Ucionica> u = otvoriUcionicu();
+                Ucionice.Clear();
+                foreach (Ucionica ucionica in u)
+                {
+                    Ucionice.Add(ucionica);
+                }
+            }
+            else
+            {
+                if (Pretraga != null)
+                {
+                    List<Ucionica> u = otvoriUcionicu();
+                    string pretraga = Pretraga.ToUpper();
+                    if ((pretraga.IndexOf("AND") != -1) && (pretraga.IndexOf("OR") != -1))
+                    {
+                        Ucionice.Clear();
+                    }
+                    else if (pretraga.IndexOf("AND") != -1)
+                    {
+                        List<Dictionary<string, Ucionica>> dicts = new List<Dictionary<string, Ucionica>>();
+                        string[] andTokens = Regex.Split(pretraga, "AND");
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaUcionica(u, andTokens[i]));
+                        }
+
+
+                        Ucionice.Clear();
+                        foreach (Ucionica ucionica in dicts[0].Values)
+                        {
+                            bool da = true;
+                            foreach (Dictionary<string, Ucionica> d in dicts)
+                            {
+                                if (d.ContainsKey(ucionica.Oznaka))
+                                {
+                                    da = true;
+                                }
+                                else
+                                {
+                                    da = false;
+                                    break;
+                                }
+                            }
+                            if (da)
+                            {
+                                Ucionice.Add(ucionica);
+
+                            }
+
+                        }
+                    }
+                    else if (pretraga.IndexOf("OR") != -1)
+                    {
+                        List<Dictionary<string, Ucionica>> dicts = new List<Dictionary<string, Ucionica>>();
+                        string[] andTokens = Regex.Split(pretraga, "OR");
+
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaUcionica(u, andTokens[i]));
+                        }
+
+                        Ucionice.Clear();
+                        Dictionary<string, Ucionica> hash = new Dictionary<string, Ucionica>();
+                        foreach (Dictionary<string, Ucionica> d in dicts)
+                        {
+                            foreach (Ucionica ucionica in d.Values)
+                            {
+                                if (!hash.ContainsKey(ucionica.Oznaka))
+                                {
+                                    Ucionice.Add(ucionica);
+                                    hash.Add(ucionica.Oznaka, ucionica);
+                                }
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        Dictionary<string, Ucionica> pretragaUc = pretragaUcionica(u, Pretraga);
+
+                        Ucionice.Clear();
+                        foreach (Ucionica ucionica in pretragaUc.Values)
+                        {
+                            Ucionice.Add(ucionica);
+
+                        }
+
+                    }
+                }
+            }
+
+           
+            
+            
+
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            GridPretraga.Visibility = Visibility.Visible;
+            ButtonPretraga.Visibility = Visibility.Collapsed;
+            ButtonFilter.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonOtkazi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            List<Ucionica> u = otvoriUcionicu();
+            Ucionice.Clear();
+            foreach(Ucionica ucionica in u)
+            {
+                Ucionice.Add(ucionica);
+            }
+
+            GridPretraga.Visibility = Visibility.Collapsed;
+            ButtonPretraga.Visibility = Visibility.Visible;
+            ButtonFilter.Visibility = Visibility.Visible;
+            GridFilter.Visibility = Visibility.Collapsed;
+
+
+        }
+
+        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            GridFilter.Visibility = Visibility.Visible;
+            ButtonFilter.Visibility = Visibility.Collapsed;
+            ButtonPretraga.Visibility = Visibility.Collapsed;
+        }
+
+        public ObservableCollection<string> Projektor
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<string> Tabla
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<string> PametnaTabla
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<string> OS
+        {
+            get;
+            set;
+        }
+
+        private string _izabraniProjektor;
+        public string IzabraniProjektor
+        {
+            get
+            {
+                return _izabraniProjektor;
+            }
+            set
+            {
+                if (_izabraniProjektor != value)
+                {
+                    _izabraniProjektor = value;
+                    OnPropertyChanged("IzabraniProjektor");
+                }
+            }
+        }
+
+        private string _izabranaTabla;
+        public string IzabranaTabla
+        {
+            get
+            {
+                return _izabranaTabla;
+            }
+            set
+            {
+                if (_izabranaTabla != value)
+                {
+                    _izabranaTabla = value;
+                    OnPropertyChanged("IzabranaTabla");
+                }
+            }
+        }
+
+        private string _izabranaPametnaTabla;
+        public string IzabranaPametnaTabla
+        {
+            get
+            {
+                return _izabranaPametnaTabla;
+            }
+            set
+            {
+                if (_izabranaPametnaTabla != value)
+                {
+                    _izabranaPametnaTabla = value;
+                    OnPropertyChanged("IzabranaTabla");
+                }
+            }
+        }
+
+        private string _izabraniOS;
+        public string IzabraniOS
+        {
+            get
+            {
+                return _izabraniOS;
+            }
+            set
+            {
+                if (_izabraniOS != value)
+                {
+                    _izabraniOS= value;
+                    OnPropertyChanged("IzabraniOS");
+                }
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // MessageBox.Show(IzabraniOS);
+            Ucionice.Clear();
+            List<Ucionica> u = otvoriUcionicu();
+            if (IzabraniOS == "")
+            {
+                foreach (Ucionica ucionica in u)
+                {
+
+                    Ucionice.Add(ucionica);
+
+
+                }
+            }
+            else
+            {
+                foreach (Ucionica ucionica in u)
+                {
+                    if (ucionica.Sistem.ToUpper() == IzabraniOS.ToUpper())
+                    {
+                        Ucionice.Add(ucionica);
+                    }
+
+                }
+            }
+
+
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            Ucionice.Clear();
+            List<Ucionica> u = otvoriUcionicu();
+            if (IzabraniProjektor == "")
+            {
+                foreach (Ucionica ucionica in u)
+                {
+
+                    Ucionice.Add(ucionica);
+
+
+                }
+            }
+            else
+            {
+                foreach (Ucionica ucionica in u)
+                {
+                    if (IzabraniProjektor == "Ima")
+                    {
+                        if (ucionica.ImaProjektor)
+                        {
+                            Ucionice.Add(ucionica);
+                        }
+                    }
+                    if (IzabraniProjektor == "Nema")
+                    {
+                        if (!ucionica.ImaProjektor)
+                        {
+                            Ucionice.Add(ucionica); 
+
+                        }
+                    }
+
+                }
+            }
+
+
+        }
+
+        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+            Ucionice.Clear();
+            List<Ucionica> u = otvoriUcionicu();
+            if (IzabranaTabla == "")
+            {
+                foreach (Ucionica ucionica in u)
+                {
+
+                    Ucionice.Add(ucionica);
+
+
+                }
+            }
+            else
+            {
+                foreach (Ucionica ucionica in u)
+                {
+                    if (IzabranaTabla == "Ima")
+                    {
+                        if (ucionica.ImaTabla)
+                        {
+                            Ucionice.Add(ucionica);
+                        }
+                    }
+                    if (IzabranaTabla == "Nema")
+                    {
+                        if (!ucionica.ImaTabla)
+                        {
+                            Ucionice.Add(ucionica);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        private void ComboBox_SelectionChanged_3(object sender, SelectionChangedEventArgs e)
+        {
+            Ucionice.Clear();
+            List<Ucionica> u = otvoriUcionicu();
+            if (IzabranaPametnaTabla == "")
+            {
+                foreach (Ucionica ucionica in u)
+                {
+
+                    Ucionice.Add(ucionica);
+
+
+                }
+            }
+            else
+            {
+                foreach (Ucionica ucionica in u)
+                {
+                    if (IzabranaPametnaTabla == "Ima")
+                    {
+                        if (ucionica.ImaPametnaTabla)
+                        {
+                            Ucionice.Add(ucionica);
+                        }
+                    }
+                    if (IzabranaPametnaTabla == "Nema")
+                    {
+                        if (!ucionica.ImaPametnaTabla)
+                        {
+                            Ucionice.Add(ucionica);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
     }
-
 }

@@ -64,6 +64,9 @@
       <DependentUpon>IzborSmera.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tabele\Komande.cs" />
+    <Compile Include="Tabele\PretragaWindow.xaml.cs">
+      <DependentUpon>PretragaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tabele\Softveri.xaml.cs">
       <DependentUpon>Softveri.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Tabele\IzborSmera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tabele\PretragaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

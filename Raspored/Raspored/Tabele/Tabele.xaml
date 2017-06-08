@@ -93,10 +93,14 @@
                             <ColumnDefinition Width="422*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+
                         <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Padding="8"
                             Background="GhostWhite"
@@ -117,24 +121,144 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock
+                                <Grid
+                                    x:Name="GridPretraga"
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Margin="0,0,10,0">
-                                    Pretraga
-                                </TextBlock>
-                                <TextBox
+                                    Grid.ColumnSpan="4"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Top">
+                                        Pretraga
+                                    </TextBlock>
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Width="500"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Text="{Binding Pretraga}" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="Button_Click_2">
+                                        Pretrazi
+                                    </Button>
+                                    <Button
+                                        x:Name="ButtonOtkazi"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="Button_Click_4">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    x:Name="GridFilter"
                                     Grid.Row="0"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    Width="400"
-                                    Margin="0,0,0,10"
-                                    HorizontalAlignment="Left" />
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Projektor}"
+                                        SelectedValue="{Binding IzabraniProjektor}"
+                                        SelectionChanged="ComboBox_SelectionChanged_1" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Tabla}"
+                                        SelectedValue="{Binding IzabranaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_2" />
+                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="5"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding PametnaTabla}"
+                                        SelectedValue="{Binding IzabranaPametnaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_3" />
+
+                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="7"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding OS}"
+                                        SelectedValue="{Binding IzabraniOS}"
+                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                    <Button
+                                        x:Name="ButtonOtkaziFilter"
+                                        Grid.Row="0"
+                                        Grid.Column="8"
+                                        Width="80"
+                                        Margin="100,0,2,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Click="Button_Click_4">
+                                        Otkazi
+                                    </Button>
+
+
+                                </Grid>
                                 <Button
+                                    x:Name="ButtonPretraga"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="Button_Click_3">
+                                    Pretraga
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilter"
                                     Grid.Row="0"
                                     Grid.Column="3"
-                                    Margin="2,2,2,2">
-                                    Pretrazi
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonFilter_Click">
+                                    Filter
                                 </Button>
                                 <DataGrid
                                     x:Name="dgrMainUcionica"
@@ -146,7 +270,7 @@
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
                                     IsSynchronizedWithCurrentItem="True"
-                                    ItemsSource="{Binding Path=Ucionice}"
+                                    ItemsSource="{Binding Path=Ucionice, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
 
                                     <DataGrid.Columns>
@@ -224,7 +348,7 @@
                             </Grid>
                         </Border>
                         <Border
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Padding="20"
