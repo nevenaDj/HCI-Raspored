@@ -31,8 +31,8 @@ namespace Raspored.Model
         private bool _trebaProjektor;
         private bool _trebaTabla;
         private bool _trebaPametnaTabla;
-        private OS _neophodanOS;
         private Softver _softver;
+        private string _sistem;
 
         public List<Softver> Softveri
         {
@@ -53,13 +53,24 @@ namespace Raspored.Model
             _trebaTabla = true;
             _trebaProjektor = true;
             _smer = null;
+            _sistem = "";
 
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
+
+        }
+        public ObservableCollection<string> Sistemi
+        {
+            get;
+            set;
         }
 
         public Predmet(string oznaka, string naziv,string skracenica, Smer smer, 
             string opis,int velicinaGrupe,int duzinaTermina, int brojTermina,
             bool trebaProjektor, bool trebaTabla, bool trebaPametnaTabla,
-            OS neophodanOS, List<Softver> softveri)
+            List<Softver> softveri, string oznakaSmera, string sistem)
         {
             _oznaka = oznaka;
             _naziv = naziv;
@@ -72,8 +83,15 @@ namespace Raspored.Model
             _trebaProjektor = trebaProjektor;
             _trebaTabla = trebaTabla;
             _trebaPametnaTabla = trebaPametnaTabla;
-            _neophodanOS = neophodanOS;
+           
             Softveri = softveri;
+            _oznakaSmera = oznakaSmera;
+            _sistem = sistem;
+
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
         }
 
         public string Oznaka
@@ -258,21 +276,7 @@ namespace Raspored.Model
             }
         }
         
-        public OS NeophodanOS
-        {
-            get
-            {
-                return _neophodanOS;
-            }
-            set
-            {
-                if (_neophodanOS != value)
-                {
-                    _neophodanOS = value;
-                    OnPropertyChanged("NeophodanOS");
-                }
-            }
-        }
+     
 
         public Softver Softver
         {
@@ -307,6 +311,22 @@ namespace Raspored.Model
                 {
                     _oznakaSmera = value;
                     OnPropertyChanged("OznakaSmera");
+                }
+            }
+        }
+
+        public string Sistem
+        {
+            get
+            {
+                return _sistem;
+            }
+            set
+            {
+                if (_sistem != value)
+                {
+                    _sistem = value;
+                    OnPropertyChanged("Sistem");
                 }
             }
         }

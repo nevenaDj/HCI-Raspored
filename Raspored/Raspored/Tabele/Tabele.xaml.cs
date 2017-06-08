@@ -76,6 +76,12 @@ namespace Raspored.Tabele
             //u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
 
             Ucionice = new ObservableCollection<Ucionica>(u);
+
+            Sistemi = new ObservableCollection<string>();
+            Sistemi.Add("Windows");
+            Sistemi.Add("Linux");
+            Sistemi.Add("Oba");
+
             
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
@@ -167,6 +173,12 @@ namespace Raspored.Tabele
         }
 
         public ObservableCollection<Softver> Softveri
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<string> Sistemi
         {
             get;
             set;
@@ -439,7 +451,7 @@ namespace Raspored.Tabele
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
                 SelectedUcionica.BrojRadnihMesta, SelectedUcionica.ImaProjektor,
-                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, SelectedUcionica.OperativniSistem, SelectedUcionica.Softveri);
+                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla,  SelectedUcionica.Softveri);
 
             GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
@@ -665,7 +677,7 @@ namespace Raspored.Tabele
                 SelectedPredmet.SmerPredmeta, SelectedPredmet.Opis, SelectedPredmet.VelicinaGrupe,
                 SelectedPredmet.DuzinaTermina, SelectedPredmet.BrojTermina, SelectedPredmet.TrebaProjektor,
                 SelectedPredmet.TrebaTabla, SelectedPredmet.TrebaPametnaTabla,
-                SelectedPredmet.NeophodanOS, SelectedPredmet.Softveri);
+                 SelectedPredmet.Softveri, SelectedPredmet.OznakaSmera, SelectedPredmet.Sistem);
 
             GridPredmeti.IsEnabled = true;
             SacuvajIzmenuPredmet.Visibility = Visibility.Visible;
@@ -1097,9 +1109,9 @@ namespace Raspored.Tabele
             _index = Softveri.IndexOf(SelectedSoftver);
 
             SelectedSoftver = new Softver(SelectedSoftver.Oznaka, SelectedSoftver.Naziv, 
-                SelectedSoftver.OperativniSistem,SelectedSoftver.Proizvodjac, 
+                SelectedSoftver.Proizvodjac, 
                 SelectedSoftver.Sajt, SelectedSoftver.GodinaIzdavanja,
-                SelectedSoftver.Cena, SelectedSoftver.Opis);
+                SelectedSoftver.Cena, SelectedSoftver.Opis, SelectedSoftver.Sistem);
 
             GridSoftver.IsEnabled = true;
             IzmeniSoftver.Visibility = Visibility.Visible;
@@ -1193,13 +1205,7 @@ namespace Raspored.Tabele
             foreach (Ucionica u in Ucionice)
             {
                 f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
-                if (u.OperativniSistem == OS.widows)
-                    f.Write(0);
-                else if (u.OperativniSistem == OS.linux)
-                    f.Write(1);
-                else
-                    f.Write(2);
-
+                f.Write(u.Sistem);
                 f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
                 if (u.Softveri != null)
                     if (u.Softveri.Count > 0)
@@ -1238,12 +1244,7 @@ namespace Raspored.Tabele
                 u.ImaTabla = Convert.ToBoolean(uc[3]);
                 u.ImaPametnaTabla = Convert.ToBoolean(uc[1]);
                 u.ImaProjektor = Convert.ToBoolean(uc[2]);
-                if (Convert.ToInt32(uc[4]) == 0)
-                    u.OperativniSistem = OS.widows;
-                else if (Convert.ToInt32(uc[4]) == 1)
-                    u.OperativniSistem = OS.linux;
-                else
-                    u.OperativniSistem = OS.ostalo;
+                u.Sistem = uc[4];
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
@@ -1314,12 +1315,7 @@ namespace Raspored.Tabele
             foreach (Softver s in Softveri)
             {
                 f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
-                if (s.OperativniSistem == OS.widows)
-                    f.Write(0);
-                else if (s.OperativniSistem == OS.linux)
-                    f.Write(1);
-                else
-                    f.Write(2);
+                f.Write(s.Sistem);
                 f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.Sajt);
                 f.Write("\r\n");
             }
@@ -1347,12 +1343,8 @@ namespace Raspored.Tabele
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                if (Convert.ToInt32(sf[3]) == 0)
-                    s.OperativniSistem = OS.widows;
-                else if (Convert.ToInt32(sf[3]) == 1)
-                    s.OperativniSistem = OS.linux;
-                else
-                    s.OperativniSistem = OS.ostalo;
+                s.Sistem = sf[3];
+                
                 s.Opis = sf[4];
                 s.Proizvodjac = sf[5];
                 s.Sajt = sf[6];
@@ -1369,13 +1361,8 @@ namespace Raspored.Tabele
             foreach (Predmet p in Predmeti)
             {
                 f.Write(p.Naziv + "|" + p.BrojTermina + "|" + p.DuzinaTermina + "|");
-
-                if (p.NeophodanOS == OS.widows)
-                    f.Write(0);
-                else if (p.NeophodanOS == OS.linux)
-                    f.Write(1);
-                else
-                    f.Write(2);
+                f.Write(p.Sistem);
+                
                 f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
                 if (p.SmerPredmeta != null)
                     f.Write(p.SmerPredmeta.Oznaka);
@@ -1414,12 +1401,8 @@ namespace Raspored.Tabele
                  
                 p.BrojTermina = Convert.ToInt32(pr[1]);
                 p.DuzinaTermina = Convert.ToInt32(pr[2]);
-                if (Convert.ToInt32(pr[3]) == 0)
-                    p.NeophodanOS = OS.widows;
-                else if (Convert.ToInt32(pr[3]) == 1)
-                    p.NeophodanOS = OS.linux;
-                else
-                    p.NeophodanOS = OS.ostalo;
+                p.Sistem = pr[3];
+              
                 p.Opis = pr[4];
                 p.Oznaka = pr[5];
                 p.Skracenica = pr[6];
@@ -1774,38 +1757,7 @@ namespace Raspored.Tabele
             set;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SelectedPredmet != null)
-            {
-               // SelectedPredmet.SmerPredmeta = null;
-                 // MessageBox.Show(SelectedPredmet.OznakaSmera);
-                 foreach(Smer s in Smerovi)
-                {
-                    if (SelectedPredmet.OznakaSmera == s.Oznaka)
-                    {
-                        SelectedPredmet.SmerPredmeta = s;
-                    }
-                }                    
-            }
-        }
-
-        private void TextBox_TouchLeave(object sender, TouchEventArgs e)
-        {
-            if (SelectedPredmet != null)
-            {
-                SelectedPredmet.SmerPredmeta = null;
-                // MessageBox.Show(SelectedPredmet.OznakaSmera);
-                foreach (Smer s in Smerovi)
-                {
-                    if (SelectedPredmet.OznakaSmera == s.Oznaka)
-                    {
-                        SelectedPredmet.SmerPredmeta = s;
-                    }
-                }
-            }
-
-        }
+       
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -1823,6 +1775,8 @@ namespace Raspored.Tabele
             }
 
         }
+
+       
     }
 
 }

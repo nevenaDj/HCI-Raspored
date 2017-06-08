@@ -68,7 +68,7 @@ namespace Raspored
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
            
-           w.ShowDialog();
+           w.ShowDialog();    //----ovo ne radi  (msm ne moze tako)
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
