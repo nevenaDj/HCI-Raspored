@@ -26,7 +26,7 @@ namespace Raspored.DDrop
     public partial class PravljenjeRasporeda : Window, INotifyPropertyChanged
     {
         private Point startPoint;
-
+        private CitanjeIPisanje citanje_pisanje;
 
         public PravljenjeRasporeda()
         {
@@ -40,13 +40,33 @@ namespace Raspored.DDrop
             InitializeComponent();
             this.DataContext = this;
             this.rasp = rasp;
-            
+            this.citanje_pisanje = citanje_pisanje;
 
             List<Softver> sof = citanje_pisanje.otvoriSoftver();
             Softveri = new ObservableCollection<Softver>(sof);
             List<Smer> s = citanje_pisanje.otvoriSmer();
             Smerovi = new ObservableCollection<Smer>(s);
             List<Predmet> p = citanje_pisanje.otvoriPredmet();
+            List<Predmet> brisanje = new List<Predmet>();
+            foreach (Predmet termin in rasp.OstaliTermini) 
+            {
+                foreach (Predmet predmet in p)
+                {
+                    if (termin.Oznaka == predmet.Oznaka)
+                    {
+                        if (termin.BrojTermina >= predmet.BrojTermina)
+                            //p.Remove(predmet);
+                            brisanje.Add(predmet);
+                        //else
+                          //  predmet.BrojTermina = predmet.BrojTermina - termin.BrojTermina;
+                    }
+                }
+            }
+            foreach (Predmet pred in brisanje)
+            {
+                p.Remove(pred);
+            }
+
             foreach (Smer smer in s)
             {
                 foreach (Predmet pred in p)
@@ -216,11 +236,7 @@ namespace Raspored.DDrop
         {
             startPoint = e.GetPosition(null);
             lv = sender as ListView;
-            String v = lv.Name.ToString();
-            String r = v.Substring(4, 1);
-            from_r = Convert.ToInt32(r);
-            String c = v.Substring(2, 2);
-            from_c = Convert.ToInt32(c);
+      
         }
 
         private void ListView_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
@@ -320,7 +336,8 @@ namespace Raspored.DDrop
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
-                int broj_termina = student.BrojTermina;
+                Predmet broj_termina = citanje_pisanje.nadjiPredmet(student.Oznaka);
+              //  int broj_termina = student.BrojTermina;
                 if (Termini[c1][r1].Count == 0)
                 {
                     if (fromList)
@@ -328,28 +345,43 @@ namespace Raspored.DDrop
                         int cas = student.DuzinaTermina;
                         //MessageBox.Show("Cas: " + cas);
                         bool nasla = false;
-                        foreach (Predmet p in rasp.OstaliTermini)
-                            if (p.Oznaka == student.Oznaka)
+                        bool empty = true;
+                        for (int i = 0; i < cas * 3; i++)
+                            if (Termini[c1 + i][r1].Count != 0)
                             {
+                                empty = false;
+                                break;
+                            }
+                        if (empty)
+                        {
+                            foreach (Predmet p in rasp.OstaliTermini)
+                                if (p.Oznaka == student.Oznaka)
+                                {
 
-                                p.BrojTermina += cas;
-                                if (p.BrojTermina >= broj_termina)
+                                    p.BrojTermina += cas;
+                                    if (p.BrojTermina >= broj_termina.BrojTermina)
+                                    {
+                                        Studenti.Remove(student);
+                                    }
+                                    nasla = true;
+                                    break;
+                                }
+                            if (!nasla)
+                            {
+                                //MessageBox.Show("Nije Nasla ");
+                                Predmet termini = student;
+                                termini.BrojTermina = cas;
+                                rasp.OstaliTermini.Add(termini);
+                                if (termini.BrojTermina >= broj_termina.BrojTermina)
                                 {
                                     Studenti.Remove(student);
                                 }
-                                nasla = true;
-                            }
-                        if (!nasla)
-                        {
-                            //MessageBox.Show("Nije Nasla ");
-                            Predmet termini = student;
-                            termini.BrojTermina = cas;
-                            rasp.OstaliTermini.Add(termini);
-                            if (termini.BrojTermina >= broj_termina)
-                            {
-                                Studenti.Remove(student);
-                            }
 
+                            }
+                            for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                            {
+                                Termini[c1 + i][r1].Add(student);
+                            }
                         }
 
                     }
@@ -358,34 +390,50 @@ namespace Raspored.DDrop
                         int cas = student.DuzinaTermina;
                         //MessageBox.Show("Cas: " + cas);
                         bool nasla = false;
-                        foreach (Predmet p in rasp.OstaliTermini)
-                            if (p.Oznaka == student.Oznaka)
+                        bool empty = true;
+                        for (int i = 0; i < cas * 3; i++)
+                            if (Termini[c1 + i][r1].Count != 0)
                             {
+                                empty = false;
+                                break;
+                            }
+                        if (empty)
+                        {
+                            foreach (Predmet p in rasp.OstaliTermini)
+                                if (p.Oznaka == student.Oznaka)
+                                {
 
-                                p.BrojTermina += cas;
-                                if (p.BrojTermina >= broj_termina)
+                                    p.BrojTermina += cas;
+                                    if (p.BrojTermina >= broj_termina.BrojTermina)
+                                    {
+                                        Temp.Remove(student);
+                                    }
+                                    nasla = true;
+                                    break;
+                                }
+                            if (!nasla)
+                            {
+                                //MessageBox.Show("Nije Nasla ");
+                                Predmet termini = student;
+                                termini.BrojTermina = cas;
+                                rasp.OstaliTermini.Add(termini);
+                                if (termini.BrojTermina >= broj_termina.BrojTermina)
                                 {
                                     Temp.Remove(student);
                                 }
-                                nasla = true;
-                            }
-                        if (!nasla)
-                        {
-                            //MessageBox.Show("Nije Nasla ");
-                            Predmet termini = student;
-                            termini.BrojTermina = cas;
-                            rasp.OstaliTermini.Add(termini);
-                            if (termini.BrojTermina >= broj_termina)
-                            {
-                                Temp.Remove(student);
-                            }
 
+                            }
+                            for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                            {
+                                Termini[c1 + i][r1].Add(student);
+                            }
                         }
 
                     }
 
                     else
                     {
+                        { 
                         int i = 0;
                         int x = 0;
                         while (true)
@@ -402,20 +450,31 @@ namespace Raspored.DDrop
                             i++;
                         }
 
-                        for (int j = 0; j < student.DuzinaTermina *3 ; j++)
+                            bool empty = true;
+                            for (int k = 0; k < student.DuzinaTermina * 3; k++)
+                                if (Termini[c1 + k][r1].Count != 0)
+                                {
+                                    empty = false;
+                                    break;
+                                }
+                            if (empty)
+                            {
+                                for (int j = 0; j < student.DuzinaTermina * 3; j++)
                         {
                             Termini[from_c - i + j][from_r].Remove(student);
                             lv.Background = Brushes.White;
-
                         }
+                        listView.Background = Brushes.LightGreen;
+                            
+                                for (int k = 0; k < student.DuzinaTermina * 3; k++)
+                                {
+                                    Termini[c1 + k][r1].Add(student);
+                                }
+                            }
                     }
                     // Termini[c1][r1].Add(student);
-                    listView.Background = Brushes.LightGreen;
-                    for (int i = 0; i < student.DuzinaTermina *3; i++)
-                    {
-                        Termini[c1 + i][r1].Add(student);
-                    }
-
+                    
+                }
 
 
                 }
