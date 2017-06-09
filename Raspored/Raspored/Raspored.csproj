@@ -58,6 +58,11 @@
     <Compile Include="DDrop\PravljenjeRasporeda.xaml.cs">
       <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HelpProvider.cs" />
+    <Compile Include="HelpViewer.xaml.cs">
+      <DependentUpon>HelpViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JavaScriptControlHelper.cs" />
     <Compile Include="Model\CitanjeIPisanje.cs" />
     <Compile Include="Model\Raspored.cs" />
     <Compile Include="Model\UcionicaRaspore.cs" />
@@ -76,6 +81,10 @@
       <DependentUpon>Tabele.xaml</DependentUpon>
     </Compile>
     <Page Include="DDrop\PravljenjeRasporeda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Help\error.htm" />
+    <Content Include="Help\Forma.htm" />
+    <Content Include="Help\index.htm" />
+    <Content Include="Help\Tabele.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

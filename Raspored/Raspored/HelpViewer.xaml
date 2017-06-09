@@ -1,0 +1,34 @@
+﻿<Window
+    x:Class="Raspored.HelpViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Raspored"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HelpViewer"
+    Width="300"
+    Height="300"
+    Closing="Window_Closing"
+    mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding
+            CanExecute="BrowseBack_CanExecute"
+            Command="NavigationCommands.BrowseBack"
+            Executed="BrowseBack_Executed" />
+        <CommandBinding
+            CanExecute="BrowseForward_CanExecute"
+            Command="NavigationCommands.BrowseForward"
+            Executed="BrowseForward_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Command="NavigationCommands.BrowseBack">
+                Back
+            </Button>
+            <Button Command="NavigationCommands.BrowseForward">
+                Forward
+            </Button>
+        </ToolBar>
+        <WebBrowser Name="wbHelp" Navigating="wbHelp_Navigating" />
+    </DockPanel>
+</Window>

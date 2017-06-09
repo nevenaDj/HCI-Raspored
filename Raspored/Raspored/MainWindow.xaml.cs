@@ -105,6 +105,8 @@ namespace Raspored
         private void HandleWindowActivated(object sender, EventArgs e)
         {
             this.Focus();
+            Keyboard.Focus(this);
+            FocusManager.SetFocusedElement(this, this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -246,6 +248,22 @@ namespace Raspored
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
+
+        public void doThings(string param)
+        {
+          //  btnOK.Background = new SolidColorBrush(Color.FromRgb(32, 64, 128));
+            Title = param;
         }
 
 

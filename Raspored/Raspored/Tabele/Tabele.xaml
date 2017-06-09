@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:l="clr-namespace:Raspored"
     xmlns:local="clr-namespace:Raspored.Tabele"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Raspored.Model"
@@ -80,12 +81,15 @@
                             <TextBlock Text="Učionica" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid l:HelpProvider.HelpKey="Tabele">
                         <Grid.CommandBindings>
                             <CommandBinding
                                 CanExecute="RezimIzmeniUcionicu_CanExecute"
                                 Command="local:Komande.Izmeni"
                                 Executed="RezimIzmeniUcionicu_Executed" />
+
+                            <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+
 
                         </Grid.CommandBindings>
                         <Grid.ColumnDefinitions>
@@ -265,6 +269,7 @@
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="5"
+                                    l:HelpProvider.HelpKey="Tabele"
                                     AutoGenerateColumns="False"
                                     BorderThickness="1"
                                     IsEnabled="{Binding Podaci}"
