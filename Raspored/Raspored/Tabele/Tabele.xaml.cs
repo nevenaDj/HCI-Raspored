@@ -92,6 +92,9 @@ namespace Raspored.Tabele
             DodajDemo.Visibility = Visibility.Collapsed;
             IzmeniDemo.Visibility = Visibility.Collapsed;
             ObrisiDemo.Visibility = Visibility.Collapsed;
+            SoftveriOtvoriDemo.Visibility = Visibility.Collapsed;
+            ButtonFilterDemo.Visibility = Visibility.Collapsed;
+            ButtonPretragaDemo.Visibility = Visibility.Collapsed;
 
             if (Ucionice.Count > 0)
             {
@@ -287,24 +290,37 @@ namespace Raspored.Tabele
            
             demoThread = new Thread(new ThreadStart(popuni));
             demoThread.Start();
-            lockO = new Object();
             SacuvajUcionicu.Visibility = Visibility.Collapsed;
             OdusatniUcionica.Visibility = Visibility.Collapsed;
             DodajButton.Visibility = Visibility.Collapsed;
             IzmeniButton.Visibility = Visibility.Collapsed;
             ObrisiButton.Visibility = Visibility.Collapsed;
+            SoftveriOtvori.Visibility = Visibility.Collapsed;
+            ButtonPretraga.Visibility = Visibility.Collapsed;
+            ButtonFilter.Visibility = Visibility.Collapsed;
 
-
+            Box.IsReadOnly = true;
+            OpisBox.IsReadOnly = true;
+            BrMestaBox.IsReadOnly = true;
+            Box.Background = new SolidColorBrush(Colors.White);
+            OpisBox.Background = new SolidColorBrush(Colors.White);
+            BrMestaBox.Background = new SolidColorBrush(Colors.White);
+           /* Check1.IsEnabled = false;
+            Check2.IsEnabled = false;
+            Check3.IsEnabled = false;
+            Check1.Background = new SolidColorBrush(Colors.White);
+            Check2.Background = new SolidColorBrush(Colors.White);
+            Check3.Background = new SolidColorBrush(Colors.White);
+            */
         }
 
         Thread demoThread;
-        Object lockO;
 
         private void popuni()
         {
             while (true)
             {
-                Thread.Sleep(200);
+                Thread.Sleep(1000);
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
                     if (Ucionice.Count == 4)
@@ -314,7 +330,7 @@ namespace Raspored.Tabele
                         
                     }
                 });
-                Thread.Sleep(800);
+                Thread.Sleep(200);
 
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
@@ -453,7 +469,7 @@ namespace Raspored.Tabele
                 TabSoftver = "True";
                 Podaci = "True";
                 GridUcioniceEnable = "False";
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
             }
         }
 
@@ -663,6 +679,10 @@ namespace Raspored.Tabele
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            GridPretraga.Visibility = Visibility.Collapsed;
+            ButtonPretraga.Visibility = Visibility.Visible;
+            ButtonFilter.Visibility = Visibility.Visible;
+            GridFilter.Visibility = Visibility.Collapsed;
             FocusManager.SetFocusedElement(this, GridUcionice);
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
@@ -761,6 +781,10 @@ namespace Raspored.Tabele
         /***** REZIM ZA IZMENU UCIONICE ****/
         private void RezimIzmeniUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            GridPretraga.Visibility = Visibility.Collapsed;
+            ButtonPretraga.Visibility = Visibility.Visible;
+            ButtonFilter.Visibility = Visibility.Visible;
+            GridFilter.Visibility = Visibility.Collapsed;
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
                 {

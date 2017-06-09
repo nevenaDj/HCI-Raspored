@@ -35,10 +35,7 @@
                 Click="MenuItem_Click"
                 Header="_Raspored"
                 IsEnabled="False" />
-            <MenuItem
-                x:Name="Novi_Raspored"
-                Click="Novi_Raspored_Click"
-                Header="_PravljenjeRasporeda" />
+
             <MenuItem Click="MenuItem_Click_2" Header="_Demo" />
         </Menu>
         <Grid

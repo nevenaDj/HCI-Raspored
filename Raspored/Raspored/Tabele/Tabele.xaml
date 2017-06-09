@@ -255,6 +255,17 @@
 
                                 </Grid>
                                 <Button
+                                    x:Name="ButtonPretragaDemo"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Pretraga
+                                </Button>
+                                <Button
                                     x:Name="ButtonPretraga"
                                     Grid.Row="0"
                                     Grid.Column="4"
@@ -262,7 +273,8 @@
                                     Margin="10,0,2,5"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Click="Button_Click_3">
+                                    Click="Button_Click_3"
+                                    IsEnabled="{Binding EnableDodaj}">
                                     Pretraga
                                 </Button>
                                 <Button
@@ -273,7 +285,19 @@
                                     Margin="0,0,2,5"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
-                                    Click="ButtonFilter_Click">
+                                    Click="ButtonFilter_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Filter
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilterDemo"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    IsEnabled="{Binding EnableDodaj}">
                                     Filter
                                 </Button>
                                 <DataGrid
@@ -659,6 +683,16 @@
                                     Click="SoftveriOtvori_Click">
                                     Prikazi
                                 </Button>
+                                <Button
+                                    x:Name="SoftveriOtvoriDemo"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Height="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top">
+                                    Prikazi
+                                </Button>
                                 <ComboBox
                                     x:Name="CB"
                                     Grid.Row="0"
@@ -679,6 +713,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
+                                    x:Name="Check2"
                                     Grid.Row="3"
                                     Grid.Column="5"
                                     Height="15"
@@ -687,6 +722,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
+                                    x:Name="Check3"
                                     Grid.Row="4"
                                     Grid.Column="5"
                                     Height="15"
