@@ -42,6 +42,7 @@ namespace Raspored.DDrop
             this.rasp = rasp;
             this.citanje_pisanje = citanje_pisanje;
 
+            Ucionice = new ObservableCollection<Ucionica>();
             List<Softver> sof = citanje_pisanje.otvoriSoftver();
             Softveri = new ObservableCollection<Softver>(sof);
             List<Smer> s = citanje_pisanje.otvoriSmer();
@@ -77,12 +78,7 @@ namespace Raspored.DDrop
 
             }
 
-
             Smerovi = new ObservableCollection<Smer>(s);
-
-            List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
-            Ucionice = new ObservableCollection<Ucionica>(u);
-
 
             Korak1Enable = "False";
             Korak2Enable = "False";
@@ -90,14 +86,9 @@ namespace Raspored.DDrop
             Temp = new ObservableCollection<Predmet>();
             Predmeti = new ObservableCollection<Predmet>();
 
-            /* List<Predmet> l = new List<Predmet>();
-             l.Add(new Predmet { Naziv = "1", Oznaka = "1", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-             l.Add(new Predmet { Naziv = "2", Oznaka = "2", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 2 });
-             l.Add(new Predmet { Naziv = "3", Oznaka = "3", VelicinaGrupe = 3, DuzinaTermina = 90, BrojTermina = 4 });
-             l.Add(new Predmet { Naziv = "4", Oznaka = "4", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-             l.Add(new Predmet { Naziv = "5", Oznaka = "5", VelicinaGrupe = 3, DuzinaTermina = 45, BrojTermina = 2 });
-             Studenti = new ObservableCollection<Predmet>(l);*/
             Studenti = new ObservableCollection<Predmet>();
+            Predmet pauza= new Predmet{ Naziv="Pauza", Oznaka="Pauza"};
+            Studenti.Add(pauza);
 
             Termini = new List<List<ObservableCollection<Predmet>>>();
             for (int i = 0; i < 61; i++)
@@ -147,17 +138,45 @@ namespace Raspored.DDrop
 
         private void Korak1_Click(object sender, RoutedEventArgs e)
         {
+
+            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu()) {
+                if (SelectedPredmet.TrebaPametnaTabla)
+                    if (SelectedPredmet.TrebaPametnaTabla != u.ImaPametnaTabla)
+                        continue;
+                if (SelectedPredmet.TrebaProjektor)
+                    if (SelectedPredmet.TrebaProjektor != u.ImaProjektor)
+                        continue;
+                if (SelectedPredmet.TrebaTabla)
+                    if (SelectedPredmet.TrebaTabla != u.ImaTabla)
+                        continue;
+                if (SelectedPredmet.VelicinaGrupe > u.BrojRadnihMesta)
+                    continue;
+                if (SelectedPredmet.Sistem == "Windows")
+                    if (u.Sistem != "Windows" && u.Sistem != "Oba")
+                        continue;
+                if (SelectedPredmet.Sistem == "Linux")
+                    if (u.Sistem != "Linux" && u.Sistem != "Oba")
+                        continue;
+                if (SelectedPredmet.Sistem == "Oba")
+                    if ( u.Sistem != "Oba")
+                        continue;
+                Ucionice.Add(u);
+            }
+              
+            
             Korak1Enable = "False";
             Raspored1.Visibility = Visibility.Collapsed;
             Raspored2.Visibility = Visibility.Visible;
             // Raspored3.Visibility = Visibility.Collapsed;
+
 
         }
 
         private void Korak1_Nazad_Click(object sender, RoutedEventArgs e)
         {
             Korak2Enable = "True";
-            Studenti.Remove(SelectedPredmet);
+            //Studenti.Remove(SelectedPredmet);
+            
             Raspored2.Visibility = Visibility.Visible;
             Raspored3.Visibility = Visibility.Collapsed;
             //TO_DO : ments el a Termini-t
@@ -186,7 +205,25 @@ namespace Raspored.DDrop
         private void Korak2_Click(object sender, RoutedEventArgs e)
         {
             Korak2Enable = "False";
-            Studenti.Add(SelectedPredmet);
+            int broj_termina = 0;
+            List<Predmet> termin = citanje_pisanje.otvoriPredmet();
+            foreach (Predmet p in termin)
+                if (p.Oznaka == SelectedPredmet.Oznaka)
+                {
+                    broj_termina = p.BrojTermina;
+                    break;
+                }
+            //Predme
+            foreach (Predmet ur in rasp.OstaliTermini)
+                if (ur.Oznaka == SelectedPredmet.Oznaka)
+                {
+                    if (broj_termina > ur.BrojTermina)
+                    {
+                        Studenti.Add(SelectedPredmet);
+                    }
+                    break;
+                }
+            
             Raspored2.Visibility = Visibility.Collapsed;
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
@@ -204,7 +241,12 @@ namespace Raspored.DDrop
                     x = 1;
                 }
             if (x == 0)
-                rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
+            {
+                
+                    rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
+            }
+            //
+            
 
         }
 
@@ -234,9 +276,13 @@ namespace Raspored.DDrop
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            startPoint = e.GetPosition(null);
-            lv = sender as ListView;
-      
+            startPoint = e.GetPosition(null); 
+            lv = sender as ListView; 
+            String v = lv.Name.ToString(); 
+            String r = v.Substring(4, 1); 
+            from_r = Convert.ToInt32(r); 
+            String c = v.Substring(2, 2); 
+            from_c = Convert.ToInt32(c); 
         }
 
         private void ListView_PreviewMouseLeftButtonDown2(object sender, MouseButtonEventArgs e)
@@ -336,8 +382,16 @@ namespace Raspored.DDrop
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
-                Predmet broj_termina = citanje_pisanje.nadjiPredmet(student.Oznaka);
-              //  int broj_termina = student.BrojTermina;
+                int broj_termina = 0;
+                List<Predmet> termin = citanje_pisanje.otvoriPredmet();
+                foreach (Predmet p in termin)
+                    if (p.Oznaka == student.Oznaka)
+                    {
+                        broj_termina = p.BrojTermina;
+                        break;
+                    }
+
+
                 if (Termini[c1][r1].Count == 0)
                 {
                     if (fromList)
@@ -354,12 +408,14 @@ namespace Raspored.DDrop
                             }
                         if (empty)
                         {
-                            foreach (Predmet p in rasp.OstaliTermini)
+                            if (student.Oznaka != "Pauza")
+                            {
+                                foreach (Predmet p in rasp.OstaliTermini)
                                 if (p.Oznaka == student.Oznaka)
                                 {
 
                                     p.BrojTermina += cas;
-                                    if (p.BrojTermina >= broj_termina.BrojTermina)
+                                    if (p.BrojTermina >= broj_termina)
                                     {
                                         Studenti.Remove(student);
                                     }
@@ -372,16 +428,23 @@ namespace Raspored.DDrop
                                 Predmet termini = student;
                                 termini.BrojTermina = cas;
                                 rasp.OstaliTermini.Add(termini);
-                                if (termini.BrojTermina >= broj_termina.BrojTermina)
+                                if (termini.BrojTermina >= broj_termina)
                                 {
                                     Studenti.Remove(student);
                                 }
 
                             }
-                            for (int i = 0; i < student.DuzinaTermina * 3; i++)
-                            {
-                                Termini[c1 + i][r1].Add(student);
+                            
+                                for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                                {
+                                    Termini[c1 + i][r1].Add(student);
+                                }
                             }
+                            else
+                            {
+                                Termini[c1][r1].Add(student);
+                            }
+                            
                         }
 
                     }
@@ -404,7 +467,7 @@ namespace Raspored.DDrop
                                 {
 
                                     p.BrojTermina += cas;
-                                    if (p.BrojTermina >= broj_termina.BrojTermina)
+                                    if (p.BrojTermina >= broj_termina)
                                     {
                                         Temp.Remove(student);
                                     }
@@ -417,15 +480,22 @@ namespace Raspored.DDrop
                                 Predmet termini = student;
                                 termini.BrojTermina = cas;
                                 rasp.OstaliTermini.Add(termini);
-                                if (termini.BrojTermina >= broj_termina.BrojTermina)
+                                if (termini.BrojTermina >= broj_termina)
                                 {
                                     Temp.Remove(student);
                                 }
 
                             }
-                            for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                            if (student.Oznaka != "Pauza")
                             {
-                                Termini[c1 + i][r1].Add(student);
+                                for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                                {
+                                    Termini[c1 + i][r1].Add(student);
+                                }
+                            }
+                            else
+                            {
+                                Termini[c1][r1].Add(student);
                             }
                         }
 
@@ -436,40 +506,48 @@ namespace Raspored.DDrop
                         { 
                         int i = 0;
                         int x = 0;
-                        while (true)
-                        {
-
-                            foreach (Predmet p in Termini[from_c - i - 1][from_r])
+                            while (true)
                             {
-                                if (p.Naziv != student.Naziv)
-                                    x = 1;
-                            }
-                            // MessageBox.Show("" + x);
-                            if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
-                                break;
-                            i++;
-                        }
-
-                            bool empty = true;
-                            for (int k = 0; k < student.DuzinaTermina * 3; k++)
-                                if (Termini[c1 + k][r1].Count != 0)
+                                if (student.Oznaka != "Pauza")
                                 {
-                                    empty = false;
-                                    break;
+                                    foreach (Predmet p in Termini[from_c - i - 1][from_r])
+                                    {
+                                        if (p.Naziv != student.Naziv)
+                                            x = 1;
+                                    }
+                                    // MessageBox.Show("" + x);
+                                    if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
+                                        break;
+                                    i++;
                                 }
-                            if (empty)
-                            {
-                                for (int j = 0; j < student.DuzinaTermina * 3; j++)
-                        {
-                            Termini[from_c - i + j][from_r].Remove(student);
-                            lv.Background = Brushes.White;
-                        }
-                        listView.Background = Brushes.LightGreen;
-                            
+
+                                bool empty = true;
                                 for (int k = 0; k < student.DuzinaTermina * 3; k++)
+                                    if (Termini[c1 + k][r1].Count != 0)
+                                    {
+                                        empty = false;
+                                        break;
+                                    }
+                                if (empty)
                                 {
-                                    Termini[c1 + k][r1].Add(student);
+                                    for (int j = 0; j < student.DuzinaTermina * 3; j++)
+                                    {
+                                        Termini[from_c - i + j][from_r].Remove(student);
+                                        lv.Background = Brushes.White;
+                                    }
+                                    listView.Background = Brushes.LightGreen;
+                                        for (int k = 0; k < student.DuzinaTermina * 3; k++)
+                                        {
+                                            Termini[c1 + k][r1].Add(student);
+                                        }
+
                                 }
+                                else
+                                {
+                                    Termini[from_c ][from_r].Remove(student);
+                                    Termini[c1][r1].Add(student);
+                                }
+
                             }
                     }
                     // Termini[c1][r1].Add(student);
@@ -922,6 +1000,7 @@ namespace Raspored.DDrop
             Raspored1.Visibility = Visibility.Visible;
             Raspored2.Visibility = Visibility.Collapsed;
             Korak1Enable = "True";
+            Ucionice.ToList().All(i => Ucionice.Remove(i));
         }
     }
 }

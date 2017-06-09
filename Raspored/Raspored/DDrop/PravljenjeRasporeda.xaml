@@ -386,7 +386,7 @@
                         Drop="ListView_Delete"
                         ItemsSource="{Binding Delete}"
                         MouseMove="ListView_MouseMove"
-                        PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown">
+                        PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown3">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
