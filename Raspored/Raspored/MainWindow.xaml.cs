@@ -27,14 +27,17 @@ namespace Raspored
     {
         private Model.Raspored raspored;
         Tabele.Tabele w;
+        CitanjeIPisanje citanje_pisanje;
         public MainWindow()
         {
             InitializeComponent();
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
+
+            citanje_pisanje = new CitanjeIPisanje();
             
             RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
-            w = new Tabele.Tabele();
+            //w = new Tabele.Tabele();
             RegexOptions options = RegexOptions.None;
             Regex regex = new Regex("[\r\n]{3,}", options);
             string recentText = File.ReadAllText("../../Save/recent.txt");
@@ -50,7 +53,7 @@ namespace Raspored
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: ocitanje rasporeda iz fajla
                 //raspored = new Model.Raspored();
-                raspored = otvoriRaspored(recentFile);
+                raspored = citanje_pisanje.otvoriRaspored(recentFile);
                 raspored.File = recentFile;
 
             } catch (Exception e)
@@ -94,7 +97,7 @@ namespace Raspored
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: raspored -> citanjeIz fajla
-                raspored = otvoriRaspored(filepath);
+                raspored = citanje_pisanje.otvoriRaspored(filepath);
             }
             return true;
         }
@@ -139,7 +142,7 @@ namespace Raspored
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: raspored -> citanjeIz fajla
-                raspored = otvoriRaspored(filename);
+                raspored = citanje_pisanje.otvoriRaspored(filename);
                 //raspored = new Model.Raspored();
             }
         }
@@ -171,7 +174,7 @@ namespace Raspored
             MessageBox.Show(listView);
         }
 
-        Model.Raspored otvoriRaspored(String fileName)
+       /* Model.Raspored otvoriRaspored(String fileName)
         {
             Model.Raspored rasp = new Model.Raspored();
             rasp.File = fileName;
@@ -231,7 +234,7 @@ namespace Raspored
                 
             }
             //return rasp;
-        }
+        }*/
 
         private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
         {

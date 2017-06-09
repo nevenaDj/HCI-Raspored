@@ -58,6 +58,7 @@
     <Compile Include="DDrop\PravljenjeRasporeda.xaml.cs">
       <DependentUpon>PravljenjeRasporeda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CitanjeIPisanje.cs" />
     <Compile Include="Model\Raspored.cs" />
     <Compile Include="Model\UcionicaRaspore.cs" />
     <Compile Include="Tabele\IzborSmera.xaml.cs">
