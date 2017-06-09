@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Raspored.Model
 {
-    class CitanjeIPisanje
+    public class CitanjeIPisanje
     {
         public CitanjeIPisanje()
         {

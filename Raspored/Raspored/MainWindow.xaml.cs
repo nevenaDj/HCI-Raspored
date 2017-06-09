@@ -75,7 +75,7 @@ namespace Raspored
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var r = new DDrop.PravljenjeRasporeda(raspored);
+            var r = new DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
             r.sacuvajRaspored();
 
@@ -238,7 +238,7 @@ namespace Raspored
 
         private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
         {
-            var r = new Raspored.DDrop.PravljenjeRasporeda(raspored);
+            var r = new Raspored.DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
             r.sacuvajRaspored();
         }

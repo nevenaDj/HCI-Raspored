@@ -35,17 +35,18 @@ namespace Raspored.DDrop
             this.rasp = new Model.Raspored();
         }
 
-        public PravljenjeRasporeda(Model.Raspored rasp)
+        public PravljenjeRasporeda(Model.Raspored rasp, CitanjeIPisanje citanje_pisanje)
         {
             InitializeComponent();
             this.DataContext = this;
             this.rasp = rasp;
+            
 
-            List<Softver> sof = otvoriSoftver();
+            List<Softver> sof = citanje_pisanje.otvoriSoftver();
             Softveri = new ObservableCollection<Softver>(sof);
-            List<Smer> s = otvoriSmer();
+            List<Smer> s = citanje_pisanje.otvoriSmer();
             Smerovi = new ObservableCollection<Smer>(s);
-            List<Predmet> p = otvoriPredmet();
+            List<Predmet> p = citanje_pisanje.otvoriPredmet();
             foreach (Smer smer in s)
             {
                 foreach (Predmet pred in p)
@@ -59,7 +60,7 @@ namespace Raspored.DDrop
 
             Smerovi = new ObservableCollection<Smer>(s);
 
-            List<Ucionica> u = otvoriUcionicu();
+            List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
             Ucionice = new ObservableCollection<Ucionica>(u);
 
 
