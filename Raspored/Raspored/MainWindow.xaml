@@ -9,8 +9,12 @@
     Title="MainWindow"
     Width="525"
     Height="350"
+    local:HelpProvider.HelpKey="Forma"
     Activated="HandleWindowActivated"
     mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datoteka">
@@ -35,6 +39,7 @@
                 x:Name="Novi_Raspored"
                 Click="Novi_Raspored_Click"
                 Header="_PravljenjeRasporeda" />
+            <MenuItem Click="MenuItem_Click_2" Header="_Demo" />
         </Menu>
         <Grid
             HorizontalAlignment="Stretch"
@@ -70,6 +75,7 @@
                     Grid.Column="0"
                     Width="50"
                     Height="20"
+                    local:HelpProvider.HelpKey="Forma"
                     Click="Button_Click">
                     Novi
                 </Button>

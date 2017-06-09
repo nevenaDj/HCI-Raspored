@@ -18,6 +18,7 @@ using Raspored.Tabele;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace Raspored.Tabele
 {
@@ -145,7 +146,265 @@ namespace Raspored.Tabele
             OS.Add("Linux");
             OS.Add("Ostalo");
 
+            demoThread = null;
 
+
+        }
+
+        public Tabele(string demo)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+
+
+            //List<Smer> s = new List<Smer>(); 
+            List<Smer> s = otvoriSmer();
+            Smerovi = new ObservableCollection<Smer>(s);
+
+            List<Softver> sf = new List<Softver>();
+            //List<Softver> sf = otvoriSoftver();
+            Softveri = new ObservableCollection<Softver>(sf);
+
+            // List<Predmet> p = new List<Predmet>();
+            List<Predmet> p = new List<Predmet>();
+            p.Add(new Predmet { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "HCI (SIIT)", DuzinaTermina = 2, BrojTermina = 6, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = true, TrebaPametnaTabla = false, TrebaProjektor = true });
+            p.Add(new Predmet { Naziv = "Internet softverske arhitekture", Oznaka = "ISA", Skracenica = "ISA (SIIT)", DuzinaTermina = 2, BrojTermina = 5, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = false, TrebaPametnaTabla = false, TrebaProjektor = true });
+            Predmeti = new ObservableCollection<Predmet>(p);
+
+            List<Ucionica> u = new List<Ucionica>();
+            //List<Ucionica> u = otvoriUcionicu();
+            u.Add(new Ucionica{ Oznaka = "L1", BrojRadnihMesta=16, ImaPametnaTabla=false, ImaTabla=true, ImaProjektor = true});
+            u.Add(new Ucionica { Oznaka = "L2", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+            u.Add(new Ucionica { Oznaka = "L3", BrojRadnihMesta = 16, ImaPametnaTabla = false, ImaTabla = true, ImaProjektor = true });
+
+            Ucionice = new ObservableCollection<Ucionica>(u);
+            SveUcionice = new ObservableCollection<Ucionica>(u);
+
+
+
+            SacuvajUcionicu.Visibility = Visibility.Hidden;
+            SacuvajPredmet.Visibility = Visibility.Hidden;
+            SacuvajSmer.Visibility = Visibility.Hidden;
+            SacuvajSoftver.Visibility = Visibility.Hidden;
+
+            OdusatniUcionica.Visibility = Visibility.Hidden;
+            OdustaniPredmet.Visibility = Visibility.Hidden;
+            OdustaniSmer.Visibility = Visibility.Hidden;
+            OdustaniSoftver.Visibility = Visibility.Hidden;
+
+            GridUcionice.IsEnabled = false;
+            GridSmer.IsEnabled = false;
+            GridPredmeti.IsEnabled = false;
+            GridSoftver.IsEnabled = false;
+
+            IzmeniSoftver.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
+            IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
+            IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
+
+            SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
+            IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
+
+            if (Ucionice.Count > 0)
+            {
+                SelectedUcionica = Ucionice[0];
+
+            }
+            else
+            {
+
+                EnableIzbrisiUcionicu = "False";
+                EnablePromeniUcionicu = "False";
+            }
+
+            if (Predmeti.Count > 0)
+            {
+                SelectedPredmet = Predmeti[0];
+            }
+            else
+            {
+                EnablePromeniPredmet = "False";
+                EnableIzbrisiPredmet = "False";
+            }
+
+            if (Softveri.Count > 0)
+            {
+                SelectedSoftver = Softveri[0];
+            }
+            else
+            {
+                EnablePromeniSoftver = "False";
+                EnableIzbrisiSoftver = "False";
+            }
+
+            if (Smerovi.Count > 0)
+            {
+                SelectedSmer = Smerovi[0];
+            }
+            else
+            {
+                EnableIzbrisiSmer = "False";
+                EnablePromeniSmer = "False";
+            }
+            SelectedTabUcionice = true;
+
+            Projektor = new ObservableCollection<string>();
+            Projektor.Add("");
+            Projektor.Add("Ima");
+            Projektor.Add("Nema");
+            Tabla = new ObservableCollection<string>();
+            Tabla.Add("");
+            Tabla.Add("Ima");
+            Tabla.Add("Nema");
+            PametnaTabla = new ObservableCollection<string>();
+            PametnaTabla.Add("");
+            PametnaTabla.Add("Ima");
+            PametnaTabla.Add("Nema");
+            OS = new ObservableCollection<string>();
+            OS.Add("");
+            OS.Add("Windows");
+            OS.Add("Linux");
+            OS.Add("Ostalo");
+
+          
+            _greskeDodavanje = 0;
+            _greskeIzmena = -100;
+            SelectedUcionica = new Ucionica();
+           
+           
+           
+            demoThread = new Thread(new ThreadStart(popuni));
+            demoThread.Start();
+            lockO = new Object();
+
+
+        }
+
+        Thread demoThread;
+        Object lockO;
+
+        private void popuni()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    SacuvajUcionicu.Visibility = Visibility.Visible;
+                    OdusatniUcionica.Visibility = Visibility.Visible;
+                    
+                    GridUcionice.IsEnabled = true;
+                    if (Ucionice.Count == 4)
+                    {
+                        Ucionice.Remove(Ucionice[Ucionice.Count-1]);
+                        SelectedUcionica = new Ucionica();
+                    }
+                    
+                });
+                GridUcioniceEnable = "True";
+                EnablePromeniUcionicu = "False";
+                EnableIzbrisiUcionicu = "False";
+                EnableDodaj = "False";
+                TabPredmeti = "False";
+                TabSmer = "False";
+                TabSoftver = "False";
+                Podaci = "False";
+                Thread.Sleep(100);
+                SelectedUcionica.Oznaka = "";
+                SelectedUcionica.Opis = "";
+                SelectedUcionica.BrojRadnihMesta = 16;
+                SelectedUcionica.Sistem = "";
+                SelectedUcionica.ImaPametnaTabla = false;
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    Box.BorderBrush = new SolidColorBrush(Colors.Blue);
+                });
+                SelectedUcionica.Oznaka = "L";
+                Thread.Sleep(300);
+                SelectedUcionica.Oznaka = "L4";
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    Box.BorderBrush = new SolidColorBrush(Colors.Silver);
+                });
+                Thread.Sleep(200);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    OpisBox.BorderBrush = new SolidColorBrush(Colors.Blue);
+                });
+                SelectedUcionica.Opis = "n";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "no";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nov";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova u";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova uc";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova uci";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova ucio";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova ucion";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova ucioni";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova ucionic";
+                Thread.Sleep(300);
+                SelectedUcionica.Opis = "nova ucionica";
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    OpisBox.BorderBrush = new SolidColorBrush(Colors.Silver);
+                });
+                Thread.Sleep(200);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    BrMestaBox.BorderBrush = new SolidColorBrush(Colors.Blue);
+                });
+                Thread.Sleep(300);
+                SelectedUcionica.BrojRadnihMesta = 3;
+                Thread.Sleep(300);
+                SelectedUcionica.BrojRadnihMesta = 32;
+                Thread.Sleep(600);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    BrMestaBox.BorderBrush = new SolidColorBrush(Colors.Silver);
+                });
+                Thread.Sleep(600);
+                Thread.Sleep(600);
+                SelectedUcionica.Sistem = "Windows";
+                Thread.Sleep(600);
+                SelectedUcionica.ImaPametnaTabla = true;
+                Thread.Sleep(600);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    Ucionice.Add(SelectedUcionica);
+                    GridUcionice.IsEnabled = false;
+                    SacuvajUcionicu.Visibility = Visibility.Hidden;
+                    OdusatniUcionica.Visibility = Visibility.Hidden;
+                   
+                });
+               
+                
+                EnablePromeniUcionicu = "True";
+                EnableIzbrisiUcionicu = "True";
+                EnableDodaj = "True";
+                TabPredmeti = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+                Podaci = "True";
+                GridUcioniceEnable = "False";
+                Thread.Sleep(1000);
+            }
         }
 
         /** KOLEKCIJE **/
@@ -196,6 +455,24 @@ namespace Raspored.Tabele
                 }
             }
         }
+
+        private string _gridUcioniceEnable;
+        public string GridUcioniceEnable
+        {
+            get
+            {
+                return _gridUcioniceEnable;
+            }
+            set
+            {
+                if (_gridUcioniceEnable != value)
+                {
+                    _gridUcioniceEnable = value;
+                    OnPropertyChanged("GridUcioniceEnable");
+                }
+            }
+        }
+
         /**** ENABLE ZA TABOVE ****/
         private string _tabUcionice;
         public string TabUcionice
@@ -336,7 +613,7 @@ namespace Raspored.Tabele
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            FocusManager.SetFocusedElement(this, GridUcionice);
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
                 {
@@ -384,6 +661,7 @@ namespace Raspored.Tabele
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             OdusatniUcionica.Visibility = Visibility.Hidden;
             GridUcionice.IsEnabled = false;
+            FocusManager.SetFocusedElement(this, dgrMainUcionica);
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
@@ -411,10 +689,6 @@ namespace Raspored.Tabele
             }
 
             sacuvajUcionicu();
-
-
-
-
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
 
             e.Handled = true;
@@ -1612,6 +1886,7 @@ namespace Raspored.Tabele
         {
 
             this.Focus();
+            FocusManager.SetFocusedElement(this,dgrMainUcionica);
 
         }
 
@@ -2290,5 +2565,97 @@ namespace Raspored.Tabele
             }
 
         }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[1]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (SelectedTabPredmeti && str == "Tabele")
+                {
+                    str = "PrikazPredmeta";
+                }
+                if (SelectedTabSmer && str == "Tabele")
+                {
+                    str = "PrikazSmera";
+                }
+
+                if (SelectedTabSoftver && str == "Tabele")
+                {
+                    str = "PrikazSoftvera";
+                }
+
+                if (str == "index")
+                {
+                    if (SelectedTabUcionice)
+                    {
+                        str = "Tabele";
+                    }else if (SelectedTabPredmeti)
+                    {
+                        str = "PrikazPredmeta";
+                    }else if (SelectedTabSmer)
+                    {
+                        str = "PrikazSmera";
+                    }else if (SelectedTabSoftver)
+                    {
+                        str = "PrikazSoftvera";
+                    }
+                }
+
+                if (str == "Tab")
+                {
+                    if (SelectedTabUcionice)
+                    {
+                        str = "Tabele";
+                    }else if (SelectedTabPredmeti)
+                    {
+                        str = "PrikazPredmeta";
+
+                    }else if (SelectedTabSmer)
+                    {
+                        str = "PrikazSmera";
+                    }else if (SelectedTabSoftver)
+                    {
+                        str = "PrikazSoftvera";
+                    }
+                }
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedTabPredmeti)
+            {
+                FocusManager.SetFocusedElement(this,TabPr);
+
+            }
+            else if (SelectedTabSmer)
+            {
+                FocusManager.SetFocusedElement(this, dgrMainSmer);
+
+            }
+            else if (SelectedTabSoftver)
+            {
+                FocusManager.SetFocusedElement(this, dgrMainSoftver);
+
+            }
+            else if (SelectedTabUcionice)
+            {
+                FocusManager.SetFocusedElement(this,TabUc);
+
+            }
+
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (demoThread != null)
+            {
+                demoThread.Abort();
+            }
+
+        }
     }
+
 }
