@@ -266,6 +266,11 @@ namespace Raspored
             Title = param;
         }
 
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Tabele.Tabele t = new Tabele.Tabele("demo");
+            t.ShowDialog();
 
+        }
     }
 }

@@ -15,6 +15,7 @@
     MinHeight="650"
     l:HelpProvider.HelpKey="Tab"
     Activated="HandleWindowActivated"
+    Closing="Window_Closing"
     FontSize="16"
     Top="50"
     mc:Ignorable="d">
@@ -543,12 +544,14 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
+                                    x:Name="OpisBox"
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
+                                    x:Name="BrMestaBox"
                                     Grid.Row="3"
                                     Grid.Column="2"
                                     Margin="0,0,0,0"
@@ -616,6 +619,7 @@
                                     SelectedValue="{Binding Sistem}" />
 
                                 <CheckBox
+                                    x:Name="Check1"
                                     Grid.Row="2"
                                     Grid.Column="5"
                                     Height="15"
