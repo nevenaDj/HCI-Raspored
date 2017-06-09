@@ -255,6 +255,17 @@
 
                                 </Grid>
                                 <Button
+                                    x:Name="ButtonPretragaDemo"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Pretraga
+                                </Button>
+                                <Button
                                     x:Name="ButtonPretraga"
                                     Grid.Row="0"
                                     Grid.Column="4"
@@ -262,7 +273,8 @@
                                     Margin="10,0,2,5"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Click="Button_Click_3">
+                                    Click="Button_Click_3"
+                                    IsEnabled="{Binding EnableDodaj}">
                                     Pretraga
                                 </Button>
                                 <Button
@@ -273,7 +285,19 @@
                                     Margin="0,0,2,5"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
-                                    Click="ButtonFilter_Click">
+                                    Click="ButtonFilter_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Filter
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilterDemo"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    IsEnabled="{Binding EnableDodaj}">
                                     Filter
                                 </Button>
                                 <DataGrid
@@ -342,6 +366,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
+                                    x:Name="DodajButton"
                                     Grid.Row="2"
                                     Grid.Column="2"
                                     Width="150"
@@ -353,6 +378,17 @@
                                     Dodaj novu učionicu
                                 </Button>
                                 <Button
+                                    x:Name="DodajDemo"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    Width="150"
+                                    Margin="0,5,5,15"
+                                    HorizontalAlignment="Right"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Dodaj novu učionicu
+                                </Button>
+                                <Button
+                                    x:Name="IzmeniButton"
                                     Grid.Row="2"
                                     Grid.Column="3"
                                     Width="120"
@@ -364,6 +400,17 @@
                                     Izmeni učionicu
                                 </Button>
                                 <Button
+                                    x:Name="IzmeniDemo"
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    Width="120"
+                                    Margin="0,5,5,15"
+                                    HorizontalAlignment="Right"
+                                    IsEnabled="{Binding EnablePromeniUcionicu}">
+                                    Izmeni učionicu
+                                </Button>
+                                <Button
+                                    x:Name="ObrisiButton"
                                     Grid.Row="2"
                                     Grid.Column="4"
                                     Width="120"
@@ -371,6 +418,16 @@
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="Tabele"
                                     Click="IzbrisiUcionicu_Click"
+                                    IsEnabled="{Binding EnableIzbrisiUcionicu}">
+                                    Obriši učionicu
+                                </Button>
+                                <Button
+                                    x:Name="ObrisiDemo"
+                                    Grid.Row="2"
+                                    Grid.Column="4"
+                                    Width="120"
+                                    Margin="0,5,5,15"
+                                    HorizontalAlignment="Right"
                                     IsEnabled="{Binding EnableIzbrisiUcionicu}">
                                     Obriši učionicu
                                 </Button>
@@ -483,6 +540,15 @@
                                     Margin="20,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
+                                <Button
+                                    x:Name="SacuvajUcionicuDemo"
+                                    Grid.Row="7"
+                                    Grid.Column="5"
+                                    Width="120"
+                                    Margin="0,5,5,0"
+                                    HorizontalAlignment="Right">
+                                    Dodaj ucionicu
+                                </Button>
 
 
                                 <Button
@@ -520,6 +586,15 @@
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Click="OdustaniUcionica_Click">
+                                    Odustani
+                                </Button>
+                                <Button
+                                    x:Name="OdusatniUcionicaDemo"
+                                    Grid.Row="7"
+                                    Grid.Column="6"
+                                    Width="120"
+                                    Margin="0,5,10,0"
+                                    HorizontalAlignment="Right">
                                     Odustani
                                 </Button>
                                 <Button
@@ -608,6 +683,16 @@
                                     Click="SoftveriOtvori_Click">
                                     Prikazi
                                 </Button>
+                                <Button
+                                    x:Name="SoftveriOtvoriDemo"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Height="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top">
+                                    Prikazi
+                                </Button>
                                 <ComboBox
                                     x:Name="CB"
                                     Grid.Row="0"
@@ -628,6 +713,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
+                                    x:Name="Check2"
                                     Grid.Row="3"
                                     Grid.Column="5"
                                     Height="15"
@@ -636,6 +722,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
+                                    x:Name="Check3"
                                     Grid.Row="4"
                                     Grid.Column="5"
                                     Height="15"
