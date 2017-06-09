@@ -336,7 +336,7 @@ namespace Raspored.Tabele
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            FocusManager.SetFocusedElement(this, GridUcionice);
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
                 {
@@ -384,6 +384,7 @@ namespace Raspored.Tabele
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             OdusatniUcionica.Visibility = Visibility.Hidden;
             GridUcionice.IsEnabled = false;
+            FocusManager.SetFocusedElement(this, dgrMainUcionica);
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
@@ -411,10 +412,6 @@ namespace Raspored.Tabele
             }
 
             sacuvajUcionicu();
-
-
-
-
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
 
             e.Handled = true;
@@ -2297,9 +2294,84 @@ namespace Raspored.Tabele
             if (focusedControl is DependencyObject)
             {
                 string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (SelectedTabPredmeti && str == "Tabele")
+                {
+                    str = "PrikazPredmeta";
+                }
+                if (SelectedTabSmer && str == "Tabele")
+                {
+                    str = "PrikazSmera";
+                }
+
+                if (SelectedTabSoftver && str == "Tabele")
+                {
+                    str = "PrikazSoftvera";
+                }
+
+                if (str == "index")
+                {
+                    if (SelectedTabUcionice)
+                    {
+                        str = "Tabele";
+                    }else if (SelectedTabPredmeti)
+                    {
+                        str = "PrikazPredmeta";
+                    }else if (SelectedTabSmer)
+                    {
+                        str = "PrikazSmera";
+                    }else if (SelectedTabSoftver)
+                    {
+                        str = "PrikazSoftvera";
+                    }
+                }
+
+                if (str == "Tab")
+                {
+                    if (SelectedTabUcionice)
+                    {
+                        str = "Tabele";
+                    }else if (SelectedTabPredmeti)
+                    {
+                        str = "PrikazPredmeta";
+
+                    }else if (SelectedTabSmer)
+                    {
+                        str = "PrikazSmera";
+                    }else if (SelectedTabSoftver)
+                    {
+                        str = "PrikazSoftvera";
+                    }
+                }
                 HelpProvider.ShowHelp(str, this);
             }
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedTabPredmeti)
+            {
+                FocusManager.SetFocusedElement(this,TabPr);
+
+            }
+            else if (SelectedTabSmer)
+            {
+                FocusManager.SetFocusedElement(this, dgrMainSmer);
+
+            }
+            else if (SelectedTabSoftver)
+            {
+                FocusManager.SetFocusedElement(this, dgrMainSoftver);
+
+            }
+            else if (SelectedTabUcionice)
+            {
+                FocusManager.SetFocusedElement(this,TabUc);
+
+            }
+
+        }
+
+       
     }
 
 }

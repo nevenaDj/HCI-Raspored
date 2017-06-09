@@ -37,5 +37,17 @@ namespace Raspored
             HelpViewer hh = new HelpViewer(key, originator);
             hh.Show();
         }
+
+        public static void ShowHelp(string key, Raspored.Tabele.IzborSmera originator)
+        {
+            HelpViewer hh = new HelpViewer(key, originator);
+            hh.Show();
+        }
+
+        public static void ShowHelp(string key, Raspored.Tabele.SoftveriOtvori originator)
+        {
+            HelpViewer hh = new HelpViewer(key, originator);
+            hh.Show();
+        }
     }
 }

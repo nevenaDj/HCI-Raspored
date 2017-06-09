@@ -13,6 +13,7 @@
     Height="650"
     MinWidth="1100"
     MinHeight="650"
+    l:HelpProvider.HelpKey="Tab"
     Activated="HandleWindowActivated"
     FontSize="16"
     Top="50"
@@ -35,10 +36,11 @@
             CanExecute="DodajSoftver_CanExecute"
             Command="local:Komande.Novi"
             Executed="DodajSoftver_Executed" />
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
     </Window.CommandBindings>
     <Grid x:Name="Proba">
         <Grid>
-            <TabControl>
+            <TabControl SelectionChanged="TabControl_SelectionChanged">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -75,13 +77,20 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem IsEnabled="{Binding TabUcionice}" IsSelected="{Binding SelectedTabUcionice}">
+                <TabItem
+                    x:Name="TabUc"
+                    l:HelpProvider.HelpKey="Tabele"
+                    IsEnabled="{Binding TabUcionice}"
+                    IsSelected="{Binding SelectedTabUcionice}">
+                    <TabItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+                    </TabItem.CommandBindings>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Učionica" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid l:HelpProvider.HelpKey="Tabele">
+                    <Grid>
                         <Grid.CommandBindings>
                             <CommandBinding
                                 CanExecute="RezimIzmeniUcionicu_CanExecute"
@@ -93,8 +102,9 @@
 
                         </Grid.CommandBindings>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="71*" />
-                            <ColumnDefinition Width="422*" />
+                            <ColumnDefinition Width="39*" />
+                            <ColumnDefinition Width="13*" />
+                            <ColumnDefinition Width="310*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -105,13 +115,14 @@
                         <Border
                             Grid.Row="1"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Padding="8"
+                            l:HelpProvider.HelpKey="Tabele"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid x:Name="Grid1">
+                            <Grid x:Name="Grid1" l:HelpProvider.HelpKey="Tabele">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -279,42 +290,51 @@
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
 
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
+                                        <DataGridTemplateColumn
+                                            Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
+                                            Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Oznaka}" />
+                                                        <TextBlock l:HelpProvider.HelpKey="Tabele" Text="{Binding Oznaka}" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding Opis}"
                                             CanUserSort="False"
                                             Header="Opis" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding BrojRadnihMesta}"
                                             CanUserSort="False"
                                             Header="Broj radnih mesta" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding Sistem}"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding ImaTabla}"
                                             CanUserSort="False"
                                             Header="Ima tablu" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding ImaProjektor}"
                                             CanUserSort="False"
                                             Header="Ima projektor" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding ImaPametnaTabla}"
                                             CanUserSort="False"
                                             Header="Ima pametnu tablu" />
@@ -326,6 +346,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="Tabele"
                                     Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novu učionicu
@@ -336,6 +357,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="Tabele"
                                     Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniUcionicu}">
                                     Izmeni učionicu
@@ -346,6 +368,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="Tabele"
                                     Click="IzbrisiUcionicu_Click"
                                     IsEnabled="{Binding EnableIzbrisiUcionicu}">
                                     Obriši učionicu
@@ -355,8 +378,9 @@
                         <Border
                             Grid.Row="2"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Padding="20"
+                            l:HelpProvider.HelpKey="DodavanjeUcionica"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
@@ -364,6 +388,7 @@
                             <Grid
                                 x:Name="GridUcionice"
                                 Margin="10"
+                                l:HelpProvider.HelpKey="DodavanjeUcionica"
                                 DataContext="{Binding Path=SelectedUcionica, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
 
 
@@ -466,6 +491,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Command="local:Komande.Dodavanje"
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Dodaj ucionicu
@@ -478,6 +504,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Command="local:Komande.Izmena"
                                     Visibility="{Binding VisibleSacuvaj}">
                                     Sacuvaj izmenu
@@ -490,6 +517,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Click="OdustaniUcionica_Click">
                                     Odustani
                                 </Button>
@@ -500,6 +528,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Click="IzmenaOdustaniUcionica_Click">
                                     Ponisti izmenu
                                 </Button>
@@ -511,16 +540,19 @@
                                     Width="119"
                                     Margin="0,0,0,4"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="2"
                                     Margin="0,0,0,0"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -569,6 +601,7 @@
                                     Height="25"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Click="SoftveriOtvori_Click">
                                     Prikazi
                                 </Button>
@@ -578,6 +611,7 @@
                                     Grid.Column="5"
                                     Width="200"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     ItemsSource="{Binding Sistemi}"
                                     SelectedValue="{Binding Sistem}" />
 
@@ -587,6 +621,7 @@
                                     Height="15"
                                     Margin="0,5"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaProjektor}" />
                                 <CheckBox
                                     Grid.Row="3"
@@ -594,6 +629,7 @@
                                     Height="15"
                                     Margin="0,5"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaTabla}" />
                                 <CheckBox
                                     Grid.Row="4"
@@ -601,19 +637,27 @@
                                     Height="15"
                                     Margin="0,5"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaPametnaTabla}" />
                             </Grid>
                         </Border>
                     </Grid>
                 </TabItem>
 
-                <TabItem IsEnabled="{Binding TabPredmeti}" IsSelected="{Binding SelectedTabPredmeti}">
+                <TabItem
+                    x:Name="TabPr"
+                    l:HelpProvider.HelpKey="PrikazPredmeta"
+                    IsEnabled="{Binding TabPredmeti}"
+                    IsSelected="{Binding SelectedTabPredmeti}">
+                    <TabItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+                    </TabItem.CommandBindings>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Predmet" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid l:HelpProvider.HelpKey="PrikazPredmeta">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="47*" />
                             <ColumnDefinition Width="939*" />
@@ -625,16 +669,18 @@
                         <Border
                             Grid.ColumnSpan="2"
                             Padding="8"
+                            l:HelpProvider.HelpKey="PrikazPredmeta"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid>
+                            <Grid l:HelpProvider.HelpKey="PrikazPredmeta">
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="RezimIzmeniPredmet_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniPredmet_Executed" />
+                                    <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
@@ -651,6 +697,7 @@
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="3"
+                                    l:HelpProvider.HelpKey="PrikazPredmeta"
                                     AutoGenerateColumns="False"
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
@@ -709,6 +756,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazPredmeta"
                                     Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi predmet
@@ -719,6 +767,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazPredmeta"
                                     Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniPredmet}">
                                     Izmeni predmet
@@ -729,6 +778,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazPredmeta"
                                     Click="IzbrisiPredmet_Click"
                                     IsEnabled="{Binding EnableIzbrisiPredmet}">
                                     Obriši predmet
@@ -741,6 +791,7 @@
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Padding="20"
+                            l:HelpProvider.HelpKey="DodavanjePredmeta"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
@@ -748,6 +799,7 @@
                             <Grid
                                 x:Name="GridPredmeti"
                                 Margin="10,0,10,0"
+                                l:HelpProvider.HelpKey="DodavanjePredmeta"
                                 DataContext="{Binding SelectedPredmet}">
                                 <Grid.CommandBindings>
                                     <CommandBinding
@@ -899,6 +951,7 @@
                                     Width="120"
                                     Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
                                 </Button>
@@ -910,6 +963,7 @@
                                     Width="120"
                                     Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Command="local:Komande.Dodavanje">
                                     Dodaj predmet
                                 </Button>
@@ -920,6 +974,7 @@
                                     Width="120"
                                     Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Click="IzmenaOdustaniPredmet_Click">
                                     Ponisti izmenu
                                 </Button>
@@ -930,6 +985,7 @@
                                     Width="120"
                                     Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Click="OdustaniPredmet_Click">
                                     Odustani
                                 </Button>
@@ -939,6 +995,7 @@
                                     Grid.Column="1"
                                     Width="119"
                                     Margin="0,0,0,4"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="0"
@@ -946,12 +1003,14 @@
                                     Width="119"
                                     Margin="10,0,0,4"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Skracenica}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
                                     Margin="0,0,10,4"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Naziv}" />
 
                                 <TextBox
@@ -959,12 +1018,14 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
                                     Margin="0,0,10,37"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="3"
                                     Grid.Column="2"
                                     Width="80"
                                     Margin="0,0,21,4"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -999,6 +1060,7 @@
                                                 <TextBlock
                                                     Grid.Row="0"
                                                     Grid.Column="1"
+                                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                                     Foreground="Red"
                                                     Text="{Binding [0].ErrorContent}" />
                                             </Grid>
@@ -1010,6 +1072,7 @@
                                     Grid.Column="2"
                                     Width="80"
                                     Margin="0,0,21,4"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -1044,6 +1107,7 @@
                                                 <TextBlock
                                                     Grid.Row="0"
                                                     Grid.Column="1"
+                                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                                     Foreground="Red"
                                                     Text="{Binding [0].ErrorContent}" />
                                             </Grid>
@@ -1057,6 +1121,7 @@
                                     Height="25"
                                     Margin="0,0,21,0"
                                     VerticalAlignment="Top"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -1091,6 +1156,7 @@
                                                 <TextBlock
                                                     Grid.Row="0"
                                                     Grid.Column="1"
+                                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                                     Foreground="Red"
                                                     Text="{Binding [0].ErrorContent}" />
                                             </Grid>
@@ -1105,6 +1171,7 @@
                                     Margin="19,0,20,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Click="Button_Click">
                                     Prikazi
                                 </Button>
@@ -1115,6 +1182,7 @@
                                     Height="25"
                                     Margin="0,2,0,0"
                                     VerticalAlignment="Top"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     LostFocus="TextBox_LostFocus"
                                     Text="{Binding OznakaSmera}" />
                                 <Button
@@ -1125,6 +1193,7 @@
                                     Margin="5,2,0,2"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Click="Button_Click_1">
                                     ...
                                 </Button>
@@ -1136,6 +1205,7 @@
                                     Height="25"
                                     Margin="78,2,0,2"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsReadOnly="True"
                                     Text="{Binding SmerPredmeta.Naziv}" />
                                 <TextBox
@@ -1144,6 +1214,7 @@
                                     Height="25"
                                     Margin="5,2,0,2"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsReadOnly="True"
                                     Text="{Binding SmerPredmeta.Skracenica}" />
 
@@ -1153,6 +1224,7 @@
                                     Grid.ColumnSpan="3"
                                     Height="27"
                                     VerticalAlignment="Top"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     ItemsSource="{Binding Sistemi}"
                                     SelectedValue="{Binding Sistem}" />
 
@@ -1163,6 +1235,7 @@
                                     Height="15"
                                     Margin="0,5"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaProjektor}" />
                                 <CheckBox
                                     Grid.Row="6"
@@ -1171,6 +1244,7 @@
                                     Height="15"
                                     Margin="0,5"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaTabla}" />
                                 <CheckBox
                                     Grid.Row="8"
@@ -1179,40 +1253,50 @@
                                     Height="14"
                                     Margin="0,5,0,6"
                                     VerticalAlignment="Center"
+                                    l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaPametnaTabla}" />
                             </Grid>
                         </Border>
                     </Grid>
                 </TabItem>
 
-                <TabItem IsEnabled="{Binding TabSmer}" IsSelected="{Binding SelectedTabSmer}">
+                <TabItem
+                    l:HelpProvider.HelpKey="PrikazSmera"
+                    IsEnabled="{Binding TabSmer}"
+                    IsSelected="{Binding SelectedTabSmer}">
+                    <TabItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+                    </TabItem.CommandBindings>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Smer" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid l:HelpProvider.HelpKey="PrikazSmera">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="127*" />
-                            <ColumnDefinition Width="859*" />
+                            <ColumnDefinition Width="70*" />
+                            <ColumnDefinition Width="66*" />
+                            <ColumnDefinition Width="407*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Padding="8"
+                            l:HelpProvider.HelpKey="PrikazSmera"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid>
+                            <Grid l:HelpProvider.HelpKey="PrikazSmera">
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="RezimIzmeniSmer_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSmer_Executed" />
+                                    <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
@@ -1231,6 +1315,7 @@
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="5"
+                                    l:HelpProvider.HelpKey="PrikazSmera"
                                     AutoGenerateColumns="False"
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
@@ -1278,6 +1363,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSmera"
                                     Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi smer
@@ -1288,6 +1374,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSmera"
                                     Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniSmer}">
                                     Izmeni smer
@@ -1298,6 +1385,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSmera"
                                     Click="IzbrisiSmer_Click"
                                     IsEnabled="{Binding EnableIzbrisiSmer}">
                                     Obriši smer
@@ -1307,8 +1395,9 @@
                         <Border
                             Grid.Row="1"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Padding="20"
+                            l:HelpProvider.HelpKey="DodavanjeSmera"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
@@ -1316,6 +1405,7 @@
                             <Grid
                                 x:Name="GridSmer"
                                 Margin="10"
+                                l:HelpProvider.HelpKey="DodavanjeSmera"
                                 DataContext="{Binding SelectedSmer}">
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type TextBox}">
@@ -1360,6 +1450,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Click="SacuvajSmer_Click">
                                     Dodaj smer
                                 </Button>
@@ -1370,6 +1461,7 @@
                                     Width="120"
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Click="SacuvajIzmenuSmera_Click">
                                     Sacuvaj izmenu
                                 </Button>
@@ -1380,6 +1472,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Click="IzmenaOdustaniSmer_Click">
                                     Ponisti izmenu
                                 </Button>
@@ -1390,6 +1483,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Click="OdustaniSmer_Click">
                                     Odustani
                                 </Button>
@@ -1400,6 +1494,7 @@
                                     Width="119"
                                     Margin="0,0,0,4"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
@@ -1407,12 +1502,14 @@
                                     Width="119"
                                     Margin="0,0,0,4"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Skracenica}" />
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Margin="0,0,10,4"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Naziv}" />
 
                                 <TextBox
@@ -1420,10 +1517,12 @@
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
                                     Margin="0,0,10,4"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Opis}" />
                                 <DatePicker
                                     Grid.Row="0"
                                     Grid.Column="4"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
                                     SelectedDate="{Binding Path=DatumUvodjenja}" />
                             </Grid>
                         </Border>
@@ -1432,30 +1531,36 @@
                 <TabItem
                     Height="26"
                     VerticalAlignment="Bottom"
+                    l:HelpProvider.HelpKey="PrikazSoftvera"
                     IsEnabled="{Binding TabSoftver}"
                     IsSelected="{Binding SelectedTabSoftver}">
+                    <TabItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+                    </TabItem.CommandBindings>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Softver" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid l:HelpProvider.HelpKey="PrikazSoftvera">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
                             Padding="8"
+                            l:HelpProvider.HelpKey="PrikazSoftvera"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
-                            <Grid>
+                            <Grid l:HelpProvider.HelpKey="PrikazSoftvera">
                                 <Grid.CommandBindings>
                                     <CommandBinding
                                         CanExecute="RezimIzmeniSoftver_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSoftver_Executed" />
+                                    <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
@@ -1472,6 +1577,7 @@
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="3"
+                                    l:HelpProvider.HelpKey="PrikazSoftvera"
                                     AutoGenerateColumns="False"
                                     IsEnabled="{Binding Podaci}"
                                     IsReadOnly="True"
@@ -1490,36 +1596,43 @@
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Naziv}"
                                             CanUserSort="False"
                                             Header="Naziv" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Sistem}"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Proizvođač}"
                                             CanUserSort="False"
                                             Header="Proizvodjac" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Sajt}"
                                             CanUserSort="False"
                                             Header="Sajt" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding GodinaIzdavanja}"
                                             CanUserSort="False"
                                             Header="Godina izdavanja" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Cena}"
                                             CanUserSort="False"
                                             Header="Cena" />
                                         <DataGridTextColumn
                                             Width="Auto"
+                                            l:HelpProvider.HelpKey="PrikazSoftvera"
                                             Binding="{Binding Opis}"
                                             CanUserSort="False"
                                             Header="Opis" />
@@ -1531,6 +1644,7 @@
                                     Width="150"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSoftvera"
                                     Command="local:Komande.Novi"
                                     IsEnabled="{Binding EnableDodaj}">
                                     Dodaj novi softver
@@ -1541,6 +1655,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSoftvera"
                                     Command="local:Komande.Izmeni"
                                     IsEnabled="{Binding EnablePromeniSoftver}">
                                     Izmeni softver
@@ -1551,6 +1666,7 @@
                                     Width="120"
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="PrikazSoftvera"
                                     Click="IzbrisiSoftver_Click"
                                     IsEnabled="{Binding EnableIzbrisiSoftver}">
                                     Obriši softver
@@ -1561,6 +1677,7 @@
                             Grid.Row="1"
                             Grid.Column="0"
                             Padding="20"
+                            l:HelpProvider.HelpKey="DodavanjeSoftvera"
                             Background="GhostWhite"
                             BorderBrush="Gainsboro"
                             BorderThickness="3"
@@ -1568,6 +1685,7 @@
                             <Grid
                                 x:Name="GridSoftver"
                                 Margin="10"
+                                l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                 DataContext="{Binding SelectedSoftver}">
                                 <Grid.CommandBindings>
                                     <CommandBinding
@@ -1636,6 +1754,7 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Command="local:Komande.Izmena">
                                     Sacuvaj izmenu
                                 </Button>
@@ -1648,6 +1767,7 @@
                                     Margin="0,0,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Command="local:Komande.Dodavanje">
                                     Dodaj softver
                                 </Button>
@@ -1658,6 +1778,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Click="IzmenaOdustaniSoftver_Click">
                                     Ponisti izmenu
                                 </Button>
@@ -1668,6 +1789,7 @@
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Click="OdustaniSoftver_Click">
                                     Odustani
                                 </Button>
@@ -1677,21 +1799,25 @@
                                     Grid.Column="1"
                                     Width="119"
                                     HorizontalAlignment="Left"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     IsReadOnly="{Binding RezimPrikaz, Mode=OneWay}"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Naziv}" />
                                 <TextBox
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="4"
                                     Grid.Column="1"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -1735,6 +1861,7 @@
                                 <TextBox
                                     Grid.Row="5"
                                     Grid.Column="1"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
                                         <Binding
@@ -1776,16 +1903,19 @@
                                     Grid.Row="0"
                                     Grid.Column="4"
                                     Grid.ColumnSpan="2"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Proizvodjac}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="4"
                                     Grid.ColumnSpan="2"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Sajt}" />
 
                                 <ComboBox
                                     Grid.Row="3"
                                     Grid.Column="4"
+                                    l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     ItemsSource="{Binding Sistemi}"
                                     SelectedValue="{Binding Sistem}" />
 

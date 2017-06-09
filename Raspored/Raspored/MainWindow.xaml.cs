@@ -26,7 +26,7 @@ namespace Raspored
     public partial class MainWindow : Window
     {
         private Model.Raspored raspored;
-        Tabele.Tabele w;
+       // Tabele.Tabele w;
         CitanjeIPisanje citanje_pisanje;
         public MainWindow()
         {
@@ -69,7 +69,7 @@ namespace Raspored
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-            w = new Tabele.Tabele(); 
+            Tabele.Tabele w = new Tabele.Tabele(); 
             w.ShowDialog();
         }
 

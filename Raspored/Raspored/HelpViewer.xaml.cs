@@ -57,6 +57,38 @@ namespace Raspored
 
         }
 
+        public HelpViewer(string key, Raspored.Tabele.IzborSmera originator)
+        {
+            InitializeComponent();
+            string curDir = Directory.GetCurrentDirectory();
+            curDir = curDir.Remove(curDir.Count() - 10);
+            string path = String.Format("{0}/Help/{1}.htm", curDir, key);
+            if (!File.Exists(path))
+            {
+                key = "error";
+            }
+            Uri u = new Uri(String.Format("file:///{0}/Help/{1}.htm", curDir, key));
+            ch = new JavaScriptControlHelper(originator);
+            wbHelp.ObjectForScripting = ch;
+            wbHelp.Navigate(u);
+
+        }
+        public HelpViewer(string key, Raspored.Tabele.SoftveriOtvori originator)
+        {
+            InitializeComponent();
+            string curDir = Directory.GetCurrentDirectory();
+            curDir = curDir.Remove(curDir.Count() - 10);
+            string path = String.Format("{0}/Help/{1}.htm", curDir, key);
+            if (!File.Exists(path))
+            {
+                key = "error";
+            }
+            Uri u = new Uri(String.Format("file:///{0}/Help/{1}.htm", curDir, key));
+            ch = new JavaScriptControlHelper(originator);
+            wbHelp.ObjectForScripting = ch;
+            wbHelp.Navigate(u);
+
+        }
         private void BrowseBack_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ((wbHelp != null) && (wbHelp.CanGoBack));
