@@ -19,6 +19,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Automation;
 
 namespace Raspored.Tabele
 {
@@ -84,6 +85,13 @@ namespace Raspored.Tabele
 
             SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
             IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
+
+            SacuvajUcionicuDemo.Visibility = Visibility.Collapsed;
+            OdusatniUcionicaDemo.Visibility = Visibility.Collapsed;
+
+            DodajDemo.Visibility = Visibility.Collapsed;
+            IzmeniDemo.Visibility = Visibility.Collapsed;
+            ObrisiDemo.Visibility = Visibility.Collapsed;
 
             if (Ucionice.Count > 0)
             {
@@ -280,6 +288,11 @@ namespace Raspored.Tabele
             demoThread = new Thread(new ThreadStart(popuni));
             demoThread.Start();
             lockO = new Object();
+            SacuvajUcionicu.Visibility = Visibility.Collapsed;
+            OdusatniUcionica.Visibility = Visibility.Collapsed;
+            DodajButton.Visibility = Visibility.Collapsed;
+            IzmeniButton.Visibility = Visibility.Collapsed;
+            ObrisiButton.Visibility = Visibility.Collapsed;
 
 
         }
@@ -291,19 +304,39 @@ namespace Raspored.Tabele
         {
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
-                    SacuvajUcionicu.Visibility = Visibility.Visible;
-                    OdusatniUcionica.Visibility = Visibility.Visible;
-                    
-                    GridUcionice.IsEnabled = true;
                     if (Ucionice.Count == 4)
                     {
-                        Ucionice.Remove(Ucionice[Ucionice.Count-1]);
-                        SelectedUcionica = new Ucionica();
+                        Ucionice.Remove(Ucionice[Ucionice.Count - 1]);
+                        SelectedUcionica = Ucionice[Ucionice.Count - 1];
+                        
                     }
+                });
+                Thread.Sleep(800);
+
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    DodajDemo.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                });
+                Thread.Sleep(600);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    DodajDemo.Background = new SolidColorBrush(Colors.LightGray);
+
+
+                });
+
+                Thread.Sleep(200);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    SacuvajUcionicuDemo.Visibility = Visibility.Visible;
+                    OdusatniUcionicaDemo.Visibility = Visibility.Visible;
                     
+                    GridUcionice.IsEnabled = true;
+                    SelectedUcionica = new Ucionica();
+
                 });
                 GridUcioniceEnable = "True";
                 EnablePromeniUcionicu = "False";
@@ -371,6 +404,8 @@ namespace Raspored.Tabele
                     BrMestaBox.BorderBrush = new SolidColorBrush(Colors.Blue);
                 });
                 Thread.Sleep(300);
+                SelectedUcionica.BrojRadnihMesta = 1;
+                Thread.Sleep(300);
                 SelectedUcionica.BrojRadnihMesta = 3;
                 Thread.Sleep(300);
                 SelectedUcionica.BrojRadnihMesta = 32;
@@ -385,16 +420,31 @@ namespace Raspored.Tabele
                 Thread.Sleep(600);
                 SelectedUcionica.ImaPametnaTabla = true;
                 Thread.Sleep(600);
+
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
+                    SacuvajUcionicuDemo.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                   
+
+                });
+                Thread.Sleep(600);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    SacuvajUcionicuDemo.Background = new SolidColorBrush(Colors.LightGray);
+
+
+                });
+                Thread.Sleep(200);
+
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    
                     Ucionice.Add(SelectedUcionica);
                     GridUcionice.IsEnabled = false;
-                    SacuvajUcionicu.Visibility = Visibility.Hidden;
-                    OdusatniUcionica.Visibility = Visibility.Hidden;
-                   
+                    SacuvajUcionicuDemo.Visibility = Visibility.Hidden;
+                    OdusatniUcionicaDemo.Visibility = Visibility.Hidden;
                 });
                
-                
                 EnablePromeniUcionicu = "True";
                 EnableIzbrisiUcionicu = "True";
                 EnableDodaj = "True";
