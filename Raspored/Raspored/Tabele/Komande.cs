@@ -47,5 +47,15 @@ namespace Raspored.Tabele
                 new KeyGesture(Key.U, ModifierKeys.Control),
             }
           );
+
+        public static readonly RoutedUICommand Brisanje = new RoutedUICommand(
+           "Brisanje",
+           "Brisanje",
+           typeof(Komande),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.Delete, ModifierKeys.Control),
+            }
+           );
     }
 }
