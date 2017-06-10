@@ -73,6 +73,9 @@
     <Compile Include="Tabele\PretragaWindow.xaml.cs">
       <DependentUpon>PretragaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DDrop\PrikaziPredmet.xaml.cs">
+      <DependentUpon>PrikaziPredmet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tabele\Softveri.xaml.cs">
       <DependentUpon>Softveri.xaml</DependentUpon>
     </Compile>
@@ -108,9 +111,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tabele\Softveri.xaml">
+    <Page Include="DDrop\PrikaziPredmet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tabele\Softveri.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Tabele\Tabele.xaml">
       <SubType>Designer</SubType>
