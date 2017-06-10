@@ -1645,28 +1645,44 @@ namespace Raspored.Tabele
             }
             if (res == MessageBoxResult.Yes)
             {
-             /*   foreach (Predmet p in Predmeti)
+                if (i)
                 {
-                    foreach (Softver s in p.Softveri)
+                   
+                    foreach (Predmet p in Predmeti)
                     {
-                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        List<Softver> softveri = new List<Softver>();
+                        foreach (Softver s in p.Softveri)
                         {
-                            p.Softveri.Remove(s);
+                            if (s.Oznaka != SelectedSoftver.Oznaka)
+                            {
+                                //   p.Softveri.Remove(s);
+                                softveri.Add(s);
 
+                            }
                         }
+                        p.Softveri = softveri;
+                        sacuvajPredmet();
                     }
                 }
-                foreach (Ucionica u in Ucionice)
+                if (j)
                 {
-                    foreach (Softver s in u.Softveri)
+                    
+                    foreach (Ucionica u in Ucionice)
                     {
-                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        List<Softver> sof = new List<Softver>();
+                        foreach (Softver s in u.Softveri)
                         {
-                            u.Softveri.Remove(s);
+                            if (s.Oznaka != SelectedSoftver.Oznaka)
+                            {
+                                sof.Add(s);
+                               // u.Softveri.Remove(s);
 
+                            }
                         }
+                        u.Softveri = sof;
+                        sacuvajUcionicu();
                     }
-                }*/
+                }
                 Softveri.Remove(SelectedSoftver);
                 if (Softveri.Count <= 0)
                 {
