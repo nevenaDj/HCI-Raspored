@@ -235,7 +235,9 @@ namespace Raspored.DDrop
                         for (int j = 0; j < 7; j++)
                         {
                             if (ur.Rasporedi[i][j].Oznaka != "")
+                            {
                                 Termini[i][j].Add(ur.Rasporedi[i][j]);
+                            }
                         }
                     }
                     x = 1;
@@ -400,7 +402,9 @@ namespace Raspored.DDrop
                         //MessageBox.Show("Cas: " + cas);
                         bool nasla = false;
                         bool empty = true;
-                        for (int i = 0; i < cas * 3; i++)
+                        if (student.Oznaka != "Pauza")
+                        {
+                            for (int i = 0; i < cas * 3; i++)
                             if (Termini[c1 + i][r1].Count != 0)
                             {
                                 empty = false;
@@ -408,8 +412,7 @@ namespace Raspored.DDrop
                             }
                         if (empty)
                         {
-                            if (student.Oznaka != "Pauza")
-                            {
+                            
                                 foreach (Predmet p in rasp.OstaliTermini)
                                 if (p.Oznaka == student.Oznaka)
                                 {
@@ -442,10 +445,15 @@ namespace Raspored.DDrop
                             }
                             else
                             {
+                                MessageBox.Show("Nema dovoljno mesta za termin.");
+                            }
+                        }
+                        else
+                            {
                                 Termini[c1][r1].Add(student);
                             }
                             
-                        }
+                       
 
                     }
                     else if (fromListTemp)
@@ -454,50 +462,59 @@ namespace Raspored.DDrop
                         //MessageBox.Show("Cas: " + cas);
                         bool nasla = false;
                         bool empty = true;
-                        for (int i = 0; i < cas * 3; i++)
-                            if (Termini[c1 + i][r1].Count != 0)
-                            {
-                                empty = false;
-                                break;
-                            }
-                        if (empty)
+                        if (student.Oznaka != "Pauza")
                         {
-                            foreach (Predmet p in rasp.OstaliTermini)
-                                if (p.Oznaka == student.Oznaka)
+                            for (int i = 0; i < cas * 3; i++)
+                                if (Termini[c1 + i][r1].Count != 0)
                                 {
+                                    empty = false;
+                                    break;
+                                }
+                            if (empty)
+                            {
+                                foreach (Predmet p in rasp.OstaliTermini)
+                                    if (p.Oznaka == student.Oznaka)
+                                    {
 
-                                    p.BrojTermina += cas;
-                                    if (p.BrojTermina >= broj_termina)
+                                        p.BrojTermina += cas;
+                                        if (p.BrojTermina >= broj_termina)
+                                        {
+                                            Temp.Remove(student);
+                                        }
+                                        nasla = true;
+                                        break;
+                                    }
+                                if (!nasla)
+                                {
+                                    //MessageBox.Show("Nije Nasla ");
+                                    Predmet termini = student;
+                                    termini.BrojTermina = cas;
+                                    rasp.OstaliTermini.Add(termini);
+                                    if (termini.BrojTermina >= broj_termina)
                                     {
                                         Temp.Remove(student);
                                     }
-                                    nasla = true;
-                                    break;
-                                }
-                            if (!nasla)
-                            {
-                                //MessageBox.Show("Nije Nasla ");
-                                Predmet termini = student;
-                                termini.BrojTermina = cas;
-                                rasp.OstaliTermini.Add(termini);
-                                if (termini.BrojTermina >= broj_termina)
-                                {
-                                    Temp.Remove(student);
-                                }
 
-                            }
-                            if (student.Oznaka != "Pauza")
-                            {
-                                for (int i = 0; i < student.DuzinaTermina * 3; i++)
-                                {
-                                    Termini[c1 + i][r1].Add(student);
                                 }
+                                if (student.Oznaka != "Pauza")
+                                {
+                                    for (int i = 0; i < student.DuzinaTermina * 3; i++)
+                                    {
+                                        Termini[c1 + i][r1].Add(student);
+                                    }
+                                }
+                                
                             }
                             else
                             {
-                                Termini[c1][r1].Add(student);
+                                MessageBox.Show("Nema dovoljno mesta za termin.");
                             }
                         }
+                        else
+                        {
+                            Termini[c1][r1].Add(student);
+                        }
+                        
 
                     }
 
@@ -506,9 +523,9 @@ namespace Raspored.DDrop
                         { 
                         int i = 0;
                         int x = 0;
-                            while (true)
+                        if (student.Oznaka != "Pauza")
                             {
-                                if (student.Oznaka != "Pauza")
+                                while (true)
                                 {
                                     foreach (Predmet p in Termini[from_c - i - 1][from_r])
                                     {
@@ -525,8 +542,11 @@ namespace Raspored.DDrop
                                 for (int k = 0; k < student.DuzinaTermina * 3; k++)
                                     if (Termini[c1 + k][r1].Count != 0)
                                     {
-                                        empty = false;
-                                        break;
+                                        if (Termini[c1 + k][r1][0].Oznaka != student.Oznaka)
+                                        {
+                                            empty = false;
+                                            break;
+                                        }
                                     }
                                 if (empty)
                                 {
@@ -540,16 +560,18 @@ namespace Raspored.DDrop
                                         {
                                             Termini[c1 + k][r1].Add(student);
                                         }
-
                                 }
                                 else
                                 {
-                                    Termini[from_c ][from_r].Remove(student);
-                                    Termini[c1][r1].Add(student);
+                                    MessageBox.Show("Nema dovoljno mesto za termin");
                                 }
-
                             }
-                    }
+                            else
+                            {
+                                Termini[from_c][from_r].Remove(student);
+                                Termini[c1][r1].Add(student);
+                            }
+                        }
                     // Termini[c1][r1].Add(student);
                     
                 }
