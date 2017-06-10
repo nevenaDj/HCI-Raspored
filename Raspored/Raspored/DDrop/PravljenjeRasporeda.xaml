@@ -311,7 +311,7 @@
             <Grid Grid.Row="0"
                 Grid.Column="0"
                 Grid.RowSpan="2">
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"  />
                     <RowDefinition />
@@ -347,7 +347,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <TextBlock Grid.Row="2">
-                        Temp
+                        Privremeno
                 </TextBlock>
                 <ListView
                     Grid.Row="3"
@@ -390,12 +390,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                
+
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                
+
             </Grid>
             <Button
                 Grid.Row="2"
