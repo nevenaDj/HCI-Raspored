@@ -743,6 +743,7 @@ namespace Raspored.Tabele
 
             EUcionice.Visibility = Visibility.Collapsed;
             _index = -1;
+            Box.BorderBrush = new SolidColorBrush(Colors.Silver);
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
@@ -879,6 +880,7 @@ namespace Raspored.Tabele
 
             GridUcionice.IsEnabled = false;
             EUcionice.Visibility = Visibility.Collapsed;
+            Box.BorderBrush = new SolidColorBrush(Colors.Silver);
 
         }
 
@@ -958,6 +960,7 @@ namespace Raspored.Tabele
             OdustaniPredmet.Visibility = Visibility.Visible;
 
             GridPredmeti.IsEnabled = true;
+            _index = -1;
         }
 
         private void OdustaniPredmet_Click(object sender, RoutedEventArgs e)
@@ -985,6 +988,12 @@ namespace Raspored.Tabele
             OdustaniPredmet.Visibility = Visibility.Hidden;
 
             GridPredmeti.IsEnabled = false;
+
+            Naziv1.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Box2.BorderBrush = new SolidColorBrush(Colors.Silver);
+            EPredmeti.Visibility = Visibility.Collapsed;
+            _index = -1;
 
         }
 
@@ -1017,6 +1026,7 @@ namespace Raspored.Tabele
             SelectRowByIndex(dgrMainPredmet, Predmeti.Count - 1);
 
             e.Handled = true;
+            _index = -1;
 
 
         }
@@ -1075,7 +1085,7 @@ namespace Raspored.Tabele
         private void SacuvajIzmenuPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Predmeti[_index] = SelectedPredmet;
-
+            _index = -1;
             SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
             IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
 
@@ -1097,7 +1107,7 @@ namespace Raspored.Tabele
         private void IzmenaOdustaniPredmet_Click(object sender, RoutedEventArgs e)
         {
             SelectedPredmet = Predmeti[_index];
-
+            _index = -1;
             SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
             IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
 
@@ -1110,6 +1120,11 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridPredmeti.IsEnabled = false;
+
+            Naziv1.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Box2.BorderBrush = new SolidColorBrush(Colors.Silver);
+            EPredmeti.Visibility = Visibility.Collapsed;
 
         }
 
@@ -1217,6 +1232,11 @@ namespace Raspored.Tabele
             OdustaniSmer.Visibility = Visibility.Hidden;
 
             GridSmer.IsEnabled = false;
+            _index = -1;
+            ESmerovi.Visibility = Visibility.Collapsed;
+            Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
         }
 
         private void SacuvajSmer_Click(object sender, RoutedEventArgs e)
@@ -1242,6 +1262,7 @@ namespace Raspored.Tabele
             sacuvajSmer();
 
             SelectRowByIndex(dgrMainSmer, Smerovi.Count - 1);
+            _index = -1;
 
         }
 
@@ -1327,6 +1348,7 @@ namespace Raspored.Tabele
         private void SacuvajIzmenuSmera_Click(object sender, RoutedEventArgs e)
         {
             Smerovi[_index] = SelectedSmer;
+            _index = -1;
 
             SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
             IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
@@ -1347,7 +1369,7 @@ namespace Raspored.Tabele
         private void IzmenaOdustaniSmer_Click(object sender, RoutedEventArgs e)
         {
             SelectedSmer = Smerovi[_index];
-
+            _index = -1;
             SacuvajIzmenuSmera.Visibility = Visibility.Hidden;
             IzmenaOdustaniSmer.Visibility = Visibility.Hidden;
 
@@ -1360,6 +1382,10 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridSmer.IsEnabled = false;
+            ESmerovi.Visibility = Visibility.Collapsed;
+            Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
+           Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
 
         }
 
@@ -1441,6 +1467,7 @@ namespace Raspored.Tabele
             OdustaniSoftver.Visibility = Visibility.Visible;
 
             GridSoftver.IsEnabled = true;
+            _index = -1;
 
         }
 
@@ -1469,6 +1496,11 @@ namespace Raspored.Tabele
             OdustaniSoftver.Visibility = Visibility.Hidden;
 
             GridSoftver.IsEnabled = false;
+            _index = -1;
+
+            Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Box4.BorderBrush = new SolidColorBrush(Colors.Silver);
+            ESoftveri.Visibility = Visibility.Collapsed;
 
         }
 
@@ -1501,6 +1533,7 @@ namespace Raspored.Tabele
             SelectRowByIndex(dgrMainSoftver, Softveri.Count - 1);
 
             e.Handled = true;
+            _index = -1;
 
         }
 
@@ -1574,7 +1607,7 @@ namespace Raspored.Tabele
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
                 {
-                    Box.Focus();
+                    Box4.Focus();
                     Keyboard.Focus(Box4);
                 }));
             _greskeIzmena = 0;
@@ -1603,7 +1636,7 @@ namespace Raspored.Tabele
         private void IzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Softveri[_index] = SelectedSoftver;
-
+            _index = -1;
             IzmeniSoftver.Visibility = Visibility.Hidden;
             IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
 
@@ -1624,7 +1657,7 @@ namespace Raspored.Tabele
         private void IzmenaOdustaniSoftver_Click(object sender, RoutedEventArgs e)
         {
             SelectedSoftver = Softveri[_index];
-
+            _index = -1;
             IzmeniSoftver.Visibility = Visibility.Hidden;
             IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
 
@@ -1636,6 +1669,10 @@ namespace Raspored.Tabele
             TabSmer = "True";
             Podaci = "True";
             GridSoftver.IsEnabled = false;
+
+            Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
+            Box4.BorderBrush = new SolidColorBrush(Colors.Silver);
+            ESoftveri.Visibility = Visibility.Collapsed;
 
         }
 
@@ -2099,7 +2136,6 @@ namespace Raspored.Tabele
 
         private void HandleWindowActivated(object sender, EventArgs e)
         {
-
             this.Focus();
             FocusManager.SetFocusedElement(this,dgrMainUcionica);
 
@@ -2943,13 +2979,12 @@ namespace Raspored.Tabele
         {
             if (Box.Text == "")
             {
-                EUcionice.Text = "Polje ne sme biti prazno.";
-                EUcionice.Visibility = Visibility.Visible;
+                Box.BorderBrush = new SolidColorBrush(Colors.Red);
 
             }
             else
             {
-
+                Box.BorderBrush = new SolidColorBrush(Colors.Silver);
 
                 bool ima = false;
                 for (int i = 0; i < Ucionice.Count; i++)
@@ -3685,6 +3720,203 @@ namespace Raspored.Tabele
            
             return u;
 
+        }
+
+        private void Box2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Box2.Text == "")
+            {
+                Box2.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Box2.BorderBrush = new SolidColorBrush(Colors.Silver);
+                bool ima = false;
+                for (int i = 0; i < Predmeti.Count; i++)
+                {
+                    if (_index == i)
+                    {
+                        continue;
+                    }
+                    if (Predmeti[i].Oznaka == Box2.Text)
+                    {
+                        ima = true;
+                        break;
+                    }
+
+                }
+
+
+                if (!ima)
+                {
+                    EPredmeti.Visibility = Visibility.Collapsed;
+                    _greskaOznaka = false;
+
+                }
+                else
+                {
+                    EPredmeti.Text = " Oznaka predmeta mora biti jedinstvena.";
+                    EPredmeti.Visibility = Visibility.Visible;
+                    _greskaOznaka = true;
+                }
+            }
+
+        }
+
+        private void Skracenica1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Skracenica1.Text == "")
+            {
+                Skracenica1.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            }
+        }
+
+        private void Naziv1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Naziv1.Text == "")
+            {
+                Naziv1.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Naziv1.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            }
+
+        }
+
+        private void Box3_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Box3.Text == "")
+            {
+                Box3.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
+                bool ima = false;
+                for (int i = 0; i < Smerovi.Count; i++)
+                {
+                    if (_index == i)
+                    {
+                        continue;
+                    }
+                    if (Smerovi[i].Oznaka == Box3.Text)
+                    {
+                        ima = true;
+                        break;
+                    }
+
+                }
+
+
+                if (!ima)
+                {
+                    ESmerovi.Visibility = Visibility.Collapsed;
+                    _greskaOznaka = false;
+
+                }
+                else
+                {
+                    ESmerovi.Text = " Oznaka smera mora biti jedinstvena.";
+                    ESmerovi.Visibility = Visibility.Visible;
+                    _greskaOznaka = true;
+                }
+            }
+
+        }
+
+        private void Skracenica2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Skracenica2.Text == "")
+            {
+                Skracenica2.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
+            }
+
+        }
+
+        private void Naziv2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Naziv2.Text == "")
+            {
+                Naziv2.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            }
+        }
+
+        private void Box4_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Box4.Text == "")
+            {
+                Box4.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Box4.BorderBrush = new SolidColorBrush(Colors.Silver);
+                bool ima = false;
+                for (int i = 0; i < Softveri.Count; i++)
+                {
+                    if (_index == i)
+                    {
+                        continue;
+                    }
+                    if (Softveri[i].Oznaka == Box4.Text)
+                    {
+                        ima = true;
+                        break;
+                    }
+
+                }
+
+
+                if (!ima)
+                {
+                    ESoftveri.Visibility = Visibility.Collapsed;
+                    _greskaOznaka = false;
+
+                }
+                else
+                {
+                    ESoftveri.Text = " Oznaka softvera mora biti jedinstvena.";
+                    ESoftveri.Visibility = Visibility.Visible;
+                    _greskaOznaka = true;
+                }
+            }
+
+        }
+
+        private void Naziv3_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Naziv3.Text == "")
+            {
+                Naziv3.BorderBrush = new SolidColorBrush(Colors.Red);
+
+            }
+            else
+            {
+                Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            }
         }
     }
 
