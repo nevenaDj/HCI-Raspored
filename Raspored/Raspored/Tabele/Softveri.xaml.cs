@@ -223,8 +223,6 @@ namespace Raspored.Tabele
         {
 
             this.Focus();
-            Keyboard.Focus(this);
-            FocusManager.SetFocusedElement(this, this);
 
         }
 
@@ -312,20 +310,6 @@ namespace Raspored.Tabele
 
             }
 
-        }
-
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[2]);
-            if (focusedControl is DependencyObject)
-            {
-                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                if (str != "ProzorDodavanjeSoftvera")
-                {
-                    str = "ProzorDodavanjeSoftvera";
-                }
-                HelpProvider.ShowHelp(str, this);
-            }
         }
 
     }

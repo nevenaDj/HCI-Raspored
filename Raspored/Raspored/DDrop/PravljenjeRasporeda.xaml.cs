@@ -164,7 +164,7 @@ namespace Raspored.DDrop
                 Ucionice.Add(u);
             }
 
-
+            Korak2Enable = "False";
             Korak1Enable = "False";
             Raspored1.Visibility = Visibility.Collapsed;
             Raspored2.Visibility = Visibility.Visible;
@@ -1059,13 +1059,48 @@ namespace Raspored.DDrop
 
         private void Korak_Nazad_Click(object sender, RoutedEventArgs e)
         {
-            Korak1Enable = "True";
+            //!!!!!!!!!!!!
             Korak2Enable = "False";
+            Korak1Enable = "True";
+            
             SelectedUcionica = null;
             Raspored1.Visibility = Visibility.Visible;
             Raspored2.Visibility = Visibility.Collapsed;
 
             Ucionice.ToList().All(i => Ucionice.Remove(i));
+        }
+
+        private void Show_Predmet_Click(object sender, MouseButtonEventArgs e)
+        {
+            //  MessageBox.Show("blbabla");
+            ListView listView = sender as ListView;
+            String v = listView.Name.ToString();
+            String r = v.Substring(4, 1);
+            int r1 = Convert.ToInt32(r);
+            String c = v.Substring(2, 2);
+            int c1 = Convert.ToInt32(c);
+
+            if (Termini[c1][r1].Count!=0) { 
+                foreach (Predmet p in citanje_pisanje.otvoriPredmet())
+                    if (Termini[c1][r1][0].Oznaka == p.Oznaka)
+                    {
+                        PrikaziPredmet pp = new PrikaziPredmet(p);
+                        pp.Show();
+                    }
+            }
+
+
+
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
