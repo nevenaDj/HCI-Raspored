@@ -97,6 +97,10 @@
                                 CanExecute="RezimIzmeniUcionicu_CanExecute"
                                 Command="local:Komande.Izmeni"
                                 Executed="RezimIzmeniUcionicu_Executed" />
+                            <CommandBinding
+                                CanExecute="RezimIzmeniUcionicu_CanExecute"
+                                Command="local:Komande.Brisanje"
+                                Executed="IzbrisiUcionicu_Executed" />
 
                             <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
@@ -417,7 +421,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="Tabele"
-                                    Click="IzbrisiUcionicu_Click"
+                                    Command="local:Komande.Brisanje"
                                     IsEnabled="{Binding EnableIzbrisiUcionicu}">
                                     Obriši učionicu
                                 </Button>
@@ -771,6 +775,10 @@
                                         CanExecute="RezimIzmeniPredmet_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniPredmet_Executed" />
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniPredmet_CanExecute"
+                                        Command="local:Komande.Brisanje"
+                                        Executed="IzbrisiPredmet_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
@@ -870,7 +878,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="PrikazPredmeta"
-                                    Click="IzbrisiPredmet_Click"
+                                    Command="local:Komande.Brisanje"
                                     IsEnabled="{Binding EnableIzbrisiPredmet}">
                                     Obriši predmet
                                 </Button>
@@ -1387,6 +1395,10 @@
                                         CanExecute="RezimIzmeniSmer_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSmer_Executed" />
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniSmer_CanExecute"
+                                        Command="local:Komande.Brisanje"
+                                        Executed="IzbrisiSmer_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
@@ -1477,7 +1489,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="PrikazSmera"
-                                    Click="IzbrisiSmer_Click"
+                                    Command="local:Komande.Brisanje"
                                     IsEnabled="{Binding EnableIzbrisiSmer}">
                                     Obriši smer
                                 </Button>
@@ -1651,6 +1663,10 @@
                                         CanExecute="RezimIzmeniSoftver_CanExecute"
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSoftver_Executed" />
+                                    <CommandBinding
+                                        CanExecute="RezimIzmeniSoftver_CanExecute"
+                                        Command="local:Komande.Brisanje"
+                                        Executed="IzbrisiSoftver_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
 
                                 </Grid.CommandBindings>
@@ -1758,7 +1774,7 @@
                                     Margin="0,5,5,15"
                                     HorizontalAlignment="Right"
                                     l:HelpProvider.HelpKey="PrikazSoftvera"
-                                    Click="IzbrisiSoftver_Click"
+                                    Command="local:Komande.Brisanje"
                                     IsEnabled="{Binding EnableIzbrisiSoftver}">
                                     Obriši softver
                                 </Button>

@@ -765,17 +765,24 @@ namespace Raspored.Tabele
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
-        private void IzbrisiUcionicu_Click(object sender, RoutedEventArgs e)
+        private void IzbrisiUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Ucionice.Remove(SelectedUcionica);
-            SveUcionice.Remove(SelectedUcionica);
-
-            if (Ucionice.Count <= 0)
+            MessageBoxResult res = MessageBox.Show(
+                "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " + 
+                SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo, 
+                MessageBoxImage.Warning, MessageBoxResult.No);
+            if (res == MessageBoxResult.Yes)
             {
-                EnableIzbrisiUcionicu = "False";
-                EnablePromeniUcionicu = "False";
+                Ucionice.Remove(SelectedUcionica);
+                SveUcionice.Remove(SelectedUcionica);
+
+                if (Ucionice.Count <= 0)
+                {
+                    EnableIzbrisiUcionicu = "False";
+                    EnablePromeniUcionicu = "False";
+                }
+                sacuvajUcionicu();
             }
-            sacuvajUcionicu();
         }
 
         /***** REZIM ZA IZMENU UCIONICE ****/
@@ -817,7 +824,7 @@ namespace Raspored.Tabele
         private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
-            MessageBox.Show(SelectedUcionica.Oznaka + " " + SelectedUcionica.Opis + " " + SelectedUcionica.ImaProjektor);
+           // MessageBox.Show(SelectedUcionica.Oznaka + " " + SelectedUcionica.Opis + " " + SelectedUcionica.ImaProjektor);
 
             Ucionice[_index] = SelectedUcionica;
             SveUcionice[_index] = SelectedUcionica;
@@ -1000,15 +1007,22 @@ namespace Raspored.Tabele
 
         }
 
-        private void IzbrisiPredmet_Click(object sender, RoutedEventArgs e)
+        private void IzbrisiPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Predmeti.Remove(SelectedPredmet);
-            if (Predmeti.Count <= 0)
+            MessageBoxResult res = MessageBox.Show(
+               "Da li ste sigurni da želite da obišete predmet " +
+               SelectedPredmet.Naziv + "?", "Brisanje predmeta", MessageBoxButton.YesNo,
+               MessageBoxImage.Warning, MessageBoxResult.No);
+            if (res == MessageBoxResult.Yes)
             {
-                EnableIzbrisiPredmet = "False";
-                EnablePromeniPredmet = "False";
+                Predmeti.Remove(SelectedPredmet);
+                if (Predmeti.Count <= 0)
+                {
+                    EnableIzbrisiPredmet = "False";
+                    EnablePromeniPredmet = "False";
+                }
+                sacuvajPredmet();
             }
-            sacuvajPredmet();
         }
 
         private void RezimIzmeniPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1217,16 +1231,53 @@ namespace Raspored.Tabele
 
         }
 
-        private void IzbrisiSmer_Click(object sender, RoutedEventArgs e)
+        private void IzbrisiSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Smerovi.Remove(SelectedSmer);
-            if (Smerovi.Count <= 0)
+            string poruka = "";
+            bool i = false;
+            foreach(Predmet p in Predmeti)
             {
-                EnableIzbrisiSmer = "False";
-                EnablePromeniSmer = "False";
-            }
-            sacuvajSmer();
+                if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                {
+                    if (i)
+                    {
+                        poruka += "\n    - " + p.Naziv;
+                    }
+                    else
+                    {
+                        poruka = "Ukoliko izbrišete smer " + SelectedSmer.Naziv + "\n" +
+                            "Obrisaćete smer predmetima:" + "\n    - " +
+                            p.Naziv;
+                        i = true;
+                    }
+                    
 
+                }
+            }
+
+            poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
+            MessageBoxResult res = MessageBox.Show(
+                poruka, "Brisanje smera", MessageBoxButton.YesNo,
+                MessageBoxImage.Warning, MessageBoxResult.No);
+            if (res == MessageBoxResult.Yes)
+            {
+                foreach(Predmet p in Predmeti)
+                {
+                    if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                    {
+                        p.OznakaSmera = "";
+                        p.SmerPredmeta = null;
+                    }
+                }
+                Smerovi.Remove(SelectedSmer);
+                if (Smerovi.Count <= 0)
+                {
+                    EnableIzbrisiSmer = "False";
+                    EnablePromeniSmer = "False";
+                }
+                sacuvajPredmet();
+                sacuvajSmer();
+            }
         }
 
         private void RezimIzmeniSmer_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1439,15 +1490,68 @@ namespace Raspored.Tabele
 
         }
 
-        private void IzbrisiSoftver_Click(object sender, RoutedEventArgs e)
+        private void IzbrisiSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Softveri.Remove(SelectedSoftver);
-            if (Softveri.Count <= 0)
+            string poruka = "";
+            bool i = false;
+            bool j = false;
+            foreach (Predmet p in Predmeti)
             {
-                EnableIzbrisiSoftver = "False";
-                EnablePromeniSoftver = "False";
+                foreach(Softver s in p.Softveri) {
+                    if (s.Oznaka == SelectedSoftver.Oznaka)
+                    {
+                        if (i)
+                        {
+                            poruka += "\n    - " + s.Naziv;
+                        }
+                        else
+                        {
+                            poruka = "Ukoliko izbrišete softver " + SelectedSoftver.Naziv + "\n" +
+                                "Uklonićete ga iz liste softvera kod predmeta: " + "\n    - " +
+                                p.Naziv;
+                            i = true;
+                        }
+
+                    }
+                }
             }
-            sacuvajSoftver();
+
+            foreach (Ucionica u in Ucionice)
+            {
+                foreach (Softver s in u.Softveri)
+                {
+                    if (s.Oznaka == SelectedSoftver.Oznaka)
+                    {
+                        if (j)
+                        {
+                            poruka += "\n    - " + s.Naziv;
+                        }
+                        else
+                        {
+                            poruka = "Ukoliko izbrišete softver " + SelectedSoftver.Naziv + "\n" +
+                                "Uklonićete ga iz liste softvera u učionicama: " + "\n    - " +
+                                u.Oznaka;
+                            j = true;
+                        }
+
+                    }
+                }
+            }
+
+            poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
+            MessageBoxResult res = MessageBox.Show(
+              poruka, "Brisanje softvera", MessageBoxButton.YesNo,
+              MessageBoxImage.Warning, MessageBoxResult.No);
+            if (res == MessageBoxResult.Yes)
+            {
+                Softveri.Remove(SelectedSoftver);
+                if (Softveri.Count <= 0)
+                {
+                    EnableIzbrisiSoftver = "False";
+                    EnablePromeniSoftver = "False";
+                }
+                sacuvajSoftver();
+            }
 
         }
 
