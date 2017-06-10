@@ -949,17 +949,16 @@
                                     <ColumnDefinition Width="Auto" MinWidth="110" />
                                     <ColumnDefinition Width="197*" MaxWidth="300" />
                                     <ColumnDefinition Width="Auto" MinWidth="229" />
-                                    <ColumnDefinition Width="0" MaxWidth="100" />
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="176*" />
+                                    <ColumnDefinition Width="0" MinWidth="100" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
 
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Naziv*</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Naziv*</TextBlock>
                                 <TextBlock
-                                    Grid.Row="0"
-                                    Grid.Column="2"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
                                     Width="80"
                                     Height="29"
                                     Margin="0"
@@ -967,26 +966,24 @@
                                     VerticalAlignment="Bottom">
                                     Skraćenica*
                                 </TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0">
+                                <TextBlock Grid.Row="3" Grid.Column="0">
                                     Opis
                                 </TextBlock>
 
                                 <TextBlock
                                     Grid.Row="0"
+                                    Grid.RowSpan="2"
                                     Grid.Column="4"
-                                    Width="36"
+                                    Width="127"
                                     Height="29"
-                                    Margin="123,0,70,0"
+                                    Margin="104,1,6,28"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom">
-                                    Smer
+                                    VerticalAlignment="Center">
+                                    Smer predmeta
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="6"
-                                    Grid.RowSpan="3"
+                                    Grid.Row="11"
                                     Grid.Column="0"
-                                    Width="54"
-                                    Margin="6,24,15,2"
                                     HorizontalAlignment="Center">
                                     Softveri
                                 </TextBlock>
@@ -994,36 +991,35 @@
                                 <TextBlock
                                     Grid.Row="3"
                                     Grid.Column="4"
-                                    Margin="104,0,10,0">
+                                    Grid.ColumnSpan="2"
+                                    Margin="104,0,10,37">
                                     Operativni sistem
                                 </TextBlock>
 
                                 <TextBlock
-                                    Grid.Row="3"
+                                    Grid.Row="4"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="2">
                                     Veličina grupe
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="4"
+                                    Grid.Row="5"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,0,10,1">
+                                    Margin="0,0,0,1">
                                     Minimalna dužina termina
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="4"
-                                    Grid.RowSpan="2"
+                                    Grid.Row="6"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,30,10,1">
+                                    Margin="0,0,10,1">
                                     Broj termina
                                 </TextBlock>
-
                                 <TextBlock
                                     Grid.Row="5"
                                     Grid.Column="4"
-                                    Margin="104,1,2,3">
+                                    Margin="104,2,2,2">
                                     Projektor
                                 </TextBlock>
                                 <TextBlock
@@ -1033,10 +1029,10 @@
                                     Tabla
                                 </TextBlock>
                                 <TextBlock
-                                    Grid.Row="8"
+                                    Grid.Row="7"
                                     Grid.Column="4"
                                     Height="21"
-                                    Margin="104,1,2,0"
+                                    Margin="104,2,2,2"
                                     VerticalAlignment="Top">
                                     Pametna tabla
                                 </TextBlock>
@@ -1044,7 +1040,7 @@
                                 <Button
                                     x:Name="SacuvajIzmenuPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="7"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
@@ -1056,7 +1052,7 @@
                                 <Button
                                     x:Name="SacuvajPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="7"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,3,5,2"
                                     HorizontalAlignment="Right"
@@ -1067,7 +1063,7 @@
                                 <Button
                                     x:Name="IzmenaOdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="8"
+                                    Grid.Column="7"
                                     Width="120"
                                     Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
@@ -1078,7 +1074,7 @@
                                 <Button
                                     x:Name="OdustaniPredmet"
                                     Grid.Row="11"
-                                    Grid.Column="8"
+                                    Grid.Column="7"
                                     Width="120"
                                     Margin="0,3,10,2"
                                     HorizontalAlignment="Right"
@@ -1090,35 +1086,35 @@
                                     x:Name="Box2"
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    Width="119"
-                                    Margin="0,0,0,4"
+                                    Margin="10,0,0,4"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
-                                    Grid.Row="0"
-                                    Grid.Column="3"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
                                     Width="119"
                                     Margin="10,0,0,4"
                                     HorizontalAlignment="Left"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Skracenica}" />
                                 <TextBox
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
-                                    Margin="0,0,10,4"
+                                    Margin="10,0,10,4"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Naziv}" />
 
                                 <TextBox
-                                    Grid.Row="2"
+                                    Grid.Row="3"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="3"
-                                    Margin="0,0,10,37"
+                                    Height="25"
+                                    Margin="10,2,10,42"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
-                                    Grid.Row="3"
+                                    Grid.Row="4"
                                     Grid.Column="2"
                                     Width="80"
                                     Margin="0,0,21,4"
@@ -1165,7 +1161,7 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
-                                    Grid.Row="4"
+                                    Grid.Row="5"
                                     Grid.Column="2"
                                     Width="80"
                                     Margin="0,0,21,4"
@@ -1212,7 +1208,7 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
-                                    Grid.Row="5"
+                                    Grid.Row="6"
                                     Grid.Column="2"
                                     Width="80"
                                     Height="25"
@@ -1261,33 +1257,34 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <Button
-                                    Grid.Row="8"
+                                    Grid.Row="11"
                                     Grid.Column="1"
                                     Width="80"
                                     Height="25"
-                                    Margin="19,0,20,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Click="Button_Click">
                                     Prikazi
                                 </Button>
+
                                 <TextBox
                                     x:Name="UnosSmera"
                                     Grid.Row="0"
-                                    Grid.Column="7"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
                                     Height="25"
-                                    Margin="0,2,0,0"
-                                    VerticalAlignment="Top"
+                                    Margin="10,0,90,0"
+                                    VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     LostFocus="TextBox_LostFocus"
                                     Text="{Binding OznakaSmera}" />
                                 <Button
                                     Grid.Row="0"
-                                    Grid.Column="8"
+                                    Grid.Column="6"
                                     Width="50"
                                     Height="25"
-                                    Margin="5,2,0,2"
+                                    Margin="65,0,0,5"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
@@ -1298,16 +1295,16 @@
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="4"
-                                    Grid.ColumnSpan="4"
+                                    Grid.ColumnSpan="3"
                                     Height="25"
-                                    Margin="78,2,0,2"
+                                    Margin="104,2,0,2"
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsReadOnly="True"
                                     Text="{Binding SmerPredmeta.Naziv}" />
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="8"
+                                    Grid.Column="7"
                                     Height="25"
                                     Margin="5,2,0,2"
                                     VerticalAlignment="Center"
@@ -1315,11 +1312,15 @@
                                     IsReadOnly="True"
                                     Text="{Binding SmerPredmeta.Skracenica}" />
 
+
                                 <ComboBox
                                     Grid.Row="3"
                                     Grid.Column="5"
-                                    Grid.ColumnSpan="3"
+                                    Grid.ColumnSpan="2"
+                                    Width="200"
                                     Height="27"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     ItemsSource="{Binding Sistemi}"
@@ -1344,7 +1345,7 @@
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaTabla}" />
                                 <CheckBox
-                                    Grid.Row="8"
+                                    Grid.Row="7"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
                                     Height="14"
@@ -1609,7 +1610,7 @@
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,0,10,4"
+                                    Margin="0,0,105,4"
                                     l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Naziv}" />
 
@@ -1617,7 +1618,7 @@
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,0,10,4"
+                                    Margin="0,0,105,4"
                                     l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Opis}" />
                                 <DatePicker
@@ -1835,6 +1836,7 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
@@ -1844,16 +1846,26 @@
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Naziv</TextBlock>
                                 <TextBlock Grid.Row="2" Grid.Column="0">Opis</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="3">Operativni sistem:</TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="3">Proizvođač</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="3">Sajt</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="0">Godina izdavanja</TextBlock>
-                                <TextBlock Grid.Row="5" Grid.Column="0">Cena</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="4">Operativni sistem</TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="4">Proizvođač</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="4">Sajt</TextBlock>
+                                <TextBlock
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Godina izdavanja
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    Cena
+                                </TextBlock>
 
                                 <Button
                                     x:Name="IzmeniSoftver"
                                     Grid.Row="8"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Width="120"
                                     Height="24"
                                     Margin="0,0,5,0"
@@ -1866,7 +1878,7 @@
                                 <Button
                                     x:Name="SacuvajSoftver"
                                     Grid.Row="8"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Width="120"
                                     Height="24"
                                     Margin="0,0,5,0"
@@ -1879,7 +1891,7 @@
                                 <Button
                                     x:Name="IzmenaOdustaniSoftver"
                                     Grid.Row="8"
-                                    Grid.Column="5"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
@@ -1890,7 +1902,7 @@
                                 <Button
                                     x:Name="OdustaniSoftver"
                                     Grid.Row="8"
-                                    Grid.Column="5"
+                                    Grid.Column="6"
                                     Width="120"
                                     Margin="0,5,10,0"
                                     HorizontalAlignment="Right"
@@ -1901,27 +1913,28 @@
                                 <TextBox
                                     x:Name="Box4"
                                     Grid.Row="0"
-                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
                                     Width="119"
+                                    Margin="74,0,0,4"
                                     HorizontalAlignment="Left"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     IsReadOnly="{Binding RezimPrikaz, Mode=OneWay}"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="4"
+                                    Margin="74,0,100,4"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Naziv}" />
                                 <TextBox
                                     Grid.Row="2"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="4"
+                                    Margin="74,0,100,4"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
                                     Grid.Row="4"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -1965,7 +1978,7 @@
                                 </TextBox>
                                 <TextBox
                                     Grid.Row="5"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Validation.Error="Validation_Error">
                                     <TextBox.Text>
@@ -2006,20 +2019,20 @@
                                 </TextBox>
                                 <TextBox
                                     Grid.Row="0"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Grid.ColumnSpan="2"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Proizvodjac}" />
                                 <TextBox
                                     Grid.Row="1"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     Grid.ColumnSpan="2"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     Text="{Binding Path=Sajt}" />
 
                                 <ComboBox
                                     Grid.Row="3"
-                                    Grid.Column="4"
+                                    Grid.Column="5"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
                                     ItemsSource="{Binding Sistemi}"
                                     SelectedValue="{Binding Sistem}" />

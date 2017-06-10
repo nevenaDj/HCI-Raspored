@@ -69,7 +69,7 @@ namespace Raspored
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-            Tabele.Tabele w = new Tabele.Tabele(); 
+            Tabele.Tabele w = new Tabele.Tabele(raspored); 
             w.ShowDialog();
         }
 

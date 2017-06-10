@@ -28,7 +28,7 @@ namespace Raspored.Tabele
     /// </summary>
     public partial class Tabele : Window, INotifyPropertyChanged
     {
-        public Tabele()
+        public Tabele(Model.Raspored raspored)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -161,8 +161,12 @@ namespace Raspored.Tabele
             _greskaOznaka = false;
             _index = -1;
 
+            _raspored = raspored;
+
 
         }
+
+        private Model.Raspored _raspored;
 
         public Tabele(string demo)
         {
@@ -816,7 +820,8 @@ namespace Raspored.Tabele
             _index = Ucionice.IndexOf(SelectedUcionica);
             SelectedUcionica = new Ucionica(SelectedUcionica.Oznaka, SelectedUcionica.Opis,
                 SelectedUcionica.BrojRadnihMesta, SelectedUcionica.ImaProjektor,
-                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, SelectedUcionica.Softveri, SelectedUcionica.Sistem);
+                SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, 
+                SelectedUcionica.Softveri, SelectedUcionica.Sistem);
 
             GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
@@ -852,9 +857,6 @@ namespace Raspored.Tabele
             GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
             _index = -1;
-
-
-
             e.Handled = true;
         }
 
@@ -876,6 +878,7 @@ namespace Raspored.Tabele
             Podaci = "True";
 
             GridUcionice.IsEnabled = false;
+            EUcionice.Visibility = Visibility.Collapsed;
 
         }
 
@@ -2875,7 +2878,7 @@ namespace Raspored.Tabele
         {
             if (Box.Text == "")
             {
-                EUcionice.Text = "Polje ne sme ostati prazno.";
+                EUcionice.Text = "Polje ne sme biti prazno.";
                 EUcionice.Visibility = Visibility.Visible;
 
             }

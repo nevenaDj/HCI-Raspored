@@ -58,7 +58,7 @@ namespace Raspored.Model
             Sistemi = new ObservableCollection<string>();
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");
-            Sistemi.Add("Oba");
+            Sistemi.Add("Svejedno");
 
         }
         public ObservableCollection<string> Sistemi
@@ -91,7 +91,7 @@ namespace Raspored.Model
             Sistemi = new ObservableCollection<string>();
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");
-            Sistemi.Add("Oba");
+            Sistemi.Add("Svejedno");
         }
 
         public string Oznaka
