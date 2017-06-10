@@ -585,49 +585,52 @@ namespace Raspored.DDrop
         private void ListView_Delete(object sender, DragEventArgs e)
         {
             ListView listView = sender as ListView;
-           
+
             //  CONFIRM
 
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
-                
-                
-                    if (fromList || fromListTemp)
+
+
+                if (fromList || fromListTemp)
+                {
+
+
+                }
+                else
+                {
+                    int i = 0;
+                    int x = 0;
+                    while (true)
                     {
-                     
+
+                        foreach (Predmet p in Termini[from_c - i - 1][from_r])
+                        {
+                            if (p.Naziv != student.Naziv)
+                                x = 1;
+                        }
+                        // MessageBox.Show("" + x);
+                        if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
+                            break;
+                        i++;
+                    }
+
+                    for (int j = 0; j < student.DuzinaTermina * 3; j++)
+                    {
+                        Termini[from_c - i + j][from_r].Remove(student);
+                        lv.Background = Brushes.White;
 
                     }
-                    else
+                    if (SelectedPredmet.Oznaka == student.Oznaka)
+                        Studenti.Add(student);
+                    foreach (Predmet p in rasp.OstaliTermini)
                     {
-                        int i = 0;
-                        int x = 0;
-                        while (true)
-                        {
-
-                            foreach (Predmet p in Termini[from_c - i - 1][from_r])
-                            {
-                                if (p.Naziv != student.Naziv)
-                                    x = 1;
-                            }
-                            // MessageBox.Show("" + x);
-                            if (x == 1 || Termini[from_c - i - 1][from_r].Count == 0)
-                                break;
-                            i++;
-                        }
-
-                        for (int j = 0; j < student.DuzinaTermina * 3; j++)
-                        {
-                            Termini[from_c - i + j][from_r].Remove(student);
-                            lv.Background = Brushes.White;
-
-                        }
-
-                    Studenti.Add(student);
+                        if (p.Oznaka == student.Oznaka)
+                            p.BrojTermina = p.BrojTermina - student.BrojTermina;
                     }
-                   
-
-                
+                }
+            
                 fromList = false;
             }
         }
