@@ -517,6 +517,7 @@ namespace Raspored.Model
                                 Predmet pauza = new Predmet();
                                 pauza.Oznaka = "Pauza";
                                 pauza.Naziv = "Pauza";
+                                pauza.DuzinaTermina = 0;
                                 ur.Rasporedi[i][j] = pauza;
                             }
                         }
