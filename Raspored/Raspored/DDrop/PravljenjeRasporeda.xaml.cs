@@ -138,31 +138,39 @@ namespace Raspored.DDrop
 
         private void Korak1_Click(object sender, RoutedEventArgs e)
         {
-
+            
             foreach (Ucionica u in citanje_pisanje.otvoriUcionicu())
             {
-                if (SelectedPredmet.TrebaPametnaTabla)
-                    if (SelectedPredmet.TrebaPametnaTabla != u.ImaPametnaTabla)
+                if (SelectedPredmet != null)
+                {
+                    if (SelectedPredmet.TrebaPametnaTabla)
+                        if (SelectedPredmet.TrebaPametnaTabla != u.ImaPametnaTabla)
+                            continue;
+                    if (SelectedPredmet.TrebaProjektor)
+                        if (SelectedPredmet.TrebaProjektor != u.ImaProjektor)
+                            continue;
+                    if (SelectedPredmet.TrebaTabla)
+                        if (SelectedPredmet.TrebaTabla != u.ImaTabla)
+                            continue;
+                    if (SelectedPredmet.VelicinaGrupe > u.BrojRadnihMesta)
                         continue;
-                if (SelectedPredmet.TrebaProjektor)
-                    if (SelectedPredmet.TrebaProjektor != u.ImaProjektor)
-                        continue;
-                if (SelectedPredmet.TrebaTabla)
-                    if (SelectedPredmet.TrebaTabla != u.ImaTabla)
-                        continue;
-                if (SelectedPredmet.VelicinaGrupe > u.BrojRadnihMesta)
-                    continue;
-                if (SelectedPredmet.Sistem == "Windows")
-                    if (u.Sistem != "Windows" && u.Sistem != "Oba")
-                        continue;
-                if (SelectedPredmet.Sistem == "Linux")
-                    if (u.Sistem != "Linux" && u.Sistem != "Oba")
-                        continue;
-                if (SelectedPredmet.Sistem == "Oba")
-                    if (u.Sistem != "Oba")
-                        continue;
-                Ucionice.Add(u);
+                    if (SelectedPredmet.Sistem == "Windows")
+                        if (u.Sistem != "Windows" && u.Sistem != "Oba")
+                            continue;
+                    if (SelectedPredmet.Sistem == "Linux")
+                        if (u.Sistem != "Linux" && u.Sistem != "Oba")
+                            continue;
+                    if (SelectedPredmet.Sistem == "Oba")
+                        if (u.Sistem != "Oba")
+                            continue;
+                    Ucionice.Add(u);
+                }
+                else
+                {
+                    Ucionice.Add(u);
+                }
             }
+            
 
             Korak2Enable = "False";
             Korak1Enable = "False";
@@ -208,30 +216,32 @@ namespace Raspored.DDrop
             Korak2Enable = "False";
             int broj_termina = 0;
             List<Predmet> termin = citanje_pisanje.otvoriPredmet();
-            foreach (Predmet p in termin)
-                if (p.Oznaka == SelectedPredmet.Oznaka)
-                {
-                    broj_termina = p.BrojTermina;
-                    break;
-                }
-            //Predme
-            int y = 0;
-            foreach (Predmet ur in rasp.OstaliTermini)
-                if (ur.Oznaka == SelectedPredmet.Oznaka)
-                {
-                    y = 1;
-                    if (broj_termina > ur.BrojTermina)
-                    {
-                        //if (!Studenti.Contains(SelectedPredmet))
-                        Studenti.Add(SelectedPredmet);
-                    }
-                    break;
-                }
-            if (y == 0)
+            if (SelectedPredmet != null)
             {
-                Studenti.Add(SelectedPredmet);
+                foreach (Predmet p in termin)
+                    if (p.Oznaka == SelectedPredmet.Oznaka)
+                    {
+                        broj_termina = p.BrojTermina;
+                        break;
+                    }
+                //Predme
+                int y = 0;
+                foreach (Predmet ur in rasp.OstaliTermini)
+                    if (ur.Oznaka == SelectedPredmet.Oznaka)
+                    {
+                        y = 1;
+                        if (broj_termina > ur.BrojTermina)
+                        {
+                            //if (!Studenti.Contains(SelectedPredmet))
+                            Studenti.Add(SelectedPredmet);
+                        }
+                        break;
+                    }
+                if (y == 0)
+                {
+                    Studenti.Add(SelectedPredmet);
+                }
             }
-
             Raspored2.Visibility = Visibility.Collapsed;
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
