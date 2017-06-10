@@ -244,8 +244,7 @@ namespace Raspored.DDrop
                 }
             if (x == 0)
             {
-                
-                    rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
+                rasp.Rasporedi.Add(new UcionicaRaspored(SelectedUcionica));
             }
             //
             

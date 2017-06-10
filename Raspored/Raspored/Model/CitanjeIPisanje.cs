@@ -512,6 +512,13 @@ namespace Raspored.Model
                             Predmet p = nadjiPredmet(predmeti[j]);
                             if (p != null)
                                 ur.Rasporedi[i][j] = p;
+                            if (predmeti[j] == "Pauza")
+                            {
+                                Predmet pauza = new Predmet();
+                                pauza.Oznaka = "Pauza";
+                                pauza.Naziv = "Pauza";
+                                ur.Rasporedi[i][j] = pauza;
+                            }
                         }
 
                     }
