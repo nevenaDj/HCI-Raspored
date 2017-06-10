@@ -2379,8 +2379,73 @@ namespace Raspored.Tabele
                         u.Add(ucionica.Oznaka, ucionica);
                     }
                 }
+            }else if (oznaka.Trim().ToUpper() == "PROJEKTOR")
+            {
+
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (ucionica.ImaProjektor)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!ucionica.ImaProjektor)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+                    }
+                }
             }
-            return u;
+            else if (oznaka.Trim().ToUpper() == "TABLA")
+            {
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (ucionica.ImaTabla)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!ucionica.ImaTabla)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "PAMETNA TABLA")
+            {
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (ucionica.ImaPametnaTabla)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!ucionica.ImaPametnaTabla)
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+                    }
+                }
+
+            }
+                return u;
 
         }
 
@@ -2423,11 +2488,11 @@ namespace Raspored.Tabele
                 {
                     List<Ucionica> u = otvoriUcionicu();
                     string pretraga = Pretraga.ToUpper();
-                    if ((pretraga.IndexOf("AND") != -1) && (pretraga.IndexOf("OR") != -1))
+                    if ((pretraga.IndexOf(" AND ") != -1) && (pretraga.IndexOf(" OR ") != -1))
                     {
                         Ucionice.Clear();
                     }
-                    else if (pretraga.IndexOf("AND") != -1)
+                    else if (pretraga.IndexOf(" AND ") != -1)
                     {
                         List<Dictionary<string, Ucionica>> dicts = new List<Dictionary<string, Ucionica>>();
                         string[] andTokens = Regex.Split(pretraga, "AND");
@@ -2461,7 +2526,7 @@ namespace Raspored.Tabele
 
                         }
                     }
-                    else if (pretraga.IndexOf("OR") != -1)
+                    else if (pretraga.IndexOf(" OR ") != -1)
                     {
                         List<Dictionary<string, Ucionica>> dicts = new List<Dictionary<string, Ucionica>>();
                         string[] andTokens = Regex.Split(pretraga, "OR");
@@ -2915,6 +2980,710 @@ namespace Raspored.Tabele
                     _greskaOznaka = true;
                 }
             }
+
+        }
+
+        private void ButtonPretragaPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            GridPretragaPredmet.Visibility = Visibility.Visible;
+            ButtonPretragaPredmet.Visibility = Visibility.Collapsed;
+            ButtonFilterPredmet.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonFilterPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            GridFilterPredmet.Visibility = Visibility.Visible;
+            ButtonFilterPredmet.Visibility = Visibility.Collapsed;
+            ButtonPretragaPredmet.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void ButtonFilterSmer_Click(object sender, RoutedEventArgs e)
+        {
+            GridFilterSmer.Visibility = Visibility.Visible;
+            ButtonFilterSmer.Visibility = Visibility.Collapsed;
+            ButtonPretragaSmer.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void ButtonPretragaSmer_Click(object sender, RoutedEventArgs e)
+        {
+            GridPretragaSmer.Visibility = Visibility.Visible;
+            ButtonPretragaSmer.Visibility = Visibility.Collapsed;
+            ButtonFilterSmer.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void ButtonFilterSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            GridFilterSoftver.Visibility = Visibility.Visible;
+            ButtonFilterSoftver.Visibility = Visibility.Collapsed;
+            ButtonPretragaSoftver.Visibility = Visibility.Collapsed;
+        }
+
+        private void ButtonPretragaSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            GridPretragaSoftver.Visibility = Visibility.Visible;
+            ButtonPretragaSoftver.Visibility = Visibility.Collapsed;
+            ButtonFilterSoftver.Visibility = Visibility.Collapsed;
+
+        }
+
+
+        private void ButtonOtkaziPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            List<Predmet> u = otvoriPredmet();
+            Predmeti.Clear();
+            foreach (Predmet predmet in u)
+            {
+                Predmeti.Add(predmet);
+            }
+
+            GridPretragaPredmet.Visibility = Visibility.Collapsed;
+            ButtonPretragaPredmet.Visibility = Visibility.Visible;
+            ButtonFilterPredmet.Visibility = Visibility.Visible;
+            GridFilterPredmet.Visibility = Visibility.Collapsed;
+
+        }
+
+       
+
+        private void ButtonOtkaziSmer_Click(object sender, RoutedEventArgs e)
+        {
+            List<Smer> u = otvoriSmer();
+            Smerovi.Clear();
+            foreach (Smer smer in u)
+            {
+                Smerovi.Add(smer);
+            }
+
+            GridPretragaSmer.Visibility = Visibility.Collapsed;
+            ButtonPretragaSmer.Visibility = Visibility.Visible;
+            ButtonFilterSmer.Visibility = Visibility.Visible;
+            GridFilterSmer.Visibility = Visibility.Collapsed;
+
+        }
+
+       
+
+        private void ButtonOtkaziSoftver_Click(object sender, RoutedEventArgs e)
+        {
+            List<Softver> u = otvoriSoftver();
+            Softveri.Clear();
+            foreach (Softver softver in u)
+            {
+                Softveri.Add(softver);
+            }
+
+            GridPretragaSoftver.Visibility = Visibility.Collapsed;
+            ButtonPretragaSoftver.Visibility = Visibility.Visible;
+            ButtonFilterSoftver.Visibility = Visibility.Visible;
+            GridFilterSoftver.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            if (Pretraga == "")
+            {
+                List<Predmet> u = otvoriPredmet();
+                Predmeti.Clear();
+                foreach (Predmet predmet in u)
+                {
+                    Predmeti.Add(predmet);
+                }
+            }
+            else
+            {
+                if (Pretraga != null)
+                {
+                    List<Predmet> u = otvoriPredmet();
+                    string pretraga = Pretraga.ToUpper();
+                    if ((pretraga.IndexOf(" AND ") != -1) && (pretraga.IndexOf(" OR ") != -1))
+                    {
+                        Predmeti.Clear();
+                    }
+                    else if (pretraga.IndexOf(" AND ") != -1)
+                    {
+                        List<Dictionary<string, Predmet>> dicts = new List<Dictionary<string,Predmet>>();
+                        string[] andTokens = Regex.Split(pretraga, "AND");
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaPredmeta(u, andTokens[i]));
+                        }
+
+
+                        Predmeti.Clear();
+                        foreach (Predmet predmet in dicts[0].Values)
+                        {
+                            bool da = true;
+                            foreach (Dictionary<string, Predmet> d in dicts)
+                            {
+                                if (d.ContainsKey(predmet.Oznaka))
+                                {
+                                    da = true;
+                                }
+                                else
+                                {
+                                    da = false;
+                                    break;
+                                }
+                            }
+                            if (da)
+                            {
+                                Predmeti.Add(predmet);
+
+                            }
+
+                        }
+                    }
+                    else if (pretraga.IndexOf(" OR ") != -1)
+                    {
+                        List<Dictionary<string, Predmet>> dicts = new List<Dictionary<string, Predmet>>();
+                        string[] andTokens = Regex.Split(pretraga, "OR");
+
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaPredmeta(u, andTokens[i]));
+                        }
+
+                        Predmeti.Clear();
+                        Dictionary<string, Predmet> hash = new Dictionary<string, Predmet>();
+                        foreach (Dictionary<string, Predmet> d in dicts)
+                        {
+                            foreach (Predmet predmet in d.Values)
+                            {
+                                if (!hash.ContainsKey(predmet.Oznaka))
+                                {
+                                    Predmeti.Add(predmet);
+                                    hash.Add(predmet.Oznaka, predmet);
+                                }
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        Dictionary<string, Predmet> pretragaUc = pretragaPredmeta(u, Pretraga);
+
+                        Predmeti.Clear();
+                        foreach (Predmet predmet in pretragaUc.Values)
+                        {
+                            Predmeti.Add(predmet);
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        private Dictionary<string, Predmet> pretragaPredmeta(List<Predmet> predmeti, string kriterijum)
+        {
+            string[] tokens = kriterijum.Split(':');
+            string oznaka = tokens[0];
+
+            Dictionary<string, Predmet> u = new Dictionary<string, Predmet>();
+
+            //List<Ucionica> u = new List<Ucionica>(); 
+            if (oznaka.Trim().ToUpper() == "OZNAKA")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "OPIS")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.Opis.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "BROJ TERMINA")
+            {
+                int broj = -1;
+                bool res = Int32.TryParse(tokens[1].Trim(), out broj);
+                if (res)
+                {
+                    //   int brojRadnihMesta = Int32.Parse(tokens[1].Trim());
+                    foreach (Predmet predmet in predmeti)
+                    {
+                        if (predmet.BrojTermina == broj)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "DUZINA TERMINA")
+            {
+                int broj = -1;
+                bool res = Int32.TryParse(tokens[1].Trim(), out broj);
+                if (res)
+                {
+                    
+                    foreach (Predmet predmet in predmeti)
+                    {
+                        if (predmet.DuzinaTermina == broj)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "VELICINA GRUPE")
+            {
+                int broj = -1;
+                bool res = Int32.TryParse(tokens[1].Trim(), out broj);
+                if (res)
+                {
+                    
+                    foreach (Predmet predmet in predmeti)
+                    {
+                        if (predmet.VelicinaGrupe == broj)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "OS")
+            {
+
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.Sistem.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "PROJEKTOR")
+            {
+
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (predmet.TrebaProjektor)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!predmet.TrebaProjektor)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "TABLA")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (predmet.TrebaTabla)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!predmet.TrebaTabla)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "PAMETNA TABLA")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (tokens[1].Trim().ToUpper() == "IMA")
+                    {
+                        if (predmet.TrebaPametnaTabla)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+
+                    }
+                    if (tokens[1].Trim().ToUpper() == "NEMA")
+                    {
+                        if (!predmet.TrebaPametnaTabla)
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
+
+            }
+            return u;
+
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            if (Pretraga == "")
+            {
+                List<Smer> u = otvoriSmer();
+                Smerovi.Clear();
+                foreach (Smer smer in u)
+                {
+                    Smerovi.Add(smer);
+                }
+            }
+            else
+            {
+                if (Pretraga != null)
+                {
+                    List<Smer> u = otvoriSmer();
+                    string pretraga = Pretraga.ToUpper();
+                    if ((pretraga.IndexOf(" AND ") != -1) && (pretraga.IndexOf(" OR ") != -1))
+                    {
+                        Predmeti.Clear();
+                    }
+                    else if (pretraga.IndexOf(" AND ") != -1)
+                    {
+                        List<Dictionary<string, Smer>> dicts = new List<Dictionary<string, Smer>>();
+                        string[] andTokens = Regex.Split(pretraga, "AND");
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaSmera(u, andTokens[i]));
+                        }
+
+
+                        Smerovi.Clear();
+                        foreach (Smer smer in dicts[0].Values)
+                        {
+                            bool da = true;
+                            foreach (Dictionary<string, Smer> d in dicts)
+                            {
+                                if (d.ContainsKey(smer.Oznaka))
+                                {
+                                    da = true;
+                                }
+                                else
+                                {
+                                    da = false;
+                                    break;
+                                }
+                            }
+                            if (da)
+                            {
+                                Smerovi.Add(smer);
+
+                            }
+
+                        }
+                    }
+                    else if (pretraga.IndexOf(" OR ") != -1)
+                    {
+                        List<Dictionary<string, Smer>> dicts = new List<Dictionary<string, Smer>>();
+                        string[] andTokens = Regex.Split(pretraga, "OR");
+
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaSmera(u, andTokens[i]));
+                        }
+
+                        Smerovi.Clear();
+                        Dictionary<string, Smer> hash = new Dictionary<string, Smer>();
+                        foreach (Dictionary<string, Smer> d in dicts)
+                        {
+                            foreach (Smer smer in d.Values)
+                            {
+                                if (!hash.ContainsKey(smer.Oznaka))
+                                {
+                                    Smerovi.Add(smer);
+                                    hash.Add(smer.Oznaka, smer);
+                                }
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        Dictionary<string, Smer> pretragaUc = pretragaSmera(u, Pretraga);
+
+                        Smerovi.Clear();
+                        foreach (Smer smer in pretragaUc.Values)
+                        {
+                            Smerovi.Add(smer);
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        private Dictionary<string, Smer> pretragaSmera(List<Smer> smerovi, string kriterijum)
+        {
+            string[] tokens = kriterijum.Split(':');
+            string oznaka = tokens[0];
+
+            Dictionary<string, Smer> u = new Dictionary<string, Smer>();
+
+            //List<Ucionica> u = new List<Ucionica>(); 
+            if (oznaka.Trim().ToUpper() == "OZNAKA")
+            {
+                foreach (Smer smer  in smerovi)
+                {
+                    if (smer.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(smer.Oznaka, smer);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "OPIS")
+            {
+                foreach (Smer smer in smerovi)
+                {
+                    if (smer.Opis.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(smer.Oznaka, smer);
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "NAZIV")
+            {
+                foreach (Smer smer in smerovi)
+                {
+                    if (smer.Naziv.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(smer.Oznaka, smer);
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "SKRACENICA")
+            {
+                foreach (Smer smer in smerovi)
+                {
+                    if (smer.Skracenica.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(smer.Oznaka, smer);
+                    }
+                }
+            }
+           
+            return u;
+
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            if (Pretraga == "")
+            {
+                List<Softver> u = otvoriSoftver();
+                Softveri.Clear();
+                foreach (Softver softver in u)
+                {
+                    Softveri.Add(softver);
+                }
+            }
+            else
+            {
+                if (Pretraga != null)
+                {
+                    List<Softver> u = otvoriSoftver();
+                    string pretraga = Pretraga.ToUpper();
+                    if ((pretraga.IndexOf(" AND ") != -1) && (pretraga.IndexOf(" OR ") != -1))
+                    {
+                        Softveri.Clear();
+                    }
+                    else if (pretraga.IndexOf(" AND ") != -1)
+                    {
+                        List<Dictionary<string, Softver>> dicts = new List<Dictionary<string, Softver>>();
+                        string[] andTokens = Regex.Split(pretraga, "AND");
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaSoftvera(u, andTokens[i]));
+                        }
+
+
+                        Softveri.Clear();
+                        foreach (Softver softver in dicts[0].Values)
+                        {
+                            bool da = true;
+                            foreach (Dictionary<string, Softver> d in dicts)
+                            {
+                                if (d.ContainsKey(softver.Oznaka))
+                                {
+                                    da = true;
+                                }
+                                else
+                                {
+                                    da = false;
+                                    break;
+                                }
+                            }
+                            if (da)
+                            {
+                                Softveri.Add(softver);
+
+                            }
+
+                        }
+                    }
+                    else if (pretraga.IndexOf(" OR ") != -1)
+                    {
+                        List<Dictionary<string, Softver>> dicts = new List<Dictionary<string, Softver>>();
+                        string[] andTokens = Regex.Split(pretraga, "OR");
+
+                        for (int i = 0; i < andTokens.Count(); i++)
+                        {
+                            dicts.Add(pretragaSoftvera(u, andTokens[i]));
+                        }
+
+                        Softveri.Clear();
+                        Dictionary<string, Softver> hash = new Dictionary<string, Softver>();
+                        foreach (Dictionary<string, Softver> d in dicts)
+                        {
+                            foreach (Softver softver in d.Values)
+                            {
+                                if (!hash.ContainsKey(softver.Oznaka))
+                                {
+                                    Softveri.Add(softver);
+                                    hash.Add(softver.Oznaka, softver);
+                                }
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        Dictionary<string, Softver> pretragaUc = pretragaSoftvera(u, Pretraga);
+
+                        Softveri.Clear();
+                        foreach (Softver softver in pretragaUc.Values)
+                        {
+                            Softveri.Add(softver);
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        private Dictionary<string, Softver> pretragaSoftvera(List<Softver> softveri, string kriterijum)
+        {
+            string[] tokens = kriterijum.Split(':');
+            string oznaka = tokens[0];
+
+            Dictionary<string, Softver> u = new Dictionary<string, Softver>();
+
+            //List<Ucionica> u = new List<Ucionica>(); 
+            if (oznaka.Trim().ToUpper() == "OZNAKA")
+            {
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "OPIS")
+            {
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Opis.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "SAJT")
+            {
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Sajt.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+
+            }
+            else if (oznaka.Trim().ToUpper() == "PROIZVODJAC")
+            {
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Proizvodjac.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+
+            }
+           
+            else if (oznaka.Trim().ToUpper() == "GODINA")
+            {
+                int broj = -1;
+                bool res = Int32.TryParse(tokens[1].Trim(), out broj);
+                if (res)
+                {
+                    
+                    foreach (Softver softver in softveri)
+                    {
+                        if (softver.GodinaIzdavanja == broj)
+                        {
+                            u.Add(softver.Oznaka, softver);
+                        }
+                    }
+                }
+            }
+            else if (oznaka.Trim().ToUpper() == "CENA")
+            {
+                double broj = -1;
+                bool res = Double.TryParse(tokens[1].Trim(), out broj);
+                if (res)
+                {
+                  
+                    foreach (Softver softver in softveri)
+                    {
+                        if (softver.Cena == broj)
+                        {
+                            u.Add(softver.Oznaka, softver);
+                        }
+                    }
+                }
+            }
+            
+            else if (oznaka.Trim().ToUpper() == "OS")
+            {
+
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Sistem.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+            }
+           
+            return u;
 
         }
     }
