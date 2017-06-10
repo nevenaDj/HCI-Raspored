@@ -1,2 +1,4 @@
-16|True|True|True|Windows||1|22,2,
-16|False|True|True|Oba||2|2,1,
+32|False|True|True|Windows|RC 1|L1|
+16|False|True|True|Windows|RC 2|L2|
+32|False|True|True|Windows|RC 3|L3|
+16|False|True|True|Windows|RC 4|L5|

@@ -158,6 +158,8 @@ namespace Raspored.Tabele
             OS.Add("Ostalo");
 
             demoThread = null;
+            _greskaOznaka = false;
+            _index = -1;
 
 
         }
@@ -676,9 +678,11 @@ namespace Raspored.Tabele
             }
         }
 
+
         /***  REZIM ZA DODAVANJE NOVE UCIONICE ***/
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            _index = -1;
             GridPretraga.Visibility = Visibility.Collapsed;
             ButtonPretraga.Visibility = Visibility.Visible;
             ButtonFilter.Visibility = Visibility.Visible;
@@ -733,10 +737,15 @@ namespace Raspored.Tabele
             GridUcionice.IsEnabled = false;
             FocusManager.SetFocusedElement(this, dgrMainUcionica);
 
+            EUcionice.Visibility = Visibility.Collapsed;
+            _index = -1;
+
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
         private void SacuvajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+
+            EUcionice.Visibility = Visibility.Collapsed;
 
             Ucionice.Add(SelectedUcionica);
             SveUcionice.Add(SelectedUcionica);
@@ -760,13 +769,15 @@ namespace Raspored.Tabele
 
             sacuvajUcionicu();
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
-
+            _index = -1;
             e.Handled = true;
+
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
         private void IzbrisiUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+
             MessageBoxResult res = MessageBox.Show(
                 "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " + 
                 SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo, 
@@ -824,8 +835,6 @@ namespace Raspored.Tabele
         private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
-           // MessageBox.Show(SelectedUcionica.Oznaka + " " + SelectedUcionica.Opis + " " + SelectedUcionica.ImaProjektor);
-
             Ucionice[_index] = SelectedUcionica;
             SveUcionice[_index] = SelectedUcionica;
 
@@ -842,6 +851,7 @@ namespace Raspored.Tabele
 
             GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
+            _index = -1;
 
 
 
@@ -852,6 +862,7 @@ namespace Raspored.Tabele
         private void IzmenaOdustaniUcionica_Click(object sender, RoutedEventArgs e)
         {
             SelectedUcionica = Ucionice[_index];
+            _index = -1;
 
             SacuvajIzmenuUcionice.Visibility = Visibility.Hidden;
             IzmenaOdustaniUcionica.Visibility = Visibility.Hidden;
@@ -1958,13 +1969,16 @@ namespace Raspored.Tabele
         {
             if (_greskeDodavanje == 0)
             {
-                if (SelectedPredmet != null)
+                if (!_greskaOznaka)
                 {
-                    if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != ""
-                        && SelectedPredmet.Skracenica != "")
+                    if (SelectedPredmet != null)
                     {
-                        e.CanExecute = true;
-                        e.Handled = true;
+                        if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != ""
+                            && SelectedPredmet.Skracenica != "")
+                        {
+                            e.CanExecute = true;
+                            e.Handled = true;
+                        }
                     }
                 }
 
@@ -1976,13 +1990,16 @@ namespace Raspored.Tabele
         {
             if (_greskeDodavanje == 0)
             {
-                if (SelectedUcionica != null)
+                if (!_greskaOznaka)
                 {
-                    if (SelectedUcionica.Oznaka != "")
+                    if (SelectedUcionica != null)
                     {
-                        e.CanExecute = true;
-                        e.Handled = true;
+                        if (SelectedUcionica.Oznaka != "")
+                        {
+                            e.CanExecute = true;
+                            e.Handled = true;
 
+                        }
                     }
                 }
             }
@@ -2013,8 +2030,25 @@ namespace Raspored.Tabele
 
         private void IzmeniUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeIzmena == 0;
-            e.Handled = true;
+
+            if (_greskeIzmena == 0)
+            {
+                if (!_greskaOznaka)
+                {
+                    if (SelectedUcionica != null)
+                    {
+                        if (SelectedUcionica.Oznaka != "")
+                        {
+                            e.CanExecute = true;
+                            e.Handled = true;
+
+                        }
+                    }
+                }
+            }
+
+
+
         }
 
         private void IzmeniSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2805,7 +2839,7 @@ namespace Raspored.Tabele
         {
             if (SelectedTabPredmeti)
             {
-                FocusManager.SetFocusedElement(this,TabPr);
+                FocusManager.SetFocusedElement(this,dgrMainPredmet);
 
             }
             else if (SelectedTabSmer)
@@ -2820,7 +2854,7 @@ namespace Raspored.Tabele
             }
             else if (SelectedTabUcionice)
             {
-                FocusManager.SetFocusedElement(this,TabUc);
+                FocusManager.SetFocusedElement(this,dgrMainUcionica);
 
             }
 
@@ -2831,6 +2865,52 @@ namespace Raspored.Tabele
             if (demoThread != null)
             {
                 demoThread.Abort();
+            }
+
+        }
+
+        private bool _greskaOznaka;
+
+        private void Box_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Box.Text == "")
+            {
+                EUcionice.Text = "Polje ne sme ostati prazno.";
+                EUcionice.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+
+
+                bool ima = false;
+                for (int i = 0; i < Ucionice.Count; i++)
+                {
+                    if (_index == i)
+                    {
+                        continue;
+                    }
+                    if (Ucionice[i].Oznaka == Box.Text)
+                    {
+                        ima = true;
+                        break;
+                    }
+                    
+                }
+
+
+                if (!ima)
+                {
+                    EUcionice.Visibility = Visibility.Collapsed;
+                    _greskaOznaka = false;
+
+                }
+                else
+                {
+                    EUcionice.Text = " Oznaka ucionice mora biti jedinstvena.";
+                    EUcionice.Visibility = Visibility.Visible;
+                    _greskaOznaka = true;
+                }
             }
 
         }

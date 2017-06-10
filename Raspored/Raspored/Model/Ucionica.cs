@@ -26,6 +26,9 @@ namespace Raspored.Model
         private bool _imaTabla;
         private bool _imaPametnaTabla;
         private string _sistem;
+        private string _projektor;
+        private string _tabla;
+        private string _pametnaTabla;
 
         public List<Softver> Softveri
         {
@@ -48,6 +51,34 @@ namespace Raspored.Model
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");
             Sistemi.Add("Oba");
+
+            if (_imaProjektor)
+            {
+                Projektor = "Ima";
+            }
+            else
+            {
+                Projektor = "Nema";
+            }
+
+            if (_imaTabla)
+            {
+                Tabla = "Ima";
+            }
+            else
+            {
+                Tabla = "Nema";
+            }
+
+            if (_imaPametnaTabla)
+            {
+                PametnaTabla = "Ima";
+            }
+            else
+            {
+                PametnaTabla = "Nema";
+            }
+
         }
 
         public Ucionica(string oznaka, string opis, int brojRadnihMesta, 
@@ -61,6 +92,29 @@ namespace Raspored.Model
             _imaPametnaTabla = imaPametnaTabla;
             Softveri = softver;
             _sistem = sistem;
+            if (_imaProjektor)
+            {
+                Projektor = "Ima";
+            }else
+            {
+                Projektor = "Nema";
+            }
+
+            if (_imaTabla)
+            {
+                Tabla = "Ima";
+            }else
+            {
+                Tabla = "Nema";
+            }
+
+            if (_imaPametnaTabla)
+            {
+                PametnaTabla = "Ima";
+            }else
+            {
+                PametnaTabla = "Nema";
+            }
 
 
             Sistemi = new ObservableCollection<string>();
@@ -128,6 +182,13 @@ namespace Raspored.Model
                 if (_imaProjektor != value)
                 {
                     _imaProjektor = value;
+                    if (_imaProjektor)
+                    {
+                        Projektor = "Ima";
+                    }else
+                    {
+                        Projektor = "Nema";
+                    }
                     OnPropertyChanged("ImaProjektor");
                 }
             }
@@ -144,6 +205,13 @@ namespace Raspored.Model
                 if (_imaTabla != value)
                 {
                     _imaTabla = value;
+                    if (_imaTabla)
+                    {
+                        Tabla = "Ima";
+                    }else
+                    {
+                        Tabla = "Nema";
+                    }
                     OnPropertyChanged("ImaTabla");
                 }
             }
@@ -160,6 +228,13 @@ namespace Raspored.Model
                 if (_imaPametnaTabla != value)
                 {
                     _imaPametnaTabla = value;
+                    if (_imaPametnaTabla)
+                    {
+                        PametnaTabla = "Ima";
+                    }else
+                    {
+                        PametnaTabla = "Nema";
+                    }
                     OnPropertyChanged("ImaPametnaTabla");
                 }
             }
@@ -188,5 +263,51 @@ namespace Raspored.Model
             set;
         }
         public object OperativniSistem { get; internal set; }
+
+        public string Projektor
+        {
+            get
+            {
+                return _projektor;
+            }
+            set
+            {
+                if (_projektor != value)
+                {
+                    _projektor = value;
+                    OnPropertyChanged("Projektor");
+                }
+            }
+        }
+        public string Tabla
+        {
+            get
+            {
+                return _tabla;
+            }
+            set
+            {
+                if (_tabla != value)
+                {
+                    _tabla = value;
+                    OnPropertyChanged("Tabla");
+                }
+            }
+        }
+        public string PametnaTabla
+        {
+            get
+            {
+                return _pametnaTabla;
+            }
+            set
+            {
+                if (_pametnaTabla != value)
+                {
+                    _pametnaTabla = value;
+                    OnPropertyChanged("PametnaTabla");
+                }
+            }
+        }
     }
 }

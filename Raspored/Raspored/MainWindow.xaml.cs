@@ -78,6 +78,7 @@ namespace Raspored
             var r = new DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
             r.sacuvajRaspored();
+          
 
         }
 

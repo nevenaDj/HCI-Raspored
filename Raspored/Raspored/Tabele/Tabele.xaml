@@ -9,9 +9,9 @@
     xmlns:model="clr-namespace:Raspored.Model"
     xmlns:val="clr-namespace:Raspored.Tabele"
     Title="Tabele"
-    Width="1100"
+    Width="1150"
     Height="650"
-    MinWidth="1100"
+    MinWidth="1150"
     MinHeight="650"
     l:HelpProvider.HelpKey="Tab"
     Activated="HandleWindowActivated"
@@ -101,10 +101,7 @@
                                 CanExecute="RezimIzmeniUcionicu_CanExecute"
                                 Command="local:Komande.Brisanje"
                                 Executed="IzbrisiUcionicu_Executed" />
-
                             <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
-
-
                         </Grid.CommandBindings>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="39*" />
@@ -128,7 +125,6 @@
                             BorderThickness="4"
                             CornerRadius="8,8,3,3">
                             <Grid x:Name="Grid1" l:HelpProvider.HelpKey="Tabele">
-
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
@@ -319,52 +315,44 @@
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
 
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn
-                                            Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
-                                            Header="Oznaka">
+                                        <DataGridTemplateColumn Width="Auto" Header="Oznaka">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <TextBlock l:HelpProvider.HelpKey="Tabele" Text="{Binding Oznaka}" />
+                                                        <TextBlock Text="{Binding Oznaka}" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding Opis}"
                                             CanUserSort="False"
                                             Header="Opis" />
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding BrojRadnihMesta}"
                                             CanUserSort="False"
                                             Header="Broj radnih mesta" />
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
                                             Binding="{Binding Sistem}"
                                             CanUserSort="False"
                                             Header="Operativni sistem" />
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
-                                            Binding="{Binding ImaTabla}"
-                                            CanUserSort="False"
-                                            Header="Ima tablu" />
-                                        <DataGridTextColumn
-                                            Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
-                                            Binding="{Binding ImaProjektor}"
+                                            Binding="{Binding Projektor}"
                                             CanUserSort="False"
                                             Header="Ima projektor" />
                                         <DataGridTextColumn
                                             Width="Auto"
-                                            l:HelpProvider.HelpKey="Tabele"
-                                            Binding="{Binding ImaPametnaTabla}"
+                                            Binding="{Binding Tabla}"
+                                            CanUserSort="False"
+                                            Header="Ima tablu" />
+
+                                        <DataGridTextColumn
+                                            Width="Auto"
+                                            Binding="{Binding PametnaTabla}"
                                             CanUserSort="False"
                                             Header="Ima pametnu tablu" />
                                     </DataGrid.Columns>
@@ -505,6 +493,15 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0">Oznaka*</TextBlock>
+                                <TextBlock
+                                    x:Name="EUcionice"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Margin="0,0,0,0"
+                                    Foreground="Red"
+                                    Visibility="Collapsed">
+                                    Oznaka ucionice mora biti jedinstvena.
+                                </TextBlock>
                                 <TextBlock Grid.Row="1" Grid.Column="0">Opis</TextBlock>
                                 <TextBlock
                                     Grid.Row="3"
@@ -617,10 +614,11 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Grid.ColumnSpan="2"
-                                    Width="119"
+                                    Width="125"
                                     Margin="0,0,0,4"
                                     HorizontalAlignment="Left"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
+                                    LostFocus="Box_LostFocus"
                                     Text="{Binding Path=Oznaka}" />
                                 <TextBox
                                     x:Name="OpisBox"
