@@ -754,12 +754,16 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="47*" />
                             <ColumnDefinition Width="939*" />
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Padding="8"
                             l:HelpProvider.HelpKey="PrikazPredmeta"
@@ -781,6 +785,7 @@
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -789,9 +794,149 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+                                <Grid
+                                    x:Name="GridPretragaPredmet"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="4"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Top">
+                                        Pretraga
+                                    </TextBlock>
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Width="500"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Text="{Binding Pretraga}" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="Button_Click_5">
+                                        Pretrazi
+                                    </Button>
+                                    <Button
+                                        x:Name="ButtonOtkaziPredmet"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="ButtonOtkaziPredmet_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    x:Name="GridFilterPredmet"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Projektor}"
+                                        SelectedValue="{Binding IzabraniProjektor}"
+                                        SelectionChanged="ComboBox_SelectionChanged_1" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Tabla}"
+                                        SelectedValue="{Binding IzabranaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_2" />
+                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="5"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding PametnaTabla}"
+                                        SelectedValue="{Binding IzabranaPametnaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_3" />
+
+                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="7"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding OS}"
+                                        SelectedValue="{Binding IzabraniOS}"
+                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                    <Button
+                                        x:Name="ButtonOtkaziFilterPredmet"
+                                        Grid.Row="0"
+                                        Grid.Column="8"
+                                        Width="80"
+                                        Margin="100,0,2,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Click="ButtonOtkaziPredmet_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Button
+                                    x:Name="ButtonPretragaPredmet"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonPretragaPredmet_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Pretraga
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilterPredmet"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonFilterPredmet_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Filter
+                                </Button>
+
                                 <DataGrid
                                     x:Name="dgrMainPredmet"
-                                    Grid.Row="0"
+                                    Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="3"
                                     l:HelpProvider.HelpKey="PrikazPredmeta"
@@ -848,7 +993,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="0"
                                     Width="150"
                                     Margin="0,5,5,15"
@@ -859,7 +1004,7 @@
                                     Dodaj novi predmet
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="1"
                                     Width="120"
                                     Margin="0,5,5,15"
@@ -870,7 +1015,7 @@
                                     Izmeni predmet
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="2"
                                     Width="120"
                                     Margin="0,5,5,15"
@@ -1402,6 +1547,7 @@
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -1412,9 +1558,148 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+                                <Grid
+                                    x:Name="GridPretragaSmer"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="4"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Top">
+                                        Pretraga
+                                    </TextBlock>
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Width="500"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Text="{Binding Pretraga}" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="Button_Click_6">
+                                        Pretrazi
+                                    </Button>
+                                    <Button
+                                        x:Name="ButtonOtkaziSmer"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="ButtonOtkaziSmer_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    x:Name="GridFilterSmer"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Projektor}"
+                                        SelectedValue="{Binding IzabraniProjektor}"
+                                        SelectionChanged="ComboBox_SelectionChanged_1" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Tabla}"
+                                        SelectedValue="{Binding IzabranaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_2" />
+                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="5"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding PametnaTabla}"
+                                        SelectedValue="{Binding IzabranaPametnaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_3" />
+
+                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="7"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding OS}"
+                                        SelectedValue="{Binding IzabraniOS}"
+                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                    <Button
+                                        x:Name="ButtonOtkaziFilterSmer"
+                                        Grid.Row="0"
+                                        Grid.Column="8"
+                                        Width="80"
+                                        Margin="100,0,2,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Click="ButtonOtkaziSmer_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Button
+                                    x:Name="ButtonPretragaSmer"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonPretragaSmer_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Pretraga
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilterSmer"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonFilterSmer_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Filter
+                                </Button>
                                 <DataGrid
                                     x:Name="dgrMainSmer"
-                                    Grid.Row="0"
+                                    Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="5"
                                     l:HelpProvider.HelpKey="PrikazSmera"
@@ -1460,7 +1745,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="2"
                                     Width="150"
                                     Margin="0,5,5,15"
@@ -1471,7 +1756,7 @@
                                     Dodaj novi smer
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="3"
                                     Width="120"
                                     Margin="0,5,5,15"
@@ -1482,7 +1767,7 @@
                                     Izmeni smer
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="4"
                                     Width="120"
                                     Margin="0,5,5,15"
@@ -1670,6 +1955,7 @@
 
                                 </Grid.CommandBindings>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -1678,9 +1964,148 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+                                <Grid
+                                    x:Name="GridPretragaSoftver"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="4"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Top">
+                                        Pretraga
+                                    </TextBlock>
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Width="500"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Text="{Binding Pretraga}" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="Button_Click_7">
+                                        Pretrazi
+                                    </Button>
+                                    <Button
+                                        x:Name="ButtonOtkaziSoftver"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Width="80"
+                                        Margin="2,0,2,5"
+                                        HorizontalAlignment="Left"
+                                        Click="ButtonOtkaziSoftver_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    x:Name="GridFilterSoftver"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
+                                    Visibility="Collapsed">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Projektor}"
+                                        SelectedValue="{Binding IzabraniProjektor}"
+                                        SelectionChanged="ComboBox_SelectionChanged_1" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding Tabla}"
+                                        SelectedValue="{Binding IzabranaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_2" />
+                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="5"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding PametnaTabla}"
+                                        SelectedValue="{Binding IzabranaPametnaTabla}"
+                                        SelectionChanged="ComboBox_SelectionChanged_3" />
+
+                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        Grid.Column="7"
+                                        Margin="5,0,30,5"
+                                        ItemsSource="{Binding OS}"
+                                        SelectedValue="{Binding IzabraniOS}"
+                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                    <Button
+                                        x:Name="ButtonOtkaziFilterSoftver"
+                                        Grid.Row="0"
+                                        Grid.Column="8"
+                                        Width="80"
+                                        Margin="100,0,2,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Click="ButtonOtkaziSoftver_Click">
+                                        Otkazi
+                                    </Button>
+                                </Grid>
+                                <Button
+                                    x:Name="ButtonPretragaSoftver"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Width="80"
+                                    Margin="10,0,2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonPretragaSoftver_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Pretraga
+                                </Button>
+                                <Button
+                                    x:Name="ButtonFilterSoftver"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="80"
+                                    Margin="0,0,2,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Click="ButtonFilterSoftver_Click"
+                                    IsEnabled="{Binding EnableDodaj}">
+                                    Filter
+                                </Button>
                                 <DataGrid
                                     x:Name="dgrMainSoftver"
-                                    Grid.Row="0"
+                                    Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="3"
                                     l:HelpProvider.HelpKey="PrikazSoftvera"
@@ -1745,7 +2170,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="0"
                                     Width="150"
                                     Margin="0,5,5,15"
@@ -1756,7 +2181,7 @@
                                     Dodaj novi softver
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="1"
                                     Width="120"
                                     Margin="0,5,5,15"
@@ -1767,7 +2192,7 @@
                                     Izmeni softver
                                 </Button>
                                 <Button
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     Grid.Column="2"
                                     Width="120"
                                     Margin="0,5,5,15"
