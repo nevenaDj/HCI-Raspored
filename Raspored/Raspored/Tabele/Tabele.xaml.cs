@@ -1311,11 +1311,22 @@ namespace Raspored.Tabele
 
                 }
             }
+            MessageBoxResult res;
+            if (i)
+            {
+                poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
+                res = MessageBox.Show(
+                    poruka, "Brisanje smera", MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning, MessageBoxResult.No);
+            }else
+            {
+                res = MessageBox.Show(
+                    "Da li ste sigurni da želite da obišete smer " +
+                    SelectedSmer.Naziv + "?",
+                    "Brisanje smera", MessageBoxButton.YesNo,
+                   MessageBoxImage.Warning, MessageBoxResult.No);
 
-            poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
-            MessageBoxResult res = MessageBox.Show(
-                poruka, "Brisanje smera", MessageBoxButton.YesNo,
-                MessageBoxImage.Warning, MessageBoxResult.No);
+            }
             if (res == MessageBoxResult.Yes)
             {
                 foreach(Predmet p in Predmeti)
@@ -1597,22 +1608,65 @@ namespace Raspored.Tabele
                         }
                         else
                         {
-                            poruka = "Ukoliko izbrišete softver " + SelectedSoftver.Naziv + "\n" +
-                                "Uklonićete ga iz liste softvera u učionicama: " + "\n    - " +
-                                u.Oznaka;
+                            if (i)
+                            {
+                                poruka += "\n\n" +
+                                    "Uklonićete ga iz liste softvera u učionicama: " + "\n    - " +
+                                    u.Oznaka;
+                            }else
+                            {
+                                poruka = "Ukoliko izbrišete softver " + SelectedSoftver.Naziv + "\n" +
+                                   "Uklonićete ga iz liste softvera u učionicama: " + "\n    - " +
+                                   u.Oznaka;
+
+                            }
                             j = true;
                         }
 
                     }
                 }
             }
+            MessageBoxResult res;
+            if (i || j)
+            {
 
-            poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
-            MessageBoxResult res = MessageBox.Show(
-              poruka, "Brisanje softvera", MessageBoxButton.YesNo,
-              MessageBoxImage.Warning, MessageBoxResult.No);
+                poruka += "\n\nDa li ste sigurni da želite da nastavite? ";
+                res = MessageBox.Show(
+                  poruka, "Brisanje softvera", MessageBoxButton.YesNo,
+                  MessageBoxImage.Warning, MessageBoxResult.No);
+            }else
+            {
+
+                res = MessageBox.Show(
+                 "Da li ste sigurni da želite da obišete softver koja ima oznaku  " +
+                SelectedSoftver.Oznaka + "?", "Brisanje softvera", MessageBoxButton.YesNo,
+                  MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
             if (res == MessageBoxResult.Yes)
             {
+             /*   foreach (Predmet p in Predmeti)
+                {
+                    foreach (Softver s in p.Softveri)
+                    {
+                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        {
+                            p.Softveri.Remove(s);
+
+                        }
+                    }
+                }
+                foreach (Ucionica u in Ucionice)
+                {
+                    foreach (Softver s in u.Softveri)
+                    {
+                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        {
+                            u.Softveri.Remove(s);
+
+                        }
+                    }
+                }*/
                 Softveri.Remove(SelectedSoftver);
                 if (Softveri.Count <= 0)
                 {
@@ -1620,6 +1674,7 @@ namespace Raspored.Tabele
                     EnablePromeniSoftver = "False";
                 }
                 sacuvajSoftver();
+
             }
 
         }
