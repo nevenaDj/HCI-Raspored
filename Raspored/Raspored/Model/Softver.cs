@@ -38,7 +38,7 @@ namespace Raspored.Model
             Sistemi = new ObservableCollection<string>();
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");
-            Sistemi.Add("Oba");
+            Sistemi.Add("Cross-platform");
         }
 
         public Softver(string oznaka, string naziv, string proizvodjac,
@@ -56,7 +56,7 @@ namespace Raspored.Model
             Sistemi = new ObservableCollection<string>();
             Sistemi.Add("Windows");
             Sistemi.Add("Linux");
-            Sistemi.Add("Oba");
+            Sistemi.Add("Cross-platform");
         }
 
 

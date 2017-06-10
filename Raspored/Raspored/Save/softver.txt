@@ -1,3 +1,6 @@
-1|1|0|0|Oba|0|0|0
-2|2|0|0|0|0|0|2
-22||0|0|0|0||
+1|1|0|2017|Oba|Oba|0|0
+2|2|0|2017|0|0|0|0
+22||0|2017|0|0|0|0
+qq|jjj|0|2017|Windows|s||
+jaaa|jaaaa|0|2017|Windows||proizvodajac|
+oznaka|naziv|150|2017|Windows|opis|prozivodjac|sajt

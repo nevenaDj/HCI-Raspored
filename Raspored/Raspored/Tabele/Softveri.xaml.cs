@@ -247,11 +247,12 @@ namespace Raspored.Tabele
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                s.Oznaka = sf[3];
-              
-                s.Opis = sf[4];
-                s.Proizvodjac = sf[5];
-                s.Sajt = sf[6];
+                s.GodinaIzdavanja = Convert.ToInt32(sf[3]);
+                s.Sistem = sf[4];
+
+                s.Opis = sf[5];
+                s.Proizvodjac = sf[6];
+                s.Sajt = sf[7].Trim();
 
                 softveri.Add(s);
             }
