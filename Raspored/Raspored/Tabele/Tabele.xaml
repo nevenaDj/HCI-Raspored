@@ -869,34 +869,34 @@
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="5,0,30,5"
-                                        ItemsSource="{Binding Projektor}"
-                                        SelectedValue="{Binding IzabraniProjektor}"
-                                        SelectionChanged="ComboBox_SelectionChanged_1" />
+                                        ItemsSource="{Binding ProjektorPredmet}"
+                                        SelectedValue="{Binding IzabraniProjektorPredmet}"
+                                        SelectionChanged="ComboBox_SelectionChanged_7" />
                                     <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
                                     <ComboBox
                                         Grid.Row="0"
                                         Grid.Column="3"
                                         Margin="5,0,30,5"
-                                        ItemsSource="{Binding Tabla}"
-                                        SelectedValue="{Binding IzabranaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_2" />
+                                        ItemsSource="{Binding TablaPredmet}"
+                                        SelectedValue="{Binding IzabranaTablaPredmet}"
+                                        SelectionChanged="ComboBox_SelectionChanged_5" />
                                     <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
                                     <ComboBox
                                         Grid.Row="0"
                                         Grid.Column="5"
                                         Margin="5,0,30,5"
-                                        ItemsSource="{Binding PametnaTabla}"
-                                        SelectedValue="{Binding IzabranaPametnaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_3" />
+                                        ItemsSource="{Binding PametnaTablaPredmet}"
+                                        SelectedValue="{Binding IzabranaPametnaTablaPredmet}"
+                                        SelectionChanged="ComboBox_SelectionChanged_6" />
 
                                     <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
                                     <ComboBox
                                         Grid.Row="0"
                                         Grid.Column="7"
                                         Margin="5,0,30,5"
-                                        ItemsSource="{Binding OS}"
-                                        SelectedValue="{Binding IzabraniOS}"
-                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                        ItemsSource="{Binding OSPredmet}"
+                                        SelectedValue="{Binding IzabraniOSPredmet}"
+                                        SelectionChanged="ComboBox_SelectionChanged_8" />
                                     <Button
                                         x:Name="ButtonOtkaziFilterPredmet"
                                         Grid.Row="0"
@@ -1643,39 +1643,18 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
-                                    <ComboBox
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="0,5,0,2">
+                                        Datum uvodjenja
+                                    </TextBlock>
+                                    <DatePicker
+                                        x:Name="DataPic"
                                         Grid.Row="0"
                                         Grid.Column="1"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding Projektor}"
-                                        SelectedValue="{Binding IzabraniProjektor}"
-                                        SelectionChanged="ComboBox_SelectionChanged_1" />
-                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="3"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding Tabla}"
-                                        SelectedValue="{Binding IzabranaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_2" />
-                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="5"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding PametnaTabla}"
-                                        SelectedValue="{Binding IzabranaPametnaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_3" />
-
-                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="7"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding OS}"
-                                        SelectedValue="{Binding IzabraniOS}"
-                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                        Margin="10,2,2,5"
+                                        SelectedDateChanged="DatePicker_SelectedDateChanged" />
                                     <Button
                                         x:Name="ButtonOtkaziFilterSmer"
                                         Grid.Row="0"
@@ -2064,39 +2043,16 @@
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="0">Projektor</TextBlock>
+
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0">Operativni sistem</TextBlock>
                                     <ComboBox
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="5,0,30,5"
-                                        ItemsSource="{Binding Projektor}"
-                                        SelectedValue="{Binding IzabraniProjektor}"
-                                        SelectionChanged="ComboBox_SelectionChanged_1" />
-                                    <TextBlock Grid.Row="0" Grid.Column="2">Tabla</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="3"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding Tabla}"
-                                        SelectedValue="{Binding IzabranaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_2" />
-                                    <TextBlock Grid.Row="0" Grid.Column="4">Pametna tabla</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="5"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding PametnaTabla}"
-                                        SelectedValue="{Binding IzabranaPametnaTabla}"
-                                        SelectionChanged="ComboBox_SelectionChanged_3" />
-
-                                    <TextBlock Grid.Row="0" Grid.Column="6">Operativni sistem</TextBlock>
-                                    <ComboBox
-                                        Grid.Row="0"
-                                        Grid.Column="7"
-                                        Margin="5,0,30,5"
-                                        ItemsSource="{Binding OS}"
-                                        SelectedValue="{Binding IzabraniOS}"
-                                        SelectionChanged="ComboBox_SelectionChanged" />
+                                        ItemsSource="{Binding OSSoftver}"
+                                        SelectedValue="{Binding IzabraniOSSoftver}"
+                                        SelectionChanged="ComboBox_SelectionChanged_4" />
                                     <Button
                                         x:Name="ButtonOtkaziFilterSoftver"
                                         Grid.Row="0"
@@ -2170,9 +2126,9 @@
                                         <DataGridTextColumn
                                             Width="Auto"
                                             l:HelpProvider.HelpKey="PrikazSoftvera"
-                                            Binding="{Binding Proizvođač}"
+                                            Binding="{Binding Proizvodjac}"
                                             CanUserSort="False"
-                                            Header="Proizvodjac" />
+                                            Header="Proizvođač" />
                                         <DataGridTextColumn
                                             Width="Auto"
                                             l:HelpProvider.HelpKey="PrikazSoftvera"

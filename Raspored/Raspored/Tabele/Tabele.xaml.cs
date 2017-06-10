@@ -155,7 +155,29 @@ namespace Raspored.Tabele
             OS.Add("");
             OS.Add("Windows");
             OS.Add("Linux");
-            OS.Add("Ostalo");
+            OS.Add("Oba");
+            OSSoftver = new ObservableCollection<string>();
+            OSSoftver.Add("");
+            OSSoftver.Add("Windows");
+            OSSoftver.Add("Linux");
+            OSSoftver.Add("Cross-platform");
+            ProjektorPredmet = new ObservableCollection<string>();
+            ProjektorPredmet.Add("");
+            ProjektorPredmet.Add("Ima");
+            ProjektorPredmet.Add("Nema");
+            TablaPredmet = new ObservableCollection<string>();
+            TablaPredmet.Add("");
+            TablaPredmet.Add("Ima");
+            TablaPredmet.Add("Nema");
+            PametnaTablaPredmet = new ObservableCollection<string>();
+            PametnaTablaPredmet.Add("");
+            PametnaTablaPredmet.Add("Ima");
+            PametnaTablaPredmet.Add("Nema");
+            OSPredmet = new ObservableCollection<string>();
+            OSPredmet.Add("");
+            OSPredmet.Add("Windows");
+            OSPredmet.Add("Linux");
+            OSPredmet.Add("Svejedno");
 
             demoThread = null;
             _greskaOznaka = false;
@@ -1854,11 +1876,12 @@ namespace Raspored.Tabele
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                s.Sistem = sf[3];
+                s.GodinaIzdavanja = Convert.ToInt32(sf[3]);
+                s.Sistem = sf[4];
 
-                s.Opis = sf[4];
-                s.Proizvodjac = sf[5];
-                s.Sajt = sf[6];
+                s.Opis = sf[5];
+                s.Proizvodjac = sf[6];
+                s.Sajt = sf[7].Trim();
 
                 softveri.Add(s);
             }
@@ -2650,7 +2673,17 @@ namespace Raspored.Tabele
             get;
             set;
         }
+        public ObservableCollection<string> ProjektorPredmet
+        {
+            get;
+            set;
+        }
         public ObservableCollection<string> Tabla
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<string> TablaPredmet
         {
             get;
             set;
@@ -2660,7 +2693,23 @@ namespace Raspored.Tabele
             get;
             set;
         }
+        public ObservableCollection<string> PametnaTablaPredmet
+        {
+            get;
+            set;
+        }
         public ObservableCollection<string> OS
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<string> OSPredmet
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<string> OSSoftver
         {
             get;
             set;
@@ -2682,6 +2731,22 @@ namespace Raspored.Tabele
                 }
             }
         }
+        private string _izabraniProjektorPredmet;
+        public string IzabraniProjektorPredmet
+        {
+            get
+            {
+                return _izabraniProjektorPredmet;
+            }
+            set
+            {
+                if (_izabraniProjektorPredmet != value)
+                {
+                    _izabraniProjektorPredmet = value;
+                    OnPropertyChanged("IzabraniProjektorPredmet");
+                }
+            }
+        }
 
         private string _izabranaTabla;
         public string IzabranaTabla
@@ -2699,6 +2764,22 @@ namespace Raspored.Tabele
                 }
             }
         }
+        private string _izabranaTablaPredmet;
+        public string IzabranaTablaPredmet
+        {
+            get
+            {
+                return _izabranaTablaPredmet;
+            }
+            set
+            {
+                if (_izabranaTablaPredmet != value)
+                {
+                    _izabranaTablaPredmet = value;
+                    OnPropertyChanged("IzabranaTablaPredmet");
+                }
+            }
+        }
 
         private string _izabranaPametnaTabla;
         public string IzabranaPametnaTabla
@@ -2712,7 +2793,23 @@ namespace Raspored.Tabele
                 if (_izabranaPametnaTabla != value)
                 {
                     _izabranaPametnaTabla = value;
-                    OnPropertyChanged("IzabranaTabla");
+                    OnPropertyChanged("IzabranaPametnaTabla");
+                }
+            }
+        }
+        private string _izabranaPametnaTablaPredmet;
+        public string IzabranaPametnaTablaPredmet
+        {
+            get
+            {
+                return _izabranaPametnaTablaPredmet;
+            }
+            set
+            {
+                if (_izabranaPametnaTablaPredmet != value)
+                {
+                    _izabranaPametnaTablaPredmet = value;
+                    OnPropertyChanged("IzabranaPametnaTablaPredmet");
                 }
             }
         }
@@ -2730,6 +2827,38 @@ namespace Raspored.Tabele
                 {
                     _izabraniOS= value;
                     OnPropertyChanged("IzabraniOS");
+                }
+            }
+        }
+        private string _izabraniOSPredmet;
+        public string IzabraniOSPredmet
+        {
+            get
+            {
+                return _izabraniOSPredmet;
+            }
+            set
+            {
+                if (_izabraniOSPredmet != value)
+                {
+                    _izabraniOSPredmet = value;
+                    OnPropertyChanged("IzabraniOSPredmet");
+                }
+            }
+        }
+        private string _izabraniOSSoftver;
+        public string IzabraniOSSoftver
+        {
+            get
+            {
+                return _izabraniOSSoftver;
+            }
+            set
+            {
+                if (_izabraniOSSoftver != value)
+                {
+                    _izabraniOSSoftver = value;
+                    OnPropertyChanged("IzabraniOSSoftver");
                 }
             }
         }
@@ -3916,6 +4045,192 @@ namespace Raspored.Tabele
             {
                 Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
 
+            }
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("" + DataPic.SelectedDate);
+            Smerovi.Clear();
+            List<Smer> u = otvoriSmer();
+
+            foreach (Smer smer in u)
+            {
+                if (smer.DatumUvodjenja == DataPic.SelectedDate)
+                {
+                    Smerovi.Add(smer);
+                }
+
+            }
+        }
+
+        private void ComboBox_SelectionChanged_4(object sender, SelectionChangedEventArgs e)
+        {
+            if (IzabraniOSSoftver == "")
+            {
+                List<Softver> u = otvoriSoftver();
+                Softveri.Clear();
+                foreach (Softver softver in u)
+                {
+                    Softveri.Add(softver);
+                }
+            }
+            else
+            {
+                Softveri.Clear();
+                List<Softver> u = otvoriSoftver();
+
+                foreach (Softver softver in u)
+                {
+                    if (softver.Sistem == IzabraniOSSoftver)
+                    {
+                        Softveri.Add(softver);
+                    }
+                }
+            }
+        }
+
+        private void ComboBox_SelectionChanged_5(object sender, SelectionChangedEventArgs e)
+        {
+            Predmeti.Clear();
+            List<Predmet> u = otvoriPredmet();
+            if (IzabranaTablaPredmet == "")
+            {
+                foreach (Predmet predmet in u)
+                {
+
+                    Predmeti.Add(predmet);
+
+
+                }
+            }
+            else
+            {
+                foreach (Predmet predmet in u)
+                {
+                    if (IzabranaTablaPredmet == "Ima")
+                    {
+                        if (predmet.TrebaTabla)
+                        {
+                            Predmeti.Add(predmet);
+                        }
+                    }
+                    if (IzabranaTablaPredmet == "Nema")
+                    {
+                        if (!predmet.TrebaTabla)
+                        {
+                            Predmeti.Add(predmet);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        private void ComboBox_SelectionChanged_6(object sender, SelectionChangedEventArgs e)
+        {
+            Predmeti.Clear();
+            List<Predmet> u = otvoriPredmet();
+            if (IzabranaPametnaTablaPredmet == "")
+            {
+                foreach (Predmet predmet in u)
+                {
+
+                    Predmeti.Add(predmet);
+
+
+                }
+            }
+            else
+            {
+                foreach (Predmet predmet in u)
+                {
+                    if (IzabranaPametnaTablaPredmet == "Ima")
+                    {
+                        if (predmet.TrebaPametnaTabla)
+                        {
+                            Predmeti.Add(predmet);
+                        }
+                    }
+                    if (IzabranaPametnaTablaPredmet == "Nema")
+                    {
+                        if (!predmet.TrebaPametnaTabla)
+                        {
+                            Predmeti.Add(predmet);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        private void ComboBox_SelectionChanged_7(object sender, SelectionChangedEventArgs e)
+        {
+            Predmeti.Clear();
+            List<Predmet> u = otvoriPredmet();
+            if (IzabraniProjektorPredmet == "")
+            {
+                foreach (Predmet predmet in u)
+                {
+
+                    Predmeti.Add(predmet);
+
+
+                }
+            }
+            else
+            {
+                foreach (Predmet predmet in u)
+                {
+                    if (IzabraniProjektorPredmet == "Ima")
+                    {
+                        if (predmet.TrebaProjektor)
+                        {
+                            Predmeti.Add(predmet);
+                        }
+                    }
+                    if (IzabraniProjektorPredmet == "Nema")
+                    {
+                        if (!predmet.TrebaProjektor)
+                        {
+                            Predmeti.Add(predmet);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        private void ComboBox_SelectionChanged_8(object sender, SelectionChangedEventArgs e)
+        {
+            Predmeti.Clear();
+            List<Predmet> u = otvoriPredmet();
+            if (IzabraniOSPredmet == "")
+            {
+                foreach (Predmet predmet in u)
+                {
+
+                    Predmeti.Add(predmet);
+
+
+                }
+            }
+            else
+            {
+                foreach (Predmet predmet in u)
+                {
+                    if (predmet.Sistem.ToUpper() == IzabraniOSPredmet.ToUpper())
+                    {
+                        Predmeti.Add(predmet);
+                    }
+
+                }
             }
         }
     }
