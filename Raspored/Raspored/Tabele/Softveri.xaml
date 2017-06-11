@@ -8,9 +8,9 @@
     xmlns:model="clr-namespace:Raspored.Model"
     xmlns:val="clr-namespace:Raspored.Tabele"
     Title="Softveri"
-    Width="500"
+    Width="600"
     Height="500"
-    MinWidth="500"
+    MinWidth="600"
     MinHeight="500"
     Activated="HandleWindowActivated"
     FontSize="16"
@@ -20,41 +20,93 @@
     <Grid x:Name="Softveri_otvori">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  />
+                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition  />
-                <RowDefinition  Height="40"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+
             </Grid.RowDefinitions>
-            <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding List1}"  AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop2" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" BorderThickness="1" Width="Auto">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="{Binding Oznaka}" FontWeight="Bold" />
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding Naziv}" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView Grid.Column="1" Grid.Row="0" ItemsSource="{Binding List2}"  AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2" MouseMove="ListView_MouseMove" BorderThickness="1" Width="Auto">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="{Binding Oznaka}" FontWeight="Bold" />
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding Naziv}" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Grid 
+
+            <TextBlock
+                x:Name="Naziv"
                 Grid.Row="1"
+                Grid.Column="1"
+                Margin="2,2,2,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Foreground="Blue">
+                Instalirani softveri u ucionici
+            </TextBlock>
+            <ListView
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="Auto"
+                Margin="10,0,10,10"
+                Padding="10"
+                AllowDrop="True"
+                BorderThickness="1"
+                DragEnter="ListView_DragEnter"
+                Drop="ListView_Drop2"
+                ItemsSource="{Binding List1}"
+                MouseMove="ListView_MouseMove"
+                PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock FontWeight="Bold" Text="{Binding Oznaka}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Naziv}" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView
+                Grid.Row="2"
                 Grid.Column="0"
-                Grid.ColumnSpan="2">
-                <TextBox Text="{Binding  ElementName=Search,  Path=Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,5,5" TextChanged="Text_Changed" />
-                
+                Width="Auto"
+                Margin="10,0,10,10"
+                Padding="10"
+                AllowDrop="True"
+                BorderThickness="1"
+                DragEnter="ListView_DragEnter"
+                Drop="ListView_Drop"
+                ItemsSource="{Binding List2}"
+                MouseMove="ListView_MouseMove"
+                PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock FontWeight="Bold" Text="{Binding Oznaka}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Naziv}" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Margin="10,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Blue">
+                    Pretraga
+                </TextBlock>
+                <TextBox
+                    Grid.Column="1"
+                    Margin="5,5,10,5"
+                    Text="{Binding ElementName=Search, Path=Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="Text_Changed" />
+
             </Grid>
         </Grid>
     </Grid>

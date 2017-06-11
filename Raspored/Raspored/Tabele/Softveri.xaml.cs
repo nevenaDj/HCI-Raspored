@@ -33,6 +33,7 @@ namespace Raspored.Tabele
             InitializeComponent();
             this.DataContext = this;
             Search = "";
+            Naziv.Text = "Instalirani softveri u učionici";
             if (u.Softveri == null)
             {
                 List<Softver> sf = otvoriSoftver();
@@ -65,6 +66,7 @@ namespace Raspored.Tabele
             InitializeComponent();
             this.DataContext = this;
             Search = "";
+            Naziv.Text = "Neophodni softveri za nastavu";
             SaveList2 = new List<Softver>();
             if (u.Softveri == null)
             {

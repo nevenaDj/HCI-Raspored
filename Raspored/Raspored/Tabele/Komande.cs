@@ -15,7 +15,7 @@ namespace Raspored.Tabele
             typeof(Komande),
             new InputGestureCollection()
             {
-              //  new KeyGesture(Key.S, ModifierKeys.Control),
+                new KeyGesture(Key.S, ModifierKeys.Control),
             }
             );
 
@@ -25,7 +25,7 @@ namespace Raspored.Tabele
             typeof(Komande),
             new InputGestureCollection()
             {
-             //   new KeyGesture(Key.D, ModifierKeys.Control),
+                new KeyGesture(Key.D, ModifierKeys.Control),
             }
             );
 
@@ -57,5 +57,15 @@ namespace Raspored.Tabele
                 new KeyGesture(Key.Delete, ModifierKeys.Control),
             }
            );
+
+        public static readonly RoutedUICommand Pretraga = new RoutedUICommand(
+          "Pretraga",
+          "Pretraga",
+          typeof(Komande),
+          new InputGestureCollection()
+          {
+                new KeyGesture(Key.F, ModifierKeys.Control),
+           }
+          );
     }
 }

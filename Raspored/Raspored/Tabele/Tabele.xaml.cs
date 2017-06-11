@@ -771,6 +771,8 @@ namespace Raspored.Tabele
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
         private void SacuvajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedUcionica.Oznaka = Box.Text;
+            SelectedUcionica.Opis = OpisBox.Text;
 
             EUcionice.Visibility = Visibility.Collapsed;
 
@@ -862,6 +864,8 @@ namespace Raspored.Tabele
         /***** KLINK NA DUGME SACUVAJ IZMENU UCIONICE ****/
         private void SacuvajIzmenuUcionice_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedUcionica.Oznaka = Box.Text;
+            SelectedUcionica.Opis = OpisBox.Text;
 
             Ucionice[_index] = SelectedUcionica;
             SveUcionice[_index] = SelectedUcionica;
@@ -881,6 +885,11 @@ namespace Raspored.Tabele
             sacuvajUcionicu();
             _index = -1;
             e.Handled = true;
+
+            
+
+            EUcionice.Visibility = Visibility.Collapsed;
+            Box.BorderBrush = new SolidColorBrush(Colors.Silver);
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -1106,7 +1115,13 @@ namespace Raspored.Tabele
 
         private void SacuvajIzmenuPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedPredmet.Oznaka = Box2.Text;
+            SelectedPredmet.Naziv = Naziv1.Text;
+            SelectedPredmet.Skracenica = Skracenica1.Text;
+            SelectedPredmet.Opis = OpisPredmet.Text;
+
             Predmeti[_index] = SelectedPredmet;
+            SelectRowByIndex(dgrMainPredmet, _index);
             _index = -1;
             SacuvajIzmenuPredmet.Visibility = Visibility.Hidden;
             IzmenaOdustaniPredmet.Visibility = Visibility.Hidden;
@@ -1261,8 +1276,12 @@ namespace Raspored.Tabele
             Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
         }
 
-        private void SacuvajSmer_Click(object sender, RoutedEventArgs e)
+        private void SacuvajSmer_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedSmer.Naziv = Naziv2.Text;
+            SelectedSmer.Oznaka = Box3.Text;
+            SelectedSmer.Skracenica = Skracenica2.Text;
+            SelectedSmer.Opis = OpisSmer.Text;
             Smerovi.Add(SelectedSmer);
             EnablePromeniSmer = "True";
             EnableIzbrisiSmer = "True";
@@ -1378,8 +1397,12 @@ namespace Raspored.Tabele
 
         }
 
-        private void SacuvajIzmenuSmera_Click(object sender, RoutedEventArgs e)
+        private void SacuvajIzmenuSmera_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedSmer.Naziv = Naziv2.Text;
+            SelectedSmer.Oznaka = Box3.Text;
+            SelectedSmer.Skracenica = Skracenica2.Text;
+            SelectedSmer.Opis = OpisSmer.Text;
             Smerovi[_index] = SelectedSmer;
             _index = -1;
 
@@ -1645,28 +1668,44 @@ namespace Raspored.Tabele
             }
             if (res == MessageBoxResult.Yes)
             {
-             /*   foreach (Predmet p in Predmeti)
+                if (i)
                 {
-                    foreach (Softver s in p.Softveri)
+                   
+                    foreach (Predmet p in Predmeti)
                     {
-                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        List<Softver> softveri = new List<Softver>();
+                        foreach (Softver s in p.Softveri)
                         {
-                            p.Softveri.Remove(s);
+                            if (s.Oznaka != SelectedSoftver.Oznaka)
+                            {
+                                //   p.Softveri.Remove(s);
+                                softveri.Add(s);
 
+                            }
                         }
+                        p.Softveri = softveri;
+                        sacuvajPredmet();
                     }
                 }
-                foreach (Ucionica u in Ucionice)
+                if (j)
                 {
-                    foreach (Softver s in u.Softveri)
+                    
+                    foreach (Ucionica u in Ucionice)
                     {
-                        if (s.Oznaka == SelectedSoftver.Oznaka)
+                        List<Softver> sof = new List<Softver>();
+                        foreach (Softver s in u.Softveri)
                         {
-                            u.Softveri.Remove(s);
+                            if (s.Oznaka != SelectedSoftver.Oznaka)
+                            {
+                                sof.Add(s);
+                               // u.Softveri.Remove(s);
 
+                            }
                         }
+                        u.Softveri = sof;
+                        sacuvajUcionicu();
                     }
-                }*/
+                }
                 Softveri.Remove(SelectedSoftver);
                 if (Softveri.Count <= 0)
                 {
@@ -1712,6 +1751,11 @@ namespace Raspored.Tabele
 
         private void IzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SelectedSoftver.Oznaka = Box4.Text;
+            SelectedSoftver.Naziv = Naziv3.Text;
+            SelectedSoftver.Opis = OpisSoftver.Text;
+            SelectedSoftver.Proizvodjac = PSoftver.Text;
+            SelectedSoftver.Sajt = SajtSoftver.Text;
             Softveri[_index] = SelectedSoftver;
             _index = -1;
             IzmeniSoftver.Visibility = Visibility.Hidden;
@@ -2103,6 +2147,26 @@ namespace Raspored.Tabele
             }
         }
 
+        private void SacuvajSmer_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (_greskeDodavanje == 0)
+            {
+                if (!_greskaOznaka)
+                {
+                    if (SelectedSmer != null)
+                    {
+                        if (SelectedSmer.Oznaka != "" && SelectedSmer.Naziv != ""
+                            && SelectedSmer.Skracenica != "")
+                        {
+                            e.CanExecute = true;
+                            e.Handled = true;
+                        }
+                    }
+                }
+
+            }
+        }
+
 
         private void SacuvajUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -2142,8 +2206,60 @@ namespace Raspored.Tabele
 
         private void IzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeIzmena == 0;
-            e.Handled = true;
+            if (_greskeIzmena == 0)
+            {
+                if (!_greskaOznaka)
+                {
+                    if (SelectedPredmet != null)
+                    {
+                        if (SelectedPredmet.Oznaka != "" && SelectedPredmet.Naziv != ""
+                            && SelectedPredmet.Skracenica != "")
+                        {
+                            if (!Box2.IsFocused)
+                            {
+                                if (!Naziv1.IsFocused)
+                                {
+                                    if (!Skracenica1.IsFocused)
+                                    {
+                                        e.CanExecute = true;
+                                        e.Handled = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private void IzmeniSmer_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (_greskeIzmena == 0)
+            {
+                if (!_greskaOznaka)
+                {
+                    if (SelectedSmer != null)
+                    {
+                        if (SelectedSmer.Oznaka != "" && SelectedSmer.Naziv != ""
+                            && SelectedSmer.Skracenica != "")
+                        {
+                            if (!Box3.IsFocused)
+                            {
+                                if (!Naziv2.IsFocused)
+                                {
+                                    if (!Skracenica2.IsFocused)
+                                    {
+                                        e.CanExecute = true;
+                                        e.Handled = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
         }
 
         private void IzmeniUcionicu_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2157,8 +2273,11 @@ namespace Raspored.Tabele
                     {
                         if (SelectedUcionica.Oznaka != "")
                         {
-                            e.CanExecute = true;
-                            e.Handled = true;
+                            if (!Box.IsFocused)
+                            {
+                                e.CanExecute = true;
+                                e.Handled = true;
+                            }
 
                         }
                     }
@@ -2171,8 +2290,23 @@ namespace Raspored.Tabele
 
         private void IzmeniSoftver_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _greskeIzmena == 0;
-            e.Handled = true;
+            if (_greskeIzmena == 0)
+            {
+                if (SelectedSoftver != null)
+                {
+                    if (SelectedSoftver.Oznaka != "")
+                    {
+                        if (!Box4.IsFocused)
+                        {
+                           
+                                e.CanExecute = true;
+                                e.Handled = true;
+                            
+                        }
+
+                    }
+                }
+            }
         }
 
         public static void SelectRowByIndex(DataGrid dataGrid, int rowIndex)
@@ -3127,23 +3261,49 @@ namespace Raspored.Tabele
         {
             if (SelectedTabPredmeti)
             {
-                FocusManager.SetFocusedElement(this,dgrMainPredmet);
+                if (Predmeti.Count > 0)
+                {
+                    //  SelectRowByIndex(dgrMainPredmet, 0);
+                }
+                else
+                {
+                    FocusManager.SetFocusedElement(this, dgrMainPredmet);
+                }
 
             }
             else if (SelectedTabSmer)
             {
-                FocusManager.SetFocusedElement(this, dgrMainSmer);
+                if (Smerovi.Count > 0)
+                {
+
+                }
+                else
+                {
+                    FocusManager.SetFocusedElement(this, dgrMainSmer);
+                }
 
             }
             else if (SelectedTabSoftver)
             {
-                FocusManager.SetFocusedElement(this, dgrMainSoftver);
+                if (Softveri.Count > 0)
+                {
 
+                }
+                else
+                {
+                    FocusManager.SetFocusedElement(this, dgrMainSoftver);
+                }
             }
             else if (SelectedTabUcionice)
             {
-                FocusManager.SetFocusedElement(this,dgrMainUcionica);
-
+                if (Ucionice.Count > 0)
+                {
+                    //  SelectRowByIndex(dgrMainUcionica, 0);
+                }
+                else
+                {
+                    FocusManager.SetFocusedElement(this, dgrMainUcionica);
+                }
             }
 
         }
