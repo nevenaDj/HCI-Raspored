@@ -58,7 +58,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130" />
@@ -67,22 +66,11 @@
 
                 <Grid Grid.Row="0"
                 Grid.Column="0"
-                Grid.RowSpan="2">
+                      Grid.RowSpan="2">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"  />
-                        <RowDefinition />
-                        <RowDefinition Height="20"  />
-                        <RowDefinition  />
-                        <RowDefinition Height="20" />
-                        <RowDefinition  Height="50" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="6">
-                        Učionice:
-                    </TextBlock>
                     <DataGrid
                                     x:Name="dgrMainUcionica"
-                                    Grid.Row="1"       
+                                         
                                     AutoGenerateColumns="False"
                                     BorderThickness="1"
                                     IsReadOnly="True"
@@ -91,13 +79,13 @@
                                     SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
 
                         <DataGrid.Columns>
-                            
+
                             <DataGridTextColumn
                                             Width="Auto"
                                             Binding="{Binding Oznaka}"
                                             CanUserSort="False"
                                             Header="Oznaka" />
-                             
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

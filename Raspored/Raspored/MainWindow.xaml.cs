@@ -25,7 +25,7 @@ namespace Raspored
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, System.ComponentModel.INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         private Model.Raspored raspored;
         // Tabele.Tabele w;
@@ -36,32 +36,6 @@ namespace Raspored
             get;
             set;
         }
-
-        private Ucionica _selectedUcionica;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public Ucionica SelectedUcionica
-        {
-            get
-            {
-                return _selectedUcionica;
-            }
-            set
-            {
-                if (_selectedUcionica != value)
-                {
-                    _selectedUcionica = value;
-                    OnPropertyChanged("SelectedUcionica");
-                }
-            }
-        }
-
-        private void OnPropertyChanged(string v)
-        {
-            throw new NotImplementedException();
-        }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -69,7 +43,7 @@ namespace Raspored
             f.Close();
 
             citanje_pisanje = new CitanjeIPisanje();
-            
+
             RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
             //w = new Tabele.Tabele();
             RegexOptions options = RegexOptions.None;
@@ -80,7 +54,8 @@ namespace Raspored
             string recentFile = tekst[0];
             try
             {
-                
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+                Ucionice = new ObservableCollection<Ucionica>(u);
                 string fileText = File.ReadAllText(recentFile);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
@@ -89,10 +64,10 @@ namespace Raspored
                 //raspored = new Model.Raspored();
                 raspored = citanje_pisanje.otvoriRaspored(recentFile);
                 raspored.File = recentFile;
-                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
-                Ucionice = new ObservableCollection<Ucionica>(u);
 
-            } catch (Exception e)
+
+            }
+            catch (Exception e)
             {
                 Prozor2.Visibility = Visibility.Visible;
                 Prozor1.Visibility = Visibility.Hidden;
@@ -101,11 +76,11 @@ namespace Raspored
             }
         }
 
-       
+
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
-            Tabele.Tabele w = new Tabele.Tabele(raspored); 
+            Tabele.Tabele w = new Tabele.Tabele(raspored);
             w.ShowDialog();
         }
 
@@ -114,13 +89,13 @@ namespace Raspored
             var r = new DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
             r.sacuvajRaspored();
-          
+
 
         }
 
         bool FileOpenCore(string filepath)
         {
-           // MessageBox.Show(filepath);
+            // MessageBox.Show(filepath);
             if (!File.Exists(filepath))
             {
                 MessageBox.Show("File is removed or moved.");
@@ -188,7 +163,7 @@ namespace Raspored
 
         void saveRecent(String filename)
         {
-            String file_tekst = filename+"\n";
+            String file_tekst = filename + "\n";
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
 
