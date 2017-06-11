@@ -2191,17 +2191,18 @@ namespace Raspored.Tabele
         {
             if (_greskeDodavanje == 0)
             {
-                if (SelectedSoftver != null)
+                if (!_greskaOznaka)
                 {
-                    if (SelectedSoftver.Oznaka != "")
+                    if (SelectedSoftver != null)
                     {
-                        e.CanExecute = true;
-                        e.Handled = true;
-
+                        if (SelectedSoftver.Oznaka != "" && SelectedSoftver.Naziv != "")
+                        {
+                            e.CanExecute = true;
+                            e.Handled = true;
+                        }
                     }
                 }
             }
-
         }
 
         private void IzmeniPredmet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2292,18 +2293,21 @@ namespace Raspored.Tabele
         {
             if (_greskeIzmena == 0)
             {
-                if (SelectedSoftver != null)
+                if (!_greskaOznaka)
                 {
-                    if (SelectedSoftver.Oznaka != "")
+                    if (SelectedSoftver != null)
                     {
-                        if (!Box4.IsFocused)
+                        if (SelectedSoftver.Oznaka != "" && SelectedSoftver.Naziv != "")
                         {
-                           
+                            if (!Box4.IsFocused)
+                            {
+
                                 e.CanExecute = true;
                                 e.Handled = true;
-                            
-                        }
 
+                            }
+
+                        }
                     }
                 }
             }
@@ -4212,6 +4216,7 @@ namespace Raspored.Tabele
             if (Box4.Text == "")
             {
                 Box4.BorderBrush = new SolidColorBrush(Colors.Red);
+                _greskaOznaka = true;
 
             }
             else
