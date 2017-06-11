@@ -324,6 +324,29 @@ namespace Raspored
 
         }
 
+        private void Ucionice_Radio(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("ucionice");
+            scoll.Visibility = Visibility.Visible;
+            lsUcionice.Visibility = Visibility.Visible;
+            header.Visibility = Visibility.Visible;
+            scoll_2.Visibility = Visibility.Collapsed;
+            lsDani.Visibility = Visibility.Collapsed;
+            header_2.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void Dani_Radio(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Dani");
+            scoll.Visibility = Visibility.Collapsed;
+            lsUcionice.Visibility = Visibility.Collapsed;
+            header.Visibility = Visibility.Collapsed;
+            scoll_2.Visibility = Visibility.Visible;
+            lsDani.Visibility = Visibility.Visible;
+            header_2.Visibility = Visibility.Visible;
+
+        }
 
         private void lsUcionice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -359,5 +382,15 @@ namespace Raspored
 
 
         }
-    }
+
+        private void lsDani_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+
+            //SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
+            //Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
+            //MessageBox.Show(SelectedUcionica.Oznaka);
+            
+        }
+        }
 }
