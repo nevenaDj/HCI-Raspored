@@ -258,13 +258,16 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
+
                                         <TextBlock FontWeight="Bold" Text="{Binding Naziv}" />
                                         <TextBlock Text=" (" />
                                         <TextBlock Text="{Binding Oznaka}" />
                                         <TextBlock Text=")" />
+
                                     </WrapPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+
                         </ListView>
 
                         <ListView

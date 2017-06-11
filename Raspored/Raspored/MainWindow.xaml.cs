@@ -62,11 +62,14 @@ namespace Raspored
                 raspored = citanje_pisanje.otvoriRaspored(recentFile);
                 raspored.File = recentFile;
                 Termini = new List<List<ObservableCollection<Predmet>>>();
+                //Termini = new List<List<Predmet>>();
                 for (int i = 0; i < 61; i++)
                 {
                     List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                    //List<Predmet> temp = new List<Predmet>();
                     for (int j = 0; j < 7; j++)
                         temp.Add(new ObservableCollection<Predmet>());
+                        //temp.Add(new Predmet());
                     Termini.Add(temp);
                 }
 
@@ -80,6 +83,7 @@ namespace Raspored
                 //MessageBox.Show("error");
             }
         }
+        //public List<List<Predmet>> Termini { get; private set; }
         public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
         private Model.Raspored raspored;
         // Tabele.Tabele w;
@@ -127,7 +131,36 @@ namespace Raspored
         {
             var r = new DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
+            raspored = r.rasp;
             r.sacuvajRaspored();
+            for (int i = 1; i < 61; i++)
+            {
+                for (int j = 1; j < 7; j++)
+                {
+                    if (Termini[i][j].Count != 0)
+                    {
+                        Termini[i][j].RemoveAt(0);
+                    }
+                }
+            }
+
+
+            foreach (UcionicaRaspored ur in raspored.Rasporedi)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                {
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            {
+                                Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                //Termini[i][j]=ur.Rasporedi[i][j];
+                            }
+                        }
+                    }
+                }
+
 
 
         }
@@ -232,7 +265,36 @@ namespace Raspored
         {
             var r = new Raspored.DDrop.PravljenjeRasporeda(raspored, citanje_pisanje);
             r.ShowDialog();
+            raspored = r.rasp;
             r.sacuvajRaspored();
+            for (int i = 1; i < 61; i++)
+            {
+                for (int j = 1; j < 7; j++)
+                {
+                    if (Termini[i][j].Count != 0)
+                    {
+                        Termini[i][j].RemoveAt(0);
+                    }
+                }
+            }
+
+         
+            foreach (UcionicaRaspored ur in raspored.Rasporedi)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                {
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            {
+                                Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                //Termini[i][j]=ur.Rasporedi[i][j];
+                            }
+                        }
+                    }
+                }
+            
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -265,9 +327,20 @@ namespace Raspored
 
         private void lsUcionice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            for (int i = 1; i < 61; i++)
+            {
+                for (int j = 1; j < 7; j++)
+                {
+                    if (Termini[i][j].Count != 0)
+                    {
+                        Termini[i][j].RemoveAt(0);
+                    }
+                }
+            }
+
             SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
             Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
-            MessageBox.Show(SelectedUcionica.Oznaka);
+            //MessageBox.Show(SelectedUcionica.Oznaka);
             foreach (UcionicaRaspored ur in raspored.Rasporedi)
                 if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                 {
@@ -278,6 +351,7 @@ namespace Raspored
                             if (ur.Rasporedi[i][j].Oznaka != "")
                             {
                                 Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                //Termini[i][j]=ur.Rasporedi[i][j];
                             }
                         }
                     }
