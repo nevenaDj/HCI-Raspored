@@ -13,10 +13,14 @@
     Height="350"
     MinWidth="600"
     MinHeight="350"
+    l:HelpProvider.HelpKey="ProzorZaPrikazPredmeta"
     Activated="HandleWindowActivated"
     FontSize="16"
     Top="50"
     mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
     <Border
         Grid.Row="1"
         Grid.Column="0"

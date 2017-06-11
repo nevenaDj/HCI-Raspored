@@ -57,11 +57,8 @@ namespace Raspored.Tabele
         {
           //  MessageBox.Show("click" + IzabraniSmer.Oznaka);
 
-            IzabraniPredmet.SmerPredmeta = IzabraniSmer;
-           
-            
-
-
+            IzabraniSmer = SelectedSmer;
+          
         }
 
         private Smer _izabraniSmer;
@@ -77,6 +74,23 @@ namespace Raspored.Tabele
                 {
                     _izabraniSmer = value;
                     OnPropertyChanged("IzabraniSmer");
+                }
+            }
+        }
+
+        private Smer _selectedSmer;
+        public Smer SelectedSmer
+        {
+            get
+            {
+                return _selectedSmer;
+            }
+            set
+            {
+                if (_selectedSmer != value)
+                {
+                    _selectedSmer = value;
+                    OnPropertyChanged("SelectedSmer");
                 }
             }
         }

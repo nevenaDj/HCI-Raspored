@@ -37,9 +37,9 @@
             IsReadOnly="True"
             IsSynchronizedWithCurrentItem="True"
             ItemsSource="{Binding Path=Smerovi}"
-            SelectedItem="{Binding IzabraniSmer, Mode=TwoWay}">
+            SelectedItem="{Binding SelectedSmer, Mode=TwoWay}">
 
-           
+
             <DataGrid.Columns>
                 <DataGridTemplateColumn
                     Width="Auto"
@@ -78,10 +78,10 @@
         <Button
             Grid.Row="1"
             Grid.Column="1"
-            Width="100"
+            Width="170"
             Margin="5,5,5,5"
             Click="Button_Click">
-            Izaberi
+            Dodaj smer predmetu
         </Button>
 
     </Grid>

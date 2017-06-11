@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:l="clr-namespace:Raspored"
     xmlns:local="clr-namespace:Raspored.Tabele"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Raspored.Model"
@@ -12,11 +13,14 @@
     Height="500"
     MinWidth="600"
     MinHeight="500"
+    l:HelpProvider.HelpKey="ProzorDodavanjeSoftvera"
     Activated="HandleWindowActivated"
     FontSize="16"
     Top="50"
     mc:Ignorable="d">
-
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
     <Grid x:Name="Softveri_otvori">
         <Grid>
             <Grid.ColumnDefinitions>

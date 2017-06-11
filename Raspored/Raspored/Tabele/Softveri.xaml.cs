@@ -28,11 +28,14 @@ namespace Raspored.Tabele
             Search = "";
         }
 
+        private string _rezim;
+
         public SoftveriOtvori(Ucionica u)
         {
             InitializeComponent();
             this.DataContext = this;
             Search = "";
+            _rezim = "ucionice";
             Naziv.Text = "Instalirani softveri u učionici";
             if (u.Softveri == null)
             {
@@ -67,6 +70,7 @@ namespace Raspored.Tabele
             this.DataContext = this;
             Search = "";
             Naziv.Text = "Neophodni softveri za nastavu";
+            _rezim = "predmeti";
             SaveList2 = new List<Softver>();
             if (u.Softveri == null)
             {
@@ -225,6 +229,8 @@ namespace Raspored.Tabele
         {
 
             this.Focus();
+            Keyboard.Focus(this);
+            FocusManager.SetFocusedElement(this, this);
 
         }
 
@@ -313,6 +319,20 @@ namespace Raspored.Tabele
 
             }
 
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[2]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (_rezim == "ucionice")
+                {
+                    str = "ProzorZaDodavanjeSoftvera2";
+
+                }
+                HelpProvider.ShowHelp(str, this);
+            }
         }
 
     }
