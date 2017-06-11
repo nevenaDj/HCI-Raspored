@@ -39,11 +39,7 @@
             ItemsSource="{Binding Path=Smerovi}"
             SelectedItem="{Binding IzabraniSmer, Mode=TwoWay}">
 
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="{Binding Add}" Header="Izaberi" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+           
             <DataGrid.Columns>
                 <DataGridTemplateColumn
                     Width="Auto"
