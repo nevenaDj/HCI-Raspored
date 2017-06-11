@@ -100,7 +100,7 @@ namespace Raspored.DDrop
             }
         }
 
-        private Model.Raspored rasp;
+        public Model.Raspored rasp { get; set; }
         public ObservableCollection<Smer> Smerovi
         {
             get;

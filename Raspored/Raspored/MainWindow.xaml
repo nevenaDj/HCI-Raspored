@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Raspored"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Raspored.Model"
     Title="MainWindow"
-    Width="525"
-    Height="350"
+    Width="1000"
+    Height="700"
+    FontSize="14"
     local:HelpProvider.HelpKey="Forma"
     Activated="HandleWindowActivated"
     mc:Ignorable="d">
@@ -57,6 +59,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
+                    <RowDefinition  Height="100"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -64,37 +67,54 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="0"
+
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <RadioButton Content="Učionice" IsChecked="True" Click="Ucionice_Radio"/>
+                    <RadioButton Content="Dani" Click="Dani_Radio" />
+                </StackPanel>
+
+                <Grid Grid.Row="2"
                 Grid.Column="0"
                       Grid.RowSpan="2">
 
-                    <DataGrid
-                                    x:Name="dgrMainUcionica"
-                                         
-                                    AutoGenerateColumns="False"
-                                    BorderThickness="1"
-                                    IsReadOnly="True"
-                                    IsSynchronizedWithCurrentItem="True"
-                                    ItemsSource="{Binding Path=Ucionice, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView
+                x:Name="lsUcionice"
+                Grid.Column="0"
+                Padding="20,2,20,2"
+                ItemsSource="{Binding Ucionice}"
+                SelectionChanged="lsUcionice_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Oznaka}" />
 
-                        <DataGrid.Columns>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                            <DataGridTextColumn
-                                            Width="Auto"
-                                            Binding="{Binding Oznaka}"
-                                            CanUserSort="False"
-                                            Header="Oznaka" />
+                    <ListView
+                x:Name="lsDani"
+                Grid.Column="0"
+                Padding="20,2,20,2"
+                ItemsSource="{Binding Dani}"
+                SelectionChanged="lsDani_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Oznaka}" />
 
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
 
 
                 <Grid Grid.Row="0"
-                Grid.Column="1"
-                  HorizontalAlignment="Center"
-                >
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    x:Name="header">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -102,15 +122,39 @@
                     <TextBlock Grid.Column="0">
                      Ucionica:
                     </TextBlock>
-                    <TextBlock  Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka}">
+                    <TextBlock x:Name="Oznaka_ucionica" Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka, UpdateSourceTrigger=PropertyChanged }">
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Visibility="Collapsed"
+                    x:Name="header_2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">
+                     Dan:
+                    </TextBlock>
+                    <TextBlock  Grid.Column="1" Text="{Binding SelectedDan, UpdateSourceTrigger=PropertyChanged }">
                     </TextBlock>
                 </Grid>
 
+                <ScrollViewer
+                    x:Name="scoll_2"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    VerticalScrollBarVisibility="Visible">
+                </ScrollViewer>
 
                 <ScrollViewer
-                Grid.Row="1"
-                Grid.Column="1"
-                VerticalScrollBarVisibility="Visible">
+                    x:Name="scoll"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    VerticalScrollBarVisibility="Visible">
                     <Grid x:Name="grid2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -261,13 +305,16 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <WrapPanel>
+
                                         <TextBlock FontWeight="Bold" Text="{Binding Naziv}" />
                                         <TextBlock Text=" (" />
                                         <TextBlock Text="{Binding Oznaka}" />
                                         <TextBlock Text=")" />
+
                                     </WrapPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+
                         </ListView>
 
                         <ListView
