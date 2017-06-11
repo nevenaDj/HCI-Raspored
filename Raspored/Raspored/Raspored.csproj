@@ -181,6 +181,10 @@
     <Content Include="Help\index.htm" />
     <Content Include="Help\IzborSmera.htm" />
     <Content Include="Help\PravljenjeRasporeda.htm" />
+    <Content Include="Help\PretragaPredmeta.htm" />
+    <Content Include="Help\PretragaSmera.htm" />
+    <Content Include="Help\PretragaSoftvera.htm" />
+    <Content Include="Help\PretragaUcionice.htm" />
     <Content Include="Help\PrikazPredmeta.htm" />
     <Content Include="Help\PrikazSmera.htm" />
     <Content Include="Help\PrikazSoftvera.htm" />

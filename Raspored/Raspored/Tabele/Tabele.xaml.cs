@@ -185,6 +185,8 @@ namespace Raspored.Tabele
 
             _raspored = raspored;
 
+            _rezimPretrage = false;
+
 
         }
 
@@ -652,6 +654,8 @@ namespace Raspored.Tabele
             }
         }
 
+        private bool _rezimPretrage;
+
         /************************************************* MANIPULACIJA UCIONICAMA ******************************************/
         private Ucionica _selectedUcionica;
         public Ucionica SelectedUcionica
@@ -709,10 +713,10 @@ namespace Raspored.Tabele
         private void DodajUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _index = -1;
-            GridPretraga.Visibility = Visibility.Collapsed;
-            ButtonPretraga.Visibility = Visibility.Visible;
-            ButtonFilter.Visibility = Visibility.Visible;
-            GridFilter.Visibility = Visibility.Collapsed;
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
             FocusManager.SetFocusedElement(this, GridUcionice);
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
@@ -753,9 +757,12 @@ namespace Raspored.Tabele
 
             }
             EnableDodaj = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabPredmeti = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
@@ -766,6 +773,11 @@ namespace Raspored.Tabele
             EUcionice.Visibility = Visibility.Collapsed;
             _index = -1;
             Box.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
@@ -780,10 +792,14 @@ namespace Raspored.Tabele
             SveUcionice.Add(SelectedUcionica);
             EnablePromeniUcionicu = "True";
             EnableIzbrisiUcionicu = "True";
+            
             EnableDodaj = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabPredmeti = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
@@ -800,6 +816,11 @@ namespace Raspored.Tabele
             SelectRowByIndex(dgrMainUcionica, Ucionice.Count - 1);
             _index = -1;
             e.Handled = true;
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
 
@@ -828,10 +849,10 @@ namespace Raspored.Tabele
         /***** REZIM ZA IZMENU UCIONICE ****/
         private void RezimIzmeniUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            GridPretraga.Visibility = Visibility.Collapsed;
-            ButtonPretraga.Visibility = Visibility.Visible;
-            ButtonFilter.Visibility = Visibility.Visible;
-            GridFilter.Visibility = Visibility.Collapsed;
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
             Dispatcher.BeginInvoke(DispatcherPriority.Input,
                 new Action(delegate ()
                 {
@@ -876,9 +897,12 @@ namespace Raspored.Tabele
             EnablePromeniUcionicu = "True";
             EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabPredmeti = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridUcionice.IsEnabled = false;
@@ -886,7 +910,12 @@ namespace Raspored.Tabele
             _index = -1;
             e.Handled = true;
 
-            
+            GridPretraga.IsEnabled =true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
+
+
 
             EUcionice.Visibility = Visibility.Collapsed;
             Box.BorderBrush = new SolidColorBrush(Colors.Silver);
@@ -904,14 +933,22 @@ namespace Raspored.Tabele
             EnablePromeniUcionicu = "True";
             EnableIzbrisiUcionicu = "True";
             EnableDodaj = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabPredmeti = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridUcionice.IsEnabled = false;
             EUcionice.Visibility = Visibility.Collapsed;
             Box.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
 
@@ -992,6 +1029,10 @@ namespace Raspored.Tabele
 
             GridPredmeti.IsEnabled = true;
             _index = -1;
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
         }
 
         private void OdustaniPredmet_Click(object sender, RoutedEventArgs e)
@@ -1010,9 +1051,12 @@ namespace Raspored.Tabele
             }
 
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             SacuvajPredmet.Visibility = Visibility.Hidden;
@@ -1026,6 +1070,11 @@ namespace Raspored.Tabele
             EPredmeti.Visibility = Visibility.Collapsed;
             _index = -1;
 
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
+
         }
 
         private void SacuvajPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1034,9 +1083,13 @@ namespace Raspored.Tabele
             EnablePromeniPredmet = "True";
             EnableIzbrisiPredmet = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            
+            if (!_rezimPretrage)
+            {
+                TabSmer = "True";
+                TabSoftver = "True";
+                TabUcionice = "True";
+            }
             Podaci = "True";
 
             SacuvajPredmet.Visibility = Visibility.Hidden;
@@ -1058,6 +1111,11 @@ namespace Raspored.Tabele
 
             e.Handled = true;
             _index = -1;
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
 
         }
@@ -1111,6 +1169,11 @@ namespace Raspored.Tabele
             TabSoftver = "False";
             Podaci = "False";
 
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
+
         }
 
         private void SacuvajIzmenuPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1129,15 +1192,23 @@ namespace Raspored.Tabele
             EnablePromeniPredmet = "True";
             EnableIzbrisiPredmet = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridPredmeti.IsEnabled = false;
             sacuvajPredmet();
 
             e.Handled = true;
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
 
@@ -1151,9 +1222,12 @@ namespace Raspored.Tabele
             EnablePromeniPredmet = "True";
             EnableIzbrisiPredmet = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabSmer = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabSmer = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridPredmeti.IsEnabled = false;
@@ -1162,6 +1236,11 @@ namespace Raspored.Tabele
             Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
             Box2.BorderBrush = new SolidColorBrush(Colors.Silver);
             EPredmeti.Visibility = Visibility.Collapsed;
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
 
@@ -1242,6 +1321,11 @@ namespace Raspored.Tabele
 
             GridSmer.IsEnabled = true;
 
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
+
         }
 
         private void OdustaniSmer_Click(object sender, RoutedEventArgs e)
@@ -1260,9 +1344,12 @@ namespace Raspored.Tabele
             }
 
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             SacuvajSmer.Visibility = Visibility.Hidden;
@@ -1274,6 +1361,11 @@ namespace Raspored.Tabele
             Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
             Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
             Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
         }
 
         private void SacuvajSmer_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1286,9 +1378,12 @@ namespace Raspored.Tabele
             EnablePromeniSmer = "True";
             EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             SacuvajSmer.Visibility = Visibility.Hidden;
@@ -1305,6 +1400,10 @@ namespace Raspored.Tabele
             SelectRowByIndex(dgrMainSmer, Smerovi.Count - 1);
             _index = -1;
 
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
         }
 
         private void IzbrisiSmer_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1395,6 +1494,11 @@ namespace Raspored.Tabele
             TabSoftver = "False";
             Podaci = "False";
 
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
+
         }
 
         private void SacuvajIzmenuSmera_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1412,14 +1516,20 @@ namespace Raspored.Tabele
             EnablePromeniSmer = "True";
             EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridSmer.IsEnabled = false;
             sacuvajSmer();
-
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
         }
 
         private void IzmenaOdustaniSmer_Click(object sender, RoutedEventArgs e)
@@ -1432,9 +1542,12 @@ namespace Raspored.Tabele
             EnablePromeniSmer = "True";
             EnableIzbrisiSmer = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSoftver = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSoftver = "True";
+            }
             Podaci = "True";
 
             GridSmer.IsEnabled = false;
@@ -1442,6 +1555,11 @@ namespace Raspored.Tabele
             Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
             Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
            Skracenica2.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            GridPretraga.IsEnabled = true;
+            ButtonPretraga.IsEnabled = true;
+            ButtonFilter.IsEnabled = true;
+            GridFilter.IsEnabled = true;
 
         }
 
@@ -1525,6 +1643,11 @@ namespace Raspored.Tabele
             GridSoftver.IsEnabled = true;
             _index = -1;
 
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
+
         }
 
         private void OdustaniSoftver_Click(object sender, RoutedEventArgs e)
@@ -1543,9 +1666,12 @@ namespace Raspored.Tabele
             }
 
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSmer = "True";
+            }
             Podaci = "True";
 
             SacuvajSoftver.Visibility = Visibility.Hidden;
@@ -1566,9 +1692,12 @@ namespace Raspored.Tabele
             EnablePromeniSoftver = "True";
             EnableIzbrisiSoftver = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSmer = "True";
+            }
             Podaci = "True";
 
             SacuvajSoftver.Visibility = Visibility.Hidden;
@@ -1743,10 +1872,17 @@ namespace Raspored.Tabele
             EnablePromeniSoftver = "False";
             EnableIzbrisiSoftver = "False";
             EnableDodaj = "False";
-            TabUcionice = "False";
-            TabPredmeti = "False";
-            TabSmer = "False";
+           
+                TabUcionice = "False";
+                TabPredmeti = "False";
+                TabSmer = "False";
+            
             Podaci = "False";
+
+            GridPretraga.IsEnabled = false;
+            ButtonPretraga.IsEnabled = false;
+            ButtonFilter.IsEnabled = false;
+            GridFilter.IsEnabled = false;
         }
 
         private void IzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1764,9 +1900,12 @@ namespace Raspored.Tabele
             EnablePromeniSoftver = "True";
             EnableIzbrisiSoftver = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSmer = "True";
+            }
             Podaci = "True";
 
             GridSoftver.IsEnabled = false;
@@ -1785,9 +1924,12 @@ namespace Raspored.Tabele
             EnablePromeniSoftver = "True";
             EnableIzbrisiSoftver = "True";
             EnableDodaj = "True";
-            TabUcionice = "True";
-            TabPredmeti = "True";
-            TabSmer = "True";
+            if (!_rezimPretrage)
+            {
+                TabUcionice = "True";
+                TabPredmeti = "True";
+                TabSmer = "True";
+            }
             Podaci = "True";
             GridSoftver.IsEnabled = false;
 
@@ -2697,7 +2839,20 @@ namespace Raspored.Tabele
                 }
 
             }
-                return u;
+            else if (oznaka.Trim().ToUpper() == "SOFTVER")
+            {
+                foreach (Ucionica ucionica in ucionice)
+                {
+                    foreach (Softver softver in ucionica.Softveri)
+                    {
+                        if (softver.Naziv == tokens[1].Trim().ToUpper())
+                        {
+                            u.Add(ucionica.Oznaka, ucionica);
+                        }
+                    }
+                }
+            }
+            return u;
 
         }
 
@@ -2827,18 +2982,31 @@ namespace Raspored.Tabele
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
+            _rezimPretrage = true;
             GridPretraga.Visibility = Visibility.Visible;
             ButtonPretraga.Visibility = Visibility.Collapsed;
             ButtonFilter.Visibility = Visibility.Collapsed;
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+               new Action(delegate ()
+               {
+                   TextBoxPretragaSoftver.Focus();
+                   Keyboard.Focus(TextBoxPretragaUcionice);
+               }));
         }
 
         private void ButtonOtkazi_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
             List<Ucionica> u = otvoriUcionicu();
             Ucionice.Clear();
             foreach(Ucionica ucionica in u)
@@ -2850,12 +3018,16 @@ namespace Raspored.Tabele
             ButtonPretraga.Visibility = Visibility.Visible;
             ButtonFilter.Visibility = Visibility.Visible;
             GridFilter.Visibility = Visibility.Collapsed;
+            _rezimPretrage = false;
 
 
         }
 
         private void ButtonFilter_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
             GridFilter.Visibility = Visibility.Visible;
             ButtonFilter.Visibility = Visibility.Collapsed;
             ButtonPretraga.Visibility = Visibility.Collapsed;
@@ -3368,13 +3540,27 @@ namespace Raspored.Tabele
 
         private void ButtonPretragaPredmet_Click(object sender, RoutedEventArgs e)
         {
+            TabUcionice = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
+            _rezimPretrage = true;
             GridPretragaPredmet.Visibility = Visibility.Visible;
             ButtonPretragaPredmet.Visibility = Visibility.Collapsed;
             ButtonFilterPredmet.Visibility = Visibility.Collapsed;
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+               new Action(delegate ()
+               {
+                   TextBoxPretragaSoftver.Focus();
+                   Keyboard.Focus(TextBoxPretragaPredmet);
+               }));
         }
 
         private void ButtonFilterPredmet_Click(object sender, RoutedEventArgs e)
         {
+            TabUcionice = "False";
+            TabSmer = "False";
+            TabSoftver = "False";
+            _rezimPretrage = true;
             GridFilterPredmet.Visibility = Visibility.Visible;
             ButtonFilterPredmet.Visibility = Visibility.Collapsed;
             ButtonPretragaPredmet.Visibility = Visibility.Collapsed;
@@ -3383,6 +3569,10 @@ namespace Raspored.Tabele
 
         private void ButtonFilterSmer_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabUcionice = "False";
+            TabSoftver = "False";
+            _rezimPretrage = true;
             GridFilterSmer.Visibility = Visibility.Visible;
             ButtonFilterSmer.Visibility = Visibility.Collapsed;
             ButtonPretragaSmer.Visibility = Visibility.Collapsed;
@@ -3391,14 +3581,28 @@ namespace Raspored.Tabele
 
         private void ButtonPretragaSmer_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabUcionice = "False";
+            TabSoftver = "False";
+            _rezimPretrage = true;
             GridPretragaSmer.Visibility = Visibility.Visible;
             ButtonPretragaSmer.Visibility = Visibility.Collapsed;
             ButtonFilterSmer.Visibility = Visibility.Collapsed;
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+               new Action(delegate ()
+               {
+                   TextBoxPretragaSoftver.Focus();
+                   Keyboard.Focus(TextBoxPretragaSmer);
+               }));
 
         }
 
         private void ButtonFilterSoftver_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabSmer = "False";
+            TabUcionice = "False";
+            _rezimPretrage = true;
             GridFilterSoftver.Visibility = Visibility.Visible;
             ButtonFilterSoftver.Visibility = Visibility.Collapsed;
             ButtonPretragaSoftver.Visibility = Visibility.Collapsed;
@@ -3406,15 +3610,29 @@ namespace Raspored.Tabele
 
         private void ButtonPretragaSoftver_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "False";
+            TabSmer = "False";
+            TabUcionice = "False";
+            _rezimPretrage = true;
             GridPretragaSoftver.Visibility = Visibility.Visible;
             ButtonPretragaSoftver.Visibility = Visibility.Collapsed;
             ButtonFilterSoftver.Visibility = Visibility.Collapsed;
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate ()
+                {
+                    TextBoxPretragaSoftver.Focus();
+                    Keyboard.Focus(TextBoxPretragaSoftver);
+                }));
 
         }
 
 
         private void ButtonOtkaziPredmet_Click(object sender, RoutedEventArgs e)
         {
+            TabUcionice = "True";
+            TabSmer = "True";
+            TabSoftver = "True";
+            _rezimPretrage = false;
             List<Predmet> u = otvoriPredmet();
             Predmeti.Clear();
             foreach (Predmet predmet in u)
@@ -3433,6 +3651,10 @@ namespace Raspored.Tabele
 
         private void ButtonOtkaziSmer_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "True";
+            TabUcionice = "True";
+            TabSoftver = "True";
+            _rezimPretrage = false;
             List<Smer> u = otvoriSmer();
             Smerovi.Clear();
             foreach (Smer smer in u)
@@ -3451,6 +3673,10 @@ namespace Raspored.Tabele
 
         private void ButtonOtkaziSoftver_Click(object sender, RoutedEventArgs e)
         {
+            TabPredmeti = "True";
+            TabSmer = "True";
+            TabUcionice = "True";
+            _rezimPretrage = false;
             List<Softver> u = otvoriSoftver();
             Softveri.Clear();
             foreach (Softver softver in u)
@@ -3578,6 +3804,44 @@ namespace Raspored.Tabele
                     {
                         u.Add(predmet.Oznaka, predmet);
                     }
+                }
+
+            }
+            if (oznaka.Trim().ToUpper() == "NAZIV")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.Naziv.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                }
+
+            }
+            if (oznaka.Trim().ToUpper() == "SKRACENICA")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.Skracenica.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                }
+
+            }
+            if (oznaka.Trim().ToUpper() == "SMER")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    if (predmet.SmerPredmeta.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                    if (predmet.SmerPredmeta.Naziv.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(predmet.Oznaka, predmet);
+                    }
+                      
                 }
 
             }
@@ -3715,6 +3979,19 @@ namespace Raspored.Tabele
                     }
                 }
 
+            }
+            else if (oznaka.Trim().ToUpper() == "SOFTVER")
+            {
+                foreach (Predmet predmet in predmeti)
+                {
+                    foreach (Softver softver in predmet.Softveri)
+                    {
+                        if (softver.Naziv == tokens[1].Trim().ToUpper())
+                        {
+                            u.Add(predmet.Oznaka, predmet);
+                        }
+                    }
+                }
             }
             return u;
 
@@ -3981,6 +4258,17 @@ namespace Raspored.Tabele
                 foreach (Softver softver in softveri)
                 {
                     if (softver.Oznaka.ToUpper() == tokens[1].Trim().ToUpper())
+                    {
+                        u.Add(softver.Oznaka, softver);
+                    }
+                }
+
+            }
+            if (oznaka.Trim().ToUpper() == "NAZIV")
+            {
+                foreach (Softver softver in softveri)
+                {
+                    if (softver.Naziv.ToUpper() == tokens[1].Trim().ToUpper())
                     {
                         u.Add(softver.Oznaka, softver);
                     }
