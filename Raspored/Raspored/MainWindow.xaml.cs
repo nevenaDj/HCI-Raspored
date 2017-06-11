@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using Raspored.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 
 namespace Raspored
 {
@@ -46,6 +47,9 @@ namespace Raspored
 
             string[] tekst = recentText.Split('\n');
             string recentFile = tekst[0];
+            string[] dani = { "Ponedeljak", "Utorak", "Sreda", "Cetvtak", "Petak", "Subota" };
+            Dani = new ObservableCollection<string>(dani);
+
             try
             {
                 List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
@@ -57,22 +61,50 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
-                //TO_DO: ocitanje rasporeda iz fajla
-                //raspored = new Model.Raspored();
                 raspored = citanje_pisanje.otvoriRaspored(recentFile);
                 raspored.File = recentFile;
                 Termini = new List<List<ObservableCollection<Predmet>>>();
+                TerminiDan= new List<List<ObservableCollection<Predmet>>>();
                 //Termini = new List<List<Predmet>>();
                 for (int i = 0; i < 61; i++)
                 {
                     List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
-                    //List<Predmet> temp = new List<Predmet>();
+                    List<ObservableCollection<Predmet>> temp1 = new List<ObservableCollection<Predmet>>();
                     for (int j = 0; j < 7; j++)
                         temp.Add(new ObservableCollection<Predmet>());
-                        //temp.Add(new Predmet());
                     Termini.Add(temp);
+                    for (int k = 0; k < 11; k++)
+                        temp1.Add(new ObservableCollection<Predmet>());
+ 
+                    TerminiDan.Add(temp1);
                 }
+                
+                uc = new List<string>();
+                for (int i = 0; i < u.Count; i++)
+                    uc.Add(u[i].Oznaka);
+                uc1 = uc[0];
 
+                if (u.Count < 10)
+                    c10.Width = new GridLength(0);
+                if (u.Count < 9)
+                    c9.Width = new GridLength(0);
+                if (u.Count < 8)
+                    c8.Width = new GridLength(0);
+                if (u.Count < 7)
+                    c7.Width = new GridLength(0);
+                if (u.Count < 6)
+                    c6.Width = new GridLength(0);
+                if (u.Count < 5)
+                    c5.Width = new GridLength(0);
+                if (u.Count < 4)
+                    c4.Width = new GridLength(0);
+                if (u.Count < 3)
+                    c3.Width = new GridLength(0);
+                if (u.Count < 2)
+                    c2.Width = new GridLength(0);
+                if (u.Count < 1)
+                    c1.Width = new GridLength(0);
+                    
 
             }
             catch (Exception e)
@@ -83,13 +115,21 @@ namespace Raspored
                 //MessageBox.Show("error");
             }
         }
+        
         //public List<List<Predmet>> Termini { get; private set; }
         public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
+        public List<List<ObservableCollection<Predmet>>> TerminiDan { get; private set; }
         private Model.Raspored raspored;
         // Tabele.Tabele w;
         CitanjeIPisanje citanje_pisanje;
 
         public ObservableCollection<Ucionica> Ucionice
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<string> Dani
         {
             get;
             set;
@@ -101,6 +141,24 @@ namespace Raspored
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+
+        private List<string> _uc;
+        public List<string> uc
+        {
+            get
+            {
+                return _uc;
+            }
+            set
+            {
+                if (_uc != value)
+                {
+                    _uc = value;
+                    OnPropertyChanged("_uc");
+                }
             }
         }
 
@@ -117,6 +175,23 @@ namespace Raspored
                 {
                     _selectedUcionica = value;
                     OnPropertyChanged("SelectedUcionica");
+                }
+            }
+        }
+
+        private string _selectedDan;
+        public string SelectedDan
+        {
+            get
+            {
+                return _selectedDan;
+            }
+            set
+            {
+                if (_selectedDan != value)
+                {
+                    _selectedDan = value;
+                    OnPropertyChanged("SelectedDan");
                 }
             }
         }
@@ -326,7 +401,7 @@ namespace Raspored
 
         private void Ucionice_Radio(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ucionice");
+            //MessageBox.Show("ucionice");
             scoll.Visibility = Visibility.Visible;
             lsUcionice.Visibility = Visibility.Visible;
             header.Visibility = Visibility.Visible;
@@ -335,16 +410,17 @@ namespace Raspored
             header_2.Visibility = Visibility.Collapsed;
 
         }
-
+        public string uc1;
         private void Dani_Radio(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Dani");
+            //MessageBox.Show("Dani");
             scoll.Visibility = Visibility.Collapsed;
             lsUcionice.Visibility = Visibility.Collapsed;
             header.Visibility = Visibility.Collapsed;
             scoll_2.Visibility = Visibility.Visible;
             lsDani.Visibility = Visibility.Visible;
             header_2.Visibility = Visibility.Visible;
+            
 
         }
 
@@ -385,12 +461,56 @@ namespace Raspored
 
         private void lsDani_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            SelectedDan = (string)lsDani.SelectedItem;
+            int row = 1;
+            switch (SelectedDan)
+            {
+                case "Ponedeljak":
+                    row = 1;
+                    break;
+                case "Utorak":
+                    row = 2;
+                    break;
+                case "Sreda":
+                    row = 3;
+                    break;
+                
+                case "Petak":
+                    row = 5;
+                    break;
+                case "Subota":
+                    row = 6;
+                    break;
+                default:
+                    row = 4;
+                    break;
+            }
 
-            //SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
-            //Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
-            //MessageBox.Show(SelectedUcionica.Oznaka);
-            
+            List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+            for (int i = 1; i <= u.Count; i++)
+            {
+                foreach (UcionicaRaspored ucR in raspored.Rasporedi)
+                    if (ucR.Ucionica.Oznaka == u[i - 1].Oznaka)
+                        for (int j = 1; j < 61; j++)
+                        {
+                            if (TerminiDan[j][i].Count!=0)
+                                TerminiDan[j][i].RemoveAt(0);
+                        }
+
+            }
+            for (int i=1;i<=u.Count; i++)
+            {
+                foreach (UcionicaRaspored ucR in raspored.Rasporedi)
+                    if (ucR.Ucionica.Oznaka==u[i-1].Oznaka)
+                        for (int j=1;j<61;j++)
+                        {
+                            if (ucR.Rasporedi[j][row].Oznaka!="")
+                           TerminiDan[j][i].Add(ucR.Rasporedi[j][row]);
+                        }
+                
+            }
+
+
         }
-        }
+    }
 }
