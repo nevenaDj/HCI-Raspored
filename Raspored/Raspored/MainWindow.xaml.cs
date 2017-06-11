@@ -17,17 +17,51 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Raspored.Model;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Raspored
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, System.ComponentModel.INotifyPropertyChanged
     {
         private Model.Raspored raspored;
-       // Tabele.Tabele w;
+        // Tabele.Tabele w;
         CitanjeIPisanje citanje_pisanje;
+
+        public ObservableCollection<Ucionica> Ucionice
+        {
+            get;
+            set;
+        }
+
+        private Ucionica _selectedUcionica;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Ucionica SelectedUcionica
+        {
+            get
+            {
+                return _selectedUcionica;
+            }
+            set
+            {
+                if (_selectedUcionica != value)
+                {
+                    _selectedUcionica = value;
+                    OnPropertyChanged("SelectedUcionica");
+                }
+            }
+        }
+
+        private void OnPropertyChanged(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +89,8 @@ namespace Raspored
                 //raspored = new Model.Raspored();
                 raspored = citanje_pisanje.otvoriRaspored(recentFile);
                 raspored.File = recentFile;
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+                Ucionice = new ObservableCollection<Ucionica>(u);
 
             } catch (Exception e)
             {
@@ -177,67 +213,6 @@ namespace Raspored
             MessageBox.Show(listView);
         }
 
-       /* Model.Raspored otvoriRaspored(String fileName)
-        {
-            Model.Raspored rasp = new Model.Raspored();
-            rasp.File = fileName;
-
-            RegexOptions options = RegexOptions.None;
-            Regex regex = new Regex("[\r\n]{3,}", options);
-            string open_text = File.ReadAllText(fileName);
-            if (open_text == "")
-                return rasp;
-
-            string[] tekst = open_text.Split('\n');
-            rasp.Naziv = tekst[0];
-
-            foreach (string pr in tekst[1].Split('|'))
-            {
-                string[] pr_termin = pr.Split(',');
-               // pr_termin.ToList().Count
-                if (pr_termin.ToList().Count == 2)
-                {
-                    if (pr_termin[0] != "" && pr_termin[1] != "")
-                    {
-                        Predmet p = w.nadjiPredmet(pr_termin[0]);
-                        if (p != null)
-                        {
-                            p.BrojTermina = Convert.ToInt32(pr_termin[1]);
-                            rasp.OstaliTermini.Add(p);
-                        }
-                       
-                    }
-                }
-            }
-            int broj = 2;
-            while (true)
-            {
-                if (tekst.ToList().Count == broj || tekst[broj] == "" || tekst[broj] == "\r")
-                    return rasp;
-                string[] uc_term = tekst[broj].Split(':');               
-                Ucionica u = w.nadjiUcionicu(uc_term[0]);
-                UcionicaRaspored ur = new UcionicaRaspored(u);
-                string[] pr = uc_term[1].Split('|');
-                for (int i=0; i <61; i++ )
-                {
-                    if (pr[i] != "" || pr[i] != "\r")
-                    {
-                        string[] predmeti = pr[i].Split(',');
-                        for (int j = 0; j < 7; j++)
-                        {
-                            Predmet p = w.nadjiPredmet(predmeti[j]);
-                            if (p != null)
-                                ur.Rasporedi[i][j] = p;
-                        }
-                    
-                    }
-                }
-                rasp.Rasporedi.Add(ur);
-                broj++;
-                
-            }
-            //return rasp;
-        }*/
 
         private void Novi_Raspored_Click(object sender, RoutedEventArgs e)
         {
@@ -263,7 +238,6 @@ namespace Raspored
 
         public void doThings(string param)
         {
-          //  btnOK.Background = new SolidColorBrush(Color.FromRgb(32, 64, 128));
             Title = param;
         }
 
