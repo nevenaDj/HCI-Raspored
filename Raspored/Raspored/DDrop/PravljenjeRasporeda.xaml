@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:l="clr-namespace:Raspored"
     xmlns:local="clr-namespace:Raspored.DDrop"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Raspored.Model"
@@ -11,10 +12,15 @@
     Height="730"
     MinWidth="900"
     MinHeight="730"
+    l:HelpProvider.HelpKey="PravljenjeRasporeda"
+    Activated="Window_Activated"
     Closing="DataWindow_Closing"
     FontSize="16"
     Top="0"
     mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
     <Window.Resources>
         <BitmapImage x:Key="FolderOpen" UriSource="/Raspored;component/foldero.png" />
         <BitmapImage x:Key="Bin" UriSource="/Raspored;component/bin.png" />

@@ -1132,5 +1132,24 @@ namespace Raspored.DDrop
         {
 
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[1]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                str = "PravljenjeRasporeda";
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            this.Focus();
+            Keyboard.Focus(this);
+            FocusManager.SetFocusedElement(this, this);
+
+        }
     }
 }

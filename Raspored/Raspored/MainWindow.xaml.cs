@@ -383,6 +383,7 @@ namespace Raspored
             if (focusedControl is DependencyObject)
             {
                 string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                str = "Forma";
                 HelpProvider.ShowHelp(str, this);
             }
         }

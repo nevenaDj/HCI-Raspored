@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 using Raspored.Tabele;
+using Raspored.DDrop;
 
 namespace Raspored
 {
@@ -17,6 +18,9 @@ namespace Raspored
         Tabele.Tabele prozorTabele;
         IzborSmera prozorIzborSmera;
         SoftveriOtvori prozorSoftveri;
+        PravljenjeRasporeda prozorPravljenjeRasporeda;
+        PrikaziPredmet prozorZaPrikazPredmeta;
+
         public JavaScriptControlHelper(MainWindow w)
         {
             prozor = w;
@@ -35,6 +39,14 @@ namespace Raspored
         public JavaScriptControlHelper(SoftveriOtvori w)
         {
             prozorSoftveri = w;
+        }
+        public JavaScriptControlHelper(PravljenjeRasporeda w)
+        {
+            prozorPravljenjeRasporeda = w;
+        }
+        public JavaScriptControlHelper(PrikaziPredmet w)
+        {
+            prozorZaPrikazPredmeta = w;
         }
 
         public void RunFromJavascript(string param)

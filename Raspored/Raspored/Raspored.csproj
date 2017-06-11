@@ -180,10 +180,17 @@
     <Content Include="Help\Forma.htm" />
     <Content Include="Help\index.htm" />
     <Content Include="Help\IzborSmera.htm" />
+    <Content Include="Help\PravljenjeRasporeda.htm" />
+    <Content Include="Help\PretragaPredmeta.htm" />
+    <Content Include="Help\PretragaSmera.htm" />
+    <Content Include="Help\PretragaSoftvera.htm" />
+    <Content Include="Help\PretragaUcionice.htm" />
     <Content Include="Help\PrikazPredmeta.htm" />
     <Content Include="Help\PrikazSmera.htm" />
     <Content Include="Help\PrikazSoftvera.htm" />
     <Content Include="Help\ProzorDodavanjeSoftvera.htm" />
+    <Content Include="Help\ProzorZaDodavanjeSoftvera2.htm" />
+    <Content Include="Help\ProzorZaPrikazPredmeta.htm" />
     <Content Include="Help\Tabele.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
