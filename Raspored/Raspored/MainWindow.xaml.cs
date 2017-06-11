@@ -25,7 +25,7 @@ namespace Raspored
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private Model.Raspored raspored;
         // Tabele.Tabele w;
@@ -36,6 +36,33 @@ namespace Raspored
             get;
             set;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        private Ucionica _selectedUcionica;
+        public Ucionica SelectedUcionica
+        {
+            get
+            {
+                return _selectedUcionica;
+            }
+            set
+            {
+                if (_selectedUcionica != value)
+                {
+                    _selectedUcionica = value;
+                    OnPropertyChanged("SelectedUcionica");
+                }
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
