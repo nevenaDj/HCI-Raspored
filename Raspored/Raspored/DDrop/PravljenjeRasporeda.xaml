@@ -387,7 +387,7 @@
                 Width="100"
                 Margin="15,15,15,15"
                 HorizontalAlignment="Left"
-                Click="Korak1_Click">
+                Click="Korak1_Bez_Predmeta_Click">
                 Bez predmeta
             </Button>
             <Button
