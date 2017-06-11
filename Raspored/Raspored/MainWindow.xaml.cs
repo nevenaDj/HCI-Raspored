@@ -27,6 +27,60 @@ namespace Raspored
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
+            f.Close();
+
+            citanje_pisanje = new CitanjeIPisanje();
+
+            RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
+            //w = new Tabele.Tabele();
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[\r\n]{3,}", options);
+            string recentText = File.ReadAllText("../../Save/recent.txt");
+
+            string[] tekst = recentText.Split('\n');
+            string recentFile = tekst[0];
+            try
+            {
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+                Ucionice = new ObservableCollection<Ucionica>(u);
+                //this.dgrMainUcionica.ItemsSource = u;
+                //this.dgrMainUcionica.SelectedItem = SelectedUcionica;
+                this.lsUcionice.ItemsSource = Ucionice;
+                string fileText = File.ReadAllText(recentFile);
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+                Raspored_Button.IsEnabled = true;
+                //TO_DO: ocitanje rasporeda iz fajla
+                //raspored = new Model.Raspored();
+                raspored = citanje_pisanje.otvoriRaspored(recentFile);
+                raspored.File = recentFile;
+                Termini = new List<List<ObservableCollection<Predmet>>>();
+                for (int i = 0; i < 61; i++)
+                {
+                    List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                    for (int j = 0; j < 7; j++)
+                        temp.Add(new ObservableCollection<Predmet>());
+                    Termini.Add(temp);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Prozor2.Visibility = Visibility.Visible;
+                Prozor1.Visibility = Visibility.Hidden;
+                Raspored_Button.IsEnabled = false;
+                //MessageBox.Show("error");
+            }
+        }
+        public List<List<ObservableCollection<Predmet>>> Termini { get; private set; }
         private Model.Raspored raspored;
         // Tabele.Tabele w;
         CitanjeIPisanje citanje_pisanje;
@@ -62,48 +116,6 @@ namespace Raspored
                 }
             }
         }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
-            f.Close();
-
-            citanje_pisanje = new CitanjeIPisanje();
-
-            RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
-            //w = new Tabele.Tabele();
-            RegexOptions options = RegexOptions.None;
-            Regex regex = new Regex("[\r\n]{3,}", options);
-            string recentText = File.ReadAllText("../../Save/recent.txt");
-
-            string[] tekst = recentText.Split('\n');
-            string recentFile = tekst[0];
-            try
-            {
-                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
-                Ucionice = new ObservableCollection<Ucionica>(u);
-                string fileText = File.ReadAllText(recentFile);
-                Prozor1.Visibility = Visibility.Visible;
-                Prozor2.Visibility = Visibility.Hidden;
-                Raspored_Button.IsEnabled = true;
-                //TO_DO: ocitanje rasporeda iz fajla
-                //raspored = new Model.Raspored();
-                raspored = citanje_pisanje.otvoriRaspored(recentFile);
-                raspored.File = recentFile;
-
-
-            }
-            catch (Exception e)
-            {
-                Prozor2.Visibility = Visibility.Visible;
-                Prozor1.Visibility = Visibility.Hidden;
-                Raspored_Button.IsEnabled = false;
-                //MessageBox.Show("error");
-            }
-        }
-
-
 
         private void Ucionice_Click(object sender, RoutedEventArgs e)
         {
@@ -247,6 +259,30 @@ namespace Raspored
         {
             Tabele.Tabele t = new Tabele.Tabele("demo");
             t.ShowDialog();
+
+        }
+
+
+        private void lsUcionice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
+            Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
+            MessageBox.Show(SelectedUcionica.Oznaka);
+            foreach (UcionicaRaspored ur in raspored.Rasporedi)
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                {
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            {
+                                Termini[i][j].Add(ur.Rasporedi[i][j]);
+                            }
+                        }
+                    }
+                }
+
 
         }
     }

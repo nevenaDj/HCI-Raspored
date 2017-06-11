@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Raspored"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:Raspored.Model"
     Title="MainWindow"
-    Width="525"
-    Height="350"
+    Width="1000"
+    Height="700"
+    FontSize="14"
     local:HelpProvider.HelpKey="Forma"
     Activated="HandleWindowActivated"
     mc:Ignorable="d">
@@ -68,26 +70,21 @@
                 Grid.Column="0"
                       Grid.RowSpan="2">
 
-                    <DataGrid
-                                    x:Name="dgrMainUcionica"
-                                         
-                                    AutoGenerateColumns="False"
-                                    BorderThickness="1"
-                                    IsReadOnly="True"
-                                    IsSynchronizedWithCurrentItem="True"
-                                    ItemsSource="{Binding Path=Ucionice, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedItem="{Binding Path=SelectedUcionica, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView
+                x:Name="lsUcionice"
+                Grid.Column="0"
+                Padding="20,2,20,2"
+                ItemsSource="{Binding Ucionice}"
+                SelectionChanged="lsUcionice_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Oznaka}" />
 
-                        <DataGrid.Columns>
-
-                            <DataGridTextColumn
-                                            Width="Auto"
-                                            Binding="{Binding Oznaka}"
-                                            CanUserSort="False"
-                                            Header="Oznaka" />
-
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
 
 
@@ -102,7 +99,7 @@
                     <TextBlock Grid.Column="0">
                      Ucionica:
                     </TextBlock>
-                    <TextBlock  Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka}">
+                    <TextBlock x:Name="Oznaka_ucionica" Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka, UpdateSourceTrigger=PropertyChanged }">
                     </TextBlock>
                 </Grid>
 
