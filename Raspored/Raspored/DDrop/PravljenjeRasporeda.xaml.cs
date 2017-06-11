@@ -181,6 +181,21 @@ namespace Raspored.DDrop
 
         }
 
+        private void Korak1_Bez_Predmeta_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedPredmet = null;
+            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu())
+            {
+                Ucionice.Add(u);
+            }
+
+            Korak2Enable = "False";
+            Korak1Enable = "False";
+            Raspored1.Visibility = Visibility.Collapsed;
+            Raspored2.Visibility = Visibility.Visible;
+        }
+
+
         private void Korak1_Nazad_Click(object sender, RoutedEventArgs e)
         {
             Korak2Enable = "True";

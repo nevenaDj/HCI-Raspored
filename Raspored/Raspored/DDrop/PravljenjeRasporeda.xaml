@@ -163,7 +163,7 @@
                 Width="100"
                 Margin="15,15,15,15"
                 HorizontalAlignment="Left"
-                Click="Korak1_Click"
+                Click="Korak1_Bez_Predmeta_Click"
                 >
                 Bez predmeta
             </Button>
@@ -577,6 +577,17 @@
                         ItemsSource="{Binding Termini[1][1]}"
                         MouseMove="ListView_MouseMove"
                         PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown">
+                        <ListView.ContextMenu >
+                            <ContextMenu >
+                                <ContextMenu.ItemsSource >
+                                    <CompositeCollection >
+                                        <MenuItem Name="lw011D" Header="Delete" Click="MenuItem_Click" IsEnabled="False"/>
+                                        <MenuItem Name="lw011C" Header="Change Color" Click="MenuItem_Click_1" IsEnabled="False"/>
+                                    </CompositeCollection>
+                                </ContextMenu.ItemsSource>
+                            </ContextMenu>
+
+                        </ListView.ContextMenu>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
