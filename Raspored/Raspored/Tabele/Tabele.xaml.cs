@@ -3907,6 +3907,7 @@ namespace Raspored.Tabele
         {
             Ucionice.Clear();
             List<Ucionica> u = otvoriUcionicu();
+
             if (IzabraniProjektor == "")
             {
                 foreach (Ucionica ucionica in u)
