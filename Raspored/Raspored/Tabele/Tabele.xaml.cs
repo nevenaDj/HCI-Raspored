@@ -33,21 +33,27 @@ namespace Raspored.Tabele
             InitializeComponent();
             this.DataContext = this;
 
+            _raspored = raspored;
 
             //List<Smer> s = new List<Smer>(); 
+            SmeroviP = new ObservableCollection<Smer>();
             List<Smer> s = otvoriSmer();
             Smerovi = new ObservableCollection<Smer>(s);
 
+
             //List<Softver> sf = new List<Softver>();
+            SoftveriP = new ObservableCollection<Softver>();
             List<Softver> sf = otvoriSoftver();
             Softveri = new ObservableCollection<Softver>(sf);
 
             // List<Predmet> p = new List<Predmet>();
+            PredmetiP = new ObservableCollection<Predmet>();
             List<Predmet> p = otvoriPredmet();
             //p.Add(new Predmet { Naziv = "Interakcija covek racunar", Oznaka = "HCI", Skracenica = "HCI (SIIT)", DuzinaTermina = 2, BrojTermina = 6, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = true, TrebaPametnaTabla = false, TrebaProjektor = true });
             //p.Add(new Predmet { Naziv = "Internet softverske arhitekture", Oznaka = "ISA", Skracenica = "ISA (SIIT)", DuzinaTermina = 2, BrojTermina = 5, VelicinaGrupe = 16, SmerPredmeta = s[0], TrebaTabla = false, TrebaPametnaTabla = false, TrebaProjektor = true });
             Predmeti = new ObservableCollection<Predmet>(p);
 
+            UcioniceP = new ObservableCollection<Ucionica>();
             // List<Ucionica> u = new List<Ucionica>();
             List<Ucionica> u = otvoriUcionicu();
             //u.Add(new Ucionica{ Oznaka = "L1", BrojRadnihMesta=16, ImaPametnaTabla=false, ImaTabla=true, ImaProjektor = true});
@@ -183,7 +189,6 @@ namespace Raspored.Tabele
             _greskaOznaka = false;
             _index = -1;
 
-            _raspored = raspored;
 
             _rezimPretrage = false;
 
@@ -192,11 +197,11 @@ namespace Raspored.Tabele
 
         private Model.Raspored _raspored;
 
-        public Tabele(string demo)
+        public Tabele(string demo, Model.Raspored rasp)
         {
             InitializeComponent();
             this.DataContext = this;
-
+            _raspored = rasp;
 
             //List<Smer> s = new List<Smer>(); 
             List<Smer> s = otvoriSmer();
@@ -529,6 +534,30 @@ namespace Raspored.Tabele
         }
 
         public ObservableCollection<Softver> Softveri
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Predmet> PredmetiP
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Smer> SmeroviP
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Ucionica> UcioniceP
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Softver> SoftveriP
         {
             get;
             set;
@@ -1981,6 +2010,7 @@ namespace Raspored.Tabele
                 f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
                 f.Write(u.Sistem);
                 f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
+                f.Write(_raspored.File + "|");
                 if (u.Softveri != null)
                     if (u.Softveri.Count > 0)
                     {
@@ -1992,6 +2022,27 @@ namespace Raspored.Tabele
                             }
                         }
                     }
+                
+                f.WriteLine();
+            }
+            foreach (Ucionica u in UcioniceP)
+            {
+                f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
+                f.Write(u.Sistem);
+                f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
+                f.Write(u.File + "|");
+                if (u.Softveri != null)
+                    if (u.Softveri.Count > 0)
+                    {
+                        foreach (Softver s in u.Softveri)
+                        {
+                            if (s != null)
+                            {
+                                f.Write(s.Oznaka + ",");
+                            }
+                        }
+                    }
+
                 f.WriteLine();
             }
             f.Close();
@@ -2022,7 +2073,8 @@ namespace Raspored.Tabele
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in uc[7].Split(','))
+                u.File = uc[7];
+                foreach (string sof in uc[8].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -2033,7 +2085,10 @@ namespace Raspored.Tabele
                 u.Softveri = softveri;
                 // u.Softveri = new ObservableCollection<Softver>( softveri);
                 // MessageBox.Show("" + u.Softveri.Count);
-                ucionice.Add(u);
+                if (_raspored.File == u.File)
+                    ucionice.Add(u);
+                else
+                    UcioniceP.Add(u);
             }
 
             return ucionice;
@@ -2044,7 +2099,11 @@ namespace Raspored.Tabele
             StreamWriter f = new StreamWriter("../../Save/smer.txt");
             foreach (Smer s in Smerovi)
             {
-                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja);
+                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja+"|"+_raspored.File);
+            }
+            foreach (Smer s in SmeroviP)
+            {
+                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja + "|" + s.File);
             }
             f.Close();
         }
@@ -2077,8 +2136,13 @@ namespace Raspored.Tabele
                 s.Naziv = sm[3];
                 string[] sss = sm[4].Split(' ');
                 s.DatumUvodjenja = Convert.ToDateTime(sss[0]);
+                s.File = sm[5].Replace("\r", "");
 
-                smerovi.Add(s);
+                //smerovi.Add(s);
+                if (_raspored.File == s.File)
+                    smerovi.Add(s);
+                else
+                    SmeroviP.Add(s);
             }
 
             return smerovi;
@@ -2091,7 +2155,14 @@ namespace Raspored.Tabele
             {
                 f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
                 f.Write(s.Sistem);
-                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.Sajt);
+                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + _raspored.File + "|" + s.Sajt);
+                f.Write("\r\n");
+            }
+            foreach (Softver s in SoftveriP)
+            {
+                f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
+                f.Write(s.Sistem);
+                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.File + "|" + s.Sajt);
                 f.Write("\r\n");
             }
             f.Close();
@@ -2123,9 +2194,13 @@ namespace Raspored.Tabele
 
                 s.Opis = sf[5];
                 s.Proizvodjac = sf[6];
-                s.Sajt = sf[7].Trim();
+                s.File = sf[7];
+                s.Sajt = sf[8].Trim();
 
-                softveri.Add(s);
+                if (s.File == _raspored.File)
+                    softveri.Add(s);
+                else
+                    SoftveriP.Add(s);
             }
 
             return softveri;
@@ -2142,7 +2217,23 @@ namespace Raspored.Tabele
                 f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
                 if (p.SmerPredmeta != null)
                     f.Write(p.SmerPredmeta.Oznaka);
-                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
+                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|"+ _raspored.File+"|");
+                //if (p.Softveri == null || p.Softveri.Count==0)
+                foreach (Softver s in p.Softveri)
+                {
+                    f.Write(s.Oznaka + ",");
+                }
+                f.WriteLine();
+            }
+            foreach (Predmet p in PredmetiP)
+            {
+                f.Write(p.Naziv + "|" + p.BrojTermina + "|" + p.DuzinaTermina + "|");
+                f.Write(p.Sistem);
+
+                f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
+                if (p.SmerPredmeta != null)
+                    f.Write(p.SmerPredmeta.Oznaka);
+                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|" + p.File + "|");
                 //if (p.Softveri == null || p.Softveri.Count==0)
                 foreach (Softver s in p.Softveri)
                 {
@@ -2190,8 +2281,9 @@ namespace Raspored.Tabele
                 //MessageBox.Show("TrebaTabla: " + pr[10]);
                 p.TrebaTabla = Convert.ToBoolean(pr[10]);
                 p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                p.File = pr[12];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in pr[12].Split(','))
+                foreach (string sof in pr[13].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -2199,7 +2291,10 @@ namespace Raspored.Tabele
                 }
                 p.Softveri = softveri;
                 // MessageBox.Show(""+p.Softveri.Count);
-                predmeti.Add(p);
+                if (p.File==_raspored.File)
+                    predmeti.Add(p);
+                else
+                    PredmetiP.Add(p);
 
             }
 
@@ -2503,7 +2598,7 @@ namespace Raspored.Tabele
         private void SoftveriOtvori_Click(object sender, RoutedEventArgs e)
         {
 
-            var w = new SoftveriOtvori(SelectedUcionica);
+            var w = new SoftveriOtvori(SelectedUcionica, _raspored.File);
 
             w.ShowDialog();
             List<Softver> s = w.getList1();
@@ -2512,7 +2607,7 @@ namespace Raspored.Tabele
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var w = new SoftveriOtvori(SelectedPredmet);
+            var w = new SoftveriOtvori(SelectedPredmet, _raspored.File);
 
             w.ShowDialog();
             List<Softver> s = w.getList1();
@@ -2669,7 +2764,7 @@ namespace Raspored.Tabele
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var p = new IzborSmera(SelectedPredmet);
+            var p = new IzborSmera(SelectedPredmet, _raspored.File);
             p.ShowDialog();
             SelectedPredmet.SmerPredmeta = p.IzabraniSmer;
             //    MessageBox.Show(SelectedPredmet.SmerPredmeta.Naziv);

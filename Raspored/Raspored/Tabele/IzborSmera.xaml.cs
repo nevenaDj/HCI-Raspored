@@ -29,7 +29,7 @@ namespace Raspored.Tabele
             InitializeComponent();
         }
 
-        public IzborSmera(Predmet predmet)
+        public IzborSmera(Predmet predmet, String fileName)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -43,7 +43,7 @@ namespace Raspored.Tabele
 
             
 
-            List<Smer> s = otvoriSmer(IzabraniSmer);
+            List<Smer> s = otvoriSmer(IzabraniSmer, fileName);
             Smerovi = new ObservableCollection<Smer>(s);
         }
 
@@ -58,6 +58,7 @@ namespace Raspored.Tabele
           //  MessageBox.Show("click" + IzabraniSmer.Oznaka);
 
             IzabraniSmer = SelectedSmer;
+            this.Close();
           
         }
 
@@ -129,7 +130,7 @@ namespace Raspored.Tabele
 
         
 
-        public List<Smer> otvoriSmer(Smer izabraniSmer)
+        public List<Smer> otvoriSmer(Smer izabraniSmer, String fileName)
         {
 
             List<Smer> smerovi = new List<Smer>();
@@ -161,16 +162,20 @@ namespace Raspored.Tabele
                 s.Opis = sm[2];
                 s.Naziv = sm[3];
                 s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
+                s.File = sm[5].Replace("\r", "");
+
                 if (izabraniSmer != null)
                 {
                     if (izabraniSmer.Oznaka != s.Oznaka)
                     {
-                        smerovi.Add(s);
+                        if (s.File == fileName)
+                            smerovi.Add(s);
                     }
                 }
                 else
                 {
-                    smerovi.Add(s);
+                    if (s.File == fileName)
+                        smerovi.Add(s);
 
                 }
                 

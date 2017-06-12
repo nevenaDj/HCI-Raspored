@@ -1,2 +1,10 @@
-32|False|True|True|Windows|RC 1|L1|1,jaaa,2,
-16|False|True|True||s|d|
+116|False|True|True|Windows|1|1|C:\Users\Sabinomi\Documents\1233.rsp|
+32|False|True|True|Windows|RC 1|L1|C:\Users\Sabinomi\Documents\1233.rsp|1,
+16|False|True|True||s|d|C:\Users\Sabinomi\Documents\1233.rsp|
+16|False|True|True|Windows|1|de|C:\Users\Sabinomi\Documents\1233.rsp|
+16|False|True|True|Windows|1|123|C:\Users\Sabinomi\Documents\1233.rsp|1,
+16|False|True|True|Oba||323|C:\Users\Sabinomi\Documents\1233.rsp|
+16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
+16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
+16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
+16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|

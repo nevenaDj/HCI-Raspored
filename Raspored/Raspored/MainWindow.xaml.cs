@@ -37,7 +37,7 @@ namespace Raspored
             FileStream f = new FileStream("../../Save/recent.txt", FileMode.OpenOrCreate);
             f.Close();
 
-            citanje_pisanje = new CitanjeIPisanje();
+            
 
             RecentFileList.MenuClick += (s, e) => FileOpenCore(e.Filepath);
             //w = new Tabele.Tabele();
@@ -49,10 +49,13 @@ namespace Raspored
             string recentFile = tekst[0];
             string[] dani = { "Ponedeljak", "Utorak", "Sreda", "Cetvtak", "Petak", "Subota" };
             Dani = new ObservableCollection<string>(dani);
-
+            citanje_pisanje = new CitanjeIPisanje(recentFile);
             try
             {
-                List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+                Raspored_Button.IsEnabled = true;
+                raspored = citanje_pisanje.otvoriRaspored(recentFile);
+                raspored.File = recentFile;
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu(raspored.File);
                 Ucionice = new ObservableCollection<Ucionica>(u);
                 //this.dgrMainUcionica.ItemsSource = u;
                 //this.dgrMainUcionica.SelectedItem = SelectedUcionica;
@@ -60,9 +63,7 @@ namespace Raspored
                 string fileText = File.ReadAllText(recentFile);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
-                Raspored_Button.IsEnabled = true;
-                raspored = citanje_pisanje.otvoriRaspored(recentFile);
-                raspored.File = recentFile;
+                
                 Termini = new List<List<ObservableCollection<Predmet>>>();
                 TerminiDan= new List<List<ObservableCollection<Predmet>>>();
                 //Termini = new List<List<Predmet>>();
@@ -456,7 +457,7 @@ namespace Raspored
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            Tabele.Tabele t = new Tabele.Tabele("demo");
+            Tabele.Tabele t = new Tabele.Tabele("demo", raspored);
             t.ShowDialog();
 
         }
@@ -583,7 +584,7 @@ namespace Raspored
                     break;
             }
 
-            List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
+            List<Ucionica> u = citanje_pisanje.otvoriUcionicu(raspored.File);
             if (raspored.Rasporedi.Count != 0)
             {
                 for (int i = 1; i <= u.Count; i++)

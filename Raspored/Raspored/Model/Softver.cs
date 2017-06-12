@@ -27,6 +27,7 @@ namespace Raspored.Model
         private double _cena;
         private string _opis;
         private string _sistem;
+        private string _file;
 
         public Softver()
         {
@@ -75,7 +76,23 @@ namespace Raspored.Model
                 }
             }
         }
-        
+
+
+        public string File
+        {
+            get
+            {
+                return _file;
+            }
+            set
+            {
+                if (_file != value)
+                {
+                    _file = value;
+                    OnPropertyChanged("File");
+                }
+            }
+        }
         public string Naziv
         {
             get

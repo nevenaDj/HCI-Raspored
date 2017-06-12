@@ -18,11 +18,11 @@ namespace Raspored.Tabele
 {
     public partial class SoftveriOtvori : Window
     {
-        public SoftveriOtvori()
+        public SoftveriOtvori(String fileName)
         {
             InitializeComponent();
             this.DataContext = this;
-            List<Softver> sf = otvoriSoftver();
+            List<Softver> sf = otvoriSoftver(fileName);
             List2 = new ObservableCollection<Softver>(sf);
             List1 = new ObservableCollection<Softver>();
             Search = "";
@@ -30,7 +30,7 @@ namespace Raspored.Tabele
 
         private string _rezim;
 
-        public SoftveriOtvori(Ucionica u)
+        public SoftveriOtvori(Ucionica u, String fileName)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -39,14 +39,14 @@ namespace Raspored.Tabele
             Naziv.Text = "Instalirani softveri u učionici";
             if (u.Softveri == null)
             {
-                List<Softver> sf = otvoriSoftver();
+                List<Softver> sf = otvoriSoftver(fileName);
                 List2 = new ObservableCollection<Softver>(sf);
                 List1 = new ObservableCollection<Softver>();
                 SaveList2= new List<Softver>();
             }
             else
             {
-                List<Softver> l2 = otvoriSoftver();
+                List<Softver> l2 = otvoriSoftver(fileName);
                 List<Softver> l1 = new List<Softver>();
                 foreach (Softver s in u.Softveri)
                 {
@@ -64,7 +64,7 @@ namespace Raspored.Tabele
 
         }
 
-        public SoftveriOtvori(Predmet u)
+        public SoftveriOtvori(Predmet u, String fileName)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -74,13 +74,13 @@ namespace Raspored.Tabele
             SaveList2 = new List<Softver>();
             if (u.Softveri == null)
             {
-                List<Softver> sf = otvoriSoftver();
+                List<Softver> sf = otvoriSoftver(fileName);
                 List2 = new ObservableCollection<Softver>(sf);
                 List1 = new ObservableCollection<Softver>();
             }
             else
             {
-                List<Softver> l2 = otvoriSoftver();
+                List<Softver> l2 = otvoriSoftver(fileName);
                 List<Softver> l1 = new List<Softver>();
                 foreach (Softver s in u.Softveri)
                 {
@@ -234,7 +234,7 @@ namespace Raspored.Tabele
 
         }
 
-        List<Softver> otvoriSoftver()
+        List<Softver> otvoriSoftver(String fileName)
         {
             List<Softver> softveri = new List<Softver>();
             FileStream f = new FileStream("../../Save/softver.txt", FileMode.OpenOrCreate);
@@ -257,12 +257,13 @@ namespace Raspored.Tabele
                 s.Cena = Convert.ToDouble(sf[2]);
                 s.GodinaIzdavanja = Convert.ToInt32(sf[3]);
                 s.Sistem = sf[4];
-
                 s.Opis = sf[5];
                 s.Proizvodjac = sf[6];
-                s.Sajt = sf[7].Trim();
+                s.File = sf[7];
+                s.Sajt = sf[8].Trim();
 
-                softveri.Add(s);
+                if (s.File == fileName)
+                    softveri.Add(s);
             }
 
             return softveri;

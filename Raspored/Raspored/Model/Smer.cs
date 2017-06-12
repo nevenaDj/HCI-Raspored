@@ -48,6 +48,7 @@ namespace Raspored.Model
         private DateTime _datumUvodjenja;
         private string _datum;
         private string _opis;
+        private string _file;
 
         public Smer()
         {
@@ -86,6 +87,22 @@ namespace Raspored.Model
                 {
                     _oznaka = value;
                     OnPropertyChanged("Oznaka");
+                }
+            }
+        }
+
+        public string File
+        {
+            get
+            {
+                return _file;
+            }
+            set
+            {
+                if (_file != value)
+                {
+                    _file = value;
+                    OnPropertyChanged("File");
                 }
             }
         }

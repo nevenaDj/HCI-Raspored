@@ -11,18 +11,22 @@ namespace Raspored.Model
 {
     public class CitanjeIPisanje
     {
-        public CitanjeIPisanje()
+        public CitanjeIPisanje(String fileName)
         {
-            List<Smer> s = otvoriSmer();
+            SmeroviP = new ObservableCollection<Smer>();
+            List<Smer> s = otvoriSmer(fileName);
             Smerovi = new ObservableCollection<Smer>(s);
 
-            List<Softver> sf = otvoriSoftver();
+            SoftveriP = new ObservableCollection<Softver>();
+            List<Softver> sf = otvoriSoftver(fileName);
             Softveri = new ObservableCollection<Softver>(sf);
 
-            List<Predmet> p = otvoriPredmet();
+            PredmetiP = new ObservableCollection<Predmet>();
+            List<Predmet> p = otvoriPredmet(fileName);
             Predmeti = new ObservableCollection<Predmet>(p);
 
-            List<Ucionica> u = otvoriUcionicu();
+            UcioniceP = new ObservableCollection<Ucionica>();
+            List<Ucionica> u = otvoriUcionicu(fileName);
             Ucionice = new ObservableCollection<Ucionica>(u);
         }
         public ObservableCollection<Predmet> Predmeti
@@ -49,7 +53,30 @@ namespace Raspored.Model
             get;
             set;
         }
+        public ObservableCollection<Predmet> PredmetiP
+        {
+            get;
+            set;
+        }
 
+        public ObservableCollection<Smer> SmeroviP
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Ucionica> UcioniceP
+        {
+            get;
+            set;
+        }
+
+
+        public ObservableCollection<Softver> SoftveriP
+        {
+            get;
+            set;
+        }
         public Raspored Raspored
         {
             get;
@@ -84,7 +111,7 @@ namespace Raspored.Model
             f.Close();
         }
 
-        public void sacuvajUcionicu(ObservableCollection<Ucionica> Ucionice)
+        public void sacuvajUcionicu(ObservableCollection<Ucionica> Ucionice, Raspored _raspored)
         {
             FileStream f1 = new FileStream("../../Save/ucionica.txt", FileMode.Create);
             f1.Close();
@@ -96,6 +123,7 @@ namespace Raspored.Model
                 f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
                 f.Write(u.Sistem);
                 f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
+                f.Write(_raspored.File + "|");
                 if (u.Softveri != null)
                     if (u.Softveri.Count > 0)
                     {
@@ -107,12 +135,33 @@ namespace Raspored.Model
                             }
                         }
                     }
+
+                f.WriteLine();
+            }
+            foreach (Ucionica u in UcioniceP)
+            {
+                f.Write(u.BrojRadnihMesta + "|" + u.ImaPametnaTabla + "|" + u.ImaProjektor + "|" + u.ImaTabla + "|");
+                f.Write(u.Sistem);
+                f.Write("|" + u.Opis + "|" + u.Oznaka + "|");
+                f.Write(u.File + "|");
+                if (u.Softveri != null)
+                    if (u.Softveri.Count > 0)
+                    {
+                        foreach (Softver s in u.Softveri)
+                        {
+                            if (s != null)
+                            {
+                                f.Write(s.Oznaka + ",");
+                            }
+                        }
+                    }
+
                 f.WriteLine();
             }
             f.Close();
         }
 
-        public List<Ucionica> otvoriUcionicu()
+        public List<Ucionica> otvoriUcionicu(String FileName)
         {
             List<Ucionica> ucionice = new List<Ucionica>();
             FileStream f = new FileStream("../../Save/ucionica.txt", FileMode.OpenOrCreate);
@@ -137,7 +186,8 @@ namespace Raspored.Model
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in uc[7].Split(','))
+                u.File = uc[7];
+                foreach (string sof in uc[8].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -148,10 +198,14 @@ namespace Raspored.Model
                 u.Softveri = softveri;
                 // u.Softveri = new ObservableCollection<Softver>( softveri);
                 // MessageBox.Show("" + u.Softveri.Count);
-                ucionice.Add(u);
+                if (FileName == u.File)
+                    ucionice.Add(u);
+                else
+                    UcioniceP.Add(u);
             }
 
             return ucionice;
+       
         }
 
         public void sacuvajSmer()
@@ -164,17 +218,21 @@ namespace Raspored.Model
             f.Close();
         }
 
-        public void sacuvajSmer(ObservableCollection<Smer> Smerovi)
+        public void sacuvajSmer(ObservableCollection<Smer> Smerovi, Raspored _raspored)
         {
             StreamWriter f = new StreamWriter("../../Save/smer.txt");
             foreach (Smer s in Smerovi)
             {
-                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja);
+                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja + "|" + _raspored.File);
+            }
+            foreach (Smer s in SmeroviP)
+            {
+                f.WriteLine(s.Oznaka + "|" + s.Skracenica + "|" + s.Opis + "|" + s.Naziv + "|" + s.DatumUvodjenja + "|" + s.File);
             }
             f.Close();
         }
 
-        public List<Smer> otvoriSmer()
+        public List<Smer> otvoriSmer(String fileName)
         {
 
             List<Smer> smerovi = new List<Smer>();
@@ -203,8 +261,11 @@ namespace Raspored.Model
                 //sm[4].Replace("\r", "");
                 string[] sss = sm[4].Split(' ');
                 s.DatumUvodjenja = Convert.ToDateTime(sss[0]);
-
-                smerovi.Add(s);
+                s.File = sm[5].Replace("\r","");
+                if (fileName == s.File)
+                    smerovi.Add(s);
+                else
+                    SmeroviP.Add(s);
             }
 
             return smerovi;
@@ -223,20 +284,27 @@ namespace Raspored.Model
             f.Close();
         }
 
-        public void sacuvajSoftver(ObservableCollection<Softver> Softveri)
+        public void sacuvajSoftver(ObservableCollection<Softver> Softveri, Raspored _raspored)
         {
             StreamWriter f = new StreamWriter("../../Save/softver.txt");
             foreach (Softver s in Softveri)
             {
                 f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
                 f.Write(s.Sistem);
-                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.Sajt);
+                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + _raspored.File + "|" + s.Sajt);
+                f.Write("\r\n");
+            }
+            foreach (Softver s in SoftveriP)
+            {
+                f.Write(s.Oznaka + "|" + s.Naziv + "|" + s.Cena + "|" + s.GodinaIzdavanja + "|");
+                f.Write(s.Sistem);
+                f.Write("|" + s.Opis + "|" + s.Proizvodjac + "|" + s.File + "|" + s.Sajt);
                 f.Write("\r\n");
             }
             f.Close();
         }
 
-        public List<Softver> otvoriSoftver()
+        public List<Softver> otvoriSoftver(String fileName)
         {
             List<Softver> softveri = new List<Softver>();
             FileStream f = new FileStream("../../Save/softver.txt", FileMode.OpenOrCreate);
@@ -257,13 +325,18 @@ namespace Raspored.Model
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                s.Sistem = sf[3];
+                s.GodinaIzdavanja = Convert.ToInt32(sf[3]);
+                s.Sistem = sf[4];
 
-                s.Opis = sf[4];
-                s.Proizvodjac = sf[5];
-                s.Sajt = sf[6];
+                s.Opis = sf[5];
+                s.Proizvodjac = sf[6];
+                s.File = sf[7];
+                s.Sajt = sf[8].Trim();
 
-                softveri.Add(s);
+                if (s.File == fileName)
+                    softveri.Add(s);
+                else
+                    SoftveriP.Add(s);
             }
 
             return softveri;
@@ -291,7 +364,7 @@ namespace Raspored.Model
             f.Close();
         }
 
-        public void sacuvajPredmet(ObservableCollection<Predmet> Predmeti)
+        public void sacuvajPredmet(ObservableCollection<Predmet> Predmeti, Raspored _raspored)
         {
             StreamWriter f = new StreamWriter("../../Save/predmet.txt");
             foreach (Predmet p in Predmeti)
@@ -302,7 +375,23 @@ namespace Raspored.Model
                 f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
                 if (p.SmerPredmeta != null)
                     f.Write(p.SmerPredmeta.Oznaka);
-                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|");
+                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|" + _raspored.File + "|");
+                //if (p.Softveri == null || p.Softveri.Count==0)
+                foreach (Softver s in p.Softveri)
+                {
+                    f.Write(s.Oznaka + ",");
+                }
+                f.WriteLine();
+            }
+            foreach (Predmet p in PredmetiP)
+            {
+                f.Write(p.Naziv + "|" + p.BrojTermina + "|" + p.DuzinaTermina + "|");
+                f.Write(p.Sistem);
+
+                f.Write("|" + p.Opis + "|" + p.Oznaka + "|" + p.Skracenica + "|");
+                if (p.SmerPredmeta != null)
+                    f.Write(p.SmerPredmeta.Oznaka);
+                f.Write("|" + p.TrebaPametnaTabla + "|" + p.TrebaProjektor + "|" + p.TrebaTabla + "|" + p.VelicinaGrupe + "|" + p.File + "|");
                 //if (p.Softveri == null || p.Softveri.Count==0)
                 foreach (Softver s in p.Softveri)
                 {
@@ -311,12 +400,13 @@ namespace Raspored.Model
                 f.WriteLine();
             }
             f.Close();
+            f.Close();
         }
 
 
 
 
-        public List<Predmet> otvoriPredmet()
+        public List<Predmet> otvoriPredmet(String fileName)
         {
             List<Predmet> predmeti = new List<Predmet>();
             FileStream f = new FileStream("../../Save/predmet.txt", FileMode.OpenOrCreate);
@@ -351,8 +441,9 @@ namespace Raspored.Model
                 //MessageBox.Show("TrebaTabla: " + pr[10]);
                 p.TrebaTabla = Convert.ToBoolean(pr[10]);
                 p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                p.File = pr[12];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in pr[12].Split(','))
+                foreach (string sof in pr[13].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -360,7 +451,10 @@ namespace Raspored.Model
                 }
                 p.Softveri = softveri;
                 // MessageBox.Show(""+p.Softveri.Count);
-                predmeti.Add(p);
+                if (p.File == fileName)
+                    predmeti.Add(p);
+                else
+                    PredmetiP.Add(p);
 
             }
 

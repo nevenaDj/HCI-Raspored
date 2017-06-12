@@ -36,6 +36,7 @@ namespace Raspored.Model
         private string _tabla;
         private string _projektor;
         private string _pametnaTabla;
+        private string _file;
 
         public List<Softver> Softveri
         {
@@ -181,6 +182,22 @@ namespace Raspored.Model
                 {
                     _naziv = value;
                     OnPropertyChanged("Naziv");
+                }
+            }
+        }
+
+        public string File
+        {
+            get
+            {
+                return _file;
+            }
+            set
+            {
+                if (_file != value)
+                {
+                    _file = value;
+                    OnPropertyChanged("File");
                 }
             }
         }

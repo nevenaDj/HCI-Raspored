@@ -43,11 +43,11 @@ namespace Raspored.DDrop
             this.citanje_pisanje = citanje_pisanje;
 
             Ucionice = new ObservableCollection<Ucionica>();
-            List<Softver> sof = citanje_pisanje.otvoriSoftver();
+            List<Softver> sof = citanje_pisanje.otvoriSoftver(rasp.File);
             Softveri = new ObservableCollection<Softver>(sof);
-            List<Smer> s = citanje_pisanje.otvoriSmer();
+            List<Smer> s = citanje_pisanje.otvoriSmer(rasp.File);
             Smerovi = new ObservableCollection<Smer>(s);
-            List<Predmet> p = citanje_pisanje.otvoriPredmet();
+            List<Predmet> p = citanje_pisanje.otvoriPredmet(rasp.File);
             List<Predmet> brisanje = new List<Predmet>();
             foreach (Predmet termin in rasp.OstaliTermini)
             {
@@ -138,8 +138,8 @@ namespace Raspored.DDrop
 
         private void Korak1_Click(object sender, RoutedEventArgs e)
         {
-            
-            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu())
+            SelectedPredmet = (Model.Predmet)trvPredmeti.SelectedItem;
+            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu(rasp.File))
             {
                 if (SelectedPredmet != null)
                 {
@@ -163,6 +163,8 @@ namespace Raspored.DDrop
                     if (SelectedPredmet.Sistem == "Oba")
                         if (u.Sistem != "Oba")
                             continue;
+
+                    
                     Ucionice.Add(u);
                    
                 }
@@ -185,7 +187,7 @@ namespace Raspored.DDrop
         private void Korak1_Bez_Predmeta_Click(object sender, RoutedEventArgs e)
         {
             SelectedPredmet = null;
-            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu())
+            foreach (Ucionica u in citanje_pisanje.otvoriUcionicu(rasp.File))
             {
                 Ucionice.Add(u);
             }
@@ -239,7 +241,7 @@ namespace Raspored.DDrop
         {
             Korak2Enable = "False";
             int broj_termina = 0;
-            List<Predmet> termin = citanje_pisanje.otvoriPredmet();
+            List<Predmet> termin = citanje_pisanje.otvoriPredmet(rasp.File);
             if (SelectedPredmet != null)
             {
                 foreach (Predmet p in termin)
@@ -466,7 +468,7 @@ namespace Raspored.DDrop
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;
                 int broj_termina = 0;
-                List<Predmet> termin = citanje_pisanje.otvoriPredmet();
+                List<Predmet> termin = citanje_pisanje.otvoriPredmet(rasp.File);
                 foreach (Predmet p in termin)
                     if (p.Oznaka == student.Oznaka)
                     {
@@ -1045,7 +1047,8 @@ namespace Raspored.DDrop
                 u.Opis = uc[5];
                 u.Oznaka = uc[6];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in uc[7].Split(','))
+                u.File = uc[7];
+                foreach (string sof in uc[8].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -1054,6 +1057,10 @@ namespace Raspored.DDrop
                 }
                 // 
                 u.Softveri = softveri;
+                // u.Softveri = new ObservableCollection<Softver>( softveri);
+                // MessageBox.Show("" + u.Softveri.Count);
+                if (rasp.File == u.File)
+                    ucionice.Add(u);
                 // u.Softveri = new ObservableCollection<Softver>( softveri);
                 // MessageBox.Show("" + u.Softveri.Count);
                 ucionice.Add(u);
@@ -1089,8 +1096,9 @@ namespace Raspored.DDrop
                 s.Opis = sm[2];
                 s.Naziv = sm[3];
                 s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
-
-                smerovi.Add(s);
+                s.File = sm[5].Replace("\r", "");
+                if (rasp.File == s.File)
+                    smerovi.Add(s);
             }
 
             return smerovi;
@@ -1117,13 +1125,16 @@ namespace Raspored.DDrop
                 s.Oznaka = sf[0];
                 s.Naziv = sf[1];
                 s.Cena = Convert.ToDouble(sf[2]);
-                s.Sistem = sf[3];
+                s.GodinaIzdavanja = Convert.ToInt32(sf[3]);
+                s.Sistem = sf[4];
 
-                s.Opis = sf[4];
-                s.Proizvodjac = sf[5];
-                s.Sajt = sf[6];
+                s.Opis = sf[5];
+                s.Proizvodjac = sf[6];
+                s.File = sf[7];
+                s.Sajt = sf[8].Trim();
 
-                softveri.Add(s);
+                if (s.File == rasp.File)
+                    softveri.Add(s);
             }
 
             return softveri;
@@ -1165,8 +1176,9 @@ namespace Raspored.DDrop
                 //MessageBox.Show("TrebaTabla: " + pr[10]);
                 p.TrebaTabla = Convert.ToBoolean(pr[10]);
                 p.VelicinaGrupe = Convert.ToInt32(pr[11]);
+                p.File = pr[12];
                 List<Softver> softveri = new List<Softver>();
-                foreach (string sof in pr[12].Split(','))
+                foreach (string sof in pr[13].Split(','))
                 {
                     Softver s = nadjiSoftver(sof);
                     if (s != null)
@@ -1174,7 +1186,10 @@ namespace Raspored.DDrop
                 }
                 p.Softveri = softveri;
                 // MessageBox.Show(""+p.Softveri.Count);
-                predmeti.Add(p);
+                if (p.File == rasp.File)
+                    predmeti.Add(p);
+                
+
 
             }
 
@@ -1249,7 +1264,7 @@ namespace Raspored.DDrop
             int c1 = Convert.ToInt32(c);
 
             if (Termini[c1][r1].Count!=0) { 
-                foreach (Predmet p in citanje_pisanje.otvoriPredmet())
+                foreach (Predmet p in citanje_pisanje.otvoriPredmet(rasp.File))
                     if (Termini[c1][r1][0].Oznaka == p.Oznaka)
                     {
                         PrikaziPredmet pp = new PrikaziPredmet(p);
