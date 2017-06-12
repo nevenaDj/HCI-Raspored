@@ -282,15 +282,29 @@ namespace Raspored.DDrop
                                 if (ur.Rasporedi[i][j].Oznaka != "")
                                 {
                                     Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                    ListView lv;
-                                    //MessageBox.Show("lw0" + (c1 + i) + r1);
-                                    if (i < 10)
-                                        lv = (ListView)this.FindName("lw0" + (i) + j);
-                                    else
-                                        lv = (ListView)this.FindName("lw" + i + j);
-                                    if (lv != null)
-                                        lv.Background = Brushes.Beige;
 
+                                    if (ur.Rasporedi[i][j].Oznaka == "Pauza")
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.PaleVioletRed;
+                                    }
+                                    else
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.Beige;
+                                    }
                                 }
                             }
                         }
@@ -358,7 +372,12 @@ namespace Raspored.DDrop
         private void ListView_PreviewMouseLeftButtonDown3(object sender, MouseButtonEventArgs e)
         {
             startPoint = e.GetPosition(null);
-
+            lv = sender as ListView;
+            String v = lv.Name.ToString();
+            String r = v.Substring(4, 1);
+            from_r = Convert.ToInt32(r);
+            String c = v.Substring(2, 2);
+            from_c = Convert.ToInt32(c);
             fromListTemp = true;
         }
 
@@ -522,8 +541,14 @@ namespace Raspored.DDrop
                         else
                         {
                             Termini[c1][r1].Add(student);
-                            lv = (ListView)this.FindName("lw" + c1  + r1);
-                            lv.Background = Brushes.Beige;
+                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                            ListView lv;
+                            if (c1  < 10)
+                                lv = (ListView)this.FindName("lw0" + (c1) + r1);
+                            else
+                                lv = (ListView)this.FindName("lw" + (c1 ) + r1);
+                            if (lv != null)
+                            lv.Background = Brushes.PaleVioletRed;
                         }
 
 
@@ -595,8 +620,13 @@ namespace Raspored.DDrop
                         {
                             Temp.Remove(student);
                             Termini[c1][r1].Add(student);
-                            lv = (ListView)this.FindName("lw" + c1 + r1);
-                            lv.Background = Brushes.Beige;
+                            ListView lv;
+                            if (c1 < 10)
+                                lv = (ListView)this.FindName("lw0" + (c1) + r1);
+                            else
+                                lv = (ListView)this.FindName("lw" + (c1) + r1);
+                            if (lv != null)
+                                lv.Background = Brushes.PaleVioletRed;
                         }
 
 
@@ -671,10 +701,21 @@ namespace Raspored.DDrop
                             {
                                 Termini[from_c][from_r].Remove(student);
                                 ListView lv = (ListView)this.FindName("lw" + from_c + from_r);
+                                if (from_c < 10)
+                                    lv = (ListView)this.FindName("lw0" + (from_c) + from_r);
+                                else
+                                    lv = (ListView)this.FindName("lw" + (from_c) + from_r);
+                                if (lv != null)
+                                    lv.Background = Brushes.White;
+
                                 lv.Background = Brushes.White;
                                 Termini[c1][r1].Add(student);
-                                lv = (ListView)this.FindName("lw" + c1 + r1);
-                                lv.Background = Brushes.Beige;
+                                if (c1 < 10)
+                                    lv = (ListView)this.FindName("lw0" + (c1) + r1);
+                                else
+                                    lv = (ListView)this.FindName("lw" + (c1) + r1);
+                                if (lv != null)
+                                    lv.Background = Brushes.PaleVioletRed;
                             }
                         }
                         // Termini[c1][r1].Add(student);
@@ -695,13 +736,23 @@ namespace Raspored.DDrop
             {
 
                 ListView listView = sender as ListView;
-
+              
                 //  CONFIRM
 
                 if (e.Data.GetDataPresent("myFormat"))
                 {
                     Predmet student = e.Data.GetData("myFormat") as Predmet;
-
+                    if (student.Oznaka == "Pauza")
+                    {
+                        if (from_c < 10)
+                            lv = (ListView)this.FindName("lw0" + (from_c) + from_r);
+                        else
+                            lv = (ListView)this.FindName("lw" + (from_c) + from_r);
+                        if (lv != null)
+                            lv.Background = Brushes.White;
+                        if (Termini[from_c][from_r].Count!=0)
+                            Termini[from_c][from_r].RemoveAt(0);
+                    }
 
                     if (fromList || fromListTemp)
                     {
@@ -729,17 +780,27 @@ namespace Raspored.DDrop
                         for (int j = 0; j < student.DuzinaTermina * 3; j++)
                         {
                             Termini[from_c - i + j][from_r].Remove(student);
-                            lv.Background = Brushes.White;
+                            ListView lv;
+                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                            if (from_c - i + j < 10)
+                                lv = (ListView)this.FindName("lw0" + (from_c - i + j) + from_r);
+                            else
+                                lv = (ListView)this.FindName("lw" + (from_c - i + j) + from_r);
+                            if (lv != null)
+                                lv.Background = Brushes.White;
 
                         }
                         bool add = true;
-                        if (SelectedPredmet.Oznaka == student.Oznaka)
+                        if (SelectedPredmet != null)
                         {
-                            foreach (Predmet p in Studenti)
-                                if (p.Oznaka == student.Oznaka)
-                                    add = false;
-                            if (add)
-                                Studenti.Add(student);
+                            if (SelectedPredmet.Oznaka == student.Oznaka)
+                            {
+                                foreach (Predmet p in Studenti)
+                                    if (p.Oznaka == student.Oznaka)
+                                        add = false;
+                                if (add)
+                                    Studenti.Add(student);
+                            }
                         }
                         // MessageBox.Show("" + citanje_pisanje.nadjiPredmet(student.Oznaka).DuzinaTermina);
                         Predmet brisanje = null;
@@ -753,6 +814,8 @@ namespace Raspored.DDrop
                             }
                         }
                         rasp.OstaliTermini.Remove(brisanje);
+                        
+
                     }
 
                     fromList = false;
@@ -797,7 +860,15 @@ namespace Raspored.DDrop
                     for (int j = 0; j < student.DuzinaTermina * 3; j++)
                     {
                         Termini[from_c - i + j][from_r].Remove(student);
-                        lv.Background = Brushes.White;
+                        ListView lv;
+                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                        if (from_c - i + j < 10)
+                            lv = (ListView)this.FindName("lw0" + (from_c - i + j) + from_r);
+                        else
+                            lv = (ListView)this.FindName("lw" + (from_c - i + j) + from_r);
+                        if (lv != null)
+                            lv.Background = Brushes.White;
+
 
                     }
                     Predmet brisanje = null;
