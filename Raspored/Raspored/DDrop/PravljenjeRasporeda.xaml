@@ -811,7 +811,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -828,11 +828,15 @@
                     <RowDefinition Height="20" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="5,0,5,0"
+                    Foreground="Blue">
                     Termini
                 </TextBlock>
                 <ListView
                     Grid.Row="1"
+                    Padding="2"
                     BorderThickness="0"
                     ItemsSource="{Binding Studenti}"
                     MouseMove="ListView_MouseMove"
@@ -850,7 +854,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <TextBlock Grid.Row="2">
+                <TextBlock
+                    Grid.Row="2"
+                    Margin="5,0,5,0"
+                    Foreground="Blue">
                     Privremeno
                 </TextBlock>
                 <ListView
@@ -874,7 +881,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <TextBlock Grid.Row="4">
+                <TextBlock
+                    Grid.Row="4"
+                    Margin="5,0,5,0"
+                    Foreground="Blue">
                     Brisanje
                 </TextBlock>
                 <ListView
@@ -897,6 +907,8 @@
             <Button
                 Grid.Row="2"
                 Grid.Column="0"
+                Margin="5"
+                Width="80"
                 HorizontalAlignment="Center"
                 Click="Korak1_Nazad_Click">
                 Nazad
@@ -910,7 +922,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">
+                <TextBlock Grid.Column="0" Foreground="Blue">
                     Ucionica:
                 </TextBlock>
                 <TextBlock Grid.Column="1" Text="{Binding SelectedUcionica.Oznaka}" />
@@ -1011,54 +1023,55 @@
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="0"
-                        BorderBrush="Black"
-                        BorderThickness="1" />
+                        BorderBrush="darkblue"
+                        BorderThickness="1"
+                        Foreground="DarkBlue" />
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="1"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Ponedeljak
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="2"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Utorak
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="3"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Sreda
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="4"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Cetvrtak
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="5"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Petak
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="0"
                         Grid.Column="6"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         Subota
                     </DataGridCell>
                     <DataGridCell
                         Grid.Row="1"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         07:00
                     </DataGridCell>
@@ -1219,7 +1232,7 @@
                     <DataGridCell
                         Grid.Row="2"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         07:15
                     </DataGridCell>
@@ -1362,7 +1375,7 @@
                     <DataGridCell
                         Grid.Row="3"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         07:30
                     </DataGridCell>
@@ -1507,7 +1520,7 @@
                     <DataGridCell
                         Grid.Row="4"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         07:45
                     </DataGridCell>
@@ -1653,7 +1666,7 @@
                     <DataGridCell
                         Grid.Row="5"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         08:00
                     </DataGridCell>
@@ -1800,7 +1813,7 @@
                     <DataGridCell
                         Grid.Row="6"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         08:15
                     </DataGridCell>
@@ -1947,7 +1960,7 @@
                     <DataGridCell
                         Grid.Row="7"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         08:30
                     </DataGridCell>
@@ -2092,7 +2105,7 @@
                     <DataGridCell
                         Grid.Row="8"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         08:45
                     </DataGridCell>
@@ -2239,7 +2252,7 @@
                     <DataGridCell
                         Grid.Row="9"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         09:00
                     </DataGridCell>
@@ -2386,7 +2399,7 @@
                     <DataGridCell
                         Grid.Row="10"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         09:15
                     </DataGridCell>
@@ -2532,7 +2545,7 @@
                     <DataGridCell
                         Grid.Row="11"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         09:30
                     </DataGridCell>
@@ -2677,7 +2690,7 @@
                     <DataGridCell
                         Grid.Row="12"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         09:45
                     </DataGridCell>
@@ -2822,7 +2835,7 @@
                     <DataGridCell
                         Grid.Row="13"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         10:00
                     </DataGridCell>
@@ -2967,7 +2980,7 @@
                     <DataGridCell
                         Grid.Row="14"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         10:15
                     </DataGridCell>
@@ -3112,7 +3125,7 @@
                     <DataGridCell
                         Grid.Row="15"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         10:30
                     </DataGridCell>
@@ -3258,7 +3271,7 @@
                     <DataGridCell
                         Grid.Row="16"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         10:45
                     </DataGridCell>
@@ -3403,7 +3416,7 @@
                     <DataGridCell
                         Grid.Row="17"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         11:00
                     </DataGridCell>
@@ -3548,7 +3561,7 @@
                     <DataGridCell
                         Grid.Row="18"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         11:15
                     </DataGridCell>
@@ -3693,7 +3706,7 @@
                     <DataGridCell
                         Grid.Row="19"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         11:30
                     </DataGridCell>
@@ -3838,7 +3851,7 @@
                     <DataGridCell
                         Grid.Row="20"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         11:45
                     </DataGridCell>
@@ -3983,7 +3996,7 @@
                     <DataGridCell
                         Grid.Row="21"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         12:00
                     </DataGridCell>
@@ -4128,7 +4141,7 @@
                     <DataGridCell
                         Grid.Row="22"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         12:15
                     </DataGridCell>
@@ -4273,7 +4286,7 @@
                     <DataGridCell
                         Grid.Row="23"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         12:30
                     </DataGridCell>
@@ -4418,7 +4431,7 @@
                     <DataGridCell
                         Grid.Row="24"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         12:45
                     </DataGridCell>
@@ -4563,7 +4576,7 @@
                     <DataGridCell
                         Grid.Row="25"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         13:00
                     </DataGridCell>
@@ -4708,7 +4721,7 @@
                     <DataGridCell
                         Grid.Row="26"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         13:15
                     </DataGridCell>
@@ -4853,7 +4866,7 @@
                     <DataGridCell
                         Grid.Row="27"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         13:30
                     </DataGridCell>
@@ -4998,7 +5011,7 @@
                     <DataGridCell
                         Grid.Row="28"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         13:45
                     </DataGridCell>
@@ -5143,7 +5156,7 @@
                     <DataGridCell
                         Grid.Row="29"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         14:00
                     </DataGridCell>
@@ -5288,7 +5301,7 @@
                     <DataGridCell
                         Grid.Row="30"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         14:15
                     </DataGridCell>
@@ -5433,7 +5446,7 @@
                     <DataGridCell
                         Grid.Row="31"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         14:30
                     </DataGridCell>
@@ -5578,7 +5591,7 @@
                     <DataGridCell
                         Grid.Row="32"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         14:45
                     </DataGridCell>
@@ -5723,7 +5736,7 @@
                     <DataGridCell
                         Grid.Row="33"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         15:00
                     </DataGridCell>
@@ -5868,7 +5881,7 @@
                     <DataGridCell
                         Grid.Row="34"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         15:15
                     </DataGridCell>
@@ -6013,7 +6026,7 @@
                     <DataGridCell
                         Grid.Row="35"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         15:30
                     </DataGridCell>
@@ -6158,7 +6171,7 @@
                     <DataGridCell
                         Grid.Row="36"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         15:45
                     </DataGridCell>
@@ -6303,7 +6316,7 @@
                     <DataGridCell
                         Grid.Row="37"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         16:00
                     </DataGridCell>
@@ -6448,7 +6461,7 @@
                     <DataGridCell
                         Grid.Row="38"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         16:15
                     </DataGridCell>
@@ -6593,7 +6606,7 @@
                     <DataGridCell
                         Grid.Row="39"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         16:30
                     </DataGridCell>
@@ -6738,7 +6751,7 @@
                     <DataGridCell
                         Grid.Row="40"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         16:45
                     </DataGridCell>
@@ -6883,7 +6896,7 @@
                     <DataGridCell
                         Grid.Row="41"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         17:00
                     </DataGridCell>
@@ -7028,7 +7041,7 @@
                     <DataGridCell
                         Grid.Row="42"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         17:15
                     </DataGridCell>
@@ -7173,7 +7186,7 @@
                     <DataGridCell
                         Grid.Row="43"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         17:30
                     </DataGridCell>
@@ -7318,7 +7331,7 @@
                     <DataGridCell
                         Grid.Row="44"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         17:45
                     </DataGridCell>
@@ -7463,7 +7476,7 @@
                     <DataGridCell
                         Grid.Row="45"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         18:00
                     </DataGridCell>
@@ -7608,7 +7621,7 @@
                     <DataGridCell
                         Grid.Row="46"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         18:15
                     </DataGridCell>
@@ -7753,7 +7766,7 @@
                     <DataGridCell
                         Grid.Row="47"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         18:30
                     </DataGridCell>
@@ -7898,7 +7911,7 @@
                     <DataGridCell
                         Grid.Row="48"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         18:45
                     </DataGridCell>
@@ -8043,7 +8056,7 @@
                     <DataGridCell
                         Grid.Row="49"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         19:00
                     </DataGridCell>
@@ -8188,7 +8201,7 @@
                     <DataGridCell
                         Grid.Row="50"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         19:15
                     </DataGridCell>
@@ -8333,7 +8346,7 @@
                     <DataGridCell
                         Grid.Row="51"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         19:30
                     </DataGridCell>
@@ -8478,7 +8491,7 @@
                     <DataGridCell
                         Grid.Row="52"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         19:45
                     </DataGridCell>
@@ -8623,7 +8636,7 @@
                     <DataGridCell
                         Grid.Row="53"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         20:00
                     </DataGridCell>
@@ -8768,7 +8781,7 @@
                     <DataGridCell
                         Grid.Row="54"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         20:15
                     </DataGridCell>
@@ -8913,7 +8926,7 @@
                     <DataGridCell
                         Grid.Row="55"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         20:30
                     </DataGridCell>
@@ -9058,7 +9071,7 @@
                     <DataGridCell
                         Grid.Row="56"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         20:45
                     </DataGridCell>
@@ -9203,7 +9216,7 @@
                     <DataGridCell
                         Grid.Row="57"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         21:00
                     </DataGridCell>
@@ -9348,7 +9361,7 @@
                     <DataGridCell
                         Grid.Row="58"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         21:15
                     </DataGridCell>
@@ -9493,7 +9506,7 @@
                     <DataGridCell
                         Grid.Row="59"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         21:30
                     </DataGridCell>
@@ -9638,7 +9651,7 @@
                     <DataGridCell
                         Grid.Row="60"
                         Grid.Column="0"
-                        BorderBrush="Black"
+                        BorderBrush="darkblue"
                         BorderThickness="1">
                         21:45
                     </DataGridCell>
