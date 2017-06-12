@@ -423,6 +423,9 @@ namespace Raspored.DDrop
             int c1 = Convert.ToInt32(c);
             //MessageBox.Show(r1.ToString());
 
+            ListView lv= (ListView) this.FindName("lw011");
+            lv.Background = Brushes.Beige;
+
             if (e.Data.GetDataPresent("myFormat"))
             {
                 Predmet student = e.Data.GetData("myFormat") as Predmet;

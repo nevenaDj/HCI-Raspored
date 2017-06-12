@@ -221,7 +221,7 @@ namespace Raspored
 
 
             foreach (UcionicaRaspored ur in raspored.Rasporedi)
-                if (ur.Ucionica != null)
+                if (ur.Ucionica != null && SelectedUcionica!=null)
                 {
                     if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                     {
