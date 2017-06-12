@@ -215,6 +215,14 @@ namespace Raspored
                     if (Termini[i][j].Count != 0)
                     {
                         Termini[i][j].RemoveAt(0);
+                        ListView lv;
+                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                        if (i < 10)
+                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                        else
+                            lv = (ListView)this.FindName("lw" + i + j);
+                        if (lv != null)
+                            lv.Background = Brushes.White;
                     }
                 }
             }
@@ -232,7 +240,28 @@ namespace Raspored
                                 if (ur.Rasporedi[i][j].Oznaka != "")
                                 {
                                     Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                    //Termini[i][j]=ur.Rasporedi[i][j];
+                                    if (Termini[i][j][0].Oznaka == "Pauza")
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.PaleVioletRed;
+                                    }
+                                    else
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.Beige;
+                                    }
                                 }
                             }
                         }
@@ -335,7 +364,7 @@ namespace Raspored
         private void RecentFileList_MenuClick(object sender, RecentFileList.MenuClickEventArgs e)
         {
             String listView = sender as String;
-            MessageBox.Show(listView);
+            //MessageBox.Show(listView);
         }
 
 
@@ -352,6 +381,14 @@ namespace Raspored
                     if (Termini[i][j].Count != 0)
                     {
                         Termini[i][j].RemoveAt(0);
+                        ListView lv;
+                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                        if (i < 10)
+                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                        else
+                            lv = (ListView)this.FindName("lw" + i + j);
+                        if (lv != null)
+                            lv.Background = Brushes.White;
                     }
                 }
             }
@@ -367,7 +404,28 @@ namespace Raspored
                             if (ur.Rasporedi[i][j].Oznaka != "")
                             {
                                 Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                //Termini[i][j]=ur.Rasporedi[i][j];
+                                if (Termini[i][j][0].Oznaka == "Pauza")
+                                {
+                                    ListView lv;
+                                    //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                    if (i < 10)
+                                        lv = (ListView)this.FindName("lw0" + (i) + j);
+                                    else
+                                        lv = (ListView)this.FindName("lw" + i + j);
+                                    if (lv != null)
+                                        lv.Background = Brushes.PaleVioletRed;
+                                }
+                                else
+                                {
+                                    ListView lv;
+                                    //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                    if (i < 10)
+                                        lv = (ListView)this.FindName("lw0" + (i) + j);
+                                    else
+                                        lv = (ListView)this.FindName("lw" + i + j);
+                                    if (lv != null)
+                                        lv.Background = Brushes.Beige;
+                                }
                             }
                         }
                     }
@@ -439,6 +497,14 @@ namespace Raspored
                         if (Termini[i][j].Count != 0)
                         {
                             Termini[i][j].RemoveAt(0);
+                            ListView lv;
+                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                            if (i < 10)
+                                lv = (ListView)this.FindName("lw0" + (i) + j);
+                            else
+                                lv = (ListView)this.FindName("lw" + i + j);
+                            if (lv != null)
+                                lv.Background = Brushes.White;
                         }
                     }
                 }
@@ -459,7 +525,28 @@ namespace Raspored
                                 if (ur.Rasporedi[i][j].Oznaka != "")
                                 {
                                     Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                    //Termini[i][j]=ur.Rasporedi[i][j];
+                                    if (Termini[i][j][0].Oznaka == "Pauza")
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.PaleVioletRed;
+                                    }
+                                    else
+                                    {
+                                        ListView lv;
+                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                        if (i < 10)
+                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        else
+                                            lv = (ListView)this.FindName("lw" + i + j);
+                                        if (lv != null)
+                                            lv.Background = Brushes.Beige;
+                                    }
                                 }
                             }
                         }
@@ -509,6 +596,14 @@ namespace Raspored
                                 {
                                     if (TerminiDan[j][i].Count != 0)
                                         TerminiDan[j][i].RemoveAt(0);
+                                    ListView lv;
+                                    //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                    if (j < 10)
+                                        lv = (ListView)this.FindName("ld0" + (j) + i);
+                                    else
+                                        lv = (ListView)this.FindName("ld"  + j+i);
+                                    if (lv != null)
+                                        lv.Background = Brushes.White;
                                 }
                         }
 
@@ -522,7 +617,32 @@ namespace Raspored
                                 for (int j = 1; j < 61; j++)
                                 {
                                     if (ucR.Rasporedi[j][row].Oznaka != "")
+                                    {
                                         TerminiDan[j][i].Add(ucR.Rasporedi[j][row]);
+                                        if (TerminiDan[j][i][0].Oznaka == "Pauza")
+                                        {
+                                            ListView lv;
+                                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                            if (j < 10)
+                                                lv = (ListView)this.FindName("ld0" + j + i);
+                                            else
+                                                lv = (ListView)this.FindName("ld" + j + i);
+                                            if (lv != null)
+                                                lv.Background = Brushes.PaleVioletRed;
+                                        }
+                                        else
+                                        {
+                                            ListView lv;
+                                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                            if (j < 10)
+                                                lv = (ListView)this.FindName("ld0" + j + i);
+                                            else
+                                                lv = (ListView)this.FindName("ld" + j + i);
+                                            if (lv != null)
+                                                lv.Background = Brushes.Beige;
+                                        }
+                                    }
+
                                 }
                         }
 
