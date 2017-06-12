@@ -554,6 +554,67 @@
                                     Margin="20,0,10,0">
                                     Operativni sistem
                                 </TextBlock>
+                                <TextBlock
+                                    x:Name="BoxPrikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Width="125"
+                                    Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Oznaka}"
+                                    Visibility="{Binding UPrikazEnable}" />
+                                <TextBlock
+                                    x:Name="OpisBoxPrikaz"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Opis}"
+                                    Visibility="{Binding UPrikazEnable}" />
+                                <TextBlock
+                                    x:Name="BrRadnihMestaPrikaz"
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    Foreground="Black"
+                                    Text="{Binding Path=BrojRadnihMesta}"
+                                    Visibility="{Binding UPrikazEnable}" />
+
+                                <TextBlock
+                                    x:Name="OSPrikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Width="200"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Sistem}"
+                                    Visibility="{Binding UPrikazEnable}" />
+                                <TextBlock
+                                    x:Name="Check1Prikaz"
+                                    Grid.Row="2"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Projektor}"
+                                    Visibility="{Binding UPrikazEnable}" />
+                                <TextBlock
+                                    x:Name="Check2Prikaz"
+                                    Grid.Row="3"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Tabla}"
+                                    Visibility="{Binding UPrikazEnable}" />
+                                <TextBlock
+                                    x:Name="Check3Prikaz"
+                                    Grid.Row="4"
+                                    Grid.Column="5"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=PametnaTabla}"
+                                    Visibility="{Binding UPrikazEnable}" />
                                 <Button
                                     x:Name="SacuvajUcionicuDemo"
                                     Grid.Row="7"
@@ -625,6 +686,7 @@
                                     Click="IzmenaOdustaniUcionica_Click">
                                     Ponisti izmenu
                                 </Button>
+
                                 <TextBox
                                     Name="Box"
                                     Grid.Row="0"
@@ -636,6 +698,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     LostFocus="Box_LostFocus"
                                     Text="{Binding Path=Oznaka}" />
+
                                 <TextBox
                                     x:Name="OpisBox"
                                     Grid.Row="1"
@@ -643,6 +706,7 @@
                                     Grid.ColumnSpan="3"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     Text="{Binding Path=Opis}" />
+
                                 <TextBox
                                     x:Name="BrMestaBox"
                                     Grid.Row="3"
@@ -711,6 +775,7 @@
                                     VerticalAlignment="Top">
                                     Prikazi
                                 </Button>
+
                                 <ComboBox
                                     x:Name="CB"
                                     Grid.Row="0"
@@ -721,6 +786,7 @@
                                     ItemsSource="{Binding Sistemi}"
                                     SelectedValue="{Binding Sistem}" />
 
+
                                 <CheckBox
                                     x:Name="Check1"
                                     Grid.Row="2"
@@ -730,6 +796,8 @@
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaProjektor}" />
+
+
                                 <CheckBox
                                     x:Name="Check2"
                                     Grid.Row="3"
@@ -739,6 +807,8 @@
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaTabla}" />
+
+
                                 <CheckBox
                                     x:Name="Check3"
                                     Grid.Row="4"
@@ -748,6 +818,7 @@
                                     VerticalAlignment="Center"
                                     l:HelpProvider.HelpKey="DodavanjeUcionica"
                                     IsChecked="{Binding Path=ImaPametnaTabla}" />
+
                             </Grid>
                         </Border>
                     </Grid>
@@ -1210,6 +1281,113 @@
                                     VerticalAlignment="Top">
                                     Pametna tabla
                                 </TextBlock>
+                                <TextBlock
+                                    x:Name="Box2Prikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="10,0,0,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Oznaka}" />
+                                <TextBlock
+                                    x:Name="Skracenica1Prikaz"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Width="119"
+                                    Margin="10,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Skracenica}" />
+                                <TextBlock
+                                    x:Name="Naziv1Prikaz"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="10,0,10,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Naziv}" />
+
+                                <TextBlock
+                                    x:Name="OpisPredmetPrikaz"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
+                                    Height="25"
+                                    Margin="10,2,10,42"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Opis}" />
+                                <TextBlock
+                                    x:Name="GrupaPrikaz"
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Margin="0,0,21,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=VelicinaGrupe}" />
+                                <TextBlock
+                                    x:Name="DuzinaTerminaPrikaz"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Margin="0,0,21,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=DuzinaTermina}" />
+                                <TextBlock
+                                    x:Name="BrojTerminaPrikaz"
+                                    Grid.Row="6"
+                                    Grid.Column="2"
+                                    Width="80"
+                                    Height="25"
+                                    Margin="0,0,21,0"
+                                    VerticalAlignment="Top"
+                                    Foreground="Black"
+                                    Text="{Binding Path=BrojTermina}" />
+                                <TextBlock
+                                    x:Name="UnosSmeraPrikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="3"
+                                    Height="25"
+                                    Margin="10,0,90,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Source.Naziv}" />
+                                <TextBlock
+                                    x:Name="CBPredmetPrikaz"
+                                    Grid.Row="3"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Width="200"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Foreground="Black"
+                                    Text="{Binding Sistem}" />
+
+                                <TextBlock
+                                    x:Name="ProjektorPrikaz"
+                                    Grid.Row="5"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Projektor}" />
+                                <TextBlock
+                                    x:Name="TablaPrikaz"
+                                    Grid.Row="6"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Tabla}" />
+                                <TextBlock
+                                    x:Name="PametnaTablaPrikaz"
+                                    Grid.Row="7"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,5,0,6"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=PametnaTabla}" />
 
                                 <Button
                                     x:Name="SacuvajIzmenuPredmet"
@@ -1296,6 +1474,7 @@
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     Text="{Binding Path=Opis}" />
                                 <TextBox
+                                    x:Name="Grupa"
                                     Grid.Row="4"
                                     Grid.Column="2"
                                     Width="80"
@@ -1343,6 +1522,7 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
+                                    x:Name="DuzinaTermina"
                                     Grid.Row="5"
                                     Grid.Column="2"
                                     Width="80"
@@ -1390,6 +1570,7 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
+                                    x:Name="BrojTermina"
                                     Grid.Row="6"
                                     Grid.Column="2"
                                     Width="80"
@@ -1462,6 +1643,7 @@
                                     LostFocus="TextBox_LostFocus"
                                     Text="{Binding OznakaSmera}" />
                                 <Button
+                                    x:Name="DugmeDodavanje"
                                     Grid.Row="0"
                                     Grid.Column="6"
                                     Width="50"
@@ -1475,6 +1657,7 @@
                                 </Button>
 
                                 <TextBox
+                                    x:Name="NazivSmera"
                                     Grid.Row="1"
                                     Grid.Column="4"
                                     Grid.ColumnSpan="3"
@@ -1485,6 +1668,7 @@
                                     IsReadOnly="True"
                                     Text="{Binding SmerPredmeta.Naziv}" />
                                 <TextBox
+                                    x:Name="SkracenicaSmera"
                                     Grid.Row="1"
                                     Grid.Column="7"
                                     Height="25"
@@ -1496,6 +1680,7 @@
 
 
                                 <ComboBox
+                                    x:Name="CBPredmet"
                                     Grid.Row="3"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
@@ -1509,6 +1694,7 @@
                                     SelectedValue="{Binding Sistem}" />
 
                                 <CheckBox
+                                    x:Name="Check1Projektor"
                                     Grid.Row="5"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
@@ -1518,6 +1704,7 @@
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaProjektor}" />
                                 <CheckBox
+                                    x:Name="Chek1Tabla"
                                     Grid.Row="6"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
@@ -1527,6 +1714,7 @@
                                     l:HelpProvider.HelpKey="DodavanjePredmeta"
                                     IsChecked="{Binding Path=TrebaTabla}" />
                                 <CheckBox
+                                    x:Name="Check1PametnaTabla"
                                     Grid.Row="7"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
@@ -1870,6 +2058,48 @@
                                     VerticalAlignment="Center">
                                     Datum uvodjenja
                                 </TextBlock>
+                                <TextBlock
+                                    x:Name="Box3Prikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="119"
+                                    Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Oznaka}" />
+                                <TextBlock
+                                    x:Name="Skracenica2Prikaz"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Width="119"
+                                    Margin="0,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Skracenica}" />
+                                <TextBlock
+                                    x:Name="Naziv2Prikaz"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,105,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Naziv}" />
+
+                                <TextBlock
+                                    x:Name="OpisSmerPrikaz"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,105,4"
+                                    l:HelpProvider.HelpKey="DodavanjeSmera"
+                                    Text="{Binding Path=Opis}" />
+                                <TextBlock
+                                    x:Name="DatumSmeraPrikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Datum}" />
 
                                 <Button
                                     x:Name="SacuvajSmer"
@@ -1956,6 +2186,7 @@
                                     l:HelpProvider.HelpKey="DodavanjeSmera"
                                     Text="{Binding Path=Opis}" />
                                 <DatePicker
+                                    x:Name="DatumSmera"
                                     Grid.Row="0"
                                     Grid.Column="4"
                                     l:HelpProvider.HelpKey="DodavanjeSmera"
@@ -2317,7 +2548,66 @@
                                     Grid.ColumnSpan="2">
                                     Cena
                                 </TextBlock>
+                                <TextBlock
+                                    x:Name="Box4Prikaz"
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="3"
+                                    Width="119"
+                                    Margin="74,0,0,4"
+                                    HorizontalAlignment="Left"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Oznaka}" />
+                                <TextBlock
+                                    x:Name="Naziv3Prikaz"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="4"
+                                    Margin="74,0,100,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Naziv}" />
+                                <TextBlock
+                                    x:Name="OpisSoftverPrikaz"
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="4"
+                                    Margin="74,0,100,4"
+                                    Foreground="Black"
+                                    Text="{Binding Path=Opis}" />
+                                <TextBlock
+                                    x:Name="GSoftverPrikaz"
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                     Foreground="Black"
+                                    Text="{Binding Path=GodinaIzdavanja}" />
+                                <TextBlock
+                                    x:Name="CenaPrikaz"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                     Foreground="Black"
+                                    Text="{Binding Path=Cena}">
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="PSoftverPrikaz"
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                     Foreground="Black"
+                                    
+                                    Text="{Binding Path=Proizvodjac}" />
+                                <TextBlock
+                                    x:Name="SajtSoftverPrikaz"
+                                    Grid.Row="1"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                   Foreground="Black"
+                                    Text="{Binding Path=Sajt}" />
 
+                                <TextBlock
+                                    x:Name="SoftverOSPrikaz"
+                                    Grid.Row="3"
+                                    Foreground="Black"
+                                    Grid.Column="5"
+                                 
+                                    
+                                    Text="{Binding Sistem}" />
                                 <Button
                                     x:Name="IzmeniSoftver"
                                     Grid.Row="8"
@@ -2440,6 +2730,7 @@
                                     </Validation.ErrorTemplate>
                                 </TextBox>
                                 <TextBox
+                                    x:Name="Cena"
                                     Grid.Row="5"
                                     Grid.Column="2"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
@@ -2496,6 +2787,7 @@
                                     Text="{Binding Path=Sajt}" />
 
                                 <ComboBox
+                                    x:Name="SoftverOS"
                                     Grid.Row="3"
                                     Grid.Column="5"
                                     l:HelpProvider.HelpKey="DodavanjeSoftvera"
