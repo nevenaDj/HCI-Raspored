@@ -175,7 +175,7 @@ namespace Raspored.Model
             foreach (string ucionica in tekst)
             {
                 Ucionica u = new Ucionica();
-                if (ucionica == "")
+                if (ucionica == "" || ucionica == "\r")
                     return ucionice;
                 string[] uc = ucionica.Split('|');
                 u.BrojRadnihMesta = Convert.ToInt32(uc[0]);

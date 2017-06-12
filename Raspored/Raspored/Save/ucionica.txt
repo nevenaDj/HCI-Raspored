@@ -1,10 +1,10 @@
+16|False|True|True|||1|C:\Users\Sabinomi\Documents\21212112.rsp|
+16|False|True|True|||12|C:\Users\Sabinomi\Documents\123.rsp|
+16|False|True|True|||23|C:\Users\Sabinomi\Documents\123.rsp|
 116|False|True|True|Windows|1|1|C:\Users\Sabinomi\Documents\1233.rsp|
-32|False|True|True|Windows|RC 1|L1|C:\Users\Sabinomi\Documents\1233.rsp|1,
+32|False|True|True|Windows|RC 1|L1|C:\Users\Sabinomi\Documents\1233.rsp|
 16|False|True|True||s|d|C:\Users\Sabinomi\Documents\1233.rsp|
 16|False|True|True|Windows|1|de|C:\Users\Sabinomi\Documents\1233.rsp|
-16|False|True|True|Windows|1|123|C:\Users\Sabinomi\Documents\1233.rsp|1,
+16|False|True|True|Windows|1|123|C:\Users\Sabinomi\Documents\1233.rsp|
 16|False|True|True|Oba||323|C:\Users\Sabinomi\Documents\1233.rsp|
-16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
-16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
-16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|
 16|False|True|True|||111212|C:\Users\Sabinomi\Documents\222.rsp|

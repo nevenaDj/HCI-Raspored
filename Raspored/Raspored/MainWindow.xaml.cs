@@ -290,7 +290,95 @@ namespace Raspored
                 Raspored_Button.IsEnabled = true;
                 //TO_DO: raspored -> citanjeIz fajla
                 raspored = citanje_pisanje.otvoriRaspored(filepath);
+                raspored.File = filepath;
+                citanje_pisanje = new CitanjeIPisanje(filepath);
+                RecentFileList.InsertFile(filepath);
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+                Raspored_Button.IsEnabled = true;
+                ///raspored = new Model.Raspored();
+                
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu(raspored.File);
+                Raspored_Button.IsEnabled = true;
+                Ucionice = new ObservableCollection<Ucionica>(u);
+                //this.dgrMainUcionica.ItemsSource = u;
+                //this.dgrMainUcionica.SelectedItem = SelectedUcionica;
+                this.lsUcionice.ItemsSource = Ucionice;
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+
+                Termini = new List<List<ObservableCollection<Predmet>>>();
+                TerminiDan = new List<List<ObservableCollection<Predmet>>>();
+                //Termini = new List<List<Predmet>>();
+                for (int i = 0; i < 61; i++)
+                {
+                    List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                    List<ObservableCollection<Predmet>> temp1 = new List<ObservableCollection<Predmet>>();
+                    for (int j = 0; j < 7; j++)
+                        temp.Add(new ObservableCollection<Predmet>());
+                    Termini.Add(temp);
+                    for (int k = 0; k < 11; k++)
+                        temp1.Add(new ObservableCollection<Predmet>());
+
+                    TerminiDan.Add(temp1);
+                }
+
+                c10.Width = new GridLength(100);
+
+                    c9.Width = new GridLength(100);
+
+                    c8.Width = new GridLength(100);
+
+                    c7.Width = new GridLength(100);
+
+                    c6.Width = new GridLength(100);
+
+                    c5.Width = new GridLength(100);
+
+                    c4.Width = new GridLength(100);
+    
+                    c3.Width = new GridLength(100);
+
+                    c2.Width = new GridLength(100);
+
+                    c1.Width = new GridLength(100);
+
+
+                if (uc.Count == 0)
+                {
+                    uc = new List<string>();
+                    for (int i = 0; i < u.Count; i++)
+                        uc.Add(u[i].Oznaka);
+                }
+                else
+                {
+                    for (int i = 0; i < u.Count; i++)
+                        uc[i]=(u[i].Oznaka);
+                }
+
+                if (u.Count < 10)
+                    c10.Width = new GridLength(0);
+                if (u.Count < 9)
+                    c9.Width = new GridLength(0);
+                if (u.Count < 8)
+                    c8.Width = new GridLength(0);
+                if (u.Count < 7)
+                    c7.Width = new GridLength(0);
+                if (u.Count < 6)
+                    c6.Width = new GridLength(0);
+                if (u.Count < 5)
+                    c5.Width = new GridLength(0);
+                if (u.Count < 4)
+                    c4.Width = new GridLength(0);
+                if (u.Count < 3)
+                    c3.Width = new GridLength(0);
+                if (u.Count < 2)
+                    c2.Width = new GridLength(0);
+                if (u.Count < 1)
+                    c1.Width = new GridLength(0);
+                //raspored = new Model.Raspored();
             }
+            
             return true;
         }
 
@@ -315,9 +403,89 @@ namespace Raspored
                 RecentFileList.InsertFile(filename);
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
+                
                 Raspored_Button.IsEnabled = true;
                 raspored = new Model.Raspored();
                 raspored.File = filename;
+                citanje_pisanje = new CitanjeIPisanje(raspored.File);
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu(raspored.File);
+                Ucionice = new ObservableCollection<Ucionica>(u);
+                //this.dgrMainUcionica.ItemsSource = u;
+                //this.dgrMainUcionica.SelectedItem = SelectedUcionica;
+                this.lsUcionice.ItemsSource = Ucionice;
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+
+                Termini = new List<List<ObservableCollection<Predmet>>>();
+                TerminiDan = new List<List<ObservableCollection<Predmet>>>();
+                //Termini = new List<List<Predmet>>();
+                for (int i = 0; i < 61; i++)
+                {
+                    List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                    List<ObservableCollection<Predmet>> temp1 = new List<ObservableCollection<Predmet>>();
+                    for (int j = 0; j < 7; j++)
+                        temp.Add(new ObservableCollection<Predmet>());
+                    Termini.Add(temp);
+                    for (int k = 0; k < 11; k++)
+                        temp1.Add(new ObservableCollection<Predmet>());
+
+                    TerminiDan.Add(temp1);
+                }
+
+                c10.Width = new GridLength(100);
+
+                c9.Width = new GridLength(100);
+
+                c8.Width = new GridLength(100);
+
+                c7.Width = new GridLength(100);
+
+                c6.Width = new GridLength(100);
+
+                c5.Width = new GridLength(100);
+
+                c4.Width = new GridLength(100);
+
+                c3.Width = new GridLength(100);
+
+                c2.Width = new GridLength(100);
+
+                c1.Width = new GridLength(100);
+
+
+                if (uc.Count == 0)
+                {
+                    uc = new List<string>();
+                    for (int i = 0; i < u.Count; i++)
+                        uc.Add(u[i].Oznaka);
+                }
+                else
+                {
+                    for (int i = 0; i < u.Count; i++)
+                        uc[i] = (u[i].Oznaka);
+                }
+
+                if (u.Count < 10)
+                    c10.Width = new GridLength(0);
+                if (u.Count < 9)
+                    c9.Width = new GridLength(0);
+                if (u.Count < 8)
+                    c8.Width = new GridLength(0);
+                if (u.Count < 7)
+                    c7.Width = new GridLength(0);
+                if (u.Count < 6)
+                    c6.Width = new GridLength(0);
+                if (u.Count < 5)
+                    c5.Width = new GridLength(0);
+                if (u.Count < 4)
+                    c4.Width = new GridLength(0);
+                if (u.Count < 3)
+                    c3.Width = new GridLength(0);
+                if (u.Count < 2)
+                    c2.Width = new GridLength(0);
+                if (u.Count < 1)
+                    c1.Width = new GridLength(0);
+
             }
         }
 
@@ -335,8 +503,95 @@ namespace Raspored
                 Prozor1.Visibility = Visibility.Visible;
                 Prozor2.Visibility = Visibility.Hidden;
                 Raspored_Button.IsEnabled = true;
+                citanje_pisanje = new CitanjeIPisanje(filename);
                 //TO_DO: raspored -> citanjeIz fajla
                 raspored = citanje_pisanje.otvoriRaspored(filename);
+                raspored.File = filename;
+                saveRecent(filename);
+                RecentFileList.InsertFile(filename);
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+                Raspored_Button.IsEnabled = true;
+                ///raspored = new Model.Raspored();
+                
+                List<Ucionica> u = citanje_pisanje.otvoriUcionicu(raspored.File);
+                Raspored_Button.IsEnabled = true;
+                Ucionice = new ObservableCollection<Ucionica>(u);
+                //this.dgrMainUcionica.ItemsSource = u;
+                //this.dgrMainUcionica.SelectedItem = SelectedUcionica;
+                this.lsUcionice.ItemsSource = Ucionice;
+                Prozor1.Visibility = Visibility.Visible;
+                Prozor2.Visibility = Visibility.Hidden;
+
+                Termini = new List<List<ObservableCollection<Predmet>>>();
+                TerminiDan = new List<List<ObservableCollection<Predmet>>>();
+                //Termini = new List<List<Predmet>>();
+                for (int i = 0; i < 61; i++)
+                {
+                    List<ObservableCollection<Predmet>> temp = new List<ObservableCollection<Predmet>>();
+                    List<ObservableCollection<Predmet>> temp1 = new List<ObservableCollection<Predmet>>();
+                    for (int j = 0; j < 7; j++)
+                        temp.Add(new ObservableCollection<Predmet>());
+                    Termini.Add(temp);
+                    for (int k = 0; k < 11; k++)
+                        temp1.Add(new ObservableCollection<Predmet>());
+
+                    TerminiDan.Add(temp1);
+                }
+
+                c10.Width = new GridLength(100);
+
+                c9.Width = new GridLength(100);
+
+                c8.Width = new GridLength(100);
+
+                c7.Width = new GridLength(100);
+
+                c6.Width = new GridLength(100);
+
+                c5.Width = new GridLength(100);
+
+                c4.Width = new GridLength(100);
+
+                c3.Width = new GridLength(100);
+
+                c2.Width = new GridLength(100);
+
+                c1.Width = new GridLength(100);
+
+
+                if (uc.Count == 0)
+                {
+                    uc = new List<string>();
+                    for (int i = 0; i < u.Count; i++)
+                        uc.Add(u[i].Oznaka);
+                }
+                else
+                {
+                    for (int i = 0; i < u.Count; i++)
+                        uc[i] = (u[i].Oznaka);
+                }
+
+                if (u.Count < 10)
+                    c10.Width = new GridLength(0);
+                if (u.Count < 9)
+                    c9.Width = new GridLength(0);
+                if (u.Count < 8)
+                    c8.Width = new GridLength(0);
+                if (u.Count < 7)
+                    c7.Width = new GridLength(0);
+                if (u.Count < 6)
+                    c6.Width = new GridLength(0);
+                if (u.Count < 5)
+                    c5.Width = new GridLength(0);
+                if (u.Count < 4)
+                    c4.Width = new GridLength(0);
+                if (u.Count < 3)
+                    c3.Width = new GridLength(0);
+                if (u.Count < 2)
+                    c2.Width = new GridLength(0);
+                if (u.Count < 1)
+                    c1.Width = new GridLength(0);
                 //raspored = new Model.Raspored();
             }
         }
@@ -512,48 +767,50 @@ namespace Raspored
             }
 
             SelectedUcionica = (Ucionica)lsUcionice.SelectedItem;
-            Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
-            //MessageBox.Show(SelectedUcionica.Oznaka);
-            foreach (UcionicaRaspored ur in raspored.Rasporedi)
-                if (ur.Ucionica != null)
-                {
-                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+            if (SelectedUcionica != null)
+            {
+                Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
+                //MessageBox.Show(SelectedUcionica.Oznaka);
+                foreach (UcionicaRaspored ur in raspored.Rasporedi)
+                    if (ur.Ucionica != null)
                     {
-                        for (int i = 0; i < 61; i++)
+                        if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                         {
-                            for (int j = 0; j < 7; j++)
+                            for (int i = 0; i < 61; i++)
                             {
-                                if (ur.Rasporedi[i][j].Oznaka != "")
+                                for (int j = 0; j < 7; j++)
                                 {
-                                    Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                    if (Termini[i][j][0].Oznaka == "Pauza")
+                                    if (ur.Rasporedi[i][j].Oznaka != "")
                                     {
-                                        ListView lv;
-                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
-                                        if (i < 10)
-                                            lv = (ListView)this.FindName("lw0" + (i) + j);
+                                        Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                        if (Termini[i][j][0].Oznaka == "Pauza")
+                                        {
+                                            ListView lv;
+                                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                            if (i < 10)
+                                                lv = (ListView)this.FindName("lw0" + (i) + j);
+                                            else
+                                                lv = (ListView)this.FindName("lw" + i + j);
+                                            if (lv != null)
+                                                lv.Background = Brushes.PaleVioletRed;
+                                        }
                                         else
-                                            lv = (ListView)this.FindName("lw" + i + j);
-                                        if (lv != null)
-                                            lv.Background = Brushes.PaleVioletRed;
-                                    }
-                                    else
-                                    {
-                                        ListView lv;
-                                        //MessageBox.Show("lw0" + (c1 + i) + r1);
-                                        if (i < 10)
-                                            lv = (ListView)this.FindName("lw0" + (i) + j);
-                                        else
-                                            lv = (ListView)this.FindName("lw" + i + j);
-                                        if (lv != null)
-                                            lv.Background = Brushes.Beige;
+                                        {
+                                            ListView lv;
+                                            //MessageBox.Show("lw0" + (c1 + i) + r1);
+                                            if (i < 10)
+                                                lv = (ListView)this.FindName("lw0" + (i) + j);
+                                            else
+                                                lv = (ListView)this.FindName("lw" + i + j);
+                                            if (lv != null)
+                                                lv.Background = Brushes.Beige;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-
+            }
 
         }
 
