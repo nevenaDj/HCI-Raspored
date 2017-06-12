@@ -2827,10 +2827,13 @@ namespace Raspored.Tabele
                 u.Softveri = softveri;
                 // u.Softveri = new ObservableCollection<Softver>( softveri);
                 // MessageBox.Show("" + u.Softveri.Count);
-                if (_raspored.File == u.File)
-                    ucionice.Add(u);
-                else
-                    UcioniceP.Add(u);
+                if (_raspored != null)
+                {
+                    if (_raspored.File == u.File)
+                        ucionice.Add(u);
+                    else
+                        UcioniceP.Add(u);
+                }
             }
 
             return ucionice;
@@ -2881,10 +2884,13 @@ namespace Raspored.Tabele
                 s.File = sm[5].Replace("\r", "");
 
                 //smerovi.Add(s);
-                if (_raspored.File == s.File)
-                    smerovi.Add(s);
-                else
-                    SmeroviP.Add(s);
+                if (_raspored != null)
+                {
+                    if (_raspored.File == s.File)
+                        smerovi.Add(s);
+                    else
+                        SmeroviP.Add(s);
+                }
             }
 
             return smerovi;
@@ -2938,11 +2944,13 @@ namespace Raspored.Tabele
                 s.Proizvodjac = sf[6];
                 s.File = sf[7];
                 s.Sajt = sf[8].Trim();
-
-                if (s.File == _raspored.File)
-                    softveri.Add(s);
-                else
-                    SoftveriP.Add(s);
+                if (_raspored != null)
+                {
+                    if (s.File == _raspored.File)
+                        softveri.Add(s);
+                    else
+                        SoftveriP.Add(s);
+                }
             }
 
             return softveri;
@@ -3033,10 +3041,13 @@ namespace Raspored.Tabele
                 }
                 p.Softveri = softveri;
                 // MessageBox.Show(""+p.Softveri.Count);
-                if (p.File==_raspored.File)
-                    predmeti.Add(p);
-                else
-                    PredmetiP.Add(p);
+                if (_raspored != null)
+                {
+                    if (p.File == _raspored.File)
+                        predmeti.Add(p);
+                    else
+                        PredmetiP.Add(p);
+                }
 
             }
 
