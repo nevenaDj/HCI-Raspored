@@ -2075,7 +2075,8 @@ namespace Raspored.Tabele
                 s.Skracenica = sm[1];
                 s.Opis = sm[2];
                 s.Naziv = sm[3];
-                s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
+                string[] sss = sm[4].Split(' ');
+                s.DatumUvodjenja = Convert.ToDateTime(sss[0]);
 
                 smerovi.Add(s);
             }

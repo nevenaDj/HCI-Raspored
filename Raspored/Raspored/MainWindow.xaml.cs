@@ -221,16 +221,19 @@ namespace Raspored
 
 
             foreach (UcionicaRaspored ur in raspored.Rasporedi)
-                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                if (ur.Ucionica != null)
                 {
-                    for (int i = 0; i < 61; i++)
+                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int i = 0; i < 61; i++)
                         {
-                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            for (int j = 0; j < 7; j++)
                             {
-                                Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                //Termini[i][j]=ur.Rasporedi[i][j];
+                                if (ur.Rasporedi[i][j].Oznaka != "")
+                                {
+                                    Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                    //Termini[i][j]=ur.Rasporedi[i][j];
+                                }
                             }
                         }
                     }
@@ -442,16 +445,19 @@ namespace Raspored
             Oznaka_ucionica.Text = SelectedUcionica.Oznaka;
             //MessageBox.Show(SelectedUcionica.Oznaka);
             foreach (UcionicaRaspored ur in raspored.Rasporedi)
-                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                if (ur.Ucionica != null)
                 {
-                    for (int i = 0; i < 61; i++)
+                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int i = 0; i < 61; i++)
                         {
-                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            for (int j = 0; j < 7; j++)
                             {
-                                Termini[i][j].Add(ur.Rasporedi[i][j]);
-                                //Termini[i][j]=ur.Rasporedi[i][j];
+                                if (ur.Rasporedi[i][j].Oznaka != "")
+                                {
+                                    Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                    //Termini[i][j]=ur.Rasporedi[i][j];
+                                }
                             }
                         }
                     }
@@ -488,27 +494,36 @@ namespace Raspored
             }
 
             List<Ucionica> u = citanje_pisanje.otvoriUcionicu();
-            for (int i = 1; i <= u.Count; i++)
+            if (raspored.Rasporedi.Count != 0)
             {
-                foreach (UcionicaRaspored ucR in raspored.Rasporedi)
-                    if (ucR.Ucionica.Oznaka == u[i - 1].Oznaka)
-                        for (int j = 1; j < 61; j++)
+                for (int i = 1; i <= u.Count; i++)
+                {
+                    foreach (UcionicaRaspored ucR in raspored.Rasporedi)
+                        if (ucR.Ucionica != null)
                         {
-                            if (TerminiDan[j][i].Count!=0)
-                                TerminiDan[j][i].RemoveAt(0);
+                            if (ucR.Ucionica.Oznaka == u[i - 1].Oznaka)
+                                for (int j = 1; j < 61; j++)
+                                {
+                                    if (TerminiDan[j][i].Count != 0)
+                                        TerminiDan[j][i].RemoveAt(0);
+                                }
                         }
 
-            }
-            for (int i=1;i<=u.Count; i++)
-            {
-                foreach (UcionicaRaspored ucR in raspored.Rasporedi)
-                    if (ucR.Ucionica.Oznaka==u[i-1].Oznaka)
-                        for (int j=1;j<61;j++)
+                }
+                for (int i = 1; i <= u.Count; i++)
+                {
+                    foreach (UcionicaRaspored ucR in raspored.Rasporedi)
+                        if (ucR.Ucionica != null)
                         {
-                            if (ucR.Rasporedi[j][row].Oznaka!="")
-                           TerminiDan[j][i].Add(ucR.Rasporedi[j][row]);
+                            if (ucR.Ucionica.Oznaka == u[i - 1].Oznaka)
+                                for (int j = 1; j < 61; j++)
+                                {
+                                    if (ucR.Rasporedi[j][row].Oznaka != "")
+                                        TerminiDan[j][i].Add(ucR.Rasporedi[j][row]);
+                                }
                         }
-                
+
+                }
             }
 
 

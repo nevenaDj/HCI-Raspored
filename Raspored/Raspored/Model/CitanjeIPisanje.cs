@@ -200,7 +200,9 @@ namespace Raspored.Model
                 s.Skracenica = sm[1];
                 s.Opis = sm[2];
                 s.Naziv = sm[3];
-                s.DatumUvodjenja = Convert.ToDateTime(sm[4]);
+                //sm[4].Replace("\r", "");
+                string[] sss = sm[4].Split(' ');
+                s.DatumUvodjenja = Convert.ToDateTime(sss[0]);
 
                 smerovi.Add(s);
             }

@@ -164,6 +164,7 @@ namespace Raspored.DDrop
                         if (u.Sistem != "Oba")
                             continue;
                     Ucionice.Add(u);
+                   
                 }
                 else
                 {
@@ -261,19 +262,22 @@ namespace Raspored.DDrop
             Raspored3.Visibility = Visibility.Visible;
             int x = 0;
             foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                if (ur.Ucionica != null)
                 {
-                    for (int i = 0; i < 61; i++)
+                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int i = 0; i < 61; i++)
                         {
-                            if (ur.Rasporedi[i][j].Oznaka != "")
+                            for (int j = 0; j < 7; j++)
                             {
-                                Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                if (ur.Rasporedi[i][j].Oznaka != "")
+                                {
+                                    Termini[i][j].Add(ur.Rasporedi[i][j]);
+                                }
                             }
                         }
+                        x = 1;
                     }
-                    x = 1;
                 }
             if (x == 0)
             {
@@ -290,18 +294,21 @@ namespace Raspored.DDrop
 
             if (SelectedUcionica != null)
                 foreach (UcionicaRaspored ur in rasp.Rasporedi)
-                    if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                    if (ur.Ucionica != null)
                     {
-                        //TO_DO: studentiTo -ba atkonvertalni 
-                        for (int i = 1; i < 61; i++)
+                        if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
                         {
-                            for (int j = 1; j < 7; j++)
+                            //TO_DO: studentiTo -ba atkonvertalni 
+                            for (int i = 1; i < 61; i++)
                             {
-                                if (Termini[i][j].Count != 0)
-                                    ur.Rasporedi[i][j] = Termini[i][j][0];
-                                else
-                                    if (ur.Rasporedi[i][j].Oznaka != "")
-                                    ur.Rasporedi[i][j] = new Predmet();
+                                for (int j = 1; j < 7; j++)
+                                {
+                                    if (Termini[i][j].Count != 0)
+                                        ur.Rasporedi[i][j] = Termini[i][j][0];
+                                    else
+                                        if (ur.Rasporedi[i][j].Oznaka != "")
+                                        ur.Rasporedi[i][j] = new Predmet();
+                                }
                             }
                         }
                     }
@@ -760,16 +767,19 @@ namespace Raspored.DDrop
             f.WriteLine();
             foreach (UcionicaRaspored r in rasp.Rasporedi)
             {
-                f.Write(r.Ucionica.Oznaka + ":");
-                for (int i = 0; i < 61; i++)
+                if (r.Ucionica != null)
                 {
-                    for (int j = 0; j < 7; j++)
+                    f.Write(r.Ucionica.Oznaka + ":");
+                    for (int i = 0; i < 61; i++)
                     {
-                        f.Write(r.Rasporedi[i][j].Oznaka + ",");
+                        for (int j = 0; j < 7; j++)
+                        {
+                            f.Write(r.Rasporedi[i][j].Oznaka + ",");
+                        }
+                        f.Write("|");
                     }
-                    f.Write("|");
+                    f.WriteLine();
                 }
-                f.WriteLine();
             }
 
             f.Close();
