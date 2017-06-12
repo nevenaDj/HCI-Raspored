@@ -434,9 +434,12 @@ namespace Raspored
             {
                 for (int j = 1; j < 7; j++)
                 {
-                    if (Termini[i][j].Count != 0)
+                    if (Termini != null)
                     {
-                        Termini[i][j].RemoveAt(0);
+                        if (Termini[i][j].Count != 0)
+                        {
+                            Termini[i][j].RemoveAt(0);
+                        }
                     }
                 }
             }
