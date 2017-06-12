@@ -1025,11 +1025,70 @@ namespace Raspored.Tabele
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
         private void IzbrisiUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            MessageBoxResult res;
+           
+           
+            
+            Dictionary<string, Predmet> hashPredmet = new Dictionary<string, Predmet>();
+            foreach (UcionicaRaspored ur in _raspored.Rasporedi)
+            {
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                {
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j] != null)
+                            {
+                                if (ur.Rasporedi[i][j].Naziv == "Pauza")
+                                {
+                                    continue;
+                                }
+                                if (ur.Rasporedi[i][j].Naziv == "")
+                                {
+                                    continue;
+                                }
+                                if (!hashPredmet.ContainsKey(ur.Rasporedi[i][j].Oznaka))
+                                {
+                                    hashPredmet.Add(ur.Rasporedi[i][j].Oznaka, ur.Rasporedi[i][j]);
+                                }
+                            }
+                        }
+                        
+                    }
+                   
+                    
+                }
 
-            MessageBoxResult res = MessageBox.Show(
-                "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " + 
-                SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo, 
-                MessageBoxImage.Warning, MessageBoxResult.No);
+            }
+            if (hashPredmet.Count > 0)
+            {
+                string poruka = "U učionici " + SelectedUcionica.Oznaka+" postoje raspoređeni termini za predmete: ";
+                foreach (Predmet p in hashPredmet.Values)
+                {
+                    poruka += "\n    - " + p.Naziv;
+                }
+
+                poruka += "\nUkoliko obrišete učionicu i termini će se ukloniti.\n\n";
+                poruka += "Da li ste sigurni da želite da nastavite?";
+
+                res = MessageBox.Show(
+                      poruka, "Brisanje učionice", MessageBoxButton.YesNo,
+             MessageBoxImage.Warning, MessageBoxResult.No);
+
+
+            }
+            else
+            {
+                res = MessageBox.Show(
+               "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " +
+               SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo,
+               MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+           
+          
+
             if (res == MessageBoxResult.Yes)
             {
                 Ucionice.Remove(SelectedUcionica);
@@ -1465,10 +1524,43 @@ namespace Raspored.Tabele
 
         private void IzbrisiPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBoxResult res = MessageBox.Show(
-               "Da li ste sigurni da želite da obišete predmet " +
-               SelectedPredmet.Naziv + "?", "Brisanje predmeta", MessageBoxButton.YesNo,
-               MessageBoxImage.Warning, MessageBoxResult.No);
+            MessageBoxResult res;
+            string poruka = "";
+            bool i = false;
+            foreach (Predmet p in _raspored.OstaliTermini)
+            {
+                if (p.Oznaka == SelectedPredmet.Oznaka)
+                {
+                    if (i)
+                    {
+
+                    }else
+                    {
+                        poruka = "Ukoliko obrišete predmet " + SelectedPredmet.Naziv + " on će se ukloniti iz rasporeda termina.";
+                        i = true;
+                    }
+
+                }
+            } 
+            if (i)
+            {
+                poruka += "\n\nDa li ste sigurni da želite da nastavite?";
+                res = MessageBox.Show(
+             poruka, "Brisanje predmeta", MessageBoxButton.YesNo,
+             MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+            else
+            {
+               
+                res = MessageBox.Show(
+              "Da li ste sigurni da želite da obišete predmet " +
+              SelectedPredmet.Naziv + "?", "Brisanje predmeta", MessageBoxButton.YesNo,
+              MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+
+
             if (res == MessageBoxResult.Yes)
             {
                 Predmeti.Remove(SelectedPredmet);
@@ -2296,7 +2388,7 @@ namespace Raspored.Tabele
                     {
                         if (i)
                         {
-                            poruka += "\n    - " + s.Naziv;
+                            poruka += "\n    - " + p.Naziv;
                         }
                         else
                         {
@@ -2318,7 +2410,7 @@ namespace Raspored.Tabele
                     {
                         if (j)
                         {
-                            poruka += "\n    - " + s.Naziv;
+                            poruka += "\n    - " + u.Oznaka;
                         }
                         else
                         {

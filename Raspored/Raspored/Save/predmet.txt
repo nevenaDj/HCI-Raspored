@@ -1,5 +1,5 @@
-Interakcija čovek računar|6|2|Windows||HCI (SIIT)|HCI||False|True|True|16|
-Internet softverske arhitekture|8|2|Svejedno||ISA (SIIT)|ISA||False|True|False|16|
-Metodologije razvoja softvera|10|2|Svejedno||MRS (SIIT)|MRS||False|True|False|16|
-Osnove računarske inteligencije|8|2|Windows||ORI (SIIT)|ORI||False|True|True|16|
-Programski prevodioci|4|2|Linux||PP (SIIT)|PP||False|True|True|32|
+Interakcija čovek računar|6|2|Windows||HCI (SIIT)|HCI|SW|False|True|True|16|VS,
+Internet softverske arhitekture|8|2|Svejedno||ISA (SIIT)|ISA|SW|False|True|False|16|S1,
+Metodologije razvoja softvera|10|2|Svejedno||MRS (SIIT)|MRS|SW|False|True|False|16|S1,
+Osnove računarske inteligencije|8|2|Windows||ORI (SIIT)|ORI|SW|False|True|True|16|VS,
+Programski prevodioci|4|2|Linux||PP (SIIT)|PP|SW|False|True|True|32|

@@ -1351,7 +1351,7 @@
                                     Margin="10,0,90,0"
                                     VerticalAlignment="Center"
                                     Foreground="Black"
-                                    Text="{Binding Source.Naziv}" />
+                                    Text="{Binding SmerPredmeta.Naziv}" />
                                 <TextBlock
                                     x:Name="CBPredmetPrikaz"
                                     Grid.Row="3"

@@ -1,5 +1,6 @@
-32|False|True|True|Windows|RC 1|L1|
-16|False|True|True|Windows|RC 2|L2|
-16|False|True|True|Windows|RC3|L3|
-32|False|True|True|Windows|RC 4|L4|
-16|False|True|True|Windows|RC 5|L5|
+32|False|True|True|Windows|RC 1|L1|VS,S1,
+16|False|True|True|Windows|RC 2|L2|VS,S1,
+16|False|True|True|Windows|RC3|L3|VS,S1,
+32|False|True|True|Windows|RC 4|L4|VS,S1,
+16|False|True|True|Windows|RC 5|L5|VS,S1,
+16|False|True|True||N|L6|
