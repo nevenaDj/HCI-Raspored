@@ -1,3 +1,2 @@
-232|SIIT||Softversko Inz|20.1.0001. 00.00.00
-123||||6.6.2017. 00.00.00
-wedf`|bhb||hbh|12.6.2017. 00.00.00
+SW|SIIT||Softversko inženjerstvo i informacione tehnologije|1.10.2013. 00.00.00
+E2|E2||Računarstvo i automatika|12.6.2000. 00.00.00

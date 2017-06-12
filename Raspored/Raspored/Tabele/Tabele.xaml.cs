@@ -1878,21 +1878,24 @@ namespace Raspored.Tabele
             bool i = false;
             foreach(Predmet p in Predmeti)
             {
-                if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                if (p.SmerPredmeta != null)
                 {
-                    if (i)
+                    if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
                     {
-                        poruka += "\n    - " + p.Naziv;
-                    }
-                    else
-                    {
-                        poruka = "Ukoliko izbrišete smer " + SelectedSmer.Naziv + "\n" +
-                            "Obrisaćete smer predmetima:" + "\n    - " +
-                            p.Naziv;
-                        i = true;
-                    }
-                    
+                        if (i)
+                        {
+                            poruka += "\n    - " + p.Naziv;
+                        }
+                        else
+                        {
+                            poruka = "Ukoliko izbrišete smer " + SelectedSmer.Naziv + "\n" +
+                                "Obrisaćete smer predmetima:" + "\n    - " +
+                                p.Naziv;
+                            i = true;
+                        }
 
+
+                    }
                 }
             }
             MessageBoxResult res;
@@ -1915,10 +1918,13 @@ namespace Raspored.Tabele
             {
                 foreach(Predmet p in Predmeti)
                 {
-                    if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                    if (p.SmerPredmeta != null)
                     {
-                        p.OznakaSmera = "";
-                        p.SmerPredmeta = null;
+                        if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                        {
+                            p.OznakaSmera = "";
+                            p.SmerPredmeta = null;
+                        }
                     }
                 }
                 Smerovi.Remove(SelectedSmer);
@@ -5386,6 +5392,50 @@ namespace Raspored.Tabele
 
                 }
             }
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if(SelectedSmer != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_1(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_2(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedUcionica != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_3(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedSoftver != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
         }
     }
 

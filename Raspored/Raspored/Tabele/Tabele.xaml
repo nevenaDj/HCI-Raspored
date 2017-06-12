@@ -101,7 +101,8 @@
                                 Command="local:Komande.Izmeni"
                                 Executed="RezimIzmeniUcionicu_Executed" />
                             <CommandBinding
-                                CanExecute="RezimIzmeniUcionicu_CanExecute"
+                                CanExecute="CommandBinding_CanExecute_2"
+                                
                                 Command="local:Komande.Brisanje"
                                 Executed="IzbrisiUcionicu_Executed" />
 
@@ -865,7 +866,7 @@
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniPredmet_Executed" />
                                     <CommandBinding
-                                        CanExecute="RezimIzmeniPredmet_CanExecute"
+                                        CanExecute="CommandBinding_CanExecute_1"
                                         Command="local:Komande.Brisanje"
                                         Executed="IzbrisiPredmet_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
@@ -1765,7 +1766,7 @@
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSmer_Executed" />
                                     <CommandBinding
-                                        CanExecute="RezimIzmeniSmer_CanExecute"
+                                        CanExecute="CommandBinding_CanExecute"
                                         Command="local:Komande.Brisanje"
                                         Executed="IzbrisiSmer_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
@@ -2228,7 +2229,7 @@
                                         Command="local:Komande.Izmeni"
                                         Executed="RezimIzmeniSoftver_Executed" />
                                     <CommandBinding
-                                        CanExecute="RezimIzmeniSoftver_CanExecute"
+                                        CanExecute="CommandBinding_CanExecute_3"
                                         Command="local:Komande.Brisanje"
                                         Executed="IzbrisiSoftver_Executed" />
                                     <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
