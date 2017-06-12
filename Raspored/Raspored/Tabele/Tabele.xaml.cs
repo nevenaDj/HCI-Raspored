@@ -75,10 +75,10 @@ namespace Raspored.Tabele
             OdustaniSmer.Visibility = Visibility.Hidden;
             OdustaniSoftver.Visibility = Visibility.Hidden;
 
-            GridUcionice.IsEnabled = false;
-            GridSmer.IsEnabled = false;
-            GridPredmeti.IsEnabled = false;
-            GridSoftver.IsEnabled = false;
+          //  GridUcionice.IsEnabled = false;
+       //     GridSmer.IsEnabled = false;
+        //    GridPredmeti.IsEnabled = false;
+         //   GridSoftver.IsEnabled = false;
 
             IzmeniSoftver.Visibility = Visibility.Hidden;
             IzmenaOdustaniSoftver.Visibility = Visibility.Hidden;
@@ -192,6 +192,75 @@ namespace Raspored.Tabele
 
             _rezimPretrage = false;
 
+            UPrikazEnable = Visibility.Visible;
+           
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+            DugmeDodavanje.Visibility = Visibility.Hidden;
+            
+
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            GrupaPrikaz.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
+
+            Box3.Visibility = Visibility.Hidden;
+            Skracenica2.Visibility = Visibility.Hidden;
+            Naziv2.Visibility = Visibility.Hidden;
+            OpisSmer.Visibility = Visibility.Hidden;
+            DatumSmera.Visibility = Visibility.Hidden;
+
+            Box3Prikaz.Visibility = Visibility.Visible;
+            Skracenica2Prikaz.Visibility = Visibility.Visible;
+            Naziv2Prikaz.Visibility = Visibility.Visible;
+            OpisSmerPrikaz.Visibility = Visibility.Visible;
+            DatumSmeraPrikaz.Visibility = Visibility.Visible;
+
+            Box4.Visibility = Visibility.Hidden;
+            Naziv3.Visibility = Visibility.Hidden;
+            OpisSoftver.Visibility = Visibility.Hidden;
+            GSoftver.Visibility = Visibility.Hidden;
+            Cena.Visibility = Visibility.Hidden;
+            PSoftver.Visibility = Visibility.Hidden;
+            SajtSoftver.Visibility = Visibility.Hidden;
+            SoftverOS.Visibility = Visibility.Hidden;
+
+            Box4Prikaz.Visibility = Visibility.Visible;
+            Naziv3Prikaz.Visibility = Visibility.Visible;
+            OpisSoftverPrikaz.Visibility = Visibility.Visible;
+            GSoftverPrikaz.Visibility = Visibility.Visible;
+            CenaPrikaz.Visibility = Visibility.Visible;
+            PSoftverPrikaz.Visibility = Visibility.Visible;
+            SajtSoftverPrikaz.Visibility = Visibility.Visible;
+            SoftverOSPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -238,7 +307,7 @@ namespace Raspored.Tabele
             OdustaniSmer.Visibility = Visibility.Hidden;
             OdustaniSoftver.Visibility = Visibility.Hidden;
 
-            GridUcionice.IsEnabled = false;
+            //GridUcionice.IsEnabled = false;
             GridSmer.IsEnabled = false;
             GridPredmeti.IsEnabled = false;
             GridSoftver.IsEnabled = false;
@@ -340,13 +409,51 @@ namespace Raspored.Tabele
             Box.Background = new SolidColorBrush(Colors.White);
             OpisBox.Background = new SolidColorBrush(Colors.White);
             BrMestaBox.Background = new SolidColorBrush(Colors.White);
-           /* Check1.IsEnabled = false;
-            Check2.IsEnabled = false;
-            Check3.IsEnabled = false;
-            Check1.Background = new SolidColorBrush(Colors.White);
-            Check2.Background = new SolidColorBrush(Colors.White);
-            Check3.Background = new SolidColorBrush(Colors.White);
-            */
+            /* Check1.IsEnabled = false;
+             Check2.IsEnabled = false;
+             Check3.IsEnabled = false;
+             Check1.Background = new SolidColorBrush(Colors.White);
+             Check2.Background = new SolidColorBrush(Colors.White);
+             Check3.Background = new SolidColorBrush(Colors.White);
+             */
+
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+           
+            
+
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            Grupa.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
         }
 
         Thread demoThread;
@@ -384,8 +491,25 @@ namespace Raspored.Tabele
                 {
                     SacuvajUcionicuDemo.Visibility = Visibility.Visible;
                     OdusatniUcionicaDemo.Visibility = Visibility.Visible;
-                    
+
                     GridUcionice.IsEnabled = true;
+                    BoxPrikaz.Visibility = Visibility.Hidden;
+                    OpisBoxPrikaz.Visibility = Visibility.Hidden;
+                    BrRadnihMestaPrikaz.Visibility = Visibility.Hidden;
+                    OSPrikaz.Visibility = Visibility.Hidden;
+                    Check1Prikaz.Visibility = Visibility.Hidden;
+                    Check2Prikaz.Visibility = Visibility.Hidden;
+                    Check3Prikaz.Visibility = Visibility.Hidden;
+                  //  SoftveriOtvoriPrikaz.Visibility = Visibility.Hidden;
+
+                    Box.Visibility = Visibility.Visible;
+                    OpisBox.Visibility = Visibility.Visible;
+                    BrMestaBox.Visibility = Visibility.Visible;
+                    CB.Visibility = Visibility.Visible;
+                    Check1.Visibility = Visibility.Visible;
+                    Check2.Visibility = Visibility.Visible;
+                    Check3.Visibility = Visibility.Visible;
+                  //  
                     SelectedUcionica = new Ucionica();
 
                 });
@@ -491,7 +615,24 @@ namespace Raspored.Tabele
                 {
                     
                     Ucionice.Add(SelectedUcionica);
-                    GridUcionice.IsEnabled = false;
+                    //GridUcionice.IsEnabled = false;
+                    BoxPrikaz.Visibility = Visibility.Visible;
+                    OpisBoxPrikaz.Visibility = Visibility.Visible;
+                    BrRadnihMestaPrikaz.Visibility = Visibility.Visible;
+                    OSPrikaz.Visibility = Visibility.Visible;
+                    Check1Prikaz.Visibility = Visibility.Visible;
+                    Check2Prikaz.Visibility = Visibility.Visible;
+                    Check3Prikaz.Visibility = Visibility.Visible;
+                    
+
+                    Box.Visibility = Visibility.Hidden;
+                    OpisBox.Visibility = Visibility.Hidden;
+                    BrMestaBox.Visibility = Visibility.Hidden;
+                    CB.Visibility = Visibility.Hidden;
+                    Check1.Visibility = Visibility.Hidden;
+                    Check2.Visibility = Visibility.Hidden;
+                    Check3.Visibility = Visibility.Hidden;
+                    SoftveriOtvori.Visibility = Visibility.Hidden;
                     SacuvajUcionicuDemo.Visibility = Visibility.Hidden;
                     OdusatniUcionicaDemo.Visibility = Visibility.Hidden;
                 });
@@ -766,6 +907,25 @@ namespace Raspored.Tabele
             SacuvajUcionicu.Visibility = Visibility.Visible;
             OdusatniUcionica.Visibility = Visibility.Visible;
             GridUcionice.IsEnabled = true;
+
+            UPrikazEnable = Visibility.Hidden;
+            BoxPrikaz.Visibility = Visibility.Hidden;
+            OpisBoxPrikaz.Visibility = Visibility.Hidden;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Hidden;
+            OSPrikaz.Visibility = Visibility.Hidden;
+            Check1Prikaz.Visibility = Visibility.Hidden;
+            Check2Prikaz.Visibility = Visibility.Hidden;
+            Check3Prikaz.Visibility = Visibility.Hidden;
+            
+
+            Box.Visibility = Visibility.Visible;
+            OpisBox.Visibility = Visibility.Visible;
+            BrMestaBox.Visibility = Visibility.Visible;
+            CB.Visibility = Visibility.Visible;
+            Check1.Visibility = Visibility.Visible;
+            Check2.Visibility = Visibility.Visible;
+            Check3.Visibility = Visibility.Visible;
+            
         }
 
         /**** KLIK NA DUGME ODUSTANI OD DODAVANJA UCIONICE ****/
@@ -796,7 +956,7 @@ namespace Raspored.Tabele
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             OdusatniUcionica.Visibility = Visibility.Hidden;
-            GridUcionice.IsEnabled = false;
+          //  GridUcionice.IsEnabled = false;
             FocusManager.SetFocusedElement(this, dgrMainUcionica);
 
             EUcionice.Visibility = Visibility.Collapsed;
@@ -807,6 +967,24 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+            UPrikazEnable = Visibility.Visible;
+            BoxPrikaz.Visibility = Visibility.Visible;
+            OpisBoxPrikaz.Visibility = Visibility.Visible;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Visible;
+            OSPrikaz.Visibility = Visibility.Visible;
+            Check1Prikaz.Visibility = Visibility.Visible;
+            Check2Prikaz.Visibility = Visibility.Visible;
+            Check3Prikaz.Visibility = Visibility.Visible;
+            
+
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+            
 
         }
         /**** KLINK NA DUGME SACUVAJ UCIONICU ****/
@@ -833,7 +1011,7 @@ namespace Raspored.Tabele
 
             SacuvajUcionicu.Visibility = Visibility.Hidden;
             OdusatniUcionica.Visibility = Visibility.Hidden;
-            GridUcionice.IsEnabled = false;
+           // GridUcionice.IsEnabled = false;
 
             if (Ucionice.Count > 0)
             {
@@ -851,16 +1029,95 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
 
+            UPrikazEnable = Visibility.Visible;
+
+            BoxPrikaz.Visibility = Visibility.Visible;
+            OpisBoxPrikaz.Visibility = Visibility.Visible;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Visible;
+            OSPrikaz.Visibility = Visibility.Visible;
+            Check1Prikaz.Visibility = Visibility.Visible;
+            Check2Prikaz.Visibility = Visibility.Visible;
+            Check3Prikaz.Visibility = Visibility.Visible;
+        
+
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+           
+
         }
 
         /**** KLIK NA DUGME IZBRISI UCIONICU ***/
         private void IzbrisiUcionicu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            MessageBoxResult res;
+           
+           
+            
+            Dictionary<string, Predmet> hashPredmet = new Dictionary<string, Predmet>();
+            foreach (UcionicaRaspored ur in _raspored.Rasporedi)
+            {
+                if (ur.Ucionica.Oznaka == SelectedUcionica.Oznaka)
+                {
+                    for (int i = 0; i < 61; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (ur.Rasporedi[i][j] != null)
+                            {
+                                if (ur.Rasporedi[i][j].Naziv == "Pauza")
+                                {
+                                    continue;
+                                }
+                                if (ur.Rasporedi[i][j].Naziv == "")
+                                {
+                                    continue;
+                                }
+                                if (!hashPredmet.ContainsKey(ur.Rasporedi[i][j].Oznaka))
+                                {
+                                    hashPredmet.Add(ur.Rasporedi[i][j].Oznaka, ur.Rasporedi[i][j]);
+                                }
+                            }
+                        }
+                        
+                    }
+                   
+                    
+                }
 
-            MessageBoxResult res = MessageBox.Show(
-                "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " + 
-                SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo, 
-                MessageBoxImage.Warning, MessageBoxResult.No);
+            }
+            if (hashPredmet.Count > 0)
+            {
+                string poruka = "U učionici " + SelectedUcionica.Oznaka+" postoje raspoređeni termini za predmete: ";
+                foreach (Predmet p in hashPredmet.Values)
+                {
+                    poruka += "\n    - " + p.Naziv;
+                }
+
+                poruka += "\nUkoliko obrišete učionicu i termini će se ukloniti.\n\n";
+                poruka += "Da li ste sigurni da želite da nastavite?";
+
+                res = MessageBox.Show(
+                      poruka, "Brisanje učionice", MessageBoxButton.YesNo,
+             MessageBoxImage.Warning, MessageBoxResult.No);
+
+
+            }
+            else
+            {
+                res = MessageBox.Show(
+               "Da li ste sigurni da želite da obišete učionicu koja ima oznaku  " +
+               SelectedUcionica.Oznaka + "?", "Brisanje učionice", MessageBoxButton.YesNo,
+               MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+           
+          
+
             if (res == MessageBoxResult.Yes)
             {
                 Ucionice.Remove(SelectedUcionica);
@@ -898,7 +1155,7 @@ namespace Raspored.Tabele
                 SelectedUcionica.ImaTabla, SelectedUcionica.ImaPametnaTabla, 
                 SelectedUcionica.Softveri, SelectedUcionica.Sistem);
 
-            GridUcionice.IsEnabled = true;
+           // GridUcionice.IsEnabled = true;
             SacuvajIzmenuUcionice.Visibility = Visibility.Visible;
             IzmenaOdustaniUcionica.Visibility = Visibility.Visible;
 
@@ -909,6 +1166,26 @@ namespace Raspored.Tabele
             TabSmer = "False";
             TabSoftver = "False";
             Podaci = "False";
+
+            UPrikazEnable = Visibility.Hidden;
+
+            BoxPrikaz.Visibility = Visibility.Hidden;
+            OpisBoxPrikaz.Visibility = Visibility.Hidden;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Hidden;
+            OSPrikaz.Visibility = Visibility.Hidden;
+            Check1Prikaz.Visibility = Visibility.Hidden;
+            Check2Prikaz.Visibility = Visibility.Hidden;
+            Check3Prikaz.Visibility = Visibility.Hidden;
+         
+
+            Box.Visibility = Visibility.Visible;
+            OpisBox.Visibility = Visibility.Visible;
+            BrMestaBox.Visibility = Visibility.Visible;
+            CB.Visibility = Visibility.Visible;
+            Check1.Visibility = Visibility.Visible;
+            Check2.Visibility = Visibility.Visible;
+            Check3.Visibility = Visibility.Visible;
+            
         }
 
         /***** KLINK NA DUGME SACUVAJ IZMENU UCIONICE ****/
@@ -934,7 +1211,7 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridUcionice.IsEnabled = false;
+            //GridUcionice.IsEnabled = false;
             sacuvajUcionicu();
             _index = -1;
             e.Handled = true;
@@ -948,6 +1225,25 @@ namespace Raspored.Tabele
 
             EUcionice.Visibility = Visibility.Collapsed;
             Box.BorderBrush = new SolidColorBrush(Colors.Silver);
+
+            UPrikazEnable = Visibility.Visible;
+            BoxPrikaz.Visibility = Visibility.Visible;
+            OpisBoxPrikaz.Visibility = Visibility.Visible;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Visible;
+            OSPrikaz.Visibility = Visibility.Visible;
+            Check1Prikaz.Visibility = Visibility.Visible;
+            Check2Prikaz.Visibility = Visibility.Visible;
+            Check3Prikaz.Visibility = Visibility.Visible;
+           
+
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+           
         }
 
         /**** KLINK NA DUGME PONISTI IZMENU UCIONICE ****/
@@ -970,7 +1266,7 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridUcionice.IsEnabled = false;
+          //  GridUcionice.IsEnabled = false;
             EUcionice.Visibility = Visibility.Collapsed;
             Box.BorderBrush = new SolidColorBrush(Colors.Silver);
 
@@ -978,6 +1274,25 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            UPrikazEnable = Visibility.Visible;
+            BoxPrikaz.Visibility = Visibility.Visible;
+            OpisBoxPrikaz.Visibility = Visibility.Visible;
+            BrRadnihMestaPrikaz.Visibility = Visibility.Visible;
+            OSPrikaz.Visibility = Visibility.Visible;
+            Check1Prikaz.Visibility = Visibility.Visible;
+            Check2Prikaz.Visibility = Visibility.Visible;
+            Check3Prikaz.Visibility = Visibility.Visible;
+           
+
+            Box.Visibility = Visibility.Hidden;
+            OpisBox.Visibility = Visibility.Hidden;
+            BrMestaBox.Visibility = Visibility.Hidden;
+            CB.Visibility = Visibility.Hidden;
+            Check1.Visibility = Visibility.Hidden;
+            Check2.Visibility = Visibility.Hidden;
+            Check3.Visibility = Visibility.Hidden;
+           
 
         }
 
@@ -1062,6 +1377,35 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = false;
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
+
+            Box2.Visibility = Visibility.Visible;
+            Skracenica1.Visibility = Visibility.Visible;
+            Naziv1.Visibility = Visibility.Visible;
+            OpisPredmet.Visibility = Visibility.Visible;
+            Grupa.Visibility = Visibility.Visible;
+            DuzinaTermina.Visibility = Visibility.Visible;
+            BrojTermina.Visibility = Visibility.Visible;
+            UnosSmera.Visibility = Visibility.Visible;
+            NazivSmera.Visibility = Visibility.Visible;
+            SkracenicaSmera.Visibility = Visibility.Visible;
+            CBPredmet.Visibility = Visibility.Visible;
+            Check1Projektor.Visibility = Visibility.Visible;
+            Chek1Tabla.Visibility = Visibility.Visible;
+            Check1PametnaTabla.Visibility = Visibility.Visible;
+            DugmeDodavanje.Visibility = Visibility.Visible;
+
+            Box2Prikaz.Visibility = Visibility.Hidden;
+            Skracenica1Prikaz.Visibility = Visibility.Hidden;
+            Naziv1Prikaz.Visibility = Visibility.Hidden;
+            OpisPredmetPrikaz.Visibility = Visibility.Hidden;
+            GrupaPrikaz.Visibility = Visibility.Hidden;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Hidden;
+            BrojTerminaPrikaz.Visibility = Visibility.Hidden;
+            UnosSmeraPrikaz.Visibility = Visibility.Hidden;
+            CBPredmetPrikaz.Visibility = Visibility.Hidden;
+            ProjektorPrikaz.Visibility = Visibility.Hidden;
+            TablaPrikaz.Visibility = Visibility.Hidden;
+            PametnaTablaPrikaz.Visibility = Visibility.Hidden;
         }
 
         private void OdustaniPredmet_Click(object sender, RoutedEventArgs e)
@@ -1091,7 +1435,7 @@ namespace Raspored.Tabele
             SacuvajPredmet.Visibility = Visibility.Hidden;
             OdustaniPredmet.Visibility = Visibility.Hidden;
 
-            GridPredmeti.IsEnabled = false;
+          //  GridPredmeti.IsEnabled = false;
 
             Naziv1.BorderBrush = new SolidColorBrush(Colors.Silver);
             Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
@@ -1103,6 +1447,35 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+            DugmeDodavanje.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            GrupaPrikaz.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1124,7 +1497,7 @@ namespace Raspored.Tabele
             SacuvajPredmet.Visibility = Visibility.Hidden;
             OdustaniPredmet.Visibility = Visibility.Hidden;
 
-            GridPredmeti.IsEnabled = false;
+          //  GridPredmeti.IsEnabled = false;
 
             if (Predmeti.Count > 0)
             {
@@ -1146,15 +1519,77 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
 
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+            DugmeDodavanje.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            GrupaPrikaz.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
+
 
         }
 
         private void IzbrisiPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBoxResult res = MessageBox.Show(
-               "Da li ste sigurni da želite da obišete predmet " +
-               SelectedPredmet.Naziv + "?", "Brisanje predmeta", MessageBoxButton.YesNo,
-               MessageBoxImage.Warning, MessageBoxResult.No);
+            MessageBoxResult res;
+            string poruka = "";
+            bool i = false;
+            foreach (Predmet p in _raspored.OstaliTermini)
+            {
+                if (p.Oznaka == SelectedPredmet.Oznaka)
+                {
+                    if (i)
+                    {
+
+                    }else
+                    {
+                        poruka = "Ukoliko obrišete predmet " + SelectedPredmet.Naziv + " on će se ukloniti iz rasporeda termina.";
+                        i = true;
+                    }
+
+                }
+            } 
+            if (i)
+            {
+                poruka += "\n\nDa li ste sigurni da želite da nastavite?";
+                res = MessageBox.Show(
+             poruka, "Brisanje predmeta", MessageBoxButton.YesNo,
+             MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+            else
+            {
+               
+                res = MessageBox.Show(
+              "Da li ste sigurni da želite da obišete predmet " +
+              SelectedPredmet.Naziv + "?", "Brisanje predmeta", MessageBoxButton.YesNo,
+              MessageBoxImage.Warning, MessageBoxResult.No);
+
+            }
+
+
             if (res == MessageBoxResult.Yes)
             {
                 Predmeti.Remove(SelectedPredmet);
@@ -1203,6 +1638,35 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
 
+            Box2.Visibility = Visibility.Visible;
+            Skracenica1.Visibility = Visibility.Visible;
+            Naziv1.Visibility = Visibility.Visible;
+            OpisPredmet.Visibility = Visibility.Visible;
+            Grupa.Visibility = Visibility.Visible;
+            DuzinaTermina.Visibility = Visibility.Visible;
+            BrojTermina.Visibility = Visibility.Visible;
+            UnosSmera.Visibility = Visibility.Visible;
+            NazivSmera.Visibility = Visibility.Visible;
+            SkracenicaSmera.Visibility = Visibility.Visible;
+            CBPredmet.Visibility = Visibility.Visible;
+            Check1Projektor.Visibility = Visibility.Visible;
+            Chek1Tabla.Visibility = Visibility.Visible;
+            Check1PametnaTabla.Visibility = Visibility.Visible;
+            DugmeDodavanje.Visibility = Visibility.Visible;
+
+            Box2Prikaz.Visibility = Visibility.Hidden;
+            Skracenica1Prikaz.Visibility = Visibility.Hidden;
+            Naziv1Prikaz.Visibility = Visibility.Hidden;
+            OpisPredmetPrikaz.Visibility = Visibility.Hidden;
+            GrupaPrikaz.Visibility = Visibility.Hidden;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Hidden;
+            BrojTerminaPrikaz.Visibility = Visibility.Hidden;
+            UnosSmeraPrikaz.Visibility = Visibility.Hidden;
+            CBPredmetPrikaz.Visibility = Visibility.Hidden;
+            ProjektorPrikaz.Visibility = Visibility.Hidden;
+            TablaPrikaz.Visibility = Visibility.Hidden;
+            PametnaTablaPrikaz.Visibility = Visibility.Hidden;
+
         }
 
         private void SacuvajIzmenuPredmet_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1229,7 +1693,7 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridPredmeti.IsEnabled = false;
+           // GridPredmeti.IsEnabled = false;
             sacuvajPredmet();
 
             e.Handled = true;
@@ -1238,6 +1702,35 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+            DugmeDodavanje.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            GrupaPrikaz.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1259,7 +1752,7 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridPredmeti.IsEnabled = false;
+           // GridPredmeti.IsEnabled = false;
 
             Naziv1.BorderBrush = new SolidColorBrush(Colors.Silver);
             Skracenica1.BorderBrush = new SolidColorBrush(Colors.Silver);
@@ -1270,6 +1763,35 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box2.Visibility = Visibility.Hidden;
+            Skracenica1.Visibility = Visibility.Hidden;
+            Naziv1.Visibility = Visibility.Hidden;
+            OpisPredmet.Visibility = Visibility.Hidden;
+            Grupa.Visibility = Visibility.Hidden;
+            DuzinaTermina.Visibility = Visibility.Hidden;
+            BrojTermina.Visibility = Visibility.Hidden;
+            UnosSmera.Visibility = Visibility.Hidden;
+            NazivSmera.Visibility = Visibility.Hidden;
+            SkracenicaSmera.Visibility = Visibility.Hidden;
+            CBPredmet.Visibility = Visibility.Hidden;
+            Check1Projektor.Visibility = Visibility.Hidden;
+            Chek1Tabla.Visibility = Visibility.Hidden;
+            Check1PametnaTabla.Visibility = Visibility.Hidden;
+            DugmeDodavanje.Visibility = Visibility.Hidden;
+
+            Box2Prikaz.Visibility = Visibility.Visible;
+            Skracenica1Prikaz.Visibility = Visibility.Visible;
+            Naziv1Prikaz.Visibility = Visibility.Visible;
+            OpisPredmetPrikaz.Visibility = Visibility.Visible;
+            GrupaPrikaz.Visibility = Visibility.Visible;
+            DuzinaTerminaPrikaz.Visibility = Visibility.Visible;
+            BrojTerminaPrikaz.Visibility = Visibility.Visible;
+            UnosSmeraPrikaz.Visibility = Visibility.Visible;
+            CBPredmetPrikaz.Visibility = Visibility.Visible;
+            ProjektorPrikaz.Visibility = Visibility.Visible;
+            TablaPrikaz.Visibility = Visibility.Visible;
+            PametnaTablaPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1355,6 +1877,18 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
 
+            Box3.Visibility = Visibility.Visible;
+            Skracenica2.Visibility = Visibility.Visible;
+            Naziv2.Visibility = Visibility.Visible;
+            OpisSmer.Visibility = Visibility.Visible;
+            DatumSmera.Visibility = Visibility.Visible;
+
+            Box3Prikaz.Visibility = Visibility.Hidden;
+            Skracenica2Prikaz.Visibility = Visibility.Hidden;
+            Naziv2Prikaz.Visibility = Visibility.Hidden;
+            OpisSmerPrikaz.Visibility = Visibility.Hidden;
+            DatumSmeraPrikaz.Visibility = Visibility.Hidden;
+
         }
 
         private void OdustaniSmer_Click(object sender, RoutedEventArgs e)
@@ -1384,7 +1918,7 @@ namespace Raspored.Tabele
             SacuvajSmer.Visibility = Visibility.Hidden;
             OdustaniSmer.Visibility = Visibility.Hidden;
 
-            GridSmer.IsEnabled = false;
+         //   GridSmer.IsEnabled = false;
             _index = -1;
             ESmerovi.Visibility = Visibility.Collapsed;
             Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
@@ -1395,6 +1929,18 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box3.Visibility = Visibility.Hidden;
+            Skracenica2.Visibility = Visibility.Hidden;
+            Naziv2.Visibility = Visibility.Hidden;
+            OpisSmer.Visibility = Visibility.Hidden;
+            DatumSmera.Visibility = Visibility.Hidden;
+
+            Box3Prikaz.Visibility = Visibility.Visible;
+            Skracenica2Prikaz.Visibility = Visibility.Visible;
+            Naziv2Prikaz.Visibility = Visibility.Visible;
+            OpisSmerPrikaz.Visibility = Visibility.Visible;
+            DatumSmeraPrikaz.Visibility = Visibility.Visible;
         }
 
         private void SacuvajSmer_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1417,7 +1963,7 @@ namespace Raspored.Tabele
 
             SacuvajSmer.Visibility = Visibility.Hidden;
             OdustaniSmer.Visibility = Visibility.Hidden;
-            GridSmer.IsEnabled = false;
+          //  GridSmer.IsEnabled = false;
 
             if (Smerovi.Count > 0)
             {
@@ -1433,6 +1979,18 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box3.Visibility = Visibility.Hidden;
+            Skracenica2.Visibility = Visibility.Hidden;
+            Naziv2.Visibility = Visibility.Hidden;
+            OpisSmer.Visibility = Visibility.Hidden;
+            DatumSmera.Visibility = Visibility.Hidden;
+
+            Box3Prikaz.Visibility = Visibility.Visible;
+            Skracenica2Prikaz.Visibility = Visibility.Visible;
+            Naziv2Prikaz.Visibility = Visibility.Visible;
+            OpisSmerPrikaz.Visibility = Visibility.Visible;
+            DatumSmeraPrikaz.Visibility = Visibility.Visible;
         }
 
         private void IzbrisiSmer_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1441,21 +1999,24 @@ namespace Raspored.Tabele
             bool i = false;
             foreach(Predmet p in Predmeti)
             {
-                if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                if (p.SmerPredmeta != null)
                 {
-                    if (i)
+                    if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
                     {
-                        poruka += "\n    - " + p.Naziv;
-                    }
-                    else
-                    {
-                        poruka = "Ukoliko izbrišete smer " + SelectedSmer.Naziv + "\n" +
-                            "Obrisaćete smer predmetima:" + "\n    - " +
-                            p.Naziv;
-                        i = true;
-                    }
-                    
+                        if (i)
+                        {
+                            poruka += "\n    - " + p.Naziv;
+                        }
+                        else
+                        {
+                            poruka = "Ukoliko izbrišete smer " + SelectedSmer.Naziv + "\n" +
+                                "Obrisaćete smer predmetima:" + "\n    - " +
+                                p.Naziv;
+                            i = true;
+                        }
 
+
+                    }
                 }
             }
             MessageBoxResult res;
@@ -1478,10 +2039,13 @@ namespace Raspored.Tabele
             {
                 foreach(Predmet p in Predmeti)
                 {
-                    if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                    if (p.SmerPredmeta != null)
                     {
-                        p.OznakaSmera = "";
-                        p.SmerPredmeta = null;
+                        if (p.SmerPredmeta.Oznaka == SelectedSmer.Oznaka)
+                        {
+                            p.OznakaSmera = "";
+                            p.SmerPredmeta = null;
+                        }
                     }
                 }
                 Smerovi.Remove(SelectedSmer);
@@ -1528,6 +2092,18 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
 
+            Box3.Visibility = Visibility.Visible;
+            Skracenica2.Visibility = Visibility.Visible;
+            Naziv2.Visibility = Visibility.Visible;
+            OpisSmer.Visibility = Visibility.Visible;
+            DatumSmera.Visibility = Visibility.Visible;
+
+            Box3Prikaz.Visibility = Visibility.Hidden;
+            Skracenica2Prikaz.Visibility = Visibility.Hidden;
+            Naziv2Prikaz.Visibility = Visibility.Hidden;
+            OpisSmerPrikaz.Visibility = Visibility.Hidden;
+            DatumSmeraPrikaz.Visibility = Visibility.Hidden;
+
         }
 
         private void SacuvajIzmenuSmera_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1553,12 +2129,24 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridSmer.IsEnabled = false;
+          //  GridSmer.IsEnabled = false;
             sacuvajSmer();
             GridPretraga.IsEnabled = true;
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box3.Visibility = Visibility.Hidden;
+            Skracenica2.Visibility = Visibility.Hidden;
+            Naziv2.Visibility = Visibility.Hidden;
+            OpisSmer.Visibility = Visibility.Hidden;
+            DatumSmera.Visibility = Visibility.Hidden;
+
+            Box3Prikaz.Visibility = Visibility.Visible;
+            Skracenica2Prikaz.Visibility = Visibility.Visible;
+            Naziv2Prikaz.Visibility = Visibility.Visible;
+            OpisSmerPrikaz.Visibility = Visibility.Visible;
+            DatumSmeraPrikaz.Visibility = Visibility.Visible;
         }
 
         private void IzmenaOdustaniSmer_Click(object sender, RoutedEventArgs e)
@@ -1579,7 +2167,7 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridSmer.IsEnabled = false;
+          //  GridSmer.IsEnabled = false;
             ESmerovi.Visibility = Visibility.Collapsed;
             Box3.BorderBrush = new SolidColorBrush(Colors.Silver);
             Naziv2.BorderBrush = new SolidColorBrush(Colors.Silver);
@@ -1589,6 +2177,18 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = true;
             ButtonFilter.IsEnabled = true;
             GridFilter.IsEnabled = true;
+
+            Box3.Visibility = Visibility.Hidden;
+            Skracenica2.Visibility = Visibility.Hidden;
+            Naziv2.Visibility = Visibility.Hidden;
+            OpisSmer.Visibility = Visibility.Hidden;
+            DatumSmera.Visibility = Visibility.Hidden;
+
+            Box3Prikaz.Visibility = Visibility.Visible;
+            Skracenica2Prikaz.Visibility = Visibility.Visible;
+            Naziv2Prikaz.Visibility = Visibility.Visible;
+            OpisSmerPrikaz.Visibility = Visibility.Visible;
+            DatumSmeraPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1677,6 +2277,24 @@ namespace Raspored.Tabele
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
 
+            Box4.Visibility = Visibility.Visible;
+            Naziv3.Visibility = Visibility.Visible;
+            OpisSoftver.Visibility = Visibility.Visible;
+            GSoftver.Visibility = Visibility.Visible;
+            Cena.Visibility = Visibility.Visible;
+            PSoftver.Visibility = Visibility.Visible;
+            SajtSoftver.Visibility = Visibility.Visible;
+            SoftverOS.Visibility = Visibility.Visible;
+
+            Box4Prikaz.Visibility = Visibility.Hidden;
+            Naziv3Prikaz.Visibility = Visibility.Hidden;
+            OpisSoftverPrikaz.Visibility = Visibility.Hidden;
+            GSoftverPrikaz.Visibility = Visibility.Hidden;
+            CenaPrikaz.Visibility = Visibility.Hidden;
+            PSoftverPrikaz.Visibility = Visibility.Hidden;
+            SajtSoftverPrikaz.Visibility = Visibility.Hidden;
+            SoftverOSPrikaz.Visibility = Visibility.Hidden;
+
         }
 
         private void OdustaniSoftver_Click(object sender, RoutedEventArgs e)
@@ -1706,12 +2324,30 @@ namespace Raspored.Tabele
             SacuvajSoftver.Visibility = Visibility.Hidden;
             OdustaniSoftver.Visibility = Visibility.Hidden;
 
-            GridSoftver.IsEnabled = false;
+         //   GridSoftver.IsEnabled = false;
             _index = -1;
 
             Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
             Box4.BorderBrush = new SolidColorBrush(Colors.Silver);
             ESoftveri.Visibility = Visibility.Collapsed;
+
+            Box4.Visibility = Visibility.Hidden;
+            Naziv3.Visibility = Visibility.Hidden;
+            OpisSoftver.Visibility = Visibility.Hidden;
+            GSoftver.Visibility = Visibility.Hidden;
+            Cena.Visibility = Visibility.Hidden;
+            PSoftver.Visibility = Visibility.Hidden;
+            SajtSoftver.Visibility = Visibility.Hidden;
+            SoftverOS.Visibility = Visibility.Hidden;
+
+            Box4Prikaz.Visibility = Visibility.Visible;
+            Naziv3Prikaz.Visibility = Visibility.Visible;
+            OpisSoftverPrikaz.Visibility = Visibility.Visible;
+            GSoftverPrikaz.Visibility = Visibility.Visible;
+            CenaPrikaz.Visibility = Visibility.Visible;
+            PSoftverPrikaz.Visibility = Visibility.Visible;
+            SajtSoftverPrikaz.Visibility = Visibility.Visible;
+            SoftverOSPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1732,7 +2368,7 @@ namespace Raspored.Tabele
             SacuvajSoftver.Visibility = Visibility.Hidden;
             OdustaniSoftver.Visibility = Visibility.Hidden;
 
-            GridSoftver.IsEnabled = false;
+           // GridSoftver.IsEnabled = false;
 
             if (Softveri.Count > 0)
             {
@@ -1749,6 +2385,24 @@ namespace Raspored.Tabele
             e.Handled = true;
             _index = -1;
 
+            Box4.Visibility = Visibility.Hidden;
+            Naziv3.Visibility = Visibility.Hidden;
+            OpisSoftver.Visibility = Visibility.Hidden;
+            GSoftver.Visibility = Visibility.Hidden;
+            Cena.Visibility = Visibility.Hidden;
+            PSoftver.Visibility = Visibility.Hidden;
+            SajtSoftver.Visibility = Visibility.Hidden;
+            SoftverOS.Visibility = Visibility.Hidden;
+
+            Box4Prikaz.Visibility = Visibility.Visible;
+            Naziv3Prikaz.Visibility = Visibility.Visible;
+            OpisSoftverPrikaz.Visibility = Visibility.Visible;
+            GSoftverPrikaz.Visibility = Visibility.Visible;
+            CenaPrikaz.Visibility = Visibility.Visible;
+            PSoftverPrikaz.Visibility = Visibility.Visible;
+            SajtSoftverPrikaz.Visibility = Visibility.Visible;
+            SoftverOSPrikaz.Visibility = Visibility.Visible;
+
         }
 
         private void IzbrisiSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1763,7 +2417,7 @@ namespace Raspored.Tabele
                     {
                         if (i)
                         {
-                            poruka += "\n    - " + s.Naziv;
+                            poruka += "\n    - " + p.Naziv;
                         }
                         else
                         {
@@ -1785,7 +2439,7 @@ namespace Raspored.Tabele
                     {
                         if (j)
                         {
-                            poruka += "\n    - " + s.Naziv;
+                            poruka += "\n    - " + u.Oznaka;
                         }
                         else
                         {
@@ -1912,6 +2566,24 @@ namespace Raspored.Tabele
             ButtonPretraga.IsEnabled = false;
             ButtonFilter.IsEnabled = false;
             GridFilter.IsEnabled = false;
+
+            Box4.Visibility = Visibility.Visible;
+            Naziv3.Visibility = Visibility.Visible;
+            OpisSoftver.Visibility = Visibility.Visible;
+            GSoftver.Visibility = Visibility.Visible;
+            Cena.Visibility = Visibility.Visible;
+            PSoftver.Visibility = Visibility.Visible;
+            SajtSoftver.Visibility = Visibility.Visible;
+            SoftverOS.Visibility = Visibility.Visible;
+
+            Box4Prikaz.Visibility = Visibility.Hidden;
+            Naziv3Prikaz.Visibility = Visibility.Hidden;
+            OpisSoftverPrikaz.Visibility = Visibility.Hidden;
+            GSoftverPrikaz.Visibility = Visibility.Hidden;
+            CenaPrikaz.Visibility = Visibility.Hidden;
+            PSoftverPrikaz.Visibility = Visibility.Hidden;
+            SajtSoftverPrikaz.Visibility = Visibility.Hidden;
+            SoftverOSPrikaz.Visibility = Visibility.Hidden;
         }
 
         private void IzmeniSoftver_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1937,10 +2609,28 @@ namespace Raspored.Tabele
             }
             Podaci = "True";
 
-            GridSoftver.IsEnabled = false;
+          //  GridSoftver.IsEnabled = false;
             sacuvajSoftver();
 
             e.Handled = true;
+
+            Box4.Visibility = Visibility.Hidden;
+            Naziv3.Visibility = Visibility.Hidden;
+            OpisSoftver.Visibility = Visibility.Hidden;
+            GSoftver.Visibility = Visibility.Hidden;
+            Cena.Visibility = Visibility.Hidden;
+            PSoftver.Visibility = Visibility.Hidden;
+            SajtSoftver.Visibility = Visibility.Hidden;
+            SoftverOS.Visibility = Visibility.Hidden;
+
+            Box4Prikaz.Visibility = Visibility.Visible;
+            Naziv3Prikaz.Visibility = Visibility.Visible;
+            OpisSoftverPrikaz.Visibility = Visibility.Visible;
+            GSoftverPrikaz.Visibility = Visibility.Visible;
+            CenaPrikaz.Visibility = Visibility.Visible;
+            PSoftverPrikaz.Visibility = Visibility.Visible;
+            SajtSoftverPrikaz.Visibility = Visibility.Visible;
+            SoftverOSPrikaz.Visibility = Visibility.Visible;
         }
 
         private void IzmenaOdustaniSoftver_Click(object sender, RoutedEventArgs e)
@@ -1960,11 +2650,29 @@ namespace Raspored.Tabele
                 TabSmer = "True";
             }
             Podaci = "True";
-            GridSoftver.IsEnabled = false;
+         //   GridSoftver.IsEnabled = false;
 
             Naziv3.BorderBrush = new SolidColorBrush(Colors.Silver);
             Box4.BorderBrush = new SolidColorBrush(Colors.Silver);
             ESoftveri.Visibility = Visibility.Collapsed;
+
+            Box4.Visibility = Visibility.Hidden;
+            Naziv3.Visibility = Visibility.Hidden;
+            OpisSoftver.Visibility = Visibility.Hidden;
+            GSoftver.Visibility = Visibility.Hidden;
+            Cena.Visibility = Visibility.Hidden;
+            PSoftver.Visibility = Visibility.Hidden;
+            SajtSoftver.Visibility = Visibility.Hidden;
+            SoftverOS.Visibility = Visibility.Hidden;
+
+            Box4Prikaz.Visibility = Visibility.Visible;
+            Naziv3Prikaz.Visibility = Visibility.Visible;
+            OpisSoftverPrikaz.Visibility = Visibility.Visible;
+            GSoftverPrikaz.Visibility = Visibility.Visible;
+            CenaPrikaz.Visibility = Visibility.Visible;
+            PSoftverPrikaz.Visibility = Visibility.Visible;
+            SajtSoftverPrikaz.Visibility = Visibility.Visible;
+            SoftverOSPrikaz.Visibility = Visibility.Visible;
 
         }
 
@@ -1981,6 +2689,40 @@ namespace Raspored.Tabele
                 {
                     _visibleSacuvaj = value;
                     OnPropertyChanged("VisibleSacuvaj");
+                }
+            }
+        }
+
+        private Visibility _uPrikaEnable;
+        public Visibility UPrikazEnable
+        {
+            get
+            {
+                return _uPrikaEnable;
+            }
+            set
+            {
+                if (_uPrikaEnable != value)
+                {
+                    _uPrikaEnable = value;
+                    OnPropertyChanged("UPrikazEnable");
+                }
+            }
+        }
+
+        private Visibility _uDodavanjeEnable;
+        public Visibility UDodavanjeEnable
+        {
+            get
+            {
+                return _uDodavanjeEnable;
+            }
+            set
+            {
+                if (_uDodavanjeEnable != value)
+                {
+                    _uDodavanjeEnable = value;
+                    OnPropertyChanged("UDodavanjeEnable");
                 }
             }
         }
@@ -3358,6 +4100,7 @@ namespace Raspored.Tabele
         {
             Ucionice.Clear();
             List<Ucionica> u = otvoriUcionicu();
+
             if (IzabraniProjektor == "")
             {
                 foreach (Ucionica ucionica in u)
@@ -4836,6 +5579,50 @@ namespace Raspored.Tabele
 
                 }
             }
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if(SelectedSmer != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_1(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedPredmet != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_2(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedUcionica != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
+        }
+
+        private void CommandBinding_CanExecute_3(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (SelectedSoftver != null)
+            {
+                e.CanExecute = true;
+                e.Handled = true;
+
+            }
+
         }
     }
 

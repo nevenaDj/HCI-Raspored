@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Raspored.Model"
     Title="PravljenjeRasporeda"
-    Width="1000"
+    Width="1100"
     Height="730"
-    MinWidth="900"
+    MinWidth="1100"
     MinHeight="730"
     l:HelpProvider.HelpKey="PravljenjeRasporeda"
     Activated="Window_Activated"
@@ -907,8 +907,8 @@
             <Button
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="5"
                 Width="80"
+                Margin="5"
                 HorizontalAlignment="Center"
                 Click="Korak1_Nazad_Click">
                 Nazad
@@ -5365,7 +5365,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock FontWeight="Bold" Text="{Binding Naziv}" />
+                                    <TextBlock FontWeight="Bold" Text="{Binding Skracenica}" />
                                     <TextBlock Text=" (" />
                                     <TextBlock Text="{Binding Oznaka}" />
                                     <TextBlock Text=") " />
